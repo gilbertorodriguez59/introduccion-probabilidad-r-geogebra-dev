@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Incertidumbre y probabilidad – Introducción a la Probabilidad con R y GeoGebra</title>
+<title>1&nbsp; Incertidumbre y probabilidad – Introducción a la Probabilidad con R y GeoGebra</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -171,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-incertidumbre-probabilidad.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-incertidumbre-probabilidad.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -203,7 +203,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la Probabilidad con R y GeoGebra</span></span></a>
+ <span class="menu-text">Portada</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -233,13 +233,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conteo y asignación de probabilidades</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -258,17 +264,17 @@ window.Quarto = {
     <h2 id="toc-title">En este capítulo</h2>
    
   <ul>
-  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</a></li>
-  <li><a href="#por-qué-necesitamos-probabilidad" id="toc-por-qué-necesitamos-probabilidad" class="nav-link" data-scroll-target="#por-qué-necesitamos-probabilidad"><span class="header-section-number">2.2</span> ¿Por qué necesitamos probabilidad?</a></li>
-  <li><a href="#experimentos-deterministas-y-aleatorios" id="toc-experimentos-deterministas-y-aleatorios" class="nav-link" data-scroll-target="#experimentos-deterministas-y-aleatorios"><span class="header-section-number">2.3</span> Experimentos deterministas y aleatorios</a></li>
-  <li><a href="#variabilidad" id="toc-variabilidad" class="nav-link" data-scroll-target="#variabilidad"><span class="header-section-number">2.4</span> Variabilidad</a></li>
-  <li><a href="#frecuencia-relativa-como-intuición" id="toc-frecuencia-relativa-como-intuición" class="nav-link" data-scroll-target="#frecuencia-relativa-como-intuición"><span class="header-section-number">2.5</span> Frecuencia relativa como intuición</a></li>
-  <li><a href="#primer-experimento-con-r" id="toc-primer-experimento-con-r" class="nav-link" data-scroll-target="#primer-experimento-con-r"><span class="header-section-number">2.6</span> Primer experimento con R</a></li>
-  <li><a href="#primer-recurso-geogebra" id="toc-primer-recurso-geogebra" class="nav-link" data-scroll-target="#primer-recurso-geogebra"><span class="header-section-number">2.7</span> Primer recurso GeoGebra</a></li>
-  <li><a href="#aplicación-de-ingeniería" id="toc-aplicación-de-ingeniería" class="nav-link" data-scroll-target="#aplicación-de-ingeniería"><span class="header-section-number">2.8</span> Aplicación de ingeniería</a></li>
-  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">2.9</span> Ideas clave</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">2.10</span> Ejercicios</a></li>
-  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">2.11</span> Referencias del capítulo</a></li>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">1.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#por-qué-necesitamos-probabilidad" id="toc-por-qué-necesitamos-probabilidad" class="nav-link" data-scroll-target="#por-qué-necesitamos-probabilidad"><span class="header-section-number">1.2</span> ¿Por qué necesitamos probabilidad?</a></li>
+  <li><a href="#experimentos-deterministas-y-aleatorios" id="toc-experimentos-deterministas-y-aleatorios" class="nav-link" data-scroll-target="#experimentos-deterministas-y-aleatorios"><span class="header-section-number">1.3</span> Experimentos deterministas y aleatorios</a></li>
+  <li><a href="#variabilidad" id="toc-variabilidad" class="nav-link" data-scroll-target="#variabilidad"><span class="header-section-number">1.4</span> Variabilidad</a></li>
+  <li><a href="#frecuencia-relativa-como-intuición" id="toc-frecuencia-relativa-como-intuición" class="nav-link" data-scroll-target="#frecuencia-relativa-como-intuición"><span class="header-section-number">1.5</span> Frecuencia relativa como intuición</a></li>
+  <li><a href="#primer-experimento-con-r" id="toc-primer-experimento-con-r" class="nav-link" data-scroll-target="#primer-experimento-con-r"><span class="header-section-number">1.6</span> Primer experimento con R</a></li>
+  <li><a href="#primer-recurso-geogebra" id="toc-primer-recurso-geogebra" class="nav-link" data-scroll-target="#primer-recurso-geogebra"><span class="header-section-number">1.7</span> Primer recurso GeoGebra</a></li>
+  <li><a href="#aplicación-de-ingeniería" id="toc-aplicación-de-ingeniería" class="nav-link" data-scroll-target="#aplicación-de-ingeniería"><span class="header-section-number">1.8</span> Aplicación de ingeniería</a></li>
+  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">1.9</span> Ideas clave</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">1.10</span> Ejercicios</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">1.11</span> Referencias del capítulo</a></li>
   </ul>
 </nav>
     </div>
@@ -277,7 +283,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></h1>
 </div>
 
 
@@ -294,17 +300,17 @@ window.Quarto = {
 </header>
 
 
-<section id="objetivos-de-aprendizaje" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</h2>
+<section id="objetivos-de-aprendizaje" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">1.1</span> Objetivos de aprendizaje</h2>
 <p>Al finalizar este capítulo, el estudiante será capaz de distinguir fenómenos deterministas y aleatorios, reconocer la variabilidad como parte natural de los sistemas reales, describir experimentos aleatorios sencillos y utilizar simulación para aproximar probabilidades.</p>
 </section>
-<section id="por-qué-necesitamos-probabilidad" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="por-qué-necesitamos-probabilidad"><span class="header-section-number">2.2</span> ¿Por qué necesitamos probabilidad?</h2>
+<section id="por-qué-necesitamos-probabilidad" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="por-qué-necesitamos-probabilidad"><span class="header-section-number">1.2</span> ¿Por qué necesitamos probabilidad?</h2>
 <p>En un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.</p>
 <p>La probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.</p>
 </section>
-<section id="experimentos-deterministas-y-aleatorios" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="experimentos-deterministas-y-aleatorios"><span class="header-section-number">2.3</span> Experimentos deterministas y aleatorios</h2>
+<section id="experimentos-deterministas-y-aleatorios" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="experimentos-deterministas-y-aleatorios"><span class="header-section-number">1.3</span> Experimentos deterministas y aleatorios</h2>
 <p>Un <strong>experimento aleatorio</strong> es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.</p>
 <p>Ejemplos:</p>
 <ul>
@@ -314,24 +320,24 @@ window.Quarto = {
 <li>observar la cara obtenida al lanzar una moneda.</li>
 </ul>
 </section>
-<section id="variabilidad" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="variabilidad"><span class="header-section-number">2.4</span> Variabilidad</h2>
+<section id="variabilidad" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="variabilidad"><span class="header-section-number">1.4</span> Variabilidad</h2>
 <p>La variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.</p>
 <p>La idea central será:</p>
 <blockquote class="blockquote">
 <p>modelar la incertidumbre en lugar de fingir que no existe.</p>
 </blockquote>
 </section>
-<section id="frecuencia-relativa-como-intuición" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="frecuencia-relativa-como-intuición"><span class="header-section-number">2.5</span> Frecuencia relativa como intuición</h2>
+<section id="frecuencia-relativa-como-intuición" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="frecuencia-relativa-como-intuición"><span class="header-section-number">1.5</span> Frecuencia relativa como intuición</h2>
 <p>Si un experimento se repite <span class="math inline">\(n\)</span> veces y el evento <span class="math inline">\(A\)</span> ocurre <span class="math inline">\(n_A\)</span> veces, su frecuencia relativa es</p>
 <p><span class="math display">\[
 \widehat P_n(A)=\frac{n_A}{n}.
 \]</span></p>
 <p>Cuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.</p>
 </section>
-<section id="primer-experimento-con-r" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="primer-experimento-con-r"><span class="header-section-number">2.6</span> Primer experimento con R</h2>
+<section id="primer-experimento-con-r" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="primer-experimento-con-r"><span class="header-section-number">1.6</span> Primer experimento con R</h2>
 <p>Simulemos lanzamientos de una moneda equilibrada.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
@@ -359,17 +365,17 @@ window.Quarto = {
 </div>
 <p>Este ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.</p>
 </section>
-<section id="primer-recurso-geogebra" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="primer-recurso-geogebra"><span class="header-section-number">2.7</span> Primer recurso GeoGebra</h2>
+<section id="primer-recurso-geogebra" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="primer-recurso-geogebra"><span class="header-section-number">1.7</span> Primer recurso GeoGebra</h2>
 <p>En la versión web construiremos experimentos interactivos que permitan comparar resultados observados con modelos teóricos. En el capítulo siguiente comenzaremos con diagramas de Venn y representación de eventos.</p>
 </section>
-<section id="aplicación-de-ingeniería" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="aplicación-de-ingeniería"><span class="header-section-number">2.8</span> Aplicación de ingeniería</h2>
+<section id="aplicación-de-ingeniería" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="aplicación-de-ingeniería"><span class="header-section-number">1.8</span> Aplicación de ingeniería</h2>
 <p>Supongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.</p>
 <p>Este tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.</p>
 </section>
-<section id="ideas-clave" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">2.9</span> Ideas clave</h2>
+<section id="ideas-clave" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">1.9</span> Ideas clave</h2>
 <ul>
 <li>La incertidumbre no implica ausencia de estructura.</li>
 <li>La probabilidad cuantifica fenómenos aleatorios.</li>
@@ -377,8 +383,8 @@ window.Quarto = {
 <li>La simulación complementa, pero no sustituye, el razonamiento matemático.</li>
 </ul>
 </section>
-<section id="ejercicios" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">2.10</span> Ejercicios</h2>
+<section id="ejercicios" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">1.10</span> Ejercicios</h2>
 <ol type="1">
 <li>Clasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular <span class="math inline">\(2+3\)</span>.</li>
 <li>Propón tres fuentes de variabilidad en una medición de temperatura ambiental.</li>
@@ -387,8 +393,8 @@ window.Quarto = {
 <li>Describe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.</li>
 </ol>
 </section>
-<section id="referencias-del-capítulo" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">2.11</span> Referencias del capítulo</h2>
+<section id="referencias-del-capítulo" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">1.11</span> Referencias del capítulo</h2>
 <p>El desarrollo conceptual de este capítulo toma como referencia la organización y el enfoque aplicado de textos de probabilidad para ingeniería y ciencias, especialmente <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span> y el enfoque computacional con R de <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
 
 
@@ -820,7 +826,7 @@ Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Pr
   </div>
   <div class="nav-page nav-page-next">
       <a href="./02-espacios-eventos.html" class="pagination-link" aria-label="Conjuntos, espacios muestrales y eventos">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

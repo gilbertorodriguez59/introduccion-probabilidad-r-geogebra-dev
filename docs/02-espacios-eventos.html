@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Conjuntos, espacios muestrales y eventos – Introducción a la Probabilidad con R y GeoGebra</title>
+<title>2&nbsp; Conjuntos, espacios muestrales y eventos – Introducción a la Probabilidad con R y GeoGebra</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -90,7 +90,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./03-conteo-probabilidad.html" rel="next">
 <link href="./01-incertidumbre-probabilidad.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -171,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-espacios-eventos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-espacios-eventos.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -203,7 +203,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la Probabilidad con R y GeoGebra</span></span></a>
+ <span class="menu-text">Portada</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -233,13 +233,19 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conteo y asignación de probabilidades</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -258,48 +264,48 @@ window.Quarto = {
     <h2 id="toc-title">En este capítulo</h2>
    
   <ul>
-  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">3.1</span> Objetivos de aprendizaje</a></li>
-  <li><a href="#del-experimento-al-modelo" id="toc-del-experimento-al-modelo" class="nav-link" data-scroll-target="#del-experimento-al-modelo"><span class="header-section-number">3.2</span> Del experimento al modelo</a></li>
-  <li><a href="#repaso-de-conjuntos" id="toc-repaso-de-conjuntos" class="nav-link" data-scroll-target="#repaso-de-conjuntos"><span class="header-section-number">3.3</span> Repaso de conjuntos</a>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#del-experimento-al-modelo" id="toc-del-experimento-al-modelo" class="nav-link" data-scroll-target="#del-experimento-al-modelo"><span class="header-section-number">2.2</span> Del experimento al modelo</a></li>
+  <li><a href="#repaso-de-conjuntos" id="toc-repaso-de-conjuntos" class="nav-link" data-scroll-target="#repaso-de-conjuntos"><span class="header-section-number">2.3</span> Repaso de conjuntos</a>
   <ul class="collapse">
   <li><a href="#subconjuntos-igualdad-y-conjunto-vacío" id="toc-subconjuntos-igualdad-y-conjunto-vacío" class="nav-link" data-scroll-target="#subconjuntos-igualdad-y-conjunto-vacío">Subconjuntos, igualdad y conjunto vacío</a></li>
   <li><a href="#operaciones-básicas" id="toc-operaciones-básicas" class="nav-link" data-scroll-target="#operaciones-básicas">Operaciones básicas</a></li>
   <li><a href="#leyes-de-de-morgan" id="toc-leyes-de-de-morgan" class="nav-link" data-scroll-target="#leyes-de-de-morgan">Leyes de De Morgan</a></li>
   </ul></li>
-  <li><a href="#espacio-muestral" id="toc-espacio-muestral" class="nav-link" data-scroll-target="#espacio-muestral"><span class="header-section-number">3.4</span> Espacio muestral</a>
+  <li><a href="#espacio-muestral" id="toc-espacio-muestral" class="nav-link" data-scroll-target="#espacio-muestral"><span class="header-section-number">2.4</span> Espacio muestral</a>
   <ul class="collapse">
   <li><a href="#ejemplo-lanzar-un-dado" id="toc-ejemplo-lanzar-un-dado" class="nav-link" data-scroll-target="#ejemplo-lanzar-un-dado">Ejemplo: lanzar un dado</a></li>
   <li><a href="#tipos-de-espacios-muestrales" id="toc-tipos-de-espacios-muestrales" class="nav-link" data-scroll-target="#tipos-de-espacios-muestrales">Tipos de espacios muestrales</a></li>
   </ul></li>
-  <li><a href="#cómo-construir-un-espacio-muestral" id="toc-cómo-construir-un-espacio-muestral" class="nav-link" data-scroll-target="#cómo-construir-un-espacio-muestral"><span class="header-section-number">3.5</span> Cómo construir un espacio muestral</a>
+  <li><a href="#cómo-construir-un-espacio-muestral" id="toc-cómo-construir-un-espacio-muestral" class="nav-link" data-scroll-target="#cómo-construir-un-espacio-muestral"><span class="header-section-number">2.5</span> Cómo construir un espacio muestral</a>
   <ul class="collapse">
   <li><a href="#enumeración-directa" id="toc-enumeración-directa" class="nav-link" data-scroll-target="#enumeración-directa">Enumeración directa</a></li>
   <li><a href="#tabla-de-doble-entrada" id="toc-tabla-de-doble-entrada" class="nav-link" data-scroll-target="#tabla-de-doble-entrada">Tabla de doble entrada</a></li>
   <li><a href="#diagrama-de-árbol" id="toc-diagrama-de-árbol" class="nav-link" data-scroll-target="#diagrama-de-árbol">Diagrama de árbol</a></li>
   </ul></li>
-  <li><a href="#eventos" id="toc-eventos" class="nav-link" data-scroll-target="#eventos"><span class="header-section-number">3.6</span> Eventos</a>
+  <li><a href="#eventos" id="toc-eventos" class="nav-link" data-scroll-target="#eventos"><span class="header-section-number">2.6</span> Eventos</a>
   <ul class="collapse">
   <li><a href="#clases-frecuentes-de-eventos" id="toc-clases-frecuentes-de-eventos" class="nav-link" data-scroll-target="#clases-frecuentes-de-eventos">Clases frecuentes de eventos</a></li>
   </ul></li>
-  <li><a href="#traducir-frases-a-operaciones-con-eventos" id="toc-traducir-frases-a-operaciones-con-eventos" class="nav-link" data-scroll-target="#traducir-frases-a-operaciones-con-eventos"><span class="header-section-number">3.7</span> Traducir frases a operaciones con eventos</a></li>
-  <li><a href="#trabajo-con-conjuntos-en-r" id="toc-trabajo-con-conjuntos-en-r" class="nav-link" data-scroll-target="#trabajo-con-conjuntos-en-r"><span class="header-section-number">3.8</span> Trabajo con conjuntos en R</a>
+  <li><a href="#traducir-frases-a-operaciones-con-eventos" id="toc-traducir-frases-a-operaciones-con-eventos" class="nav-link" data-scroll-target="#traducir-frases-a-operaciones-con-eventos"><span class="header-section-number">2.7</span> Traducir frases a operaciones con eventos</a></li>
+  <li><a href="#trabajo-con-conjuntos-en-r" id="toc-trabajo-con-conjuntos-en-r" class="nav-link" data-scroll-target="#trabajo-con-conjuntos-en-r"><span class="header-section-number">2.8</span> Trabajo con conjuntos en R</a>
   <ul class="collapse">
   <li><a href="#construcción-del-espacio-muestral-de-dos-dados" id="toc-construcción-del-espacio-muestral-de-dos-dados" class="nav-link" data-scroll-target="#construcción-del-espacio-muestral-de-dos-dados">Construcción del espacio muestral de dos dados</a></li>
   </ul></li>
-  <li><a href="#diagrama-de-venn-con-r-sin-paquetes" id="toc-diagrama-de-venn-con-r-sin-paquetes" class="nav-link" data-scroll-target="#diagrama-de-venn-con-r-sin-paquetes"><span class="header-section-number">3.9</span> Diagrama de Venn con R sin paquetes</a></li>
-  <li><a href="#actividad-interactiva-con-geogebra" id="toc-actividad-interactiva-con-geogebra" class="nav-link" data-scroll-target="#actividad-interactiva-con-geogebra"><span class="header-section-number">3.10</span> Actividad interactiva con GeoGebra</a></li>
-  <li><a href="#aplicación-sistema-de-dos-sensores" id="toc-aplicación-sistema-de-dos-sensores" class="nav-link" data-scroll-target="#aplicación-sistema-de-dos-sensores"><span class="header-section-number">3.11</span> Aplicación: sistema de dos sensores</a></li>
-  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">3.12</span> Errores frecuentes</a></li>
-  <li><a href="#ejemplo-integrador-resuelto" id="toc-ejemplo-integrador-resuelto" class="nav-link" data-scroll-target="#ejemplo-integrador-resuelto"><span class="header-section-number">3.13</span> Ejemplo integrador resuelto</a></li>
-  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">3.14</span> Ideas clave</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">3.15</span> Ejercicios</a>
+  <li><a href="#diagrama-de-venn-con-r-sin-paquetes" id="toc-diagrama-de-venn-con-r-sin-paquetes" class="nav-link" data-scroll-target="#diagrama-de-venn-con-r-sin-paquetes"><span class="header-section-number">2.9</span> Diagrama de Venn con R sin paquetes</a></li>
+  <li><a href="#actividad-interactiva-con-geogebra" id="toc-actividad-interactiva-con-geogebra" class="nav-link" data-scroll-target="#actividad-interactiva-con-geogebra"><span class="header-section-number">2.10</span> Actividad interactiva con GeoGebra</a></li>
+  <li><a href="#aplicación-sistema-de-dos-sensores" id="toc-aplicación-sistema-de-dos-sensores" class="nav-link" data-scroll-target="#aplicación-sistema-de-dos-sensores"><span class="header-section-number">2.11</span> Aplicación: sistema de dos sensores</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">2.12</span> Errores frecuentes</a></li>
+  <li><a href="#ejemplo-integrador-resuelto" id="toc-ejemplo-integrador-resuelto" class="nav-link" data-scroll-target="#ejemplo-integrador-resuelto"><span class="header-section-number">2.13</span> Ejemplo integrador resuelto</a></li>
+  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">2.14</span> Ideas clave</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">2.15</span> Ejercicios</a>
   <ul class="collapse">
   <li><a href="#nivel-básico" id="toc-nivel-básico" class="nav-link" data-scroll-target="#nivel-básico">Nivel básico</a></li>
   <li><a href="#nivel-intermedio" id="toc-nivel-intermedio" class="nav-link" data-scroll-target="#nivel-intermedio">Nivel intermedio</a></li>
   <li><a href="#r-y-geogebra" id="toc-r-y-geogebra" class="nav-link" data-scroll-target="#r-y-geogebra">R y GeoGebra</a></li>
   <li><a href="#aplicación" id="toc-aplicación" class="nav-link" data-scroll-target="#aplicación">Aplicación</a></li>
   </ul></li>
-  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">3.16</span> Referencias del capítulo</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">2.16</span> Referencias del capítulo</a></li>
   </ul>
 </nav>
     </div>
@@ -308,7 +314,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></h1>
 </div>
 
 
@@ -325,8 +331,8 @@ window.Quarto = {
 </header>
 
 
-<section id="objetivos-de-aprendizaje" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">3.1</span> Objetivos de aprendizaje</h2>
+<section id="objetivos-de-aprendizaje" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</h2>
 <p>Al finalizar este capítulo, el estudiante será capaz de:</p>
 <ul>
 <li>utilizar la notación y las operaciones básicas de conjuntos;</li>
@@ -338,8 +344,8 @@ window.Quarto = {
 <li>interpretar diagramas de Venn y construir una representación dinámica en GeoGebra.</li>
 </ul>
 </section>
-<section id="del-experimento-al-modelo" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="del-experimento-al-modelo"><span class="header-section-number">3.2</span> Del experimento al modelo</h2>
+<section id="del-experimento-al-modelo" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="del-experimento-al-modelo"><span class="header-section-number">2.2</span> Del experimento al modelo</h2>
 <p>Un experimento aleatorio se convierte en un modelo matemático cuando especificamos con claridad:</p>
 <ol type="1">
 <li>qué procedimiento se realiza;</li>
@@ -349,8 +355,8 @@ window.Quarto = {
 </ol>
 <p>Esta precisión es esencial. Si lanzamos un dado, podemos registrar el número de puntos, la paridad o simplemente si el resultado supera a 4. El experimento físico es el mismo, pero el espacio muestral cambia con la observación que decidimos conservar.</p>
 </section>
-<section id="repaso-de-conjuntos" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="repaso-de-conjuntos"><span class="header-section-number">3.3</span> Repaso de conjuntos</h2>
+<section id="repaso-de-conjuntos" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="repaso-de-conjuntos"><span class="header-section-number">2.3</span> Repaso de conjuntos</h2>
 <p>Un <strong>conjunto</strong> es una colección bien definida de objetos. Los objetos que lo integran son sus <strong>elementos</strong>.</p>
 <p>Si <span class="math inline">\(x\)</span> pertenece a <span class="math inline">\(A\)</span>, escribimos <span class="math inline">\(x\in A\)</span>; si no pertenece, <span class="math inline">\(x\notin A\)</span>. Un conjunto puede describirse por extensión,</p>
 <p><span class="math display">\[
@@ -431,8 +437,8 @@ A=B \quad\Longleftrightarrow\quad A\subseteq B\text{ y }B\subseteq A.
 </ul>
 </section>
 </section>
-<section id="espacio-muestral" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="espacio-muestral"><span class="header-section-number">3.4</span> Espacio muestral</h2>
+<section id="espacio-muestral" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="espacio-muestral"><span class="header-section-number">2.4</span> Espacio muestral</h2>
 <p>El <strong>espacio muestral</strong>, denotado por <span class="math inline">\(S\)</span> o <span class="math inline">\(\Omega\)</span>, es el conjunto de todos los resultados posibles del experimento, de acuerdo con lo que se decidió observar. Cada elemento de <span class="math inline">\(S\)</span> es un <strong>punto muestral</strong>.</p>
 <section id="ejemplo-lanzar-un-dado" class="level3">
 <h3 class="anchored" data-anchor-id="ejemplo-lanzar-un-dado">Ejemplo: lanzar un dado</h3>
@@ -456,8 +462,8 @@ S_2=\{\text{par},\text{impar}\}.
 <p>En este capítulo enumeraremos principalmente espacios finitos. Los espacios continuos se retomarán al estudiar variables aleatorias continuas.</p>
 </section>
 </section>
-<section id="cómo-construir-un-espacio-muestral" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="cómo-construir-un-espacio-muestral"><span class="header-section-number">3.5</span> Cómo construir un espacio muestral</h2>
+<section id="cómo-construir-un-espacio-muestral" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="cómo-construir-un-espacio-muestral"><span class="header-section-number">2.5</span> Cómo construir un espacio muestral</h2>
 <section id="enumeración-directa" class="level3">
 <h3 class="anchored" data-anchor-id="enumeración-directa">Enumeración directa</h3>
 <p>Para dos lanzamientos de una moneda, con <span class="math inline">\(C=\)</span> cara y <span class="math inline">\(X=\)</span> cruz,</p>
@@ -487,8 +493,8 @@ S=\{E,FE,FF\}.
 <p>No aparece <span class="math inline">\(EE\)</span>, porque el procedimiento termina después del primer éxito.</p>
 </section>
 </section>
-<section id="eventos" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="eventos"><span class="header-section-number">3.6</span> Eventos</h2>
+<section id="eventos" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="eventos"><span class="header-section-number">2.6</span> Eventos</h2>
 <p>Un <strong>evento</strong> es cualquier subconjunto del espacio muestral. El evento ocurre cuando el resultado observado pertenece a ese subconjunto.</p>
 <p>En el lanzamiento de un dado, sea</p>
 <p><span class="math display">\[
@@ -522,8 +528,8 @@ A\setminus B=\{2\}.
 <p>Mutuamente excluyentes no significa independientes. La independencia se estudiará después de introducir la probabilidad condicional.</p>
 </section>
 </section>
-<section id="traducir-frases-a-operaciones-con-eventos" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="traducir-frases-a-operaciones-con-eventos"><span class="header-section-number">3.7</span> Traducir frases a operaciones con eventos</h2>
+<section id="traducir-frases-a-operaciones-con-eventos" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="traducir-frases-a-operaciones-con-eventos"><span class="header-section-number">2.7</span> Traducir frases a operaciones con eventos</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -571,8 +577,8 @@ A\setminus B=\{2\}.
 </tbody>
 </table>
 </section>
-<section id="trabajo-con-conjuntos-en-r" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="trabajo-con-conjuntos-en-r"><span class="header-section-number">3.8</span> Trabajo con conjuntos en R</h2>
+<section id="trabajo-con-conjuntos-en-r" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="trabajo-con-conjuntos-en-r"><span class="header-section-number">2.8</span> Trabajo con conjuntos en R</h2>
 <p>R representa naturalmente un conjunto finito mediante un vector cuyos elementos no se repiten.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
@@ -685,8 +691,8 @@ A\setminus B=\{2\}.
 <p>La intersección es vacía: ningún doble suma 7.</p>
 </section>
 </section>
-<section id="diagrama-de-venn-con-r-sin-paquetes" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="diagrama-de-venn-con-r-sin-paquetes"><span class="header-section-number">3.9</span> Diagrama de Venn con R sin paquetes</h2>
+<section id="diagrama-de-venn-con-r-sin-paquetes" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="diagrama-de-venn-con-r-sin-paquetes"><span class="header-section-number">2.9</span> Diagrama de Venn con R sin paquetes</h2>
 <p>El siguiente código genera una representación conceptual. Las áreas de los círculos no expresan probabilidades; sólo muestran relaciones entre eventos.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.new</span>()</span>
@@ -707,15 +713,15 @@ A\setminus B=\{2\}.
 <img src="02-espacios-eventos_files/figure-html/fig-venn-eventos-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-venn-eventos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3.1: Unión e intersección de dos eventos.
+Figura&nbsp;2.1: Unión e intersección de dos eventos.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="actividad-interactiva-con-geogebra" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="actividad-interactiva-con-geogebra"><span class="header-section-number">3.10</span> Actividad interactiva con GeoGebra</h2>
+<section id="actividad-interactiva-con-geogebra" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="actividad-interactiva-con-geogebra"><span class="header-section-number">2.10</span> Actividad interactiva con GeoGebra</h2>
 <p>En la versión web puede abrirse <a href="https://www.geogebra.org/classic?lang=es">GeoGebra Classic</a>. En la vista <strong>Geometría</strong>, construye un rectángulo para representar <span class="math inline">\(S\)</span> y dos circunferencias superpuestas para <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>.</p>
 <ol type="1">
 <li>Crea dos puntos, por ejemplo <code>O=(-1,0)</code> y <code>P=(1,0)</code>.</li>
@@ -726,8 +732,8 @@ Figura&nbsp;3.1: Unión e intersección de dos eventos.
 </ol>
 <p>La meta no es calcular áreas, sino visualizar cómo cambian las relaciones de inclusión, intersección y exclusión al mover los conjuntos.</p>
 </section>
-<section id="aplicación-sistema-de-dos-sensores" class="level2" data-number="3.11">
-<h2 data-number="3.11" class="anchored" data-anchor-id="aplicación-sistema-de-dos-sensores"><span class="header-section-number">3.11</span> Aplicación: sistema de dos sensores</h2>
+<section id="aplicación-sistema-de-dos-sensores" class="level2" data-number="2.11">
+<h2 data-number="2.11" class="anchored" data-anchor-id="aplicación-sistema-de-dos-sensores"><span class="header-section-number">2.11</span> Aplicación: sistema de dos sensores</h2>
 <p>Dos sensores, <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>, supervisan una variable ambiental. Al finalizar una prueba se registra si cada sensor respondió correctamente (<span class="math inline">\(C\)</span>) o falló (<span class="math inline">\(F\)</span>):</p>
 <p><span class="math display">\[
 S=\{CC,CF,FC,FF\}.
@@ -745,8 +751,8 @@ E_A=\{CC,CF\},\qquad E_B=\{CC,FC\}.
 </ul>
 <p>Esta descripción prepara el análisis de confiabilidad. En el siguiente capítulo asignaremos probabilidades a estos eventos.</p>
 </section>
-<section id="errores-frecuentes" class="level2" data-number="3.12">
-<h2 data-number="3.12" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">3.12</span> Errores frecuentes</h2>
+<section id="errores-frecuentes" class="level2" data-number="2.12">
+<h2 data-number="2.12" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">2.12</span> Errores frecuentes</h2>
 <ol type="1">
 <li><strong>Omitir el orden:</strong> en experimentos secuenciales, <span class="math inline">\(CF\)</span> y <span class="math inline">\(FC\)</span> suelen ser resultados distintos.</li>
 <li><strong>Confundir elemento y evento:</strong> <span class="math inline">\(4\in S\)</span>, pero <span class="math inline">\(\{4\}\subseteq S\)</span>.</li>
@@ -755,8 +761,8 @@ E_A=\{CC,CF\},\qquad E_B=\{CC,FC\}.
 <li><strong>Confundir disjunción e independencia:</strong> son conceptos distintos.</li>
 </ol>
 </section>
-<section id="ejemplo-integrador-resuelto" class="level2" data-number="3.13">
-<h2 data-number="3.13" class="anchored" data-anchor-id="ejemplo-integrador-resuelto"><span class="header-section-number">3.13</span> Ejemplo integrador resuelto</h2>
+<section id="ejemplo-integrador-resuelto" class="level2" data-number="2.13">
+<h2 data-number="2.13" class="anchored" data-anchor-id="ejemplo-integrador-resuelto"><span class="header-section-number">2.13</span> Ejemplo integrador resuelto</h2>
 <p>Se inspeccionan dos componentes y cada uno se clasifica como conforme (<span class="math inline">\(C\)</span>), reparable (<span class="math inline">\(R\)</span>) o desecho (<span class="math inline">\(D\)</span>).</p>
 <p>El espacio muestral es</p>
 <p><span class="math display">\[
@@ -803,8 +809,8 @@ B^c=\{CR,CD,RC,RD,DC,DR\}.
 </div>
 </div>
 </section>
-<section id="ideas-clave" class="level2" data-number="3.14">
-<h2 data-number="3.14" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">3.14</span> Ideas clave</h2>
+<section id="ideas-clave" class="level2" data-number="2.14">
+<h2 data-number="2.14" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">2.14</span> Ideas clave</h2>
 <ul>
 <li>El espacio muestral depende de qué resultado se registra.</li>
 <li>Un evento es un subconjunto del espacio muestral.</li>
@@ -814,8 +820,8 @@ B^c=\{CR,CD,RC,RD,DC,DR\}.
 <li>Los diagramas de Venn apoyan la interpretación, pero no sustituyen la definición por conjuntos.</li>
 </ul>
 </section>
-<section id="ejercicios" class="level2" data-number="3.15">
-<h2 data-number="3.15" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">3.15</span> Ejercicios</h2>
+<section id="ejercicios" class="level2" data-number="2.15">
+<h2 data-number="2.15" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">2.15</span> Ejercicios</h2>
 <section id="nivel-básico" class="level3">
 <h3 class="anchored" data-anchor-id="nivel-básico">Nivel básico</h3>
 <ol type="1">
@@ -851,8 +857,8 @@ B^c=\{CR,CD,RC,RD,DC,DR\}.
 </ol>
 </section>
 </section>
-<section id="referencias-del-capítulo" class="level2" data-number="3.16">
-<h2 data-number="3.16" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">3.16</span> Referencias del capítulo</h2>
+<section id="referencias-del-capítulo" class="level2" data-number="2.16">
+<h2 data-number="2.16" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">2.16</span> Referencias del capítulo</h2>
 <p>El orden conceptual —espacio muestral, eventos y operaciones— sigue el programa oficial del curso y se apoya principalmente en <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>. Se complementa con los enfoques para ingeniería y ciencias de <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>, y con el tratamiento computacional en R de <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
 
 
@@ -1279,12 +1285,12 @@ Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Pr
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./01-incertidumbre-probabilidad.html" class="pagination-link" aria-label="Incertidumbre y probabilidad">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Referencias">
-        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03-conteo-probabilidad.html" class="pagination-link" aria-label="Conteo y asignación de probabilidades">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conteo y asignación de probabilidades</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
