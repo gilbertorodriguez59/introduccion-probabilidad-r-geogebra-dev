@@ -1,392 +1,380 @@
-# Conteo y asignación de probabilidades
+# Técnicas de conteo y enumeración
 
 ## Objetivos de aprendizaje
 
 Al finalizar este capítulo, el estudiante será capaz de:
 
-- asignar probabilidades mediante modelos equiprobables, frecuencias relativas y supuestos explícitos;
-- verificar que una asignación satisface los axiomas de probabilidad;
-- obtener probabilidades de complementos, uniones y diferencias de eventos;
-- aplicar los principios aditivo y multiplicativo de conteo;
-- distinguir permutaciones, arreglos y combinaciones;
-- enumerar espacios muestrales finitos y comprobar cálculos con R;
-- comparar probabilidades exactas con estimaciones obtenidas por simulación;
-- explorar modelos discretos sencillos con GeoGebra.
+- aplicar los principios aditivo y multiplicativo del conteo;
+- construir y leer diagramas de árbol;
+- distinguir entre permutaciones, arreglos y combinaciones;
+- identificar cuándo el orden importa y cuándo no;
+- resolver problemas con y sin repetición;
+- enumerar espacios muestrales finitos con R;
+- verificar resultados exactos mediante simulación;
+- explorar visualmente problemas combinatorios mediante un recurso interactivo.
 
-## De los eventos a los números
+## ¿Por qué necesitamos contar?
 
-En el capítulo anterior describimos resultados y eventos. Ahora necesitamos una regla que cuantifique cuán plausible es cada evento. Una **probabilidad** es un número entre 0 y 1: valores cercanos a 0 indican eventos poco plausibles y valores cercanos a 1 indican eventos muy plausibles.
+En muchos problemas de probabilidad el espacio muestral contiene un número grande de resultados. Enumerarlos uno por uno puede ser tedioso o prácticamente imposible. Las técnicas de conteo permiten determinar cuántos resultados existen sin escribirlos todos.
 
-Una asignación de probabilidades debe ser coherente. No basta con escribir porcentajes intuitivos; los valores deben respetar la estructura del espacio muestral y las relaciones entre eventos.
-
-## Tres formas de construir una asignación
-
-### Modelo equiprobable
-
-Si un espacio muestral finito $S$ contiene $N$ resultados y el modelo justifica que todos son igualmente probables, entonces para cualquier evento $A$,
+Si los resultados elementales son equiprobables, el conteo será posteriormente la base para calcular probabilidades mediante
 
 $$
 P(A)=\frac{|A|}{|S|}.
 $$
 
-La igualdad de probabilidades es un supuesto del modelo, no una consecuencia automática de que el espacio sea finito. Un dado cargado sigue teniendo seis resultados posibles, pero éstos no son equiprobables.
+En este capítulo nos concentraremos primero en aprender a contar correctamente. La asignación formal de probabilidades se desarrollará en el capítulo siguiente.
 
-### Frecuencia relativa
+## Principio aditivo
 
-Si un experimento se repite $n$ veces en condiciones semejantes y $A$ ocurre $n_A$ veces, la frecuencia relativa es
-
-$$
-\widehat P_n(A)=\frac{n_A}{n}.
-$$
-
-Esta cantidad sirve para estimar una probabilidad desconocida. Cambia de una muestra a otra y no debe confundirse con la probabilidad teórica del modelo.
-
-### Modelación basada en información
-
-En confiabilidad, riesgo o diagnóstico puede ser necesario combinar datos históricos, conocimiento físico y juicio experto. La asignación es válida si declara sus supuestos, produce valores coherentes y puede contrastarse con nueva evidencia.
-
-## Axiomas de probabilidad
-
-Una función $P$ que asigna probabilidades a los eventos debe cumplir:
-
-1. **No negatividad:** $P(A)\geq 0$ para todo evento $A$.
-2. **Normalización:** $P(S)=1$.
-3. **Aditividad:** si $A$ y $B$ son mutuamente excluyentes, entonces
-
-$$
-P(A\cup B)=P(A)+P(B).
-$$
-
-Para una familia finita de eventos mutuamente excluyentes, la probabilidad de la unión es la suma de sus probabilidades.
-
-### Consecuencias inmediatas
-
-De los axiomas se obtienen reglas de uso cotidiano:
-
-$$
-P(\varnothing)=0,
-$$
-
-$$
-P(A^c)=1-P(A),
-$$
-
-$$
-P(A\setminus B)=P(A)-P(A\cap B),
-$$
-
-$$
-P(A\cup B)=P(A)+P(B)-P(A\cap B).
-$$
-
-La última expresión resta la intersección porque los resultados comunes se contarían dos veces al sumar $P(A)$ y $P(B)$.
-
-### Ejemplo: control de calidad
-
-En un lote, $P(A)=0.08$ para el evento “la pieza tiene una falla dimensional” y $P(B)=0.05$ para “la pieza tiene una falla superficial”. Si $P(A\cap B)=0.02$, entonces
-
-$$
-P(A\cup B)=0.08+0.05-0.02=0.11.
-$$
-
-Por tanto, la probabilidad de que una pieza presente al menos una de las dos fallas es $0.11$, mientras que la probabilidad de que no presente ninguna es
-
-$$
-1-0.11=0.89.
-$$
-
-## Probabilidad en espacios finitos
-
-Sea
-
-$$
-S=\{s_1,s_2,\ldots,s_N\}.
-$$
-
-Una forma general de definir un modelo finito consiste en asignar a cada punto una masa $p_i$ tal que
-
-$$
-p_i\geq 0
-\qquad\text{y}\qquad
-\sum_{i=1}^{N}p_i=1.
-$$
-
-Entonces, para cualquier evento $A$,
-
-$$
-P(A)=\sum_{s_i\in A}p_i.
-$$
-
-### Ejemplo: dado no equilibrado
-
-Supongamos que las probabilidades de las caras de un dado son
-
-| Resultado | 1 | 2 | 3 | 4 | 5 | 6 |
-|---:|---:|---:|---:|---:|---:|---:|
-| Probabilidad | 0.10 | 0.15 | 0.15 | 0.20 | 0.20 | 0.20 |
-
-Los valores son no negativos y suman 1. Para $A=$ “obtener un número par”,
-
-$$
-P(A)=0.15+0.20+0.20=0.55.
-$$
-
-No sería correcto usar $3/6$ porque las caras no son equiprobables.
-
-## Principios fundamentales de conteo
-
-Contar permite determinar $|S|$ y $|A|$ sin enumerar uno por uno todos los resultados.
-
-### Principio aditivo
-
-Si una tarea puede realizarse mediante una de varias alternativas mutuamente excluyentes y la alternativa $i$ admite $n_i$ formas, el total es
+Supongamos que una tarea puede realizarse mediante alternativas mutuamente excluyentes. Si la primera alternativa puede realizarse de $n_1$ formas, la segunda de $n_2$ formas, y así sucesivamente, entonces el número total de posibilidades es
 
 $$
 n_1+n_2+\cdots+n_k.
 $$
 
-Por ejemplo, si un laboratorio puede seleccionar uno de 4 sensores ópticos o uno de 3 sensores térmicos, existen $4+3=7$ selecciones posibles.
+### Ejemplo
 
-### Principio multiplicativo
-
-Si un procedimiento tiene $k$ etapas y la etapa $i$ admite $n_i$ opciones para cada elección previa, el total de resultados es
+Un laboratorio dispone de 4 sensores ópticos y 3 sensores térmicos. Si se debe elegir exactamente un sensor, existen
 
 $$
-n_1n_2\cdots n_k.
+4+3=7
 $$
 
-Una clave formada por dos letras seguidas de tres dígitos, permitiendo repeticiones, tiene
+selecciones posibles.
+
+El principio aditivo se utiliza cuando las alternativas representan caminos diferentes que no ocurren simultáneamente.
+
+## Principio multiplicativo
+
+Si un procedimiento consta de varias etapas y cada etapa admite cierto número de opciones para cada elección previa, el número total de resultados es el producto de las posibilidades de cada etapa.
+
+Si existen $n_1$ opciones en la primera etapa, $n_2$ en la segunda, ..., $n_k$ en la última, entonces
 
 $$
-26^2\,10^3=676\,000
+N=n_1n_2\cdots n_k.
 $$
 
-configuraciones.
+### Ejemplo: código de identificación
 
-## Factorial y ordenamientos
-
-Para un entero $n\geq1$,
+Un código contiene dos letras seguidas de tres dígitos. Si se permiten repeticiones, el número de códigos es
 
 $$
-n!=n(n-1)\cdots2\cdot1,
+26^2\cdot 10^3=676000.
 $$
 
-y por convenio $0!=1$.
+Aquí el procedimiento tiene cinco etapas: dos elecciones de letra y tres elecciones de dígito.
 
-### Permutaciones
+## Diagramas de árbol
 
-El número de maneras de ordenar $n$ objetos distintos es
+Un diagrama de árbol representa un experimento por etapas. Cada rama corresponde a una elección y cada trayectoria completa desde la raíz hasta una hoja representa un resultado.
+
+### Ejemplo: tres transmisiones
+
+Cada transmisión puede ser correcta (C) o errónea (E). Para tres transmisiones,
+
+$$
+|S|=2\cdot2\cdot2=8.
+$$
+
+Los resultados son
+
+$$
+S=\{CCC,CCE,CEC,CEE,ECC,ECE,EEC,EEE\}.
+$$
+
+El árbol no sólo ayuda a contar: también ayuda a evitar omisiones y duplicaciones.
+
+## Factorial
+
+Para un entero positivo $n$ definimos
+
+$$
+n!=n(n-1)(n-2)\cdots2\cdot1,
+$$
+
+y por convenio
+
+$$
+0!=1.
+$$
+
+Ejemplos:
+
+$$
+5!=5\cdot4\cdot3\cdot2\cdot1=120,
+$$
+
+$$
+7!=5040.
+$$
+
+El factorial aparece naturalmente cuando contamos ordenamientos de objetos distintos.
+
+## Permutaciones
+
+Una **permutación** es un ordenamiento de todos los objetos de una colección.
+
+El número de permutaciones de $n$ objetos distintos es
 
 $$
 P_n=n!.
 $$
 
-### Arreglos de $r$ objetos tomados de $n$
+### Ejemplo
 
-Si se eligen $r$ objetos distintos de un conjunto de $n$ y el orden importa,
+Cinco dispositivos distintos deben colocarse en fila para una prueba. El número de órdenes posibles es
+
+$$
+5!=120.
+$$
+
+## Arreglos o variaciones sin repetición
+
+Cuando se eligen $r$ objetos de un conjunto de $n$ y el orden importa, el número de arreglos es
 
 $$
 P(n,r)=\frac{n!}{(n-r)!}.
 $$
 
-### Combinaciones
+### Ejemplo: asignación de cargos
 
-Si se eligen $r$ objetos y el orden no importa,
+De 10 estudiantes se eligen presidente, secretario y tesorero. Como los cargos son diferentes, el orden importa:
+
+$$
+P(10,3)=10\cdot9\cdot8=720.
+$$
+
+## Combinaciones
+
+Cuando se eligen $r$ objetos de un conjunto de $n$ y el orden no importa, utilizamos combinaciones:
 
 $$
 \binom{n}{r}=\frac{n!}{r!(n-r)!}.
 $$
 
-La pregunta decisiva es: ¿cambiar el orden produce un resultado diferente? Elegir presidenta, secretaria y tesorera es un arreglo; formar un comité de tres personas es una combinación.
+### Ejemplo: selección de un comité
 
-| Situación | ¿Importa el orden? | ¿Se permite repetición? | Conteo |
+De 10 estudiantes se selecciona un comité de 3 personas. Como no existen cargos diferenciados,
+
+$$
+\binom{10}{3}=120.
+$$
+
+La diferencia conceptual es fundamental:
+
+> si cambiar el orden produce un resultado diferente, usamos un conteo ordenado; si no produce un resultado diferente, usamos combinaciones.
+
+## Comparación rápida
+
+| Situación | ¿Importa el orden? | ¿Se permite repetición? | Número de resultados |
 |---|:---:|:---:|---:|
-| ordenar $n$ objetos distintos | sí | no | $n!$ |
-| elegir y ordenar $r$ de $n$ | sí | no | $n!/(n-r)!$ |
+| ordenar los $n$ objetos | sí | no | $n!$ |
+| elegir y ordenar $r$ de $n$ | sí | no | $\dfrac{n!}{(n-r)!}$ |
 | elegir $r$ de $n$ | no | no | $\binom{n}{r}$ |
 | formar una secuencia de longitud $r$ con $n$ símbolos | sí | sí | $n^r$ |
 
-## Ejemplo integrado: selección para inspección
+## Conteo con repetición
 
-Una caja contiene 12 componentes, de los cuales 4 son defectuosos. Se seleccionan 3 sin reemplazo y sin considerar el orden. Si todos los grupos de tres son igualmente probables, el número total de muestras es
-
-$$
-\binom{12}{3}=220.
-$$
-
-Para obtener exactamente dos defectuosos se eligen 2 de los 4 defectuosos y 1 de los 8 conformes:
+Si cada una de $r$ posiciones puede ocuparse por cualquiera de $n$ símbolos y se permite repetición, existen
 
 $$
-\binom{4}{2}\binom{8}{1}=48.
+n^r
 $$
 
-Por tanto,
+secuencias.
+
+### Ejemplo
+
+Una contraseña de cuatro dígitos, permitiendo repeticiones y ceros iniciales, tiene
 
 $$
-P(\text{exactamente 2 defectuosos})
-=\frac{48}{220}
-\approx0.2182.
+10^4=10000
 $$
 
-El producto del numerador refleja dos decisiones: seleccionar los defectuosos y seleccionar el componente conforme.
+posibilidades.
 
-## Cálculo exacto con R
+Si no se permiten repeticiones, el conteo cambia a
 
-R incluye funciones para factoriales y combinaciones:
+$$
+P(10,4)=10\cdot9\cdot8\cdot7=5040.
+$$
+
+## Permutaciones con objetos repetidos
+
+Si existen $n$ objetos, pero algunos son indistinguibles, el número de ordenamientos distintos disminuye.
+
+Si hay $n_1$ objetos de un tipo, $n_2$ de otro, ..., $n_k$ de otro, con
+
+$$
+n_1+n_2+\cdots+n_k=n,
+$$
+
+entonces el número de permutaciones distintas es
+
+$$
+\frac{n!}{n_1!n_2!\cdots n_k!}.
+$$
+
+### Ejemplo
+
+La palabra **RADAR** tiene cinco letras, con dos R y dos A. El número de arreglos distintos es
+
+$$
+\frac{5!}{2!2!}=30.
+$$
+
+## Ejemplo de ingeniería: selección para inspección
+
+Una caja contiene 12 componentes. Se seleccionan 3 para inspección.
+
+Si únicamente interesa qué componentes fueron seleccionados, y no el orden en que se extrajeron,
+
+$$
+|S|=\binom{12}{3}=220.
+$$
+
+Si en cambio el primer componente se asigna a una prueba térmica, el segundo a una prueba eléctrica y el tercero a una prueba mecánica, entonces las posiciones tienen funciones diferentes y el orden sí importa:
+
+$$
+P(12,3)=12\cdot11\cdot10=1320.
+$$
+
+El contexto determina el modelo de conteo apropiado.
+
+## Cálculo con R
+
+R proporciona funciones directas para factoriales y combinaciones:
 
 ```{r}
 factorial(6)
 choose(12, 3)
-choose(4, 2) * choose(8, 1) / choose(12, 3)
 ```
 
-Para arreglos sin repetición podemos definir:
+Podemos definir los arreglos sin repetición mediante
 
 ```{r}
 arreglos <- function(n, r) {
   factorial(n) / factorial(n - r)
 }
 
-arreglos(10, 4)
+arreglos(10, 3)
 ```
 
-### Enumeración explícita
+### Enumeración explícita con R
 
-En espacios pequeños conviene generar todos los resultados para comprobar el razonamiento. Para dos dados:
+Para tres transmisiones, cada una correcta o errónea:
 
 ```{r}
-dados <- expand.grid(dado_1 = 1:6, dado_2 = 1:6)
-evento <- subset(dados, dado_1 + dado_2 >= 10)
+S <- expand.grid(
+  t1 = c("C", "E"),
+  t2 = c("C", "E"),
+  t3 = c("C", "E")
+)
 
-nrow(evento)
-nrow(dados)
-nrow(evento) / nrow(dados)
-evento
+S
+nrow(S)
 ```
 
-Hay 6 resultados favorables de 36, de modo que
+El resultado debe contener $2^3=8$ filas.
 
-$$
-P(\text{suma}\geq10)=\frac{6}{36}=\frac{1}{6}.
-$$
+### Comprobar combinaciones
 
-## Simulación y frecuencia relativa
-
-Una simulación imita el experimento mediante números pseudoaleatorios. No sustituye un cálculo exacto disponible, pero permite comprobarlo, estudiar modelos grandes y observar la variabilidad muestral.
+Podemos enumerar todas las selecciones de 3 elementos tomadas de 5:
 
 ```{r}
-#| label: fig-convergencia-dados
-#| fig-cap: "Frecuencia relativa acumulada del evento suma mayor o igual que 10."
-set.seed(2026)
-n <- 5000
-d1 <- sample(1:6, n, replace = TRUE)
-d2 <- sample(1:6, n, replace = TRUE)
-ocurre <- d1 + d2 >= 10
-frecuencia <- cumsum(ocurre) / seq_len(n)
-
-plot(frecuencia, type = "l", col = "steelblue", lwd = 2,
-     xlab = "Número de repeticiones",
-     ylab = "Frecuencia relativa acumulada")
-abline(h = 1/6, col = "firebrick", lty = 2, lwd = 2)
-legend("topright", c("Simulación", "Probabilidad exacta"),
-       col = c("steelblue", "firebrick"), lty = c(1, 2),
-       lwd = 2, bty = "n")
+combn(1:5, 3)
+choose(5, 3)
 ```
 
-La trayectoria fluctúa más al inicio. A medida que crece el número de repeticiones, suele estabilizarse cerca de $1/6$. Esta regularidad empírica motiva la ley de los grandes números, que se estudiará posteriormente.
+La primera instrucción muestra las selecciones y la segunda devuelve únicamente su cantidad.
 
-### Simulación de la inspección
+## Simulación como verificación
+
+La simulación puede utilizarse para comprobar que un mecanismo de generación recorre los tipos de resultados esperados.
+
+Por ejemplo, si generamos aleatoriamente claves de dos letras entre A, B y C:
 
 ```{r}
-set.seed(314)
-B <- 20000
-defectuosos <- replicate(B, {
-  muestra <- sample(c(rep(1, 4), rep(0, 8)), 3,
-                    replace = FALSE)
-  sum(muestra)
-})
-
-mean(defectuosos == 2)
-choose(4, 2) * choose(8, 1) / choose(12, 3)
+set.seed(123)
+replicate(10, paste(sample(c("A", "B", "C"), 2,
+                           replace = TRUE), collapse = ""))
 ```
 
-La primera salida es una estimación y cambia ligeramente al modificar la semilla; la segunda es la probabilidad exacta.
-
-## Actividad en GeoGebra
-
-Abra [GeoGebra Classic](https://www.geogebra.org/classic) y realice la siguiente exploración:
-
-1. Cree dos deslizadores enteros, `n` entre 1 y 20 y `r` entre 0 y 20.
-2. Restrinja la interpretación a los casos $0\leq r\leq n$.
-3. En la vista CAS escriba $n!/(r!(n-r)!)$ para calcular $\binom{n}{r}$.
-4. Compare los valores obtenidos para $r$ y $n-r$.
-5. Registre una conjetura y verifíquela algebraicamente.
-
-Deberá observar la simetría
+El número total de claves posibles es
 
 $$
-\binom{n}{r}=\binom{n}{n-r}.
+3^2=9.
 $$
 
-Interprétela así: seleccionar los $r$ elementos que entran equivale a seleccionar los $n-r$ que quedan fuera.
+La simulación no sustituye el conteo exacto, pero ayuda a comprender cómo se generan los resultados.
 
-### Extensión: triángulo de Pascal
+## Interactivo del capítulo
 
-Calcule combinaciones para valores consecutivos de $n$ y organícelas por filas. Compruebe visualmente la identidad
+En la edición web se incluye un recurso interactivo con dos deslizadores, $n$ y $r$, que permite comparar simultáneamente:
 
 $$
-\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}.
+n!,
 $$
 
-## Estrategia para resolver problemas
+$$
+P(n,r)=\frac{n!}{(n-r)!},
+$$
 
-Antes de aplicar una fórmula, siga esta secuencia:
+y
 
-1. Defina con precisión el experimento y el evento.
-2. Decida si los resultados elementales son equiprobables.
-3. Determine si importa el orden.
-4. Determine si se permite repetición o reemplazo.
-5. Cuente el espacio muestral y los resultados favorables.
-6. Compruebe que la respuesta se encuentra entre 0 y 1.
-7. Interprete el resultado en el contexto original.
-8. Cuando sea útil, verifique mediante enumeración o simulación.
+$$
+\binom{n}{r}=\frac{n!}{r!(n-r)!}.
+$$
+
+El objetivo es que el estudiante observe visualmente cuánto cambia el número de resultados cuando el orden importa y cuando no importa. También se incluye un árbol de decisiones de tres etapas para ilustrar el principio multiplicativo.
+
+## Estrategia para decidir qué fórmula utilizar
+
+Antes de calcular, contesta estas preguntas:
+
+1. ¿El procedimiento ocurre por etapas?
+2. ¿Las alternativas son mutuamente excluyentes o consecutivas?
+3. ¿Importa el orden?
+4. ¿Se permite repetir elementos?
+5. ¿Se seleccionan todos los elementos o sólo una parte?
+
+Una buena práctica es describir primero el proceso con palabras y después elegir la fórmula.
 
 ## Errores frecuentes
 
-- Aplicar $P(A)=|A|/|S|$ sin justificar equiprobabilidad.
-- Usar combinaciones cuando los cargos o posiciones hacen que el orden importe.
-- Contar como diferentes selecciones que sólo cambian de orden.
-- Confundir selección con reemplazo y selección sin reemplazo.
-- Sumar probabilidades de eventos que se superponen sin restar la intersección.
-- Presentar una frecuencia simulada como si fuera un valor exacto.
+- utilizar combinaciones cuando el orden sí importa;
+- utilizar permutaciones cuando sólo interesa el grupo seleccionado;
+- olvidar si la repetición está permitida;
+- multiplicar cantidades correspondientes a alternativas excluyentes;
+- sumar cantidades correspondientes a etapas consecutivas;
+- contar dos veces resultados que representan la misma selección;
+- aplicar una fórmula antes de entender qué constituye un resultado diferente.
 
-## Resumen
+## Ideas clave
 
-- Una probabilidad coherente es no negativa, asigna 1 al espacio muestral y es aditiva para eventos mutuamente excluyentes.
-- En un espacio finito, las probabilidades puntuales deben ser no negativas y sumar 1.
-- La regla $|A|/|S|$ exige resultados equiprobables.
-- Los principios aditivo y multiplicativo organizan problemas de conteo.
-- El orden y la repetición determinan si se usan factoriales, arreglos, combinaciones o potencias.
-- R permite calcular, enumerar y simular; cada método responde una pregunta diferente.
+- El principio aditivo combina alternativas excluyentes.
+- El principio multiplicativo combina etapas sucesivas.
+- Los diagramas de árbol ayudan a visualizar procesos por etapas.
+- El factorial cuenta ordenamientos completos.
+- Los arreglos se utilizan cuando el orden importa.
+- Las combinaciones se utilizan cuando el orden no importa.
+- La repetición cambia de manera esencial el conteo.
+- R permite enumerar y comprobar espacios muestrales finitos.
 
 ## Ejercicios
 
-1. Una ruleta tiene sectores con probabilidades $0.10$, $0.20$, $0.25$, $0.15$ y $0.30$. Verifique los axiomas y calcule la probabilidad de caer en alguno de los tres primeros sectores.
-2. En una planta, $P(A)=0.12$, $P(B)=0.09$ y $P(A\cap B)=0.04$. Calcule $P(A\cup B)$ y la probabilidad de que no ocurra ninguna falla.
-3. Determine cuántos códigos de dos letras y cuatro dígitos pueden formarse si se permiten repeticiones.
-4. Resuelva el ejercicio anterior si las letras no pueden repetirse y los dígitos tampoco.
-5. ¿De cuántas formas pueden asignarse los cargos de coordinación, secretaría y tesorería entre 10 personas?
-6. ¿Cuántos comités de tres personas pueden formarse con esas mismas 10 personas? Explique por qué la respuesta difiere de la anterior.
-7. De 15 sensores, 5 son de alta precisión. Se eligen 4 sin reemplazo. Calcule la probabilidad de seleccionar exactamente 2 de alta precisión.
-8. En una baraja ordinaria de 52 cartas, calcule la probabilidad de recibir una mano de 5 cartas que contenga exactamente 2 ases.
-9. Dos dados equilibrados se lanzan una vez. Enumere con R el evento “la suma es prima” y calcule su probabilidad.
-10. Simule 10 000 lanzamientos del ejercicio anterior y compare la frecuencia relativa con el valor exacto.
-11. Explique por qué $P(A)=|A|/|S|$ no es apropiada para el ejemplo del dado no equilibrado.
-12. Demuestre mediante conteo que $\binom{n}{r}=\binom{n}{n-r}$ y describa el significado de ambos lados.
-13. Diseñe en GeoGebra una tabla con las filas $n=0,1,\ldots,8$ del triángulo de Pascal. Identifique dos patrones.
-14. Proponga un modelo de probabilidades para los niveles bajo, medio y alto de demanda de un producto. Justifique la asignación y formule un evento compuesto.
-15. Escriba un programa en R que reciba un vector de probabilidades puntuales, compruebe que no son negativas y determine si suman 1 dentro de una tolerancia numérica.
+1. Una cafetería ofrece 4 bebidas y 6 alimentos. ¿Cuántos desayunos distintos pueden formarse eligiendo una bebida y un alimento?
+2. ¿Cuántas claves de tres letras pueden formarse con 26 letras si se permite repetición?
+3. Resuelve el ejercicio anterior si no se permite repetición.
+4. ¿De cuántas maneras pueden ordenarse 8 libros distintos en un estante?
+5. De 12 estudiantes, ¿de cuántas maneras pueden asignarse los cargos de presidente, secretario y tesorero?
+6. De los mismos 12 estudiantes, ¿cuántos comités distintos de 3 personas pueden formarse?
+7. ¿Cuántos resultados posibles tiene una secuencia de 5 lanzamientos de moneda?
+8. ¿Cuántos arreglos distintos pueden formarse con las letras de la palabra PROBABILIDAD? Identifica primero las letras repetidas.
+9. Usa R para enumerar todos los resultados de cuatro transmisiones, cada una correcta o errónea, y verifica el principio multiplicativo.
+10. ★ Diseña un problema de ingeniería en el que usar una combinación en lugar de un arreglo produzca una respuesta incorrecta. Explica por qué.
 
 ## Referencias del capítulo
 
-El desarrollo de los axiomas, las reglas elementales y los métodos de conteo sigue el tratamiento introductorio de @walpole2012 y se complementa con la perspectiva aplicada de @montgomery2018.
+El tratamiento de técnicas de conteo sigue el enfoque habitual de probabilidad para ingeniería y ciencias de @walpole2012, @devore2016, @montgomery2018 y @johnson2018, complementado con verificación computacional mediante R inspirada en @kerns2010.
