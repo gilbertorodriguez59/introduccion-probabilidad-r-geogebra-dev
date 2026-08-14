@@ -23,6 +23,11 @@ jobs:
         with:
           r-version: 'release'
 
+      - name: Instalar paquetes de R necesarios para Quarto
+        shell: Rscript {0}
+        run: |
+          install.packages(c("knitr", "rmarkdown"), repos = "https://cloud.r-project.org")
+
       - name: Renderizar HTML
         run: quarto render --to html
 
