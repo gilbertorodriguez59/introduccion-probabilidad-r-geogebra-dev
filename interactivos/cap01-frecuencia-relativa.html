@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frecuencia relativa y estabilidad</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;padding:18px;background:#f8fafc;color:#172033}h2{margin-top:0}.panel{background:white;border:1px solid #dbe3ec;border-radius:12px;padding:16px;max-width:920px;margin:auto}.controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px}button,input{font:inherit}button{padding:8px 13px;border:1px solid #9aa9b8;border-radius:8px;background:#fff;cursor:pointer}canvas{width:100%;height:340px;border:1px solid #e2e8f0;border-radius:8px}.stat{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}.stat b{font-size:1.1rem}.note{font-size:.92rem;color:#526173}</style>
+</head>
+<body><div class="panel">
+<h2>Experimento: frecuencia relativa de cara</h2>
+<p>Modifica el número de lanzamientos y observa cómo la frecuencia relativa tiende a estabilizarse alrededor de 0.5.</p>
+<div class="controls"><label>Lanzamientos: <input id="n" type="range" min="20" max="5000" step="20" value="500"> <span id="nval">500</span></label><button id="sim">Simular de nuevo</button></div>
+<div class="stat"><div>Caras: <b id="caras">0</b></div><div>Frecuencia final: <b id="freq">0</b></div><div>Referencia teórica: <b>0.500</b></div></div>
+<canvas id="graf" width="900" height="340"></canvas>
+<p class="note">La simulación no demuestra que la probabilidad sea 0.5; ilustra la regularidad que motiva la Ley de los Grandes Números.</p>
+</div>
+<script>
+const c=document.getElementById('graf'),ctx=c.getContext('2d'),n=document.getElementById('n');
+function draw(){const N=+n.value;document.getElementById('nval').textContent=N;let s=0,vals=[];for(let i=1;i<=N;i++){if(Math.random()<.5)s++;vals.push(s/i)}document.getElementById('caras').textContent=s;document.getElementById('freq').textContent=(s/N).toFixed(3);ctx.clearRect(0,0,c.width,c.height);const L=48,R=18,T=18,B=38,W=c.width-L-R,H=c.height-T-B;ctx.strokeStyle='#94a3b8';ctx.beginPath();ctx.moveTo(L,T);ctx.lineTo(L,T+H);ctx.lineTo(L+W,T+H);ctx.stroke();function y(v){return T+(0.75-v)/0.5*H}ctx.setLineDash([6,5]);ctx.strokeStyle='#64748b';ctx.beginPath();ctx.moveTo(L,y(.5));ctx.lineTo(L+W,y(.5));ctx.stroke();ctx.setLineDash([]);ctx.strokeStyle='#2563eb';ctx.lineWidth=2;ctx.beginPath();vals.forEach((v,i)=>{const x=L+(i/(N-1))*W,yy=y(Math.max(.25,Math.min(.75,v)));i?ctx.lineTo(x,yy):ctx.moveTo(x,yy)});ctx.stroke();ctx.fillStyle='#334155';ctx.font='13px system-ui';ctx.fillText('0.75',8,y(.75)+4);ctx.fillText('0.50',8,y(.5)+4);ctx.fillText('0.25',8,y(.25)+4);ctx.fillText('1',L-3,T+H+22);ctx.fillText(String(N),L+W-25,T+H+22)}
+n.addEventListener('input',draw);document.getElementById('sim').addEventListener('click',draw);draw();
+</script></body></html>
