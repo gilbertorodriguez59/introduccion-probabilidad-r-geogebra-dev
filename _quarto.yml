@@ -1,6 +1,9 @@
 project:
   type: book
   output-dir: docs
+  resources:
+    - interactivos/**
+    - html/**
 
 book:
   title: "Introducción a la Probabilidad con R y GeoGebra"
@@ -43,6 +46,7 @@ format:
     anchor-sections: true
     search: true
     html-math-method: mathjax
+    include-after-body: html/interactivos-capitulos.html
   pdf:
     documentclass: scrreprt
     pdf-engine: xelatex
