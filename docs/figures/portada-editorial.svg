@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1055" height="1491" viewBox="0 0 1055 1491">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b34"/><stop offset="1" stop-color="#073a66"/></linearGradient>
+  <linearGradient id="teal" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4bb7e9"/><stop offset="1" stop-color="#42c0b4"/></linearGradient>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#2d6b93" stroke-width="1" opacity=".25"/></pattern>
+</defs>
+<rect width="1055" height="1491" fill="url(#bg)"/>
+<rect y="690" width="1055" height="700" fill="url(#grid)"/>
+<path d="M0 24H1055M0 102H1055" stroke="#2ec6c4" stroke-width="1.5" opacity=".8"/>
+<text x="72" y="60" fill="#dceef7" font-family="Arial,Helvetica,sans-serif" font-size="20" letter-spacing="5">MATEMÁTICAS APLICADAS</text>
+<text x="72" y="84" fill="#dceef7" font-family="Arial,Helvetica,sans-serif" font-size="20" letter-spacing="4">PARA LA INGENIERÍA Y LAS CIENCIAS</text>
+<text x="760" y="56" fill="#44c3b6" font-family="Arial" font-size="19" letter-spacing="2">COLECCIÓN</text>
+<text x="694" y="82" fill="#eef8fc" font-family="Arial" font-size="20" letter-spacing="2">CIENCIA Y TECNOLOGÍA</text>
+<text x="94" y="218" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="700">Introducción a la</text>
+<text x="90" y="356" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="146" font-weight="700">Probabilidad</text>
+<text x="92" y="487" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="700">con</text>
+<text x="270" y="487" fill="#55b8ed" font-family="Arial,Helvetica,sans-serif" font-size="130" font-weight="700">R</text>
+<text x="385" y="487" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="700">y</text>
+<text x="464" y="487" fill="#52c1b7" font-family="Arial,Helvetica,sans-serif" font-size="112" font-weight="700">GeoGebra</text>
+<line x1="96" y1="528" x2="917" y2="528" stroke="#42c2c0" stroke-width="2"/><circle cx="918" cy="528" r="5" fill="#42c2c0"/>
+<text x="94" y="583" fill="#63b6e6" font-family="Arial,Helvetica,sans-serif" font-size="40" font-style="italic">Teoría, simulación y aplicaciones</text>
+<text x="94" y="628" fill="#63b6e6" font-family="Arial,Helvetica,sans-serif" font-size="40" font-style="italic">para ingeniería y ciencias</text>
+<line x1="0" y1="684" x2="254" y2="684" stroke="#42c2c0" stroke-width="2"/><line x1="790" y1="684" x2="1055" y2="684" stroke="#42c2c0" stroke-width="2"/>
+<text x="274" y="697" fill="white" font-family="Arial,Helvetica,sans-serif" font-size="30">Jesús Gilberto Rodríguez Escobedo</text>
+<!-- Normal curve -->
+<g transform="translate(45,750)"><line x1="0" y1="210" x2="385" y2="210" stroke="white"/><line x1="25" y1="235" x2="25" y2="5" stroke="white"/>
+<path d="M25 210 C95 210,105 45,190 35 C275 45,285 210,360 210" fill="none" stroke="#7ed7ff" stroke-width="4"/>
+<path d="M145 210V82M190 210V35M235 210V82" stroke="#b9edff" stroke-dasharray="7 7" stroke-width="2"/>
+<text x="34" y="20" fill="#dff6ff" font-size="22" font-family="serif">f(x)</text><text x="370" y="228" fill="#dff6ff" font-size="22" font-family="serif">x</text>
+<text x="78" y="238" fill="#dff6ff" font-size="18">−2σ</text><text x="135" y="238" fill="#dff6ff" font-size="18">−1σ</text><text x="185" y="238" fill="#dff6ff" font-size="18">μ</text><text x="225" y="238" fill="#dff6ff" font-size="18">1σ</text><text x="282" y="238" fill="#dff6ff" font-size="18">2σ</text></g>
+<!-- formulas -->
+<text x="425" y="860" fill="#56c9c4" font-family="serif" font-size="26">P(A∪B)=P(A)+P(B)−P(A∩B)</text>
+<text x="460" y="915" fill="#56c9c4" font-family="serif" font-size="28">P(A|B)= P(A∩B) / P(B)</text>
+<!-- probability tree -->
+<g stroke="#dff7ff" stroke-width="2" fill="none"><line x1="664" y1="836" x2="780" y2="784"/><line x1="664" y1="836" x2="780" y2="892"/><line x1="780" y1="784" x2="935" y2="746"/><line x1="780" y1="784" x2="935" y2="824"/><line x1="780" y1="892" x2="935" y2="858"/><line x1="780" y1="892" x2="935" y2="940"/></g>
+<g fill="#55c5bb" font-family="serif" font-size="25"><text x="785" y="778">A</text><text x="785" y="904">Aᶜ</text><text x="947" y="751">B</text><text x="947" y="830">Bᶜ</text><text x="947" y="865">B</text><text x="947" y="948">Bᶜ</text></g>
+<g fill="#dff7ff" font-family="serif" font-size="18"><text x="690" y="798">P(A)</text><text x="682" y="892">P(Aᶜ)</text><text x="840" y="757">P(B|A)</text><text x="830" y="816">P(Bᶜ|A)</text></g>
+<!-- scatter -->
+<g transform="translate(50,1030)"><line x1="0" y1="250" x2="300" y2="250" stroke="white"/><line x1="20" y1="270" x2="20" y2="0" stroke="white"/>
+<line x1="35" y1="225" x2="270" y2="35" stroke="#4ed1c8" stroke-width="5"/>
+<g fill="#58c9ee"><circle cx="50" cy="205" r="5"/><circle cx="70" cy="190" r="4"/><circle cx="90" cy="170" r="5"/><circle cx="110" cy="185" r="4"/><circle cx="130" cy="140" r="5"/><circle cx="145" cy="155" r="4"/><circle cx="165" cy="110" r="5"/><circle cx="185" cy="125" r="4"/><circle cx="205" cy="90" r="5"/><circle cx="230" cy="70" r="4"/><circle cx="250" cy="48" r="5"/></g></g>
+<!-- histogram -->
+<g transform="translate(380,1040)" fill="#48aee4"><rect x="15" y="200" width="18" height="35"/><rect x="40" y="175" width="18" height="60"/><rect x="65" y="145" width="18" height="90"/><rect x="90" y="115" width="18" height="120"/><rect x="115" y="75" width="18" height="160"/><rect x="140" y="35" width="18" height="200"/><rect x="165" y="55" width="18" height="180"/><rect x="190" y="95" width="18" height="140"/><rect x="215" y="135" width="18" height="100"/><rect x="240" y="175" width="18" height="60"/><rect x="265" y="205" width="18" height="30"/></g>
+<!-- geometry -->
+<g transform="translate(700,1045)"><circle cx="145" cy="145" r="120" fill="none" stroke="#dff7ff" stroke-width="2"/><line x1="5" y1="145" x2="295" y2="145" stroke="#dff7ff"/><line x1="145" y1="5" x2="145" y2="285" stroke="#dff7ff"/><path d="M145 35 L265 130 L60 235 Z" fill="none" stroke="#dff7ff" stroke-width="2"/><path d="M145 35 Q235 30 265 130" fill="none" stroke="#49c9bd" stroke-width="3" stroke-dasharray="8 8"/><text x="150" y="30" fill="#4fd0c4" font-size="26">A</text><text x="272" y="135" fill="#4fd0c4" font-size="26">B</text><text x="43" y="250" fill="#4fd0c4" font-size="26">C</text><text x="150" y="165" fill="white" font-size="22">O</text></g>
+<!-- waves -->
+<path d="M0 1370 Q160 1320 330 1380 T660 1370 T1055 1350 V1491 H0Z" fill="#0874a4" opacity=".45"/><path d="M0 1410 Q180 1360 360 1420 T720 1410 T1055 1390" fill="none" stroke="#48c4d5" stroke-width="3" opacity=".7"/>
+</svg>
