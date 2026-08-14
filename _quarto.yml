@@ -1,0 +1,57 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Introducción a la Probabilidad con R y GeoGebra"
+  subtitle: "Teoría, simulación y aplicaciones para ingeniería y ciencias"
+  author: "Jesús Gilberto Rodríguez Escobedo"
+  date: "2026-08-14"
+  chapters:
+    - index.qmd
+    - bienvenida.qmd
+    - presentacion.qmd
+    - introduccion.qmd
+    - notacion.qmd
+    - 01-incertidumbre-probabilidad.qmd
+    - references.qmd
+  page-footer:
+    center: "Licencia CC BY-NC-SA 4.0"
+  page-navigation: true
+  sidebar:
+    title: "Contenido del libro"
+    style: docked
+    collapse-level: 1
+  downloads: [pdf]
+  repo-url: https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev
+
+bibliography: references.bib
+lang: es
+number-depth: 2
+toc-depth: 3
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-title: "En este capítulo"
+    code-copy: true
+    code-fold: false
+    anchor-sections: true
+    search: true
+    html-math-method: mathjax
+  pdf:
+    documentclass: scrreprt
+    pdf-engine: xelatex
+    toc: true
+    colorlinks: true
+    keep-tex: false
+    fig-pos: H
+    lof: true
+    lot: true
+
+execute:
+  freeze: auto
+  echo: true
+  warning: false
+  message: false
