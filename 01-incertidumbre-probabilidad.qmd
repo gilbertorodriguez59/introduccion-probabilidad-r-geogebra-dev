@@ -4,13 +4,13 @@
 
 Al finalizar este capítulo, el estudiante será capaz de distinguir fenómenos deterministas y aleatorios, reconocer la variabilidad como parte natural de los sistemas reales, describir experimentos aleatorios sencillos y utilizar simulación para aproximar probabilidades.
 
-## 1.1 ¿Por qué necesitamos probabilidad?
+## ¿Por qué necesitamos probabilidad?
 
 En un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.
 
 La probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.
 
-## 1.2 Experimentos deterministas y aleatorios
+## Experimentos deterministas y aleatorios
 
 Un **experimento aleatorio** es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.
 
@@ -21,7 +21,7 @@ Ejemplos:
 - medir la concentración de un contaminante en una estación ambiental;
 - observar la cara obtenida al lanzar una moneda.
 
-## 1.3 Variabilidad
+## Variabilidad
 
 La variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.
 
@@ -29,7 +29,7 @@ La idea central será:
 
 > modelar la incertidumbre en lugar de fingir que no existe.
 
-## 1.4 Frecuencia relativa como intuición
+## Frecuencia relativa como intuición
 
 Si un experimento se repite $n$ veces y el evento $A$ ocurre $n_A$ veces, su frecuencia relativa es
 
@@ -39,7 +39,7 @@ $$
 
 Cuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.
 
-## 1.5 Primer experimento con R
+## Primer experimento con R
 
 Simulemos lanzamientos de una moneda equilibrada.
 
@@ -62,24 +62,24 @@ abline(h = 0.5, lty = 2)
 
 Este ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.
 
-## 1.6 Primer recurso GeoGebra
+## Primer recurso GeoGebra
 
-En la versión web construiremos un experimento interactivo de lanzamiento de moneda. El estudiante podrá aumentar el número de repeticiones y comparar la frecuencia relativa observada con la probabilidad teórica $1/2$.
+En la versión web construiremos experimentos interactivos que permitan comparar resultados observados con modelos teóricos. En el capítulo siguiente comenzaremos con diagramas de Venn y representación de eventos.
 
-## 1.7 Aplicación de ingeniería
+## Aplicación de ingeniería
 
 Supongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.
 
 Este tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.
 
-## 1.8 Ideas clave
+## Ideas clave
 
 - La incertidumbre no implica ausencia de estructura.
 - La probabilidad cuantifica fenómenos aleatorios.
 - La repetición experimental permite observar regularidades.
 - La simulación complementa, pero no sustituye, el razonamiento matemático.
 
-## 1.9 Ejercicios
+## Ejercicios
 
 1. Clasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular $2+3$.
 2. Propón tres fuentes de variabilidad en una medición de temperatura ambiental.
