@@ -1,0 +1,172 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introducción a la Probabilidad con R y GeoGebra",
+    "section": "",
+    "text": "Este libro presenta los fundamentos de la probabilidad con una orientación conceptual, matemática, computacional y visual.\nLa obra desarrolla cada tema mediante cuatro perspectivas complementarias: razonamiento matemático, ejemplos de ingeniería y ciencias, experimentación con R y visualización dinámica con GeoGebra.\nLa versión actual es de desarrollo. Los capítulos se revisan aquí antes de pasar a la edición estable.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introducción a la Probabilidad con R y GeoGebra</span>"
+    ]
+  },
+  {
+    "objectID": "bienvenida.html",
+    "href": "bienvenida.html",
+    "title": "Bienvenida",
+    "section": "",
+    "text": "La probabilidad es el lenguaje matemático con el que estudiamos fenómenos cuyo resultado no puede predecirse con certeza absoluta.\nEn este libro trabajaremos con situaciones reales y simuladas de ingeniería y ciencias. Cada concepto se estudiará primero de manera intuitiva, después matemáticamente y finalmente mediante R y GeoGebra.\nEl objetivo no es memorizar fórmulas, sino aprender a construir modelos probabilísticos, interpretarlos y utilizarlos para tomar decisiones bajo incertidumbre.",
+    "crumbs": [
+      "Bienvenida"
+    ]
+  },
+  {
+    "objectID": "presentacion.html",
+    "href": "presentacion.html",
+    "title": "Presentación",
+    "section": "",
+    "text": "La obra está organizada para acompañar un primer curso universitario de probabilidad. El recorrido inicia con conjuntos, experimentos aleatorios, espacios muestrales y eventos; continúa con probabilidad condicional, independencia y Bayes; y después aborda variables aleatorias, esperanza, distribuciones conjuntas y las principales distribuciones discretas y continuas.\nLa versión aplicada incorpora simulación, gráficos y cálculo con R, además de recursos visuales e interactivos con GeoGebra. Los ejemplos se orientarán especialmente a problemas de ingeniería, ciencias y datos reales.",
+    "crumbs": [
+      "Presentación"
+    ]
+  },
+  {
+    "objectID": "introduccion.html",
+    "href": "introduccion.html",
+    "title": "Introducción",
+    "section": "",
+    "text": "La ingeniería y las ciencias trabajan constantemente con variación, ruido e incertidumbre. Dos mediciones realizadas bajo condiciones aparentemente iguales pueden producir resultados distintos; un componente puede fallar antes o después de lo esperado; una red puede recibir un número impredecible de solicitudes; y una variable ambiental puede fluctuar aun cuando las condiciones generales parezcan estables.\nLa probabilidad proporciona un marco matemático para representar y cuantificar esa incertidumbre. En lugar de intentar eliminar la variación, construimos modelos capaces de describirla.\nA lo largo del libro combinaremos teoría, resolución manual de problemas, simulación y visualización. R permitirá experimentar con miles de repeticiones y contrastar resultados teóricos; GeoGebra ayudará a explorar de forma dinámica espacios muestrales, eventos, funciones de distribución y familias de distribuciones.",
+    "crumbs": [
+      "Introducción"
+    ]
+  },
+  {
+    "objectID": "notacion.html",
+    "href": "notacion.html",
+    "title": "Notación general",
+    "section": "",
+    "text": "Se utilizarán, entre otros, los siguientes símbolos:\n\n\\(S\\) o \\(\\Omega\\): espacio muestral.\n\\(A,B,C\\): eventos.\n\\(A^c\\): complemento de \\(A\\).\n\\(A\\cup B\\): unión de eventos.\n\\(A\\cap B\\): intersección de eventos.\n\\(P(A)\\): probabilidad del evento \\(A\\).\n\\(P(A\\mid B)\\): probabilidad condicional de \\(A\\) dado \\(B\\).\n\\(X,Y\\): variables aleatorias.\n\\(F_X(x)\\): función de distribución acumulada de \\(X\\).\n\\(p_X(x)\\): función de masa de probabilidad.\n\\(f_X(x)\\): función de densidad.\n\\(E(X)\\): esperanza matemática.\n\\(\\operatorname{Var}(X)\\): varianza.\n\\(\\operatorname{Cov}(X,Y)\\): covarianza.\n\\(\\rho_{XY}\\): coeficiente de correlación.",
+    "crumbs": [
+      "Notación general"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html",
+    "href": "01-incertidumbre-probabilidad.html",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "",
+    "text": "2.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de distinguir fenómenos deterministas y aleatorios, reconocer la variabilidad como parte natural de los sistemas reales, describir experimentos aleatorios sencillos y utilizar simulación para aproximar probabilidades.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#por-qué-necesitamos-probabilidad",
+    "href": "01-incertidumbre-probabilidad.html#por-qué-necesitamos-probabilidad",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.2 1.1 ¿Por qué necesitamos probabilidad?",
+    "text": "2.2 1.1 ¿Por qué necesitamos probabilidad?\nEn un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.\nLa probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#experimentos-deterministas-y-aleatorios",
+    "href": "01-incertidumbre-probabilidad.html#experimentos-deterministas-y-aleatorios",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.3 1.2 Experimentos deterministas y aleatorios",
+    "text": "2.3 1.2 Experimentos deterministas y aleatorios\nUn experimento aleatorio es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.\nEjemplos:\n\nregistrar si un componente electrónico falla durante cierto periodo;\ncontar llamadas que llegan a un servidor durante un minuto;\nmedir la concentración de un contaminante en una estación ambiental;\nobservar la cara obtenida al lanzar una moneda.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#variabilidad",
+    "href": "01-incertidumbre-probabilidad.html#variabilidad",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.4 1.3 Variabilidad",
+    "text": "2.4 1.3 Variabilidad\nLa variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.\nLa idea central será:\n\nmodelar la incertidumbre en lugar de fingir que no existe.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#frecuencia-relativa-como-intuición",
+    "href": "01-incertidumbre-probabilidad.html#frecuencia-relativa-como-intuición",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.5 1.4 Frecuencia relativa como intuición",
+    "text": "2.5 1.4 Frecuencia relativa como intuición\nSi un experimento se repite \\(n\\) veces y el evento \\(A\\) ocurre \\(n_A\\) veces, su frecuencia relativa es\n\\[\n\\widehat P_n(A)=\\frac{n_A}{n}.\n\\]\nCuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#primer-experimento-con-r",
+    "href": "01-incertidumbre-probabilidad.html#primer-experimento-con-r",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.6 1.5 Primer experimento con R",
+    "text": "2.6 1.5 Primer experimento con R\nSimulemos lanzamientos de una moneda equilibrada.\n\nset.seed(123)\nn &lt;- 1000\nlanzamientos &lt;- sample(c(\"cara\", \"cruz\"), n, replace = TRUE)\nmean(lanzamientos == \"cara\")\n\n[1] 0.506\n\n\nPodemos observar cómo evoluciona la frecuencia relativa:\n\nfrecuencia &lt;- cumsum(lanzamientos == \"cara\") / seq_len(n)\nplot(frecuencia, type = \"l\",\n     xlab = \"Número de lanzamientos\",\n     ylab = \"Frecuencia relativa de cara\")\nabline(h = 0.5, lty = 2)\n\n\n\n\n\n\n\n\nEste ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#primer-recurso-geogebra",
+    "href": "01-incertidumbre-probabilidad.html#primer-recurso-geogebra",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.7 1.6 Primer recurso GeoGebra",
+    "text": "2.7 1.6 Primer recurso GeoGebra\nEn la versión web construiremos un experimento interactivo de lanzamiento de moneda. El estudiante podrá aumentar el número de repeticiones y comparar la frecuencia relativa observada con la probabilidad teórica \\(1/2\\).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#aplicación-de-ingeniería",
+    "href": "01-incertidumbre-probabilidad.html#aplicación-de-ingeniería",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.8 1.7 Aplicación de ingeniería",
+    "text": "2.8 1.7 Aplicación de ingeniería\nSupongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.\nEste tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#ideas-clave",
+    "href": "01-incertidumbre-probabilidad.html#ideas-clave",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.9 1.8 Ideas clave",
+    "text": "2.9 1.8 Ideas clave\n\nLa incertidumbre no implica ausencia de estructura.\nLa probabilidad cuantifica fenómenos aleatorios.\nLa repetición experimental permite observar regularidades.\nLa simulación complementa, pero no sustituye, el razonamiento matemático.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#ejercicios",
+    "href": "01-incertidumbre-probabilidad.html#ejercicios",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.10 1.9 Ejercicios",
+    "text": "2.10 1.9 Ejercicios\n\nClasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular \\(2+3\\).\nPropón tres fuentes de variabilidad en una medición de temperatura ambiental.\nSimula en R 100, 1000 y 10000 lanzamientos de una moneda y compara las frecuencias relativas de cara.\nExplica por qué una frecuencia relativa observada de 0.47 no demuestra que una moneda sea sesgada.\nDescribe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "01-incertidumbre-probabilidad.html#referencias-del-capítulo",
+    "href": "01-incertidumbre-probabilidad.html#referencias-del-capítulo",
+    "title": "2  Incertidumbre y probabilidad",
+    "section": "2.11 Referencias del capítulo",
+    "text": "2.11 Referencias del capítulo\nEl desarrollo conceptual de este capítulo toma como referencia la organización y el enfoque aplicado de textos de probabilidad para ingeniería y ciencias, especialmente Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018), Johnson (2018) y el enfoque computacional con R de Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Referencias",
+    "section": "",
+    "text": "Devore, Jay L. 2016. Probability and Statistics for Engineering and\nthe Sciences. 9th ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and\nStatistics for Engineers. 9th ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics\nUsing r. 1st ed.\n\n\nMontgomery, Douglas C., and George C. Runger. 2018. Applied\nStatistics and Probability for Engineers. 7th ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, and Keying Ye.\n2012. Probabilidad y Estadística Para Ingeniería y Ciencias.\n9th ed. Pearson.",
+    "crumbs": [
+      "Referencias"
+    ]
+  }
+]
