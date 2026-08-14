@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Incertidumbre y probabilidad – Introducción a la Probabilidad con R y GeoGebra</title>
+<title>3&nbsp; Conjuntos, experimentos, espacios muestrales y eventos – Introducción a la Probabilidad con R y GeoGebra</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -90,8 +90,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-conjuntos-espacios-eventos.html" rel="next">
-<link href="./notacion.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./01-incertidumbre-probabilidad.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -171,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-incertidumbre-probabilidad.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02-conjuntos-espacios-eventos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, experimentos, espacios muestrales y eventos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -232,13 +232,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link active">
+  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-conjuntos-espacios-eventos.html" class="sidebar-item-text sidebar-link">
+  <a href="./02-conjuntos-espacios-eventos.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, experimentos, espacios muestrales y eventos</span></span></a>
   </div>
 </li>
@@ -258,17 +258,41 @@ window.Quarto = {
     <h2 id="toc-title">En este capítulo</h2>
    
   <ul>
-  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</a></li>
-  <li><a href="#por-qué-necesitamos-probabilidad" id="toc-por-qué-necesitamos-probabilidad" class="nav-link" data-scroll-target="#por-qué-necesitamos-probabilidad"><span class="header-section-number">2.2</span> ¿Por qué necesitamos probabilidad?</a></li>
-  <li><a href="#experimentos-deterministas-y-aleatorios" id="toc-experimentos-deterministas-y-aleatorios" class="nav-link" data-scroll-target="#experimentos-deterministas-y-aleatorios"><span class="header-section-number">2.3</span> Experimentos deterministas y aleatorios</a></li>
-  <li><a href="#variabilidad" id="toc-variabilidad" class="nav-link" data-scroll-target="#variabilidad"><span class="header-section-number">2.4</span> Variabilidad</a></li>
-  <li><a href="#frecuencia-relativa-como-intuición" id="toc-frecuencia-relativa-como-intuición" class="nav-link" data-scroll-target="#frecuencia-relativa-como-intuición"><span class="header-section-number">2.5</span> Frecuencia relativa como intuición</a></li>
-  <li><a href="#primer-experimento-con-r" id="toc-primer-experimento-con-r" class="nav-link" data-scroll-target="#primer-experimento-con-r"><span class="header-section-number">2.6</span> Primer experimento con R</a></li>
-  <li><a href="#primer-recurso-geogebra" id="toc-primer-recurso-geogebra" class="nav-link" data-scroll-target="#primer-recurso-geogebra"><span class="header-section-number">2.7</span> Primer recurso GeoGebra</a></li>
-  <li><a href="#aplicación-de-ingeniería" id="toc-aplicación-de-ingeniería" class="nav-link" data-scroll-target="#aplicación-de-ingeniería"><span class="header-section-number">2.8</span> Aplicación de ingeniería</a></li>
-  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">2.9</span> Ideas clave</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">2.10</span> Ejercicios</a></li>
-  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">2.11</span> Referencias del capítulo</a></li>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">3.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#repaso-de-conjuntos" id="toc-repaso-de-conjuntos" class="nav-link" data-scroll-target="#repaso-de-conjuntos"><span class="header-section-number">3.2</span> Repaso de conjuntos</a>
+  <ul class="collapse">
+  <li><a href="#subconjuntos" id="toc-subconjuntos" class="nav-link" data-scroll-target="#subconjuntos">Subconjuntos</a></li>
+  <li><a href="#unión-intersección-y-complemento" id="toc-unión-intersección-y-complemento" class="nav-link" data-scroll-target="#unión-intersección-y-complemento">Unión, intersección y complemento</a></li>
+  </ul></li>
+  <li><a href="#experimento-aleatorio-resultado-y-espacio-muestral" id="toc-experimento-aleatorio-resultado-y-espacio-muestral" class="nav-link" data-scroll-target="#experimento-aleatorio-resultado-y-espacio-muestral"><span class="header-section-number">3.3</span> Experimento aleatorio, resultado y espacio muestral</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-lanzamiento-de-un-dado" id="toc-ejemplo-lanzamiento-de-un-dado" class="nav-link" data-scroll-target="#ejemplo-lanzamiento-de-un-dado">Ejemplo: lanzamiento de un dado</a></li>
+  <li><a href="#ejemplo-dos-lanzamientos-de-moneda" id="toc-ejemplo-dos-lanzamientos-de-moneda" class="nav-link" data-scroll-target="#ejemplo-dos-lanzamientos-de-moneda">Ejemplo: dos lanzamientos de moneda</a></li>
+  <li><a href="#ejemplo-tiempo-de-vida-de-un-componente" id="toc-ejemplo-tiempo-de-vida-de-un-componente" class="nav-link" data-scroll-target="#ejemplo-tiempo-de-vida-de-un-componente">Ejemplo: tiempo de vida de un componente</a></li>
+  </ul></li>
+  <li><a href="#espacios-muestrales-discretos-y-continuos" id="toc-espacios-muestrales-discretos-y-continuos" class="nav-link" data-scroll-target="#espacios-muestrales-discretos-y-continuos"><span class="header-section-number">3.4</span> Espacios muestrales discretos y continuos</a></li>
+  <li><a href="#eventos" id="toc-eventos" class="nav-link" data-scroll-target="#eventos"><span class="header-section-number">3.5</span> Eventos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-con-un-dado" id="toc-ejemplo-con-un-dado" class="nav-link" data-scroll-target="#ejemplo-con-un-dado">Ejemplo con un dado</a></li>
+  </ul></li>
+  <li><a href="#eventos-simples-y-compuestos" id="toc-eventos-simples-y-compuestos" class="nav-link" data-scroll-target="#eventos-simples-y-compuestos"><span class="header-section-number">3.6</span> Eventos simples y compuestos</a></li>
+  <li><a href="#diagramas-de-venn" id="toc-diagramas-de-venn" class="nav-link" data-scroll-target="#diagramas-de-venn"><span class="header-section-number">3.7</span> Diagramas de Venn</a></li>
+  <li><a href="#diagramas-de-árbol" id="toc-diagramas-de-árbol" class="nav-link" data-scroll-target="#diagramas-de-árbol"><span class="header-section-number">3.8</span> Diagramas de árbol</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-tres-mensajes-digitales" id="toc-ejemplo-tres-mensajes-digitales" class="nav-link" data-scroll-target="#ejemplo-tres-mensajes-digitales">Ejemplo: tres mensajes digitales</a></li>
+  </ul></li>
+  <li><a href="#construcción-de-espacios-muestrales-con-r" id="toc-construcción-de-espacios-muestrales-con-r" class="nav-link" data-scroll-target="#construcción-de-espacios-muestrales-con-r"><span class="header-section-number">3.9</span> Construcción de espacios muestrales con R</a>
+  <ul class="collapse">
+  <li><a href="#dos-lanzamientos-de-moneda" id="toc-dos-lanzamientos-de-moneda" class="nav-link" data-scroll-target="#dos-lanzamientos-de-moneda">Dos lanzamientos de moneda</a></li>
+  <li><a href="#tres-mensajes-a-tiempo-o-tarde" id="toc-tres-mensajes-a-tiempo-o-tarde" class="nav-link" data-scroll-target="#tres-mensajes-a-tiempo-o-tarde">Tres mensajes: a tiempo o tarde</a></li>
+  <li><a href="#evento-mediante-filtrado-lógico" id="toc-evento-mediante-filtrado-lógico" class="nav-link" data-scroll-target="#evento-mediante-filtrado-lógico">Evento mediante filtrado lógico</a></li>
+  </ul></li>
+  <li><a href="#primer-interactivo-geogebra-operaciones-con-eventos" id="toc-primer-interactivo-geogebra-operaciones-con-eventos" class="nav-link" data-scroll-target="#primer-interactivo-geogebra-operaciones-con-eventos"><span class="header-section-number">3.10</span> Primer interactivo GeoGebra: operaciones con eventos</a></li>
+  <li><a href="#aplicación-de-ingeniería-inspección-de-componentes" id="toc-aplicación-de-ingeniería-inspección-de-componentes" class="nav-link" data-scroll-target="#aplicación-de-ingeniería-inspección-de-componentes"><span class="header-section-number">3.11</span> Aplicación de ingeniería: inspección de componentes</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">3.12</span> Errores frecuentes</a></li>
+  <li><a href="#ideas-clave" id="toc-ideas-clave" class="nav-link" data-scroll-target="#ideas-clave"><span class="header-section-number">3.13</span> Ideas clave</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">3.14</span> Ejercicios</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">3.15</span> Referencias del capítulo</a></li>
   </ul>
 </nav>
     </div>
@@ -277,7 +301,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, experimentos, espacios muestrales y eventos</span></h1>
 </div>
 
 
@@ -294,102 +318,287 @@ window.Quarto = {
 </header>
 
 
-<section id="objetivos-de-aprendizaje" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">2.1</span> Objetivos de aprendizaje</h2>
-<p>Al finalizar este capítulo, el estudiante será capaz de distinguir fenómenos deterministas y aleatorios, reconocer la variabilidad como parte natural de los sistemas reales, describir experimentos aleatorios sencillos y utilizar simulación para aproximar probabilidades.</p>
+<section id="objetivos-de-aprendizaje" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">3.1</span> Objetivos de aprendizaje</h2>
+<p>Al finalizar este capítulo, el estudiante será capaz de utilizar operaciones básicas con conjuntos, describir experimentos aleatorios y sus espacios muestrales, distinguir espacios discretos y continuos, definir eventos como subconjuntos del espacio muestral y representar relaciones entre eventos mediante diagramas, tablas, árboles y R.</p>
 </section>
-<section id="por-qué-necesitamos-probabilidad" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="por-qué-necesitamos-probabilidad"><span class="header-section-number">2.2</span> ¿Por qué necesitamos probabilidad?</h2>
-<p>En un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.</p>
-<p>La probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.</p>
+<section id="repaso-de-conjuntos" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="repaso-de-conjuntos"><span class="header-section-number">3.2</span> Repaso de conjuntos</h2>
+<p>La teoría elemental de conjuntos proporciona el lenguaje natural para describir eventos. Un <strong>conjunto</strong> es una colección de objetos bien definidos. Si un elemento <span class="math inline">\(x\)</span> pertenece a un conjunto <span class="math inline">\(A\)</span>, escribimos</p>
+<p><span class="math display">\[
+x\in A.
+\]</span></p>
+<p>Si no pertenece, escribimos <span class="math inline">\(x\notin A\)</span>.</p>
+<p>Dos conjuntos son iguales cuando contienen exactamente los mismos elementos.</p>
+<section id="subconjuntos" class="level3">
+<h3 class="anchored" data-anchor-id="subconjuntos">Subconjuntos</h3>
+<p>Decimos que <span class="math inline">\(A\)</span> es subconjunto de <span class="math inline">\(B\)</span>, y escribimos</p>
+<p><span class="math display">\[
+A\subseteq B,
+\]</span></p>
+<p>si todo elemento de <span class="math inline">\(A\)</span> pertenece también a <span class="math inline">\(B\)</span>.</p>
+<p>El conjunto vacío se denota por <span class="math inline">\(\varnothing\)</span> y no contiene elementos.</p>
 </section>
-<section id="experimentos-deterministas-y-aleatorios" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="experimentos-deterministas-y-aleatorios"><span class="header-section-number">2.3</span> Experimentos deterministas y aleatorios</h2>
-<p>Un <strong>experimento aleatorio</strong> es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.</p>
+<section id="unión-intersección-y-complemento" class="level3">
+<h3 class="anchored" data-anchor-id="unión-intersección-y-complemento">Unión, intersección y complemento</h3>
+<p>Sean <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> subconjuntos de un conjunto universal <span class="math inline">\(S\)</span>.</p>
+<p>La <strong>unión</strong> es</p>
+<p><span class="math display">\[
+A\cup B=\{x:x\in A\text{ o }x\in B\}.
+\]</span></p>
+<p>La <strong>intersección</strong> es</p>
+<p><span class="math display">\[
+A\cap B=\{x:x\in A\text{ y }x\in B\}.
+\]</span></p>
+<p>El <strong>complemento</strong> de <span class="math inline">\(A\)</span> respecto de <span class="math inline">\(S\)</span> es</p>
+<p><span class="math display">\[
+A^c=\{x\in S:x\notin A\}.
+\]</span></p>
+<p>Dos conjuntos son <strong>disjuntos</strong> si</p>
+<p><span class="math display">\[
+A\cap B=\varnothing.
+\]</span></p>
+<p>Estas operaciones serán fundamentales para construir eventos compuestos.</p>
+</section>
+</section>
+<section id="experimento-aleatorio-resultado-y-espacio-muestral" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="experimento-aleatorio-resultado-y-espacio-muestral"><span class="header-section-number">3.3</span> Experimento aleatorio, resultado y espacio muestral</h2>
+<p>Un <strong>experimento aleatorio</strong> es un procedimiento cuyo resultado particular no puede conocerse con certeza antes de realizarlo, aunque sí puede describirse el conjunto de resultados posibles.</p>
+<p>Cada resultado individual se llama <strong>resultado elemental</strong> o <strong>punto muestral</strong>.</p>
+<p>El <strong>espacio muestral</strong>, denotado por <span class="math inline">\(S\)</span> o <span class="math inline">\(\Omega\)</span>, es el conjunto de todos los resultados posibles del experimento.</p>
+<section id="ejemplo-lanzamiento-de-un-dado" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-lanzamiento-de-un-dado">Ejemplo: lanzamiento de un dado</h3>
+<p>Para un dado de seis caras,</p>
+<p><span class="math display">\[
+S=\{1,2,3,4,5,6\}.
+\]</span></p>
+</section>
+<section id="ejemplo-dos-lanzamientos-de-moneda" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-dos-lanzamientos-de-moneda">Ejemplo: dos lanzamientos de moneda</h3>
+<p>Si usamos C para cara y X para cruz,</p>
+<p><span class="math display">\[
+S=\{CC,CX,XC,XX\}.
+\]</span></p>
+</section>
+<section id="ejemplo-tiempo-de-vida-de-un-componente" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-tiempo-de-vida-de-un-componente">Ejemplo: tiempo de vida de un componente</h3>
+<p>Si registramos el tiempo de vida <span class="math inline">\(T\)</span> de un componente, una representación razonable es</p>
+<p><span class="math display">\[
+S=\{t:t\ge 0\}.
+\]</span></p>
+<p>En este caso el espacio contiene un continuo de valores.</p>
+</section>
+</section>
+<section id="espacios-muestrales-discretos-y-continuos" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="espacios-muestrales-discretos-y-continuos"><span class="header-section-number">3.4</span> Espacios muestrales discretos y continuos</h2>
+<p>Un espacio muestral es <strong>discreto</strong> si tiene un número finito o numerable de resultados.</p>
 <p>Ejemplos:</p>
 <ul>
-<li>registrar si un componente electrónico falla durante cierto periodo;</li>
-<li>contar llamadas que llegan a un servidor durante un minuto;</li>
-<li>medir la concentración de un contaminante en una estación ambiental;</li>
-<li>observar la cara obtenida al lanzar una moneda.</li>
+<li>número obtenido al lanzar un dado;</li>
+<li>número de paquetes defectuosos en una muestra;</li>
+<li>cantidad de intentos hasta una transmisión correcta.</li>
 </ul>
-</section>
-<section id="variabilidad" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="variabilidad"><span class="header-section-number">2.4</span> Variabilidad</h2>
-<p>La variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.</p>
-<p>La idea central será:</p>
-<blockquote class="blockquote">
-<p>modelar la incertidumbre en lugar de fingir que no existe.</p>
-</blockquote>
-</section>
-<section id="frecuencia-relativa-como-intuición" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="frecuencia-relativa-como-intuición"><span class="header-section-number">2.5</span> Frecuencia relativa como intuición</h2>
-<p>Si un experimento se repite <span class="math inline">\(n\)</span> veces y el evento <span class="math inline">\(A\)</span> ocurre <span class="math inline">\(n_A\)</span> veces, su frecuencia relativa es</p>
-<p><span class="math display">\[
-\widehat P_n(A)=\frac{n_A}{n}.
-\]</span></p>
-<p>Cuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.</p>
-</section>
-<section id="primer-experimento-con-r" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="primer-experimento-con-r"><span class="header-section-number">2.6</span> Primer experimento con R</h2>
-<p>Simulemos lanzamientos de una moneda equilibrada.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>lanzamientos <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"cara"</span>, <span class="st">"cruz"</span>), n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(lanzamientos <span class="sc">==</span> <span class="st">"cara"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.506</code></pre>
-</div>
-</div>
-<p>Podemos observar cómo evoluciona la frecuencia relativa:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>frecuencia <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(lanzamientos <span class="sc">==</span> <span class="st">"cara"</span>) <span class="sc">/</span> <span class="fu">seq_len</span>(n)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(frecuencia, <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Número de lanzamientos"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frecuencia relativa de cara"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">0.5</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01-incertidumbre-probabilidad_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Este ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.</p>
-</section>
-<section id="primer-recurso-geogebra" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="primer-recurso-geogebra"><span class="header-section-number">2.7</span> Primer recurso GeoGebra</h2>
-<p>En la versión web construiremos experimentos interactivos que permitan comparar resultados observados con modelos teóricos. En el capítulo siguiente comenzaremos con diagramas de Venn y representación de eventos.</p>
-</section>
-<section id="aplicación-de-ingeniería" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="aplicación-de-ingeniería"><span class="header-section-number">2.8</span> Aplicación de ingeniería</h2>
-<p>Supongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.</p>
-<p>Este tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.</p>
-</section>
-<section id="ideas-clave" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">2.9</span> Ideas clave</h2>
+<p>Un espacio muestral es <strong>continuo</strong> si contiene intervalos de números reales.</p>
+<p>Ejemplos:</p>
 <ul>
-<li>La incertidumbre no implica ausencia de estructura.</li>
-<li>La probabilidad cuantifica fenómenos aleatorios.</li>
-<li>La repetición experimental permite observar regularidades.</li>
-<li>La simulación complementa, pero no sustituye, el razonamiento matemático.</li>
+<li>tiempo de falla de un dispositivo;</li>
+<li>temperatura ambiental;</li>
+<li>concentración de un contaminante;</li>
+<li>longitud de una pieza manufacturada.</li>
+</ul>
+<p>La elección del espacio muestral depende del objetivo del análisis. El mismo fenómeno físico puede describirse con diferentes espacios muestrales si interesa distinta información.</p>
+</section>
+<section id="eventos" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="eventos"><span class="header-section-number">3.5</span> Eventos</h2>
+<p>Un <strong>evento</strong> es un subconjunto del espacio muestral.</p>
+<p>Si al realizar el experimento el resultado pertenece al evento <span class="math inline">\(A\)</span>, decimos que <strong>ocurrió <span class="math inline">\(A\)</span></strong>.</p>
+<section id="ejemplo-con-un-dado" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-con-un-dado">Ejemplo con un dado</h3>
+<p>Sea</p>
+<p><span class="math display">\[
+S=\{1,2,3,4,5,6\}.
+\]</span></p>
+<p>Definimos</p>
+<p><span class="math display">\[
+A=\{2,4,6\},
+\]</span></p>
+<p>el evento “obtener un número par”, y</p>
+<p><span class="math display">\[
+B=\{4,5,6\},
+\]</span></p>
+<p>el evento “obtener al menos 4”.</p>
+<p>Entonces</p>
+<p><span class="math display">\[
+A\cap B=\{4,6\},
+\]</span></p>
+<p><span class="math display">\[
+A\cup B=\{2,4,5,6\},
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+A^c=\{1,3,5\}.
+\]</span></p>
+</section>
+</section>
+<section id="eventos-simples-y-compuestos" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="eventos-simples-y-compuestos"><span class="header-section-number">3.6</span> Eventos simples y compuestos</h2>
+<p>Un <strong>evento simple</strong> contiene un solo resultado elemental.</p>
+<p>Por ejemplo,</p>
+<p><span class="math display">\[
+\{3\}
+\]</span></p>
+<p>es un evento simple al lanzar un dado.</p>
+<p>Un <strong>evento compuesto</strong> contiene dos o más resultados.</p>
+<p>Por ejemplo,</p>
+<p><span class="math display">\[
+\{2,4,6\}
+\]</span></p>
+<p>es el evento compuesto “obtener un número par”.</p>
+</section>
+<section id="diagramas-de-venn" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="diagramas-de-venn"><span class="header-section-number">3.7</span> Diagramas de Venn</h2>
+<p>Los diagramas de Venn permiten representar de manera visual el espacio muestral y los eventos. El rectángulo representa <span class="math inline">\(S\)</span> y las regiones interiores representan eventos.</p>
+<p>Son especialmente útiles para visualizar:</p>
+<ul>
+<li>uniones;</li>
+<li>intersecciones;</li>
+<li>complementos;</li>
+<li>eventos disjuntos;</li>
+<li>relaciones de inclusión.</li>
+</ul>
+<p>En la edición web incorporaremos diagramas dinámicos para que el estudiante pueda activar o desactivar regiones y observar la operación de conjuntos correspondiente.</p>
+</section>
+<section id="diagramas-de-árbol" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="diagramas-de-árbol"><span class="header-section-number">3.8</span> Diagramas de árbol</h2>
+<p>Cuando un experimento se desarrolla por etapas, un diagrama de árbol ayuda a enumerar los resultados posibles.</p>
+<section id="ejemplo-tres-mensajes-digitales" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-tres-mensajes-digitales">Ejemplo: tres mensajes digitales</h3>
+<p>Supongamos que cada mensaje puede llegar a tiempo (T) o tarde (R). Para tres mensajes,</p>
+<p><span class="math display">\[
+S=\{TTT,TTR,TRT,TRR,RTT,RTR,RRT,RRR\}.
+\]</span></p>
+<p>El árbol permite construir estos ocho resultados de forma sistemática.</p>
+</section>
+</section>
+<section id="construcción-de-espacios-muestrales-con-r" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="construcción-de-espacios-muestrales-con-r"><span class="header-section-number">3.9</span> Construcción de espacios muestrales con R</h2>
+<section id="dos-lanzamientos-de-moneda" class="level3">
+<h3 class="anchored" data-anchor-id="dos-lanzamientos-de-moneda">Dos lanzamientos de moneda</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expand.grid</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lanzamiento1 =</span> <span class="fu">c</span>(<span class="st">"C"</span>, <span class="st">"X"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lanzamiento2 =</span> <span class="fu">c</span>(<span class="st">"C"</span>, <span class="st">"X"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  lanzamiento1 lanzamiento2
+1            C            C
+2            X            C
+3            C            X
+4            X            X</code></pre>
+</div>
+</div>
+</section>
+<section id="tres-mensajes-a-tiempo-o-tarde" class="level3">
+<h3 class="anchored" data-anchor-id="tres-mensajes-a-tiempo-o-tarde">Tres mensajes: a tiempo o tarde</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">expand.grid</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mensaje1 =</span> <span class="fu">c</span>(<span class="st">"T"</span>, <span class="st">"R"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mensaje2 =</span> <span class="fu">c</span>(<span class="st">"T"</span>, <span class="st">"R"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mensaje3 =</span> <span class="fu">c</span>(<span class="st">"T"</span>, <span class="st">"R"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mensaje1 mensaje2 mensaje3
+1        T        T        T
+2        R        T        T
+3        T        R        T
+4        R        R        T
+5        T        T        R
+6        R        T        R
+7        T        R        R
+8        R        R        R</code></pre>
+</div>
+</div>
+</section>
+<section id="evento-mediante-filtrado-lógico" class="level3">
+<h3 class="anchored" data-anchor-id="evento-mediante-filtrado-lógico">Evento mediante filtrado lógico</h3>
+<p>Podemos construir el espacio de un dado y seleccionar los resultados pares:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> S[S <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">0</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>A</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 4 6</code></pre>
+</div>
+</div>
+<p>La idea computacional coincide con la definición matemática: un evento es una selección de resultados del espacio muestral.</p>
+</section>
+</section>
+<section id="primer-interactivo-geogebra-operaciones-con-eventos" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="primer-interactivo-geogebra-operaciones-con-eventos"><span class="header-section-number">3.10</span> Primer interactivo GeoGebra: operaciones con eventos</h2>
+<p>El primer recurso GeoGebra del libro representará dos eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> dentro del espacio muestral <span class="math inline">\(S\)</span>. El estudiante podrá seleccionar entre:</p>
+<ul>
+<li><span class="math inline">\(A\cup B\)</span>;</li>
+<li><span class="math inline">\(A\cap B\)</span>;</li>
+<li><span class="math inline">\(A^c\)</span>;</li>
+<li><span class="math inline">\(B^c\)</span>;</li>
+<li><span class="math inline">\(A\setminus B\)</span>;</li>
+<li>eventos disjuntos.</li>
+</ul>
+<p>La región correspondiente se resaltará dinámicamente. Este recurso servirá como puente entre la teoría de conjuntos y las reglas de probabilidad de los capítulos siguientes.</p>
+</section>
+<section id="aplicación-de-ingeniería-inspección-de-componentes" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="aplicación-de-ingeniería-inspección-de-componentes"><span class="header-section-number">3.11</span> Aplicación de ingeniería: inspección de componentes</h2>
+<p>Supongamos que se inspeccionan dos componentes y cada uno puede ser conforme (C) o defectuoso (D). El espacio muestral es</p>
+<p><span class="math display">\[
+S=\{CC,CD,DC,DD\}.
+\]</span></p>
+<p>Sea</p>
+<p><span class="math display">\[
+A=\{CD,DC,DD\},
+\]</span></p>
+<p>el evento “al menos un componente es defectuoso”, y</p>
+<p><span class="math display">\[
+B=\{CC,CD,DC\},
+\]</span></p>
+<p>el evento “a lo más un componente es defectuoso”.</p>
+<p>Este tipo de formulación permite convertir una descripción verbal de un problema de confiabilidad en un objeto matemático preciso.</p>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">3.12</span> Errores frecuentes</h2>
+<ul>
+<li>Confundir un resultado elemental con un evento.</li>
+<li>Omitir resultados posibles al construir el espacio muestral.</li>
+<li>Suponer que todos los resultados son igualmente probables solo porque aparecen en el mismo espacio muestral.</li>
+<li>Confundir “A o B” con una unión exclusiva; en probabilidad, <span class="math inline">\(A\cup B\)</span> incluye también la posibilidad de que ambos ocurran.</li>
+<li>Definir el espacio muestral con más o menos detalle del necesario para el objetivo del problema.</li>
 </ul>
 </section>
-<section id="ejercicios" class="level2" data-number="2.10">
-<h2 data-number="2.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">2.10</span> Ejercicios</h2>
+<section id="ideas-clave" class="level2" data-number="3.13">
+<h2 data-number="3.13" class="anchored" data-anchor-id="ideas-clave"><span class="header-section-number">3.13</span> Ideas clave</h2>
+<ul>
+<li>Los eventos se modelan como conjuntos.</li>
+<li>El espacio muestral contiene todos los resultados posibles considerados por el modelo.</li>
+<li>Un mismo experimento puede admitir distintas representaciones del espacio muestral según el objetivo del análisis.</li>
+<li>Unión, intersección y complemento permiten construir eventos complejos.</li>
+<li>Las tablas, árboles, diagramas de Venn y R son representaciones complementarias de una misma estructura matemática.</li>
+</ul>
+</section>
+<section id="ejercicios" class="level2" data-number="3.14">
+<h2 data-number="3.14" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">3.14</span> Ejercicios</h2>
 <ol type="1">
-<li>Clasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular <span class="math inline">\(2+3\)</span>.</li>
-<li>Propón tres fuentes de variabilidad en una medición de temperatura ambiental.</li>
-<li>Simula en R 100, 1000 y 10000 lanzamientos de una moneda y compara las frecuencias relativas de cara.</li>
-<li>Explica por qué una frecuencia relativa observada de 0.47 no demuestra que una moneda sea sesgada.</li>
-<li>Describe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.</li>
+<li>Para dos lanzamientos de un dado, escribe el espacio muestral usando pares ordenados.</li>
+<li>En un dado, sean <span class="math inline">\(A=\{1,2,3\}\)</span> y <span class="math inline">\(B=\{2,4,6\}\)</span>. Calcula <span class="math inline">\(A\cup B\)</span>, <span class="math inline">\(A\cap B\)</span>, <span class="math inline">\(A^c\)</span> y <span class="math inline">\(B^c\)</span>.</li>
+<li>Clasifica como discreto o continuo el espacio muestral de: número de llamadas por minuto, voltaje medido en un circuito, número de fallas por día y tiempo hasta la siguiente falla.</li>
+<li>Construye con R el espacio muestral de tres lanzamientos de moneda.</li>
+<li>Para tres transmisiones, cada una correcta (C) o errónea (E), define el evento “exactamente una transmisión errónea”.</li>
+<li>Representa mediante un diagrama de Venn dos eventos que no sean disjuntos y señala unión, intersección y complementos.</li>
+<li>Un sistema tiene dos sensores, cada uno puede funcionar (F) o fallar (A). Construye el espacio muestral y define los eventos “al menos uno funciona” y “exactamente uno falla”.</li>
+<li>★ Explica por qué el espacio muestral no es una propiedad única e inmutable del fenómeno físico, sino parte del modelo elegido para estudiarlo.</li>
 </ol>
 </section>
-<section id="referencias-del-capítulo" class="level2" data-number="2.11">
-<h2 data-number="2.11" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">2.11</span> Referencias del capítulo</h2>
-<p>El desarrollo conceptual de este capítulo toma como referencia la organización y el enfoque aplicado de textos de probabilidad para ingeniería y ciencias, especialmente <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span> y el enfoque computacional con R de <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+<section id="referencias-del-capítulo" class="level2" data-number="3.15">
+<h2 data-number="3.15" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">3.15</span> Referencias del capítulo</h2>
+<p>El contenido de este capítulo sigue la secuencia curricular de conjuntos, experimentos, espacios muestrales y eventos del programa de Introducción a la Probabilidad de la UASLP, y se apoya en el tratamiento de espacios muestrales y eventos de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span> y en la integración computacional con R de <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -814,13 +1023,13 @@ Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Pr
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./notacion.html" class="pagination-link" aria-label="Notación general">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notación general</span>
+      <a href="./01-incertidumbre-probabilidad.html" class="pagination-link" aria-label="Incertidumbre y probabilidad">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-conjuntos-espacios-eventos.html" class="pagination-link" aria-label="Conjuntos, experimentos, espacios muestrales y eventos">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conjuntos, experimentos, espacios muestrales y eventos</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -63,8 +63,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#por-qué-necesitamos-probabilidad",
     "href": "01-incertidumbre-probabilidad.html#por-qué-necesitamos-probabilidad",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.2 1.1 ¿Por qué necesitamos probabilidad?",
-    "text": "2.2 1.1 ¿Por qué necesitamos probabilidad?\nEn un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.\nLa probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.",
+    "section": "2.2 ¿Por qué necesitamos probabilidad?",
+    "text": "2.2 ¿Por qué necesitamos probabilidad?\nEn un modelo determinista, unas mismas condiciones producen idealmente el mismo resultado. Sin embargo, muchos sistemas de ingeniería y ciencias contienen fuentes de variación no controladas. Por ello, aun repitiendo un procedimiento de manera semejante, los resultados pueden cambiar.\nLa probabilidad permite construir modelos matemáticos para esa variación. Un modelo probabilístico no pretende adivinar exactamente qué ocurrirá en una repetición particular; busca describir qué resultados son posibles y con qué grado de plausibilidad pueden presentarse.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -73,8 +73,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#experimentos-deterministas-y-aleatorios",
     "href": "01-incertidumbre-probabilidad.html#experimentos-deterministas-y-aleatorios",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.3 1.2 Experimentos deterministas y aleatorios",
-    "text": "2.3 1.2 Experimentos deterministas y aleatorios\nUn experimento aleatorio es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.\nEjemplos:\n\nregistrar si un componente electrónico falla durante cierto periodo;\ncontar llamadas que llegan a un servidor durante un minuto;\nmedir la concentración de un contaminante en una estación ambiental;\nobservar la cara obtenida al lanzar una moneda.",
+    "section": "2.3 Experimentos deterministas y aleatorios",
+    "text": "2.3 Experimentos deterministas y aleatorios\nUn experimento aleatorio es un procedimiento que puede producir resultados diferentes aun cuando se repita bajo condiciones esencialmente iguales.\nEjemplos:\n\nregistrar si un componente electrónico falla durante cierto periodo;\ncontar llamadas que llegan a un servidor durante un minuto;\nmedir la concentración de un contaminante en una estación ambiental;\nobservar la cara obtenida al lanzar una moneda.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -83,8 +83,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#variabilidad",
     "href": "01-incertidumbre-probabilidad.html#variabilidad",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.4 1.3 Variabilidad",
-    "text": "2.4 1.3 Variabilidad\nLa variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.\nLa idea central será:\n\nmodelar la incertidumbre en lugar de fingir que no existe.",
+    "section": "2.4 Variabilidad",
+    "text": "2.4 Variabilidad\nLa variabilidad puede provenir de ruido de medición, cambios ambientales, diferencias entre materiales, comportamiento humano o factores no observados. En ingeniería, ignorar esta variabilidad puede conducir a diseños poco confiables.\nLa idea central será:\n\nmodelar la incertidumbre en lugar de fingir que no existe.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -93,8 +93,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#frecuencia-relativa-como-intuición",
     "href": "01-incertidumbre-probabilidad.html#frecuencia-relativa-como-intuición",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.5 1.4 Frecuencia relativa como intuición",
-    "text": "2.5 1.4 Frecuencia relativa como intuición\nSi un experimento se repite \\(n\\) veces y el evento \\(A\\) ocurre \\(n_A\\) veces, su frecuencia relativa es\n\\[\n\\widehat P_n(A)=\\frac{n_A}{n}.\n\\]\nCuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.",
+    "section": "2.5 Frecuencia relativa como intuición",
+    "text": "2.5 Frecuencia relativa como intuición\nSi un experimento se repite \\(n\\) veces y el evento \\(A\\) ocurre \\(n_A\\) veces, su frecuencia relativa es\n\\[\n\\widehat P_n(A)=\\frac{n_A}{n}.\n\\]\nCuando aumentamos el número de repeticiones, esta cantidad suele estabilizarse alrededor de un valor. Más adelante estudiaremos formalmente la relación entre esta observación y la Ley de los Grandes Números.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -103,8 +103,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#primer-experimento-con-r",
     "href": "01-incertidumbre-probabilidad.html#primer-experimento-con-r",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.6 1.5 Primer experimento con R",
-    "text": "2.6 1.5 Primer experimento con R\nSimulemos lanzamientos de una moneda equilibrada.\n\nset.seed(123)\nn &lt;- 1000\nlanzamientos &lt;- sample(c(\"cara\", \"cruz\"), n, replace = TRUE)\nmean(lanzamientos == \"cara\")\n\n[1] 0.506\n\n\nPodemos observar cómo evoluciona la frecuencia relativa:\n\nfrecuencia &lt;- cumsum(lanzamientos == \"cara\") / seq_len(n)\nplot(frecuencia, type = \"l\",\n     xlab = \"Número de lanzamientos\",\n     ylab = \"Frecuencia relativa de cara\")\nabline(h = 0.5, lty = 2)\n\n\n\n\n\n\n\n\nEste ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.",
+    "section": "2.6 Primer experimento con R",
+    "text": "2.6 Primer experimento con R\nSimulemos lanzamientos de una moneda equilibrada.\n\nset.seed(123)\nn &lt;- 1000\nlanzamientos &lt;- sample(c(\"cara\", \"cruz\"), n, replace = TRUE)\nmean(lanzamientos == \"cara\")\n\n[1] 0.506\n\n\nPodemos observar cómo evoluciona la frecuencia relativa:\n\nfrecuencia &lt;- cumsum(lanzamientos == \"cara\") / seq_len(n)\nplot(frecuencia, type = \"l\",\n     xlab = \"Número de lanzamientos\",\n     ylab = \"Frecuencia relativa de cara\")\nabline(h = 0.5, lty = 2)\n\n\n\n\n\n\n\n\nEste ejemplo muestra una idea que aparecerá una y otra vez: la simulación permite observar experimentalmente un resultado probabilístico antes de demostrarlo formalmente.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -113,8 +113,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#primer-recurso-geogebra",
     "href": "01-incertidumbre-probabilidad.html#primer-recurso-geogebra",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.7 1.6 Primer recurso GeoGebra",
-    "text": "2.7 1.6 Primer recurso GeoGebra\nEn la versión web construiremos un experimento interactivo de lanzamiento de moneda. El estudiante podrá aumentar el número de repeticiones y comparar la frecuencia relativa observada con la probabilidad teórica \\(1/2\\).",
+    "section": "2.7 Primer recurso GeoGebra",
+    "text": "2.7 Primer recurso GeoGebra\nEn la versión web construiremos experimentos interactivos que permitan comparar resultados observados con modelos teóricos. En el capítulo siguiente comenzaremos con diagramas de Venn y representación de eventos.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -123,8 +123,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#aplicación-de-ingeniería",
     "href": "01-incertidumbre-probabilidad.html#aplicación-de-ingeniería",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.8 1.7 Aplicación de ingeniería",
-    "text": "2.8 1.7 Aplicación de ingeniería\nSupongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.\nEste tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.",
+    "section": "2.8 Aplicación de ingeniería",
+    "text": "2.8 Aplicación de ingeniería\nSupongamos que un sensor transmite correctamente un paquete con probabilidad aproximada de 0.98. Una sola transmisión no puede predecirse con certeza. Sin embargo, el modelo probabilístico permite analizar cuántos errores esperar, la probabilidad de varias fallas consecutivas y la confiabilidad global del sistema.\nEste tipo de preguntas motivará el desarrollo de eventos, probabilidad condicional, variables aleatorias y distribuciones.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -133,8 +133,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#ideas-clave",
     "href": "01-incertidumbre-probabilidad.html#ideas-clave",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.9 1.8 Ideas clave",
-    "text": "2.9 1.8 Ideas clave\n\nLa incertidumbre no implica ausencia de estructura.\nLa probabilidad cuantifica fenómenos aleatorios.\nLa repetición experimental permite observar regularidades.\nLa simulación complementa, pero no sustituye, el razonamiento matemático.",
+    "section": "2.9 Ideas clave",
+    "text": "2.9 Ideas clave\n\nLa incertidumbre no implica ausencia de estructura.\nLa probabilidad cuantifica fenómenos aleatorios.\nLa repetición experimental permite observar regularidades.\nLa simulación complementa, pero no sustituye, el razonamiento matemático.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -143,8 +143,8 @@
     "objectID": "01-incertidumbre-probabilidad.html#ejercicios",
     "href": "01-incertidumbre-probabilidad.html#ejercicios",
     "title": "2  Incertidumbre y probabilidad",
-    "section": "2.10 1.9 Ejercicios",
-    "text": "2.10 1.9 Ejercicios\n\nClasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular \\(2+3\\).\nPropón tres fuentes de variabilidad en una medición de temperatura ambiental.\nSimula en R 100, 1000 y 10000 lanzamientos de una moneda y compara las frecuencias relativas de cara.\nExplica por qué una frecuencia relativa observada de 0.47 no demuestra que una moneda sea sesgada.\nDescribe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.",
+    "section": "2.10 Ejercicios",
+    "text": "2.10 Ejercicios\n\nClasifica como determinista o aleatorio: calcular el área de un círculo de radio conocido; medir el tiempo de vida de un foco; lanzar un dado; calcular \\(2+3\\).\nPropón tres fuentes de variabilidad en una medición de temperatura ambiental.\nSimula en R 100, 1000 y 10000 lanzamientos de una moneda y compara las frecuencias relativas de cara.\nExplica por qué una frecuencia relativa observada de 0.47 no demuestra que una moneda sea sesgada.\nDescribe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
     ]
@@ -157,6 +157,156 @@
     "text": "2.11 Referencias del capítulo\nEl desarrollo conceptual de este capítulo toma como referencia la organización y el enfoque aplicado de textos de probabilidad para ingeniería y ciencias, especialmente Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018), Johnson (2018) y el enfoque computacional con R de Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Incertidumbre y probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html",
+    "href": "02-conjuntos-espacios-eventos.html",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "",
+    "text": "3.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de utilizar operaciones básicas con conjuntos, describir experimentos aleatorios y sus espacios muestrales, distinguir espacios discretos y continuos, definir eventos como subconjuntos del espacio muestral y representar relaciones entre eventos mediante diagramas, tablas, árboles y R.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#repaso-de-conjuntos",
+    "href": "02-conjuntos-espacios-eventos.html#repaso-de-conjuntos",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.2 Repaso de conjuntos",
+    "text": "3.2 Repaso de conjuntos\nLa teoría elemental de conjuntos proporciona el lenguaje natural para describir eventos. Un conjunto es una colección de objetos bien definidos. Si un elemento \\(x\\) pertenece a un conjunto \\(A\\), escribimos\n\\[\nx\\in A.\n\\]\nSi no pertenece, escribimos \\(x\\notin A\\).\nDos conjuntos son iguales cuando contienen exactamente los mismos elementos.\n\nSubconjuntos\nDecimos que \\(A\\) es subconjunto de \\(B\\), y escribimos\n\\[\nA\\subseteq B,\n\\]\nsi todo elemento de \\(A\\) pertenece también a \\(B\\).\nEl conjunto vacío se denota por \\(\\varnothing\\) y no contiene elementos.\n\n\nUnión, intersección y complemento\nSean \\(A\\) y \\(B\\) subconjuntos de un conjunto universal \\(S\\).\nLa unión es\n\\[\nA\\cup B=\\{x:x\\in A\\text{ o }x\\in B\\}.\n\\]\nLa intersección es\n\\[\nA\\cap B=\\{x:x\\in A\\text{ y }x\\in B\\}.\n\\]\nEl complemento de \\(A\\) respecto de \\(S\\) es\n\\[\nA^c=\\{x\\in S:x\\notin A\\}.\n\\]\nDos conjuntos son disjuntos si\n\\[\nA\\cap B=\\varnothing.\n\\]\nEstas operaciones serán fundamentales para construir eventos compuestos.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#experimento-aleatorio-resultado-y-espacio-muestral",
+    "href": "02-conjuntos-espacios-eventos.html#experimento-aleatorio-resultado-y-espacio-muestral",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.3 Experimento aleatorio, resultado y espacio muestral",
+    "text": "3.3 Experimento aleatorio, resultado y espacio muestral\nUn experimento aleatorio es un procedimiento cuyo resultado particular no puede conocerse con certeza antes de realizarlo, aunque sí puede describirse el conjunto de resultados posibles.\nCada resultado individual se llama resultado elemental o punto muestral.\nEl espacio muestral, denotado por \\(S\\) o \\(\\Omega\\), es el conjunto de todos los resultados posibles del experimento.\n\nEjemplo: lanzamiento de un dado\nPara un dado de seis caras,\n\\[\nS=\\{1,2,3,4,5,6\\}.\n\\]\n\n\nEjemplo: dos lanzamientos de moneda\nSi usamos C para cara y X para cruz,\n\\[\nS=\\{CC,CX,XC,XX\\}.\n\\]\n\n\nEjemplo: tiempo de vida de un componente\nSi registramos el tiempo de vida \\(T\\) de un componente, una representación razonable es\n\\[\nS=\\{t:t\\ge 0\\}.\n\\]\nEn este caso el espacio contiene un continuo de valores.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#espacios-muestrales-discretos-y-continuos",
+    "href": "02-conjuntos-espacios-eventos.html#espacios-muestrales-discretos-y-continuos",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.4 Espacios muestrales discretos y continuos",
+    "text": "3.4 Espacios muestrales discretos y continuos\nUn espacio muestral es discreto si tiene un número finito o numerable de resultados.\nEjemplos:\n\nnúmero obtenido al lanzar un dado;\nnúmero de paquetes defectuosos en una muestra;\ncantidad de intentos hasta una transmisión correcta.\n\nUn espacio muestral es continuo si contiene intervalos de números reales.\nEjemplos:\n\ntiempo de falla de un dispositivo;\ntemperatura ambiental;\nconcentración de un contaminante;\nlongitud de una pieza manufacturada.\n\nLa elección del espacio muestral depende del objetivo del análisis. El mismo fenómeno físico puede describirse con diferentes espacios muestrales si interesa distinta información.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#eventos",
+    "href": "02-conjuntos-espacios-eventos.html#eventos",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.5 Eventos",
+    "text": "3.5 Eventos\nUn evento es un subconjunto del espacio muestral.\nSi al realizar el experimento el resultado pertenece al evento \\(A\\), decimos que ocurrió \\(A\\).\n\nEjemplo con un dado\nSea\n\\[\nS=\\{1,2,3,4,5,6\\}.\n\\]\nDefinimos\n\\[\nA=\\{2,4,6\\},\n\\]\nel evento “obtener un número par”, y\n\\[\nB=\\{4,5,6\\},\n\\]\nel evento “obtener al menos 4”.\nEntonces\n\\[\nA\\cap B=\\{4,6\\},\n\\]\n\\[\nA\\cup B=\\{2,4,5,6\\},\n\\]\ny\n\\[\nA^c=\\{1,3,5\\}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#eventos-simples-y-compuestos",
+    "href": "02-conjuntos-espacios-eventos.html#eventos-simples-y-compuestos",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.6 Eventos simples y compuestos",
+    "text": "3.6 Eventos simples y compuestos\nUn evento simple contiene un solo resultado elemental.\nPor ejemplo,\n\\[\n\\{3\\}\n\\]\nes un evento simple al lanzar un dado.\nUn evento compuesto contiene dos o más resultados.\nPor ejemplo,\n\\[\n\\{2,4,6\\}\n\\]\nes el evento compuesto “obtener un número par”.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#diagramas-de-venn",
+    "href": "02-conjuntos-espacios-eventos.html#diagramas-de-venn",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.7 Diagramas de Venn",
+    "text": "3.7 Diagramas de Venn\nLos diagramas de Venn permiten representar de manera visual el espacio muestral y los eventos. El rectángulo representa \\(S\\) y las regiones interiores representan eventos.\nSon especialmente útiles para visualizar:\n\nuniones;\nintersecciones;\ncomplementos;\neventos disjuntos;\nrelaciones de inclusión.\n\nEn la edición web incorporaremos diagramas dinámicos para que el estudiante pueda activar o desactivar regiones y observar la operación de conjuntos correspondiente.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#diagramas-de-árbol",
+    "href": "02-conjuntos-espacios-eventos.html#diagramas-de-árbol",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.8 Diagramas de árbol",
+    "text": "3.8 Diagramas de árbol\nCuando un experimento se desarrolla por etapas, un diagrama de árbol ayuda a enumerar los resultados posibles.\n\nEjemplo: tres mensajes digitales\nSupongamos que cada mensaje puede llegar a tiempo (T) o tarde (R). Para tres mensajes,\n\\[\nS=\\{TTT,TTR,TRT,TRR,RTT,RTR,RRT,RRR\\}.\n\\]\nEl árbol permite construir estos ocho resultados de forma sistemática.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#construcción-de-espacios-muestrales-con-r",
+    "href": "02-conjuntos-espacios-eventos.html#construcción-de-espacios-muestrales-con-r",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.9 Construcción de espacios muestrales con R",
+    "text": "3.9 Construcción de espacios muestrales con R\n\nDos lanzamientos de moneda\n\nexpand.grid(\n  lanzamiento1 = c(\"C\", \"X\"),\n  lanzamiento2 = c(\"C\", \"X\")\n)\n\n  lanzamiento1 lanzamiento2\n1            C            C\n2            X            C\n3            C            X\n4            X            X\n\n\n\n\nTres mensajes: a tiempo o tarde\n\nexpand.grid(\n  mensaje1 = c(\"T\", \"R\"),\n  mensaje2 = c(\"T\", \"R\"),\n  mensaje3 = c(\"T\", \"R\")\n)\n\n  mensaje1 mensaje2 mensaje3\n1        T        T        T\n2        R        T        T\n3        T        R        T\n4        R        R        T\n5        T        T        R\n6        R        T        R\n7        T        R        R\n8        R        R        R\n\n\n\n\nEvento mediante filtrado lógico\nPodemos construir el espacio de un dado y seleccionar los resultados pares:\n\nS &lt;- 1:6\nA &lt;- S[S %% 2 == 0]\nA\n\n[1] 2 4 6\n\n\nLa idea computacional coincide con la definición matemática: un evento es una selección de resultados del espacio muestral.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#primer-interactivo-geogebra-operaciones-con-eventos",
+    "href": "02-conjuntos-espacios-eventos.html#primer-interactivo-geogebra-operaciones-con-eventos",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.10 Primer interactivo GeoGebra: operaciones con eventos",
+    "text": "3.10 Primer interactivo GeoGebra: operaciones con eventos\nEl primer recurso GeoGebra del libro representará dos eventos \\(A\\) y \\(B\\) dentro del espacio muestral \\(S\\). El estudiante podrá seleccionar entre:\n\n\\(A\\cup B\\);\n\\(A\\cap B\\);\n\\(A^c\\);\n\\(B^c\\);\n\\(A\\setminus B\\);\neventos disjuntos.\n\nLa región correspondiente se resaltará dinámicamente. Este recurso servirá como puente entre la teoría de conjuntos y las reglas de probabilidad de los capítulos siguientes.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#aplicación-de-ingeniería-inspección-de-componentes",
+    "href": "02-conjuntos-espacios-eventos.html#aplicación-de-ingeniería-inspección-de-componentes",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.11 Aplicación de ingeniería: inspección de componentes",
+    "text": "3.11 Aplicación de ingeniería: inspección de componentes\nSupongamos que se inspeccionan dos componentes y cada uno puede ser conforme (C) o defectuoso (D). El espacio muestral es\n\\[\nS=\\{CC,CD,DC,DD\\}.\n\\]\nSea\n\\[\nA=\\{CD,DC,DD\\},\n\\]\nel evento “al menos un componente es defectuoso”, y\n\\[\nB=\\{CC,CD,DC\\},\n\\]\nel evento “a lo más un componente es defectuoso”.\nEste tipo de formulación permite convertir una descripción verbal de un problema de confiabilidad en un objeto matemático preciso.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#errores-frecuentes",
+    "href": "02-conjuntos-espacios-eventos.html#errores-frecuentes",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.12 Errores frecuentes",
+    "text": "3.12 Errores frecuentes\n\nConfundir un resultado elemental con un evento.\nOmitir resultados posibles al construir el espacio muestral.\nSuponer que todos los resultados son igualmente probables solo porque aparecen en el mismo espacio muestral.\nConfundir “A o B” con una unión exclusiva; en probabilidad, \\(A\\cup B\\) incluye también la posibilidad de que ambos ocurran.\nDefinir el espacio muestral con más o menos detalle del necesario para el objetivo del problema.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#ideas-clave",
+    "href": "02-conjuntos-espacios-eventos.html#ideas-clave",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.13 Ideas clave",
+    "text": "3.13 Ideas clave\n\nLos eventos se modelan como conjuntos.\nEl espacio muestral contiene todos los resultados posibles considerados por el modelo.\nUn mismo experimento puede admitir distintas representaciones del espacio muestral según el objetivo del análisis.\nUnión, intersección y complemento permiten construir eventos complejos.\nLas tablas, árboles, diagramas de Venn y R son representaciones complementarias de una misma estructura matemática.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#ejercicios",
+    "href": "02-conjuntos-espacios-eventos.html#ejercicios",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.14 Ejercicios",
+    "text": "3.14 Ejercicios\n\nPara dos lanzamientos de un dado, escribe el espacio muestral usando pares ordenados.\nEn un dado, sean \\(A=\\{1,2,3\\}\\) y \\(B=\\{2,4,6\\}\\). Calcula \\(A\\cup B\\), \\(A\\cap B\\), \\(A^c\\) y \\(B^c\\).\nClasifica como discreto o continuo el espacio muestral de: número de llamadas por minuto, voltaje medido en un circuito, número de fallas por día y tiempo hasta la siguiente falla.\nConstruye con R el espacio muestral de tres lanzamientos de moneda.\nPara tres transmisiones, cada una correcta (C) o errónea (E), define el evento “exactamente una transmisión errónea”.\nRepresenta mediante un diagrama de Venn dos eventos que no sean disjuntos y señala unión, intersección y complementos.\nUn sistema tiene dos sensores, cada uno puede funcionar (F) o fallar (A). Construye el espacio muestral y define los eventos “al menos uno funciona” y “exactamente uno falla”.\n★ Explica por qué el espacio muestral no es una propiedad única e inmutable del fenómeno físico, sino parte del modelo elegido para estudiarlo.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
+    ]
+  },
+  {
+    "objectID": "02-conjuntos-espacios-eventos.html#referencias-del-capítulo",
+    "href": "02-conjuntos-espacios-eventos.html#referencias-del-capítulo",
+    "title": "3  Conjuntos, experimentos, espacios muestrales y eventos",
+    "section": "3.15 Referencias del capítulo",
+    "text": "3.15 Referencias del capítulo\nEl contenido de este capítulo sigue la secuencia curricular de conjuntos, experimentos, espacios muestrales y eventos del programa de Introducción a la Probabilidad de la UASLP, y se apoya en el tratamiento de espacios muestrales y eventos de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018), Johnson (2018) y en la integración computacional con R de Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conjuntos, experimentos, espacios muestrales y eventos</span>"
     ]
   },
   {
