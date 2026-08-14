@@ -245,7 +245,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Conteo y asignación de probabilidades</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Técnicas de conteo y enumeración</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -418,6 +418,42 @@ Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Pr
 </section>
 
 </main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const path = window.location.pathname.split('/').pop();
+  const mapa = {
+    '01-incertidumbre-probabilidad.html': {
+      titulo: 'Interactivo del capítulo: frecuencia relativa',
+      archivo: 'interactivos/cap01-frecuencia-relativa.html',
+      texto: 'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'
+    },
+    '02-espacios-eventos.html': {
+      titulo: 'Interactivo del capítulo: operaciones con eventos',
+      archivo: 'interactivos/cap02-eventos-venn.html',
+      texto: 'Explora visualmente unión, intersección, complementos y diferencia de eventos.'
+    },
+    '03-conteo-probabilidad.html': {
+      titulo: 'Interactivo del capítulo: conteo, arreglos y combinaciones',
+      archivo: 'interactivos/cap03-conteo.html',
+      texto: 'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'
+    }
+  };
+  const cfg = mapa[path];
+  if (!cfg) return;
+  const main = document.querySelector('main.content') || document.querySelector('main') || document.querySelector('#quarto-document-content');
+  if (!main || document.getElementById('interactivo-capitulo')) return;
+  const section = document.createElement('section');
+  section.id = 'interactivo-capitulo';
+  section.innerHTML = `
+    <h2>${cfg.titulo}</h2>
+    <p>${cfg.texto}</p>
+    <div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;">
+      <iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe>
+    </div>
+    <p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  main.appendChild(section);
+});
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

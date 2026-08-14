@@ -332,171 +332,221 @@
   {
     "objectID": "03-conteo-probabilidad.html",
     "href": "03-conteo-probabilidad.html",
-    "title": "3  Conteo y asignación de probabilidades",
+    "title": "3  Técnicas de conteo y enumeración",
     "section": "",
     "text": "3.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
     "objectID": "03-conteo-probabilidad.html#objetivos-de-aprendizaje",
     "href": "03-conteo-probabilidad.html#objetivos-de-aprendizaje",
-    "title": "3  Conteo y asignación de probabilidades",
+    "title": "3  Técnicas de conteo y enumeración",
     "section": "",
-    "text": "asignar probabilidades mediante modelos equiprobables, frecuencias relativas y supuestos explícitos;\nverificar que una asignación satisface los axiomas de probabilidad;\nobtener probabilidades de complementos, uniones y diferencias de eventos;\naplicar los principios aditivo y multiplicativo de conteo;\ndistinguir permutaciones, arreglos y combinaciones;\nenumerar espacios muestrales finitos y comprobar cálculos con R;\ncomparar probabilidades exactas con estimaciones obtenidas por simulación;\nexplorar modelos discretos sencillos con GeoGebra.",
+    "text": "aplicar los principios aditivo y multiplicativo del conteo;\nconstruir y leer diagramas de árbol;\ndistinguir entre permutaciones, arreglos y combinaciones;\nidentificar cuándo el orden importa y cuándo no;\nresolver problemas con y sin repetición;\nenumerar espacios muestrales finitos con R;\nverificar resultados exactos mediante simulación;\nexplorar visualmente problemas combinatorios mediante un recurso interactivo.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#de-los-eventos-a-los-números",
-    "href": "03-conteo-probabilidad.html#de-los-eventos-a-los-números",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.2 De los eventos a los números",
-    "text": "3.2 De los eventos a los números\nEn el capítulo anterior describimos resultados y eventos. Ahora necesitamos una regla que cuantifique cuán plausible es cada evento. Una probabilidad es un número entre 0 y 1: valores cercanos a 0 indican eventos poco plausibles y valores cercanos a 1 indican eventos muy plausibles.\nUna asignación de probabilidades debe ser coherente. No basta con escribir porcentajes intuitivos; los valores deben respetar la estructura del espacio muestral y las relaciones entre eventos.",
+    "objectID": "03-conteo-probabilidad.html#por-qué-necesitamos-contar",
+    "href": "03-conteo-probabilidad.html#por-qué-necesitamos-contar",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.2 ¿Por qué necesitamos contar?",
+    "text": "3.2 ¿Por qué necesitamos contar?\nEn muchos problemas de probabilidad el espacio muestral contiene un número grande de resultados. Enumerarlos uno por uno puede ser tedioso o prácticamente imposible. Las técnicas de conteo permiten determinar cuántos resultados existen sin escribirlos todos.\nSi los resultados elementales son equiprobables, el conteo será posteriormente la base para calcular probabilidades mediante\n\\[\nP(A)=\\frac{|A|}{|S|}.\n\\]\nEn este capítulo nos concentraremos primero en aprender a contar correctamente. La asignación formal de probabilidades se desarrollará en el capítulo siguiente.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#tres-formas-de-construir-una-asignación",
-    "href": "03-conteo-probabilidad.html#tres-formas-de-construir-una-asignación",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.3 Tres formas de construir una asignación",
-    "text": "3.3 Tres formas de construir una asignación\n\nModelo equiprobable\nSi un espacio muestral finito \\(S\\) contiene \\(N\\) resultados y el modelo justifica que todos son igualmente probables, entonces para cualquier evento \\(A\\),\n\\[\nP(A)=\\frac{|A|}{|S|}.\n\\]\nLa igualdad de probabilidades es un supuesto del modelo, no una consecuencia automática de que el espacio sea finito. Un dado cargado sigue teniendo seis resultados posibles, pero éstos no son equiprobables.\n\n\nFrecuencia relativa\nSi un experimento se repite \\(n\\) veces en condiciones semejantes y \\(A\\) ocurre \\(n_A\\) veces, la frecuencia relativa es\n\\[\n\\widehat P_n(A)=\\frac{n_A}{n}.\n\\]\nEsta cantidad sirve para estimar una probabilidad desconocida. Cambia de una muestra a otra y no debe confundirse con la probabilidad teórica del modelo.\n\n\nModelación basada en información\nEn confiabilidad, riesgo o diagnóstico puede ser necesario combinar datos históricos, conocimiento físico y juicio experto. La asignación es válida si declara sus supuestos, produce valores coherentes y puede contrastarse con nueva evidencia.",
+    "objectID": "03-conteo-probabilidad.html#principio-aditivo",
+    "href": "03-conteo-probabilidad.html#principio-aditivo",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.3 Principio aditivo",
+    "text": "3.3 Principio aditivo\nSupongamos que una tarea puede realizarse mediante alternativas mutuamente excluyentes. Si la primera alternativa puede realizarse de \\(n_1\\) formas, la segunda de \\(n_2\\) formas, y así sucesivamente, entonces el número total de posibilidades es\n\\[\nn_1+n_2+\\cdots+n_k.\n\\]\n\nEjemplo\nUn laboratorio dispone de 4 sensores ópticos y 3 sensores térmicos. Si se debe elegir exactamente un sensor, existen\n\\[\n4+3=7\n\\]\nselecciones posibles.\nEl principio aditivo se utiliza cuando las alternativas representan caminos diferentes que no ocurren simultáneamente.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#axiomas-de-probabilidad",
-    "href": "03-conteo-probabilidad.html#axiomas-de-probabilidad",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.4 Axiomas de probabilidad",
-    "text": "3.4 Axiomas de probabilidad\nUna función \\(P\\) que asigna probabilidades a los eventos debe cumplir:\n\nNo negatividad: \\(P(A)\\geq 0\\) para todo evento \\(A\\).\nNormalización: \\(P(S)=1\\).\nAditividad: si \\(A\\) y \\(B\\) son mutuamente excluyentes, entonces\n\n\\[\nP(A\\cup B)=P(A)+P(B).\n\\]\nPara una familia finita de eventos mutuamente excluyentes, la probabilidad de la unión es la suma de sus probabilidades.\n\nConsecuencias inmediatas\nDe los axiomas se obtienen reglas de uso cotidiano:\n\\[\nP(\\varnothing)=0,\n\\]\n\\[\nP(A^c)=1-P(A),\n\\]\n\\[\nP(A\\setminus B)=P(A)-P(A\\cap B),\n\\]\n\\[\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B).\n\\]\nLa última expresión resta la intersección porque los resultados comunes se contarían dos veces al sumar \\(P(A)\\) y \\(P(B)\\).\n\n\nEjemplo: control de calidad\nEn un lote, \\(P(A)=0.08\\) para el evento “la pieza tiene una falla dimensional” y \\(P(B)=0.05\\) para “la pieza tiene una falla superficial”. Si \\(P(A\\cap B)=0.02\\), entonces\n\\[\nP(A\\cup B)=0.08+0.05-0.02=0.11.\n\\]\nPor tanto, la probabilidad de que una pieza presente al menos una de las dos fallas es \\(0.11\\), mientras que la probabilidad de que no presente ninguna es\n\\[\n1-0.11=0.89.\n\\]",
+    "objectID": "03-conteo-probabilidad.html#principio-multiplicativo",
+    "href": "03-conteo-probabilidad.html#principio-multiplicativo",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.4 Principio multiplicativo",
+    "text": "3.4 Principio multiplicativo\nSi un procedimiento consta de varias etapas y cada etapa admite cierto número de opciones para cada elección previa, el número total de resultados es el producto de las posibilidades de cada etapa.\nSi existen \\(n_1\\) opciones en la primera etapa, \\(n_2\\) en la segunda, …, \\(n_k\\) en la última, entonces\n\\[\nN=n_1n_2\\cdots n_k.\n\\]\n\nEjemplo: código de identificación\nUn código contiene dos letras seguidas de tres dígitos. Si se permiten repeticiones, el número de códigos es\n\\[\n26^2\\cdot 10^3=676000.\n\\]\nAquí el procedimiento tiene cinco etapas: dos elecciones de letra y tres elecciones de dígito.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#probabilidad-en-espacios-finitos",
-    "href": "03-conteo-probabilidad.html#probabilidad-en-espacios-finitos",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.5 Probabilidad en espacios finitos",
-    "text": "3.5 Probabilidad en espacios finitos\nSea\n\\[\nS=\\{s_1,s_2,\\ldots,s_N\\}.\n\\]\nUna forma general de definir un modelo finito consiste en asignar a cada punto una masa \\(p_i\\) tal que\n\\[\np_i\\geq 0\n\\qquad\\text{y}\\qquad\n\\sum_{i=1}^{N}p_i=1.\n\\]\nEntonces, para cualquier evento \\(A\\),\n\\[\nP(A)=\\sum_{s_i\\in A}p_i.\n\\]\n\nEjemplo: dado no equilibrado\nSupongamos que las probabilidades de las caras de un dado son\n\n\n\nResultado\n1\n2\n3\n4\n5\n6\n\n\n\n\nProbabilidad\n0.10\n0.15\n0.15\n0.20\n0.20\n0.20\n\n\n\nLos valores son no negativos y suman 1. Para \\(A=\\) “obtener un número par”,\n\\[\nP(A)=0.15+0.20+0.20=0.55.\n\\]\nNo sería correcto usar \\(3/6\\) porque las caras no son equiprobables.",
+    "objectID": "03-conteo-probabilidad.html#diagramas-de-árbol",
+    "href": "03-conteo-probabilidad.html#diagramas-de-árbol",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.5 Diagramas de árbol",
+    "text": "3.5 Diagramas de árbol\nUn diagrama de árbol representa un experimento por etapas. Cada rama corresponde a una elección y cada trayectoria completa desde la raíz hasta una hoja representa un resultado.\n\nEjemplo: tres transmisiones\nCada transmisión puede ser correcta (C) o errónea (E). Para tres transmisiones,\n\\[\n|S|=2\\cdot2\\cdot2=8.\n\\]\nLos resultados son\n\\[\nS=\\{CCC,CCE,CEC,CEE,ECC,ECE,EEC,EEE\\}.\n\\]\nEl árbol no sólo ayuda a contar: también ayuda a evitar omisiones y duplicaciones.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#principios-fundamentales-de-conteo",
-    "href": "03-conteo-probabilidad.html#principios-fundamentales-de-conteo",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.6 Principios fundamentales de conteo",
-    "text": "3.6 Principios fundamentales de conteo\nContar permite determinar \\(|S|\\) y \\(|A|\\) sin enumerar uno por uno todos los resultados.\n\nPrincipio aditivo\nSi una tarea puede realizarse mediante una de varias alternativas mutuamente excluyentes y la alternativa \\(i\\) admite \\(n_i\\) formas, el total es\n\\[\nn_1+n_2+\\cdots+n_k.\n\\]\nPor ejemplo, si un laboratorio puede seleccionar uno de 4 sensores ópticos o uno de 3 sensores térmicos, existen \\(4+3=7\\) selecciones posibles.\n\n\nPrincipio multiplicativo\nSi un procedimiento tiene \\(k\\) etapas y la etapa \\(i\\) admite \\(n_i\\) opciones para cada elección previa, el total de resultados es\n\\[\nn_1n_2\\cdots n_k.\n\\]\nUna clave formada por dos letras seguidas de tres dígitos, permitiendo repeticiones, tiene\n\\[\n26^2\\,10^3=676\\,000\n\\]\nconfiguraciones.",
+    "objectID": "03-conteo-probabilidad.html#factorial",
+    "href": "03-conteo-probabilidad.html#factorial",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.6 Factorial",
+    "text": "3.6 Factorial\nPara un entero positivo \\(n\\) definimos\n\\[\nn!=n(n-1)(n-2)\\cdots2\\cdot1,\n\\]\ny por convenio\n\\[\n0!=1.\n\\]\nEjemplos:\n\\[\n5!=5\\cdot4\\cdot3\\cdot2\\cdot1=120,\n\\]\n\\[\n7!=5040.\n\\]\nEl factorial aparece naturalmente cuando contamos ordenamientos de objetos distintos.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#factorial-y-ordenamientos",
-    "href": "03-conteo-probabilidad.html#factorial-y-ordenamientos",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.7 Factorial y ordenamientos",
-    "text": "3.7 Factorial y ordenamientos\nPara un entero \\(n\\geq1\\),\n\\[\nn!=n(n-1)\\cdots2\\cdot1,\n\\]\ny por convenio \\(0!=1\\).\n\nPermutaciones\nEl número de maneras de ordenar \\(n\\) objetos distintos es\n\\[\nP_n=n!.\n\\]\n\n\nArreglos de \\(r\\) objetos tomados de \\(n\\)\nSi se eligen \\(r\\) objetos distintos de un conjunto de \\(n\\) y el orden importa,\n\\[\nP(n,r)=\\frac{n!}{(n-r)!}.\n\\]\n\n\nCombinaciones\nSi se eligen \\(r\\) objetos y el orden no importa,\n\\[\n\\binom{n}{r}=\\frac{n!}{r!(n-r)!}.\n\\]\nLa pregunta decisiva es: ¿cambiar el orden produce un resultado diferente? Elegir presidenta, secretaria y tesorera es un arreglo; formar un comité de tres personas es una combinación.\n\n\n\n\n\n\n\n\n\nSituación\n¿Importa el orden?\n¿Se permite repetición?\nConteo\n\n\n\n\nordenar \\(n\\) objetos distintos\nsí\nno\n\\(n!\\)\n\n\nelegir y ordenar \\(r\\) de \\(n\\)\nsí\nno\n\\(n!/(n-r)!\\)\n\n\nelegir \\(r\\) de \\(n\\)\nno\nno\n\\(\\binom{n}{r}\\)\n\n\nformar una secuencia de longitud \\(r\\) con \\(n\\) símbolos\nsí\nsí\n\\(n^r\\)",
+    "objectID": "03-conteo-probabilidad.html#permutaciones",
+    "href": "03-conteo-probabilidad.html#permutaciones",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.7 Permutaciones",
+    "text": "3.7 Permutaciones\nUna permutación es un ordenamiento de todos los objetos de una colección.\nEl número de permutaciones de \\(n\\) objetos distintos es\n\\[\nP_n=n!.\n\\]\n\nEjemplo\nCinco dispositivos distintos deben colocarse en fila para una prueba. El número de órdenes posibles es\n\\[\n5!=120.\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#ejemplo-integrado-selección-para-inspección",
-    "href": "03-conteo-probabilidad.html#ejemplo-integrado-selección-para-inspección",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.8 Ejemplo integrado: selección para inspección",
-    "text": "3.8 Ejemplo integrado: selección para inspección\nUna caja contiene 12 componentes, de los cuales 4 son defectuosos. Se seleccionan 3 sin reemplazo y sin considerar el orden. Si todos los grupos de tres son igualmente probables, el número total de muestras es\n\\[\n\\binom{12}{3}=220.\n\\]\nPara obtener exactamente dos defectuosos se eligen 2 de los 4 defectuosos y 1 de los 8 conformes:\n\\[\n\\binom{4}{2}\\binom{8}{1}=48.\n\\]\nPor tanto,\n\\[\nP(\\text{exactamente 2 defectuosos})\n=\\frac{48}{220}\n\\approx0.2182.\n\\]\nEl producto del numerador refleja dos decisiones: seleccionar los defectuosos y seleccionar el componente conforme.",
+    "objectID": "03-conteo-probabilidad.html#arreglos-o-variaciones-sin-repetición",
+    "href": "03-conteo-probabilidad.html#arreglos-o-variaciones-sin-repetición",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.8 Arreglos o variaciones sin repetición",
+    "text": "3.8 Arreglos o variaciones sin repetición\nCuando se eligen \\(r\\) objetos de un conjunto de \\(n\\) y el orden importa, el número de arreglos es\n\\[\nP(n,r)=\\frac{n!}{(n-r)!}.\n\\]\n\nEjemplo: asignación de cargos\nDe 10 estudiantes se eligen presidente, secretario y tesorero. Como los cargos son diferentes, el orden importa:\n\\[\nP(10,3)=10\\cdot9\\cdot8=720.\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#cálculo-exacto-con-r",
-    "href": "03-conteo-probabilidad.html#cálculo-exacto-con-r",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.9 Cálculo exacto con R",
-    "text": "3.9 Cálculo exacto con R\nR incluye funciones para factoriales y combinaciones:\n\nfactorial(6)\n\n[1] 720\n\nchoose(12, 3)\n\n[1] 220\n\nchoose(4, 2) * choose(8, 1) / choose(12, 3)\n\n[1] 0.2181818\n\n\nPara arreglos sin repetición podemos definir:\n\narreglos &lt;- function(n, r) {\n  factorial(n) / factorial(n - r)\n}\n\narreglos(10, 4)\n\n[1] 5040\n\n\n\nEnumeración explícita\nEn espacios pequeños conviene generar todos los resultados para comprobar el razonamiento. Para dos dados:\n\ndados &lt;- expand.grid(dado_1 = 1:6, dado_2 = 1:6)\nevento &lt;- subset(dados, dado_1 + dado_2 &gt;= 10)\n\nnrow(evento)\n\n[1] 6\n\nnrow(dados)\n\n[1] 36\n\nnrow(evento) / nrow(dados)\n\n[1] 0.1666667\n\nevento\n\n   dado_1 dado_2\n24      6      4\n29      5      5\n30      6      5\n34      4      6\n35      5      6\n36      6      6\n\n\nHay 6 resultados favorables de 36, de modo que\n\\[\nP(\\text{suma}\\geq10)=\\frac{6}{36}=\\frac{1}{6}.\n\\]",
+    "objectID": "03-conteo-probabilidad.html#combinaciones",
+    "href": "03-conteo-probabilidad.html#combinaciones",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.9 Combinaciones",
+    "text": "3.9 Combinaciones\nCuando se eligen \\(r\\) objetos de un conjunto de \\(n\\) y el orden no importa, utilizamos combinaciones:\n\\[\n\\binom{n}{r}=\\frac{n!}{r!(n-r)!}.\n\\]\n\nEjemplo: selección de un comité\nDe 10 estudiantes se selecciona un comité de 3 personas. Como no existen cargos diferenciados,\n\\[\n\\binom{10}{3}=120.\n\\]\nLa diferencia conceptual es fundamental:\n\nsi cambiar el orden produce un resultado diferente, usamos un conteo ordenado; si no produce un resultado diferente, usamos combinaciones.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#simulación-y-frecuencia-relativa",
-    "href": "03-conteo-probabilidad.html#simulación-y-frecuencia-relativa",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.10 Simulación y frecuencia relativa",
-    "text": "3.10 Simulación y frecuencia relativa\nUna simulación imita el experimento mediante números pseudoaleatorios. No sustituye un cálculo exacto disponible, pero permite comprobarlo, estudiar modelos grandes y observar la variabilidad muestral.\n\nset.seed(2026)\nn &lt;- 5000\nd1 &lt;- sample(1:6, n, replace = TRUE)\nd2 &lt;- sample(1:6, n, replace = TRUE)\nocurre &lt;- d1 + d2 &gt;= 10\nfrecuencia &lt;- cumsum(ocurre) / seq_len(n)\n\nplot(frecuencia, type = \"l\", col = \"steelblue\", lwd = 2,\n     xlab = \"Número de repeticiones\",\n     ylab = \"Frecuencia relativa acumulada\")\nabline(h = 1/6, col = \"firebrick\", lty = 2, lwd = 2)\nlegend(\"topright\", c(\"Simulación\", \"Probabilidad exacta\"),\n       col = c(\"steelblue\", \"firebrick\"), lty = c(1, 2),\n       lwd = 2, bty = \"n\")\n\n\n\n\n\n\n\nFigura 3.1: Frecuencia relativa acumulada del evento suma mayor o igual que 10.\n\n\n\n\n\nLa trayectoria fluctúa más al inicio. A medida que crece el número de repeticiones, suele estabilizarse cerca de \\(1/6\\). Esta regularidad empírica motiva la ley de los grandes números, que se estudiará posteriormente.\n\nSimulación de la inspección\n\nset.seed(314)\nB &lt;- 20000\ndefectuosos &lt;- replicate(B, {\n  muestra &lt;- sample(c(rep(1, 4), rep(0, 8)), 3,\n                    replace = FALSE)\n  sum(muestra)\n})\n\nmean(defectuosos == 2)\n\n[1] 0.22385\n\nchoose(4, 2) * choose(8, 1) / choose(12, 3)\n\n[1] 0.2181818\n\n\nLa primera salida es una estimación y cambia ligeramente al modificar la semilla; la segunda es la probabilidad exacta.",
+    "objectID": "03-conteo-probabilidad.html#comparación-rápida",
+    "href": "03-conteo-probabilidad.html#comparación-rápida",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.10 Comparación rápida",
+    "text": "3.10 Comparación rápida\n\n\n\n\n\n\n\n\n\nSituación\n¿Importa el orden?\n¿Se permite repetición?\nNúmero de resultados\n\n\n\n\nordenar los \\(n\\) objetos\nsí\nno\n\\(n!\\)\n\n\nelegir y ordenar \\(r\\) de \\(n\\)\nsí\nno\n\\(\\dfrac{n!}{(n-r)!}\\)\n\n\nelegir \\(r\\) de \\(n\\)\nno\nno\n\\(\\binom{n}{r}\\)\n\n\nformar una secuencia de longitud \\(r\\) con \\(n\\) símbolos\nsí\nsí\n\\(n^r\\)",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#actividad-en-geogebra",
-    "href": "03-conteo-probabilidad.html#actividad-en-geogebra",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.11 Actividad en GeoGebra",
-    "text": "3.11 Actividad en GeoGebra\nAbra GeoGebra Classic y realice la siguiente exploración:\n\nCree dos deslizadores enteros, n entre 1 y 20 y r entre 0 y 20.\nRestrinja la interpretación a los casos \\(0\\leq r\\leq n\\).\nEn la vista CAS escriba \\(n!/(r!(n-r)!)\\) para calcular \\(\\binom{n}{r}\\).\nCompare los valores obtenidos para \\(r\\) y \\(n-r\\).\nRegistre una conjetura y verifíquela algebraicamente.\n\nDeberá observar la simetría\n\\[\n\\binom{n}{r}=\\binom{n}{n-r}.\n\\]\nInterprétela así: seleccionar los \\(r\\) elementos que entran equivale a seleccionar los \\(n-r\\) que quedan fuera.\n\nExtensión: triángulo de Pascal\nCalcule combinaciones para valores consecutivos de \\(n\\) y organícelas por filas. Compruebe visualmente la identidad\n\\[\n\\binom{n}{r}=\\binom{n-1}{r-1}+\\binom{n-1}{r}.\n\\]",
+    "objectID": "03-conteo-probabilidad.html#conteo-con-repetición",
+    "href": "03-conteo-probabilidad.html#conteo-con-repetición",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.11 Conteo con repetición",
+    "text": "3.11 Conteo con repetición\nSi cada una de \\(r\\) posiciones puede ocuparse por cualquiera de \\(n\\) símbolos y se permite repetición, existen\n\\[\nn^r\n\\]\nsecuencias.\n\nEjemplo\nUna contraseña de cuatro dígitos, permitiendo repeticiones y ceros iniciales, tiene\n\\[\n10^4=10000\n\\]\nposibilidades.\nSi no se permiten repeticiones, el conteo cambia a\n\\[\nP(10,4)=10\\cdot9\\cdot8\\cdot7=5040.\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#estrategia-para-resolver-problemas",
-    "href": "03-conteo-probabilidad.html#estrategia-para-resolver-problemas",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.12 Estrategia para resolver problemas",
-    "text": "3.12 Estrategia para resolver problemas\nAntes de aplicar una fórmula, siga esta secuencia:\n\nDefina con precisión el experimento y el evento.\nDecida si los resultados elementales son equiprobables.\nDetermine si importa el orden.\nDetermine si se permite repetición o reemplazo.\nCuente el espacio muestral y los resultados favorables.\nCompruebe que la respuesta se encuentra entre 0 y 1.\nInterprete el resultado en el contexto original.\nCuando sea útil, verifique mediante enumeración o simulación.",
+    "objectID": "03-conteo-probabilidad.html#permutaciones-con-objetos-repetidos",
+    "href": "03-conteo-probabilidad.html#permutaciones-con-objetos-repetidos",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.12 Permutaciones con objetos repetidos",
+    "text": "3.12 Permutaciones con objetos repetidos\nSi existen \\(n\\) objetos, pero algunos son indistinguibles, el número de ordenamientos distintos disminuye.\nSi hay \\(n_1\\) objetos de un tipo, \\(n_2\\) de otro, …, \\(n_k\\) de otro, con\n\\[\nn_1+n_2+\\cdots+n_k=n,\n\\]\nentonces el número de permutaciones distintas es\n\\[\n\\frac{n!}{n_1!n_2!\\cdots n_k!}.\n\\]\n\nEjemplo\nLa palabra RADAR tiene cinco letras, con dos R y dos A. El número de arreglos distintos es\n\\[\n\\frac{5!}{2!2!}=30.\n\\]",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
+    ]
+  },
+  {
+    "objectID": "03-conteo-probabilidad.html#ejemplo-de-ingeniería-selección-para-inspección",
+    "href": "03-conteo-probabilidad.html#ejemplo-de-ingeniería-selección-para-inspección",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.13 Ejemplo de ingeniería: selección para inspección",
+    "text": "3.13 Ejemplo de ingeniería: selección para inspección\nUna caja contiene 12 componentes. Se seleccionan 3 para inspección.\nSi únicamente interesa qué componentes fueron seleccionados, y no el orden en que se extrajeron,\n\\[\n|S|=\\binom{12}{3}=220.\n\\]\nSi en cambio el primer componente se asigna a una prueba térmica, el segundo a una prueba eléctrica y el tercero a una prueba mecánica, entonces las posiciones tienen funciones diferentes y el orden sí importa:\n\\[\nP(12,3)=12\\cdot11\\cdot10=1320.\n\\]\nEl contexto determina el modelo de conteo apropiado.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
+    ]
+  },
+  {
+    "objectID": "03-conteo-probabilidad.html#cálculo-con-r",
+    "href": "03-conteo-probabilidad.html#cálculo-con-r",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.14 Cálculo con R",
+    "text": "3.14 Cálculo con R\nR proporciona funciones directas para factoriales y combinaciones:\n\nfactorial(6)\n\n[1] 720\n\nchoose(12, 3)\n\n[1] 220\n\n\nPodemos definir los arreglos sin repetición mediante\n\narreglos &lt;- function(n, r) {\n  factorial(n) / factorial(n - r)\n}\n\narreglos(10, 3)\n\n[1] 720\n\n\n\nEnumeración explícita con R\nPara tres transmisiones, cada una correcta o errónea:\n\nS &lt;- expand.grid(\n  t1 = c(\"C\", \"E\"),\n  t2 = c(\"C\", \"E\"),\n  t3 = c(\"C\", \"E\")\n)\n\nS\n\n  t1 t2 t3\n1  C  C  C\n2  E  C  C\n3  C  E  C\n4  E  E  C\n5  C  C  E\n6  E  C  E\n7  C  E  E\n8  E  E  E\n\nnrow(S)\n\n[1] 8\n\n\nEl resultado debe contener \\(2^3=8\\) filas.\n\n\nComprobar combinaciones\nPodemos enumerar todas las selecciones de 3 elementos tomadas de 5:\n\ncombn(1:5, 3)\n\n     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]\n[1,]    1    1    1    1    1    1    2    2    2     3\n[2,]    2    2    2    3    3    4    3    3    4     4\n[3,]    3    4    5    4    5    5    4    5    5     5\n\nchoose(5, 3)\n\n[1] 10\n\n\nLa primera instrucción muestra las selecciones y la segunda devuelve únicamente su cantidad.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
+    ]
+  },
+  {
+    "objectID": "03-conteo-probabilidad.html#simulación-como-verificación",
+    "href": "03-conteo-probabilidad.html#simulación-como-verificación",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.15 Simulación como verificación",
+    "text": "3.15 Simulación como verificación\nLa simulación puede utilizarse para comprobar que un mecanismo de generación recorre los tipos de resultados esperados.\nPor ejemplo, si generamos aleatoriamente claves de dos letras entre A, B y C:\n\nset.seed(123)\nreplicate(10, paste(sample(c(\"A\", \"B\", \"C\"), 2,\n                           replace = TRUE), collapse = \"\"))\n\n [1] \"CC\" \"CB\" \"CB\" \"BB\" \"CA\" \"BB\" \"AB\" \"CA\" \"CC\" \"AA\"\n\n\nEl número total de claves posibles es\n\\[\n3^2=9.\n\\]\nLa simulación no sustituye el conteo exacto, pero ayuda a comprender cómo se generan los resultados.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
+    ]
+  },
+  {
+    "objectID": "03-conteo-probabilidad.html#interactivo-del-capítulo",
+    "href": "03-conteo-probabilidad.html#interactivo-del-capítulo",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.16 Interactivo del capítulo",
+    "text": "3.16 Interactivo del capítulo\nEn la edición web se incluye un recurso interactivo con dos deslizadores, \\(n\\) y \\(r\\), que permite comparar simultáneamente:\n\\[\nn!,\n\\]\n\\[\nP(n,r)=\\frac{n!}{(n-r)!},\n\\]\ny\n\\[\n\\binom{n}{r}=\\frac{n!}{r!(n-r)!}.\n\\]\nEl objetivo es que el estudiante observe visualmente cuánto cambia el número de resultados cuando el orden importa y cuando no importa. También se incluye un árbol de decisiones de tres etapas para ilustrar el principio multiplicativo.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
+    ]
+  },
+  {
+    "objectID": "03-conteo-probabilidad.html#estrategia-para-decidir-qué-fórmula-utilizar",
+    "href": "03-conteo-probabilidad.html#estrategia-para-decidir-qué-fórmula-utilizar",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.17 Estrategia para decidir qué fórmula utilizar",
+    "text": "3.17 Estrategia para decidir qué fórmula utilizar\nAntes de calcular, contesta estas preguntas:\n\n¿El procedimiento ocurre por etapas?\n¿Las alternativas son mutuamente excluyentes o consecutivas?\n¿Importa el orden?\n¿Se permite repetir elementos?\n¿Se seleccionan todos los elementos o sólo una parte?\n\nUna buena práctica es describir primero el proceso con palabras y después elegir la fórmula.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
     "objectID": "03-conteo-probabilidad.html#errores-frecuentes",
     "href": "03-conteo-probabilidad.html#errores-frecuentes",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.13 Errores frecuentes",
-    "text": "3.13 Errores frecuentes\n\nAplicar \\(P(A)=|A|/|S|\\) sin justificar equiprobabilidad.\nUsar combinaciones cuando los cargos o posiciones hacen que el orden importe.\nContar como diferentes selecciones que sólo cambian de orden.\nConfundir selección con reemplazo y selección sin reemplazo.\nSumar probabilidades de eventos que se superponen sin restar la intersección.\nPresentar una frecuencia simulada como si fuera un valor exacto.",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.18 Errores frecuentes",
+    "text": "3.18 Errores frecuentes\n\nutilizar combinaciones cuando el orden sí importa;\nutilizar permutaciones cuando sólo interesa el grupo seleccionado;\nolvidar si la repetición está permitida;\nmultiplicar cantidades correspondientes a alternativas excluyentes;\nsumar cantidades correspondientes a etapas consecutivas;\ncontar dos veces resultados que representan la misma selección;\naplicar una fórmula antes de entender qué constituye un resultado diferente.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
-    "objectID": "03-conteo-probabilidad.html#resumen",
-    "href": "03-conteo-probabilidad.html#resumen",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.14 Resumen",
-    "text": "3.14 Resumen\n\nUna probabilidad coherente es no negativa, asigna 1 al espacio muestral y es aditiva para eventos mutuamente excluyentes.\nEn un espacio finito, las probabilidades puntuales deben ser no negativas y sumar 1.\nLa regla \\(|A|/|S|\\) exige resultados equiprobables.\nLos principios aditivo y multiplicativo organizan problemas de conteo.\nEl orden y la repetición determinan si se usan factoriales, arreglos, combinaciones o potencias.\nR permite calcular, enumerar y simular; cada método responde una pregunta diferente.",
+    "objectID": "03-conteo-probabilidad.html#ideas-clave",
+    "href": "03-conteo-probabilidad.html#ideas-clave",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.19 Ideas clave",
+    "text": "3.19 Ideas clave\n\nEl principio aditivo combina alternativas excluyentes.\nEl principio multiplicativo combina etapas sucesivas.\nLos diagramas de árbol ayudan a visualizar procesos por etapas.\nEl factorial cuenta ordenamientos completos.\nLos arreglos se utilizan cuando el orden importa.\nLas combinaciones se utilizan cuando el orden no importa.\nLa repetición cambia de manera esencial el conteo.\nR permite enumerar y comprobar espacios muestrales finitos.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
     "objectID": "03-conteo-probabilidad.html#ejercicios",
     "href": "03-conteo-probabilidad.html#ejercicios",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.15 Ejercicios",
-    "text": "3.15 Ejercicios\n\nUna ruleta tiene sectores con probabilidades \\(0.10\\), \\(0.20\\), \\(0.25\\), \\(0.15\\) y \\(0.30\\). Verifique los axiomas y calcule la probabilidad de caer en alguno de los tres primeros sectores.\nEn una planta, \\(P(A)=0.12\\), \\(P(B)=0.09\\) y \\(P(A\\cap B)=0.04\\). Calcule \\(P(A\\cup B)\\) y la probabilidad de que no ocurra ninguna falla.\nDetermine cuántos códigos de dos letras y cuatro dígitos pueden formarse si se permiten repeticiones.\nResuelva el ejercicio anterior si las letras no pueden repetirse y los dígitos tampoco.\n¿De cuántas formas pueden asignarse los cargos de coordinación, secretaría y tesorería entre 10 personas?\n¿Cuántos comités de tres personas pueden formarse con esas mismas 10 personas? Explique por qué la respuesta difiere de la anterior.\nDe 15 sensores, 5 son de alta precisión. Se eligen 4 sin reemplazo. Calcule la probabilidad de seleccionar exactamente 2 de alta precisión.\nEn una baraja ordinaria de 52 cartas, calcule la probabilidad de recibir una mano de 5 cartas que contenga exactamente 2 ases.\nDos dados equilibrados se lanzan una vez. Enumere con R el evento “la suma es prima” y calcule su probabilidad.\nSimule 10 000 lanzamientos del ejercicio anterior y compare la frecuencia relativa con el valor exacto.\nExplique por qué \\(P(A)=|A|/|S|\\) no es apropiada para el ejemplo del dado no equilibrado.\nDemuestre mediante conteo que \\(\\binom{n}{r}=\\binom{n}{n-r}\\) y describa el significado de ambos lados.\nDiseñe en GeoGebra una tabla con las filas \\(n=0,1,\\ldots,8\\) del triángulo de Pascal. Identifique dos patrones.\nProponga un modelo de probabilidades para los niveles bajo, medio y alto de demanda de un producto. Justifique la asignación y formule un evento compuesto.\nEscriba un programa en R que reciba un vector de probabilidades puntuales, compruebe que no son negativas y determine si suman 1 dentro de una tolerancia numérica.",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.20 Ejercicios",
+    "text": "3.20 Ejercicios\n\nUna cafetería ofrece 4 bebidas y 6 alimentos. ¿Cuántos desayunos distintos pueden formarse eligiendo una bebida y un alimento?\n¿Cuántas claves de tres letras pueden formarse con 26 letras si se permite repetición?\nResuelve el ejercicio anterior si no se permite repetición.\n¿De cuántas maneras pueden ordenarse 8 libros distintos en un estante?\nDe 12 estudiantes, ¿de cuántas maneras pueden asignarse los cargos de presidente, secretario y tesorero?\nDe los mismos 12 estudiantes, ¿cuántos comités distintos de 3 personas pueden formarse?\n¿Cuántos resultados posibles tiene una secuencia de 5 lanzamientos de moneda?\n¿Cuántos arreglos distintos pueden formarse con las letras de la palabra PROBABILIDAD? Identifica primero las letras repetidas.\nUsa R para enumerar todos los resultados de cuatro transmisiones, cada una correcta o errónea, y verifica el principio multiplicativo.\n★ Diseña un problema de ingeniería en el que usar una combinación en lugar de un arreglo produzca una respuesta incorrecta. Explica por qué.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
     "objectID": "03-conteo-probabilidad.html#referencias-del-capítulo",
     "href": "03-conteo-probabilidad.html#referencias-del-capítulo",
-    "title": "3  Conteo y asignación de probabilidades",
-    "section": "3.16 Referencias del capítulo",
-    "text": "3.16 Referencias del capítulo\nEl desarrollo de los axiomas, las reglas elementales y los métodos de conteo sigue el tratamiento introductorio de Walpole et al. (2012) y se complementa con la perspectiva aplicada de Montgomery y Runger (2018).\n\n\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "title": "3  Técnicas de conteo y enumeración",
+    "section": "3.21 Referencias del capítulo",
+    "text": "3.21 Referencias del capítulo\nEl tratamiento de técnicas de conteo sigue el enfoque habitual de probabilidad para ingeniería y ciencias de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018), complementado con verificación computacional mediante R inspirada en Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Conteo y asignación de probabilidades</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Técnicas de conteo y enumeración</span>"
     ]
   },
   {
