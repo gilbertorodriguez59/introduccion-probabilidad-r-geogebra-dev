@@ -1,0 +1,418 @@
+# Conjuntos, espacios muestrales y eventos
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- utilizar la notación y las operaciones básicas de conjuntos;
+- construir espacios muestrales mediante listas, tablas y diagramas de árbol;
+- distinguir espacios muestrales finitos, numerables y continuos;
+- representar eventos como subconjuntos del espacio muestral;
+- traducir expresiones como “al menos uno”, “ambos” y “ninguno” al lenguaje de conjuntos;
+- comprobar operaciones con eventos mediante R;
+- interpretar diagramas de Venn y construir una representación dinámica en GeoGebra.
+
+## Del experimento al modelo
+
+Un experimento aleatorio se convierte en un modelo matemático cuando especificamos con claridad:
+
+1. qué procedimiento se realiza;
+2. qué se observa o registra;
+3. cuáles resultados se consideran posibles;
+4. qué resultados forman el evento de interés.
+
+Esta precisión es esencial. Si lanzamos un dado, podemos registrar el número de puntos, la paridad o simplemente si el resultado supera a 4. El experimento físico es el mismo, pero el espacio muestral cambia con la observación que decidimos conservar.
+
+## Repaso de conjuntos
+
+Un **conjunto** es una colección bien definida de objetos. Los objetos que lo integran son sus **elementos**.
+
+Si $x$ pertenece a $A$, escribimos $x\in A$; si no pertenece, $x\notin A$. Un conjunto puede describirse por extensión,
+
+$$
+A=\{2,4,6\},
+$$
+
+o mediante una propiedad,
+
+$$
+A=\{x\in\mathbb{N}:1\leq x\leq 6\text{ y }x\text{ es par}\}.
+$$
+
+### Subconjuntos, igualdad y conjunto vacío
+
+Decimos que $A$ es subconjunto de $B$, y escribimos $A\subseteq B$, cuando todo elemento de $A$ también pertenece a $B$.
+
+Dos conjuntos son iguales si contienen exactamente los mismos elementos:
+
+$$
+A=B \quad\Longleftrightarrow\quad A\subseteq B\text{ y }B\subseteq A.
+$$
+
+El conjunto sin elementos se llama **conjunto vacío** y se representa por $\varnothing$.
+
+### Operaciones básicas
+
+Sean $A$ y $B$ subconjuntos de un universo $S$.
+
+| Operación | Notación | Interpretación |
+|---|---:|---|
+| Unión | $A\cup B$ | elementos que están en $A$, en $B$ o en ambos |
+| Intersección | $A\cap B$ | elementos comunes a $A$ y $B$ |
+| Diferencia | $A\setminus B$ | elementos de $A$ que no están en $B$ |
+| Complemento | $A^c$ | elementos de $S$ que no están en $A$ |
+| Diferencia simétrica | $A\triangle B$ | elementos que están en exactamente uno de los dos conjuntos |
+
+La palabra **o** se interpreta de manera inclusiva: $A\cup B$ contiene también los resultados donde ocurren ambos eventos. Si queremos “uno u otro, pero no ambos”, utilizamos $A\triangle B$.
+
+### Leyes de De Morgan
+
+Dos identidades especialmente útiles son
+
+$$
+(A\cup B)^c=A^c\cap B^c,
+$$
+
+$$
+(A\cap B)^c=A^c\cup B^c.
+$$
+
+En lenguaje cotidiano:
+
+- “no ocurre $A$ ni ocurre $B$” equivale a “no ocurre $A$ y no ocurre $B$”;
+- “no ocurren ambos” equivale a “falla al menos uno de los dos”.
+
+## Espacio muestral
+
+El **espacio muestral**, denotado por $S$ o $\Omega$, es el conjunto de todos los resultados posibles del experimento, de acuerdo con lo que se decidió observar. Cada elemento de $S$ es un **punto muestral**.
+
+### Ejemplo: lanzar un dado
+
+Si registramos el número de puntos,
+
+$$
+S_1=\{1,2,3,4,5,6\}.
+$$
+
+Si sólo registramos la paridad,
+
+$$
+S_2=\{\text{par},\text{impar}\}.
+$$
+
+$S_1$ conserva más información: a partir del resultado 4 podemos determinar que ocurrió “par”, pero saber únicamente “par” no permite reconstruir el número observado.
+
+### Tipos de espacios muestrales
+
+- **Finito:** contiene un número finito de resultados. Ejemplo: inspeccionar tres piezas y registrar para cada una si es conforme o defectuosa.
+- **Infinito numerable:** sus resultados pueden listarse como una sucesión. Ejemplo: número de paquetes recibidos hasta el primer error, $S=\{1,2,3,\ldots\}$.
+- **Continuo:** contiene un intervalo o una región de valores. Ejemplo: tiempo de vida de un componente, $S=[0,\infty)$.
+
+En este capítulo enumeraremos principalmente espacios finitos. Los espacios continuos se retomarán al estudiar variables aleatorias continuas.
+
+## Cómo construir un espacio muestral
+
+### Enumeración directa
+
+Para dos lanzamientos de una moneda, con $C=$ cara y $X=$ cruz,
+
+$$
+S=\{CC,CX,XC,XX\}.
+$$
+
+El orden importa: $CX$ y $XC$ son resultados distintos.
+
+### Tabla de doble entrada
+
+Al lanzar dos dados, cada resultado se representa mediante un par ordenado $(i,j)$:
+
+$$
+S=\{(i,j):i,j\in\{1,2,3,4,5,6\}\}.
+$$
+
+La tabla tiene $6\times6=36$ puntos muestrales. Esta representación facilita localizar eventos como “la suma es 7”:
+
+$$
+A=\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}.
+$$
+
+### Diagrama de árbol
+
+Un árbol es conveniente cuando el experimento ocurre por etapas. Cada trayectoria completa, desde la raíz hasta una hoja, representa un punto muestral.
+
+Por ejemplo, un sistema intenta transmitir un paquete. Si el primer intento falla, realiza un segundo intento. Con $E=$ éxito y $F=$ falla,
+
+$$
+S=\{E,FE,FF\}.
+$$
+
+No aparece $EE$, porque el procedimiento termina después del primer éxito.
+
+## Eventos
+
+Un **evento** es cualquier subconjunto del espacio muestral. El evento ocurre cuando el resultado observado pertenece a ese subconjunto.
+
+En el lanzamiento de un dado, sea
+
+$$
+S=\{1,2,3,4,5,6\},\qquad
+A=\{2,4,6\},\qquad
+B=\{4,5,6\}.
+$$
+
+Entonces:
+
+$$
+A\cap B=\{4,6\},
+$$
+
+$$
+A\cup B=\{2,4,5,6\},
+$$
+
+$$
+A^c=\{1,3,5\},
+$$
+
+$$
+A\setminus B=\{2\}.
+$$
+
+### Clases frecuentes de eventos
+
+- **Evento simple:** contiene un solo punto muestral.
+- **Evento compuesto:** contiene dos o más puntos muestrales.
+- **Evento seguro:** es todo el espacio muestral $S$.
+- **Evento imposible:** es $\varnothing$.
+- **Eventos mutuamente excluyentes:** satisfacen $A\cap B=\varnothing$.
+- **Eventos exhaustivos:** su unión es $S$.
+
+Mutuamente excluyentes no significa independientes. La independencia se estudiará después de introducir la probabilidad condicional.
+
+## Traducir frases a operaciones con eventos
+
+| Frase | Expresión |
+|---|---:|
+| ocurre $A$ y ocurre $B$ | $A\cap B$ |
+| ocurre $A$ o ocurre $B$, o ambos | $A\cup B$ |
+| no ocurre $A$ | $A^c$ |
+| ocurre $A$, pero no $B$ | $A\cap B^c=A\setminus B$ |
+| ocurre exactamente uno | $A\triangle B$ |
+| no ocurre ninguno | $(A\cup B)^c=A^c\cap B^c$ |
+| ocurre al menos uno | $A\cup B$ |
+| ocurren ambos | $A\cap B$ |
+| ocurre a lo más uno | $(A\cap B)^c$ |
+
+## Trabajo con conjuntos en R
+
+R representa naturalmente un conjunto finito mediante un vector cuyos elementos no se repiten.
+
+```{r}
+S <- 1:6
+A <- c(2, 4, 6)
+B <- c(4, 5, 6)
+
+union(A, B)
+intersect(A, B)
+setdiff(S, A)       # complemento de A respecto de S
+setdiff(A, B)       # A menos B
+```
+
+La diferencia simétrica se obtiene reuniendo las dos diferencias:
+
+```{r}
+simetrica <- union(setdiff(A, B), setdiff(B, A))
+simetrica
+```
+
+### Construcción del espacio muestral de dos dados
+
+```{r}
+dados <- expand.grid(dado_1 = 1:6, dado_2 = 1:6)
+head(dados)
+nrow(dados)
+```
+
+Seleccionemos tres eventos:
+
+```{r}
+A_suma_7 <- subset(dados, dado_1 + dado_2 == 7)
+B_dobles <- subset(dados, dado_1 == dado_2)
+C_al_menos_un_6 <- subset(dados, dado_1 == 6 | dado_2 == 6)
+
+A_suma_7
+B_dobles
+C_al_menos_un_6
+```
+
+Obsérvese la diferencia entre `|` y `&`:
+
+```{r}
+evento_union <- subset(dados,
+                       dado_1 + dado_2 == 7 | dado_1 == dado_2)
+
+evento_interseccion <- subset(dados,
+                              dado_1 + dado_2 == 7 & dado_1 == dado_2)
+
+nrow(evento_union)
+nrow(evento_interseccion)
+```
+
+La intersección es vacía: ningún doble suma 7.
+
+## Diagrama de Venn con R sin paquetes
+
+El siguiente código genera una representación conceptual. Las áreas de los círculos no expresan probabilidades; sólo muestran relaciones entre eventos.
+
+```{r}
+#| label: fig-venn-eventos
+#| fig-cap: "Unión e intersección de dos eventos."
+#| fig-width: 7
+#| fig-height: 4.8
+
+plot.new()
+plot.window(xlim = c(0, 10), ylim = c(0, 7), asp = 1)
+rect(0.4, 0.4, 9.6, 6.6, border = "#34495e", lwd = 2)
+symbols(x = c(4, 6), y = c(3.5, 3.5),
+        circles = c(2.2, 2.2), inches = FALSE,
+        add = TRUE, fg = c("#1565c0", "#c62828"), lwd = 3)
+text(2.5, 3.5, "A", cex = 1.4, col = "#1565c0")
+text(7.5, 3.5, "B", cex = 1.4, col = "#c62828")
+text(5, 3.5, expression(A %intersection% B), cex = 1.1)
+text(9.1, 6.1, "S", cex = 1.2)
+box()
+```
+
+## Actividad interactiva con GeoGebra
+
+En la versión web puede abrirse [GeoGebra Classic](https://www.geogebra.org/classic?lang=es). En la vista **Geometría**, construye un rectángulo para representar $S$ y dos circunferencias superpuestas para $A$ y $B$.
+
+1. Crea dos puntos, por ejemplo `O=(-1,0)` y `P=(1,0)`.
+2. Escribe `a=Circle(O,2.2)` y `b=Circle(P,2.2)`.
+3. Utiliza `Intersect(a,b)` para mostrar los puntos de cruce.
+4. Mueve $O$ o $P$ y observa cuándo los eventos quedarían disjuntos.
+5. Añade textos para $A\cap B$, $A\cup B$, $A\setminus B$ y $(A\cup B)^c$.
+
+La meta no es calcular áreas, sino visualizar cómo cambian las relaciones de inclusión, intersección y exclusión al mover los conjuntos.
+
+## Aplicación: sistema de dos sensores
+
+Dos sensores, $A$ y $B$, supervisan una variable ambiental. Al finalizar una prueba se registra si cada sensor respondió correctamente ($C$) o falló ($F$):
+
+$$
+S=\{CC,CF,FC,FF\}.
+$$
+
+Definamos:
+
+$$
+E_A=\{CC,CF\},\qquad E_B=\{CC,FC\}.
+$$
+
+Entonces:
+
+- ambos sensores responden correctamente: $E_A\cap E_B=\{CC\}$;
+- al menos uno responde correctamente: $E_A\cup E_B=\{CC,CF,FC\}$;
+- sólo uno responde correctamente: $E_A\triangle E_B=\{CF,FC\}$;
+- ninguno responde correctamente: $(E_A\cup E_B)^c=\{FF\}$.
+
+Esta descripción prepara el análisis de confiabilidad. En el siguiente capítulo asignaremos probabilidades a estos eventos.
+
+## Errores frecuentes
+
+1. **Omitir el orden:** en experimentos secuenciales, $CF$ y $FC$ suelen ser resultados distintos.
+2. **Confundir elemento y evento:** $4\in S$, pero $\{4\}\subseteq S$.
+3. **Interpretar “o” como exclusiva:** en matemáticas, $A\cup B$ incluye la intersección.
+4. **Cambiar el universo:** el complemento siempre depende del espacio muestral elegido.
+5. **Confundir disjunción e independencia:** son conceptos distintos.
+
+## Ejemplo integrador resuelto
+
+Se inspeccionan dos componentes y cada uno se clasifica como conforme ($C$), reparable ($R$) o desecho ($D$).
+
+El espacio muestral es
+
+$$
+S=\{CC,CR,CD,RC,RR,RD,DC,DR,DD\}.
+$$
+
+Sea $A$ el evento “al menos un componente es desecho” y $B$ el evento “los dos componentes reciben la misma clasificación”. Entonces
+
+$$
+A=\{CD,RD,DC,DR,DD\},
+$$
+
+$$
+B=\{CC,RR,DD\}.
+$$
+
+Por tanto,
+
+$$
+A\cap B=\{DD\},
+$$
+
+$$
+A\cup B=\{CC,RR,CD,RD,DC,DR,DD\},
+$$
+
+$$
+B^c=\{CR,CD,RC,RD,DC,DR\}.
+$$
+
+Podemos verificarlo en R:
+
+```{r}
+estados <- c("C", "R", "D")
+S_componentes <- apply(expand.grid(estados, estados), 1,
+                       paste0, collapse = "")
+
+A <- S_componentes[grepl("D", S_componentes)]
+B <- S_componentes[substr(S_componentes, 1, 1) ==
+                     substr(S_componentes, 2, 2)]
+
+intersect(A, B)
+union(A, B)
+setdiff(S_componentes, B)
+```
+
+## Ideas clave
+
+- El espacio muestral depende de qué resultado se registra.
+- Un evento es un subconjunto del espacio muestral.
+- Unión, intersección y complemento traducen afirmaciones sobre eventos.
+- Tablas, árboles y productos cartesianos ayudan a no omitir resultados.
+- R permite construir y verificar espacios muestrales finitos.
+- Los diagramas de Venn apoyan la interpretación, pero no sustituyen la definición por conjuntos.
+
+## Ejercicios
+
+### Nivel básico
+
+1. Sea $S=\{1,2,3,4,5,6,7,8\}$, $A=\{2,4,6,8\}$ y $B=\{5,6,7,8\}$. Obtén $A\cup B$, $A\cap B$, $A^c$, $B^c$, $A\setminus B$ y $A\triangle B$.
+2. Escribe el espacio muestral de tres lanzamientos de una moneda.
+3. Clasifica como evento simple, compuesto, seguro o imposible: obtener 7 al lanzar un dado; obtener un número par; obtener un número del 1 al 6.
+4. Expresa con símbolos: “ocurre $A$ pero no $B$”, “no ocurre ninguno” y “ocurre al menos uno”.
+
+### Nivel intermedio
+
+5. Se lanzan dos dados. Enumera los resultados cuya suma es 5 y los resultados en que aparece al menos un 2. Obtén su unión e intersección.
+6. Un paquete puede llegar a tiempo ($T$), con retraso ($R$) o perderse ($P$). Se observan dos paquetes. Construye $S$ y el evento “exactamente uno llega a tiempo”.
+7. Verifica mediante una tabla de pertenencia las dos leyes de De Morgan.
+8. Construye un diagrama de árbol para una inspección que termina al encontrar la primera pieza defectuosa o después de tres piezas conformes.
+
+### R y GeoGebra
+
+9. Usa `expand.grid()` para construir el espacio muestral de tres lanzamientos de un dado. Filtra el evento “la suma es 10”.
+10. En R, crea tres eventos finitos y verifica las identidades $A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$ y $(A\cup B)^c=A^c\cap B^c$.
+11. Modifica el diagrama de Venn en R para representar tres eventos.
+12. En GeoGebra, construye dos eventos disjuntos y después muévelos hasta que uno quede contenido en el otro. Describe qué cambia en $A\cap B$ y $A\cup B$.
+
+### Aplicación
+
+13. Define un experimento aleatorio relacionado con ingeniería ambiental, biomédica, electrónica o telecomunicaciones. Especifica el procedimiento, la observación, el espacio muestral y tres eventos relevantes.
+14. Un sistema tiene tres alarmas binarias. Construye el espacio muestral y los eventos “exactamente una alarma se activa”, “al menos dos se activan” y “ninguna se activa”.
+
+## Referencias del capítulo
+
+El orden conceptual —espacio muestral, eventos y operaciones— sigue el programa oficial del curso y se apoya principalmente en @walpole2012. Se complementa con los enfoques para ingeniería y ciencias de @devore2016, @montgomery2018 y @johnson2018, y con el tratamiento computacional en R de @kerns2010.
