@@ -7,6 +7,7 @@ book:
   subtitle: "Teoría, simulación y aplicaciones para ingeniería y ciencias"
   author: "Jesús Gilberto Rodríguez Escobedo"
   date: "2026-08-14"
+  output-file: "Introduccion-a-la-Probabilidad-con-R-y-GeoGebra"
   chapters:
     - index.qmd
     - bienvenida.qmd
