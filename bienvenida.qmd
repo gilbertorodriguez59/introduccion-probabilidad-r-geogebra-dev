@@ -1,0 +1,7 @@
+# Bienvenida {.unnumbered}
+
+La probabilidad es el lenguaje matemático con el que estudiamos fenómenos cuyo resultado no puede predecirse con certeza absoluta.
+
+En este libro trabajaremos con situaciones reales y simuladas de ingeniería y ciencias. Cada concepto se estudiará primero de manera intuitiva, después matemáticamente y finalmente mediante R y GeoGebra.
+
+El objetivo no es memorizar fórmulas, sino aprender a construir modelos probabilísticos, interpretarlos y utilizarlos para tomar decisiones bajo incertidumbre.
