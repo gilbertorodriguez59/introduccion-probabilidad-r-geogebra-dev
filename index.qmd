@@ -1,11 +1,5 @@
----
-title: "Introducción a la Probabilidad con R y GeoGebra"
-subtitle: "Teoría, simulación y aplicaciones para ingeniería y ciencias"
-author: "Jesús Gilberto Rodríguez Escobedo"
----
+# Portada {.unnumbered}
 
-Este libro presenta los fundamentos de la probabilidad con una orientación conceptual, matemática, computacional y visual.
+Este libro presenta una introducción aplicada a la probabilidad mediante teoría, simulación, programación en R y actividades dinámicas con GeoGebra. Los ejemplos se sitúan en contextos de ingeniería y ciencias.
 
-La obra desarrolla cada tema mediante cuatro perspectivas complementarias: razonamiento matemático, ejemplos de ingeniería y ciencias, experimentación con R y visualización dinámica con GeoGebra.
-
-La versión actual es de desarrollo. Los capítulos se revisan aquí antes de pasar a la edición estable.
+Los capítulos combinan conceptos, procedimientos, interpretación, comprobación computacional y ejercicios para favorecer un aprendizaje gradual.

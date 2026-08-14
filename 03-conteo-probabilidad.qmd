@@ -1,0 +1,392 @@
+# Conteo y asignación de probabilidades
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- asignar probabilidades mediante modelos equiprobables, frecuencias relativas y supuestos explícitos;
+- verificar que una asignación satisface los axiomas de probabilidad;
+- obtener probabilidades de complementos, uniones y diferencias de eventos;
+- aplicar los principios aditivo y multiplicativo de conteo;
+- distinguir permutaciones, arreglos y combinaciones;
+- enumerar espacios muestrales finitos y comprobar cálculos con R;
+- comparar probabilidades exactas con estimaciones obtenidas por simulación;
+- explorar modelos discretos sencillos con GeoGebra.
+
+## De los eventos a los números
+
+En el capítulo anterior describimos resultados y eventos. Ahora necesitamos una regla que cuantifique cuán plausible es cada evento. Una **probabilidad** es un número entre 0 y 1: valores cercanos a 0 indican eventos poco plausibles y valores cercanos a 1 indican eventos muy plausibles.
+
+Una asignación de probabilidades debe ser coherente. No basta con escribir porcentajes intuitivos; los valores deben respetar la estructura del espacio muestral y las relaciones entre eventos.
+
+## Tres formas de construir una asignación
+
+### Modelo equiprobable
+
+Si un espacio muestral finito $S$ contiene $N$ resultados y el modelo justifica que todos son igualmente probables, entonces para cualquier evento $A$,
+
+$$
+P(A)=\frac{|A|}{|S|}.
+$$
+
+La igualdad de probabilidades es un supuesto del modelo, no una consecuencia automática de que el espacio sea finito. Un dado cargado sigue teniendo seis resultados posibles, pero éstos no son equiprobables.
+
+### Frecuencia relativa
+
+Si un experimento se repite $n$ veces en condiciones semejantes y $A$ ocurre $n_A$ veces, la frecuencia relativa es
+
+$$
+\widehat P_n(A)=\frac{n_A}{n}.
+$$
+
+Esta cantidad sirve para estimar una probabilidad desconocida. Cambia de una muestra a otra y no debe confundirse con la probabilidad teórica del modelo.
+
+### Modelación basada en información
+
+En confiabilidad, riesgo o diagnóstico puede ser necesario combinar datos históricos, conocimiento físico y juicio experto. La asignación es válida si declara sus supuestos, produce valores coherentes y puede contrastarse con nueva evidencia.
+
+## Axiomas de probabilidad
+
+Una función $P$ que asigna probabilidades a los eventos debe cumplir:
+
+1. **No negatividad:** $P(A)\geq 0$ para todo evento $A$.
+2. **Normalización:** $P(S)=1$.
+3. **Aditividad:** si $A$ y $B$ son mutuamente excluyentes, entonces
+
+$$
+P(A\cup B)=P(A)+P(B).
+$$
+
+Para una familia finita de eventos mutuamente excluyentes, la probabilidad de la unión es la suma de sus probabilidades.
+
+### Consecuencias inmediatas
+
+De los axiomas se obtienen reglas de uso cotidiano:
+
+$$
+P(\varnothing)=0,
+$$
+
+$$
+P(A^c)=1-P(A),
+$$
+
+$$
+P(A\setminus B)=P(A)-P(A\cap B),
+$$
+
+$$
+P(A\cup B)=P(A)+P(B)-P(A\cap B).
+$$
+
+La última expresión resta la intersección porque los resultados comunes se contarían dos veces al sumar $P(A)$ y $P(B)$.
+
+### Ejemplo: control de calidad
+
+En un lote, $P(A)=0.08$ para el evento “la pieza tiene una falla dimensional” y $P(B)=0.05$ para “la pieza tiene una falla superficial”. Si $P(A\cap B)=0.02$, entonces
+
+$$
+P(A\cup B)=0.08+0.05-0.02=0.11.
+$$
+
+Por tanto, la probabilidad de que una pieza presente al menos una de las dos fallas es $0.11$, mientras que la probabilidad de que no presente ninguna es
+
+$$
+1-0.11=0.89.
+$$
+
+## Probabilidad en espacios finitos
+
+Sea
+
+$$
+S=\{s_1,s_2,\ldots,s_N\}.
+$$
+
+Una forma general de definir un modelo finito consiste en asignar a cada punto una masa $p_i$ tal que
+
+$$
+p_i\geq 0
+\qquad\text{y}\qquad
+\sum_{i=1}^{N}p_i=1.
+$$
+
+Entonces, para cualquier evento $A$,
+
+$$
+P(A)=\sum_{s_i\in A}p_i.
+$$
+
+### Ejemplo: dado no equilibrado
+
+Supongamos que las probabilidades de las caras de un dado son
+
+| Resultado | 1 | 2 | 3 | 4 | 5 | 6 |
+|---:|---:|---:|---:|---:|---:|---:|
+| Probabilidad | 0.10 | 0.15 | 0.15 | 0.20 | 0.20 | 0.20 |
+
+Los valores son no negativos y suman 1. Para $A=$ “obtener un número par”,
+
+$$
+P(A)=0.15+0.20+0.20=0.55.
+$$
+
+No sería correcto usar $3/6$ porque las caras no son equiprobables.
+
+## Principios fundamentales de conteo
+
+Contar permite determinar $|S|$ y $|A|$ sin enumerar uno por uno todos los resultados.
+
+### Principio aditivo
+
+Si una tarea puede realizarse mediante una de varias alternativas mutuamente excluyentes y la alternativa $i$ admite $n_i$ formas, el total es
+
+$$
+n_1+n_2+\cdots+n_k.
+$$
+
+Por ejemplo, si un laboratorio puede seleccionar uno de 4 sensores ópticos o uno de 3 sensores térmicos, existen $4+3=7$ selecciones posibles.
+
+### Principio multiplicativo
+
+Si un procedimiento tiene $k$ etapas y la etapa $i$ admite $n_i$ opciones para cada elección previa, el total de resultados es
+
+$$
+n_1n_2\cdots n_k.
+$$
+
+Una clave formada por dos letras seguidas de tres dígitos, permitiendo repeticiones, tiene
+
+$$
+26^2\,10^3=676\,000
+$$
+
+configuraciones.
+
+## Factorial y ordenamientos
+
+Para un entero $n\geq1$,
+
+$$
+n!=n(n-1)\cdots2\cdot1,
+$$
+
+y por convenio $0!=1$.
+
+### Permutaciones
+
+El número de maneras de ordenar $n$ objetos distintos es
+
+$$
+P_n=n!.
+$$
+
+### Arreglos de $r$ objetos tomados de $n$
+
+Si se eligen $r$ objetos distintos de un conjunto de $n$ y el orden importa,
+
+$$
+P(n,r)=\frac{n!}{(n-r)!}.
+$$
+
+### Combinaciones
+
+Si se eligen $r$ objetos y el orden no importa,
+
+$$
+\binom{n}{r}=\frac{n!}{r!(n-r)!}.
+$$
+
+La pregunta decisiva es: ¿cambiar el orden produce un resultado diferente? Elegir presidenta, secretaria y tesorera es un arreglo; formar un comité de tres personas es una combinación.
+
+| Situación | ¿Importa el orden? | ¿Se permite repetición? | Conteo |
+|---|:---:|:---:|---:|
+| ordenar $n$ objetos distintos | sí | no | $n!$ |
+| elegir y ordenar $r$ de $n$ | sí | no | $n!/(n-r)!$ |
+| elegir $r$ de $n$ | no | no | $\binom{n}{r}$ |
+| formar una secuencia de longitud $r$ con $n$ símbolos | sí | sí | $n^r$ |
+
+## Ejemplo integrado: selección para inspección
+
+Una caja contiene 12 componentes, de los cuales 4 son defectuosos. Se seleccionan 3 sin reemplazo y sin considerar el orden. Si todos los grupos de tres son igualmente probables, el número total de muestras es
+
+$$
+\binom{12}{3}=220.
+$$
+
+Para obtener exactamente dos defectuosos se eligen 2 de los 4 defectuosos y 1 de los 8 conformes:
+
+$$
+\binom{4}{2}\binom{8}{1}=48.
+$$
+
+Por tanto,
+
+$$
+P(\text{exactamente 2 defectuosos})
+=\frac{48}{220}
+\approx0.2182.
+$$
+
+El producto del numerador refleja dos decisiones: seleccionar los defectuosos y seleccionar el componente conforme.
+
+## Cálculo exacto con R
+
+R incluye funciones para factoriales y combinaciones:
+
+```{r}
+factorial(6)
+choose(12, 3)
+choose(4, 2) * choose(8, 1) / choose(12, 3)
+```
+
+Para arreglos sin repetición podemos definir:
+
+```{r}
+arreglos <- function(n, r) {
+  factorial(n) / factorial(n - r)
+}
+
+arreglos(10, 4)
+```
+
+### Enumeración explícita
+
+En espacios pequeños conviene generar todos los resultados para comprobar el razonamiento. Para dos dados:
+
+```{r}
+dados <- expand.grid(dado_1 = 1:6, dado_2 = 1:6)
+evento <- subset(dados, dado_1 + dado_2 >= 10)
+
+nrow(evento)
+nrow(dados)
+nrow(evento) / nrow(dados)
+evento
+```
+
+Hay 6 resultados favorables de 36, de modo que
+
+$$
+P(\text{suma}\geq10)=\frac{6}{36}=\frac{1}{6}.
+$$
+
+## Simulación y frecuencia relativa
+
+Una simulación imita el experimento mediante números pseudoaleatorios. No sustituye un cálculo exacto disponible, pero permite comprobarlo, estudiar modelos grandes y observar la variabilidad muestral.
+
+```{r}
+#| label: fig-convergencia-dados
+#| fig-cap: "Frecuencia relativa acumulada del evento suma mayor o igual que 10."
+set.seed(2026)
+n <- 5000
+d1 <- sample(1:6, n, replace = TRUE)
+d2 <- sample(1:6, n, replace = TRUE)
+ocurre <- d1 + d2 >= 10
+frecuencia <- cumsum(ocurre) / seq_len(n)
+
+plot(frecuencia, type = "l", col = "steelblue", lwd = 2,
+     xlab = "Número de repeticiones",
+     ylab = "Frecuencia relativa acumulada")
+abline(h = 1/6, col = "firebrick", lty = 2, lwd = 2)
+legend("topright", c("Simulación", "Probabilidad exacta"),
+       col = c("steelblue", "firebrick"), lty = c(1, 2),
+       lwd = 2, bty = "n")
+```
+
+La trayectoria fluctúa más al inicio. A medida que crece el número de repeticiones, suele estabilizarse cerca de $1/6$. Esta regularidad empírica motiva la ley de los grandes números, que se estudiará posteriormente.
+
+### Simulación de la inspección
+
+```{r}
+set.seed(314)
+B <- 20000
+defectuosos <- replicate(B, {
+  muestra <- sample(c(rep(1, 4), rep(0, 8)), 3,
+                    replace = FALSE)
+  sum(muestra)
+})
+
+mean(defectuosos == 2)
+choose(4, 2) * choose(8, 1) / choose(12, 3)
+```
+
+La primera salida es una estimación y cambia ligeramente al modificar la semilla; la segunda es la probabilidad exacta.
+
+## Actividad en GeoGebra
+
+Abra [GeoGebra Classic](https://www.geogebra.org/classic) y realice la siguiente exploración:
+
+1. Cree dos deslizadores enteros, `n` entre 1 y 20 y `r` entre 0 y 20.
+2. Restrinja la interpretación a los casos $0\leq r\leq n$.
+3. En la vista CAS escriba $n!/(r!(n-r)!)$ para calcular $\binom{n}{r}$.
+4. Compare los valores obtenidos para $r$ y $n-r$.
+5. Registre una conjetura y verifíquela algebraicamente.
+
+Deberá observar la simetría
+
+$$
+\binom{n}{r}=\binom{n}{n-r}.
+$$
+
+Interprétela así: seleccionar los $r$ elementos que entran equivale a seleccionar los $n-r$ que quedan fuera.
+
+### Extensión: triángulo de Pascal
+
+Calcule combinaciones para valores consecutivos de $n$ y organícelas por filas. Compruebe visualmente la identidad
+
+$$
+\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}.
+$$
+
+## Estrategia para resolver problemas
+
+Antes de aplicar una fórmula, siga esta secuencia:
+
+1. Defina con precisión el experimento y el evento.
+2. Decida si los resultados elementales son equiprobables.
+3. Determine si importa el orden.
+4. Determine si se permite repetición o reemplazo.
+5. Cuente el espacio muestral y los resultados favorables.
+6. Compruebe que la respuesta se encuentra entre 0 y 1.
+7. Interprete el resultado en el contexto original.
+8. Cuando sea útil, verifique mediante enumeración o simulación.
+
+## Errores frecuentes
+
+- Aplicar $P(A)=|A|/|S|$ sin justificar equiprobabilidad.
+- Usar combinaciones cuando los cargos o posiciones hacen que el orden importe.
+- Contar como diferentes selecciones que sólo cambian de orden.
+- Confundir selección con reemplazo y selección sin reemplazo.
+- Sumar probabilidades de eventos que se superponen sin restar la intersección.
+- Presentar una frecuencia simulada como si fuera un valor exacto.
+
+## Resumen
+
+- Una probabilidad coherente es no negativa, asigna 1 al espacio muestral y es aditiva para eventos mutuamente excluyentes.
+- En un espacio finito, las probabilidades puntuales deben ser no negativas y sumar 1.
+- La regla $|A|/|S|$ exige resultados equiprobables.
+- Los principios aditivo y multiplicativo organizan problemas de conteo.
+- El orden y la repetición determinan si se usan factoriales, arreglos, combinaciones o potencias.
+- R permite calcular, enumerar y simular; cada método responde una pregunta diferente.
+
+## Ejercicios
+
+1. Una ruleta tiene sectores con probabilidades $0.10$, $0.20$, $0.25$, $0.15$ y $0.30$. Verifique los axiomas y calcule la probabilidad de caer en alguno de los tres primeros sectores.
+2. En una planta, $P(A)=0.12$, $P(B)=0.09$ y $P(A\cap B)=0.04$. Calcule $P(A\cup B)$ y la probabilidad de que no ocurra ninguna falla.
+3. Determine cuántos códigos de dos letras y cuatro dígitos pueden formarse si se permiten repeticiones.
+4. Resuelva el ejercicio anterior si las letras no pueden repetirse y los dígitos tampoco.
+5. ¿De cuántas formas pueden asignarse los cargos de coordinación, secretaría y tesorería entre 10 personas?
+6. ¿Cuántos comités de tres personas pueden formarse con esas mismas 10 personas? Explique por qué la respuesta difiere de la anterior.
+7. De 15 sensores, 5 son de alta precisión. Se eligen 4 sin reemplazo. Calcule la probabilidad de seleccionar exactamente 2 de alta precisión.
+8. En una baraja ordinaria de 52 cartas, calcule la probabilidad de recibir una mano de 5 cartas que contenga exactamente 2 ases.
+9. Dos dados equilibrados se lanzan una vez. Enumere con R el evento “la suma es prima” y calcule su probabilidad.
+10. Simule 10 000 lanzamientos del ejercicio anterior y compare la frecuencia relativa con el valor exacto.
+11. Explique por qué $P(A)=|A|/|S|$ no es apropiada para el ejemplo del dado no equilibrado.
+12. Demuestre mediante conteo que $\binom{n}{r}=\binom{n}{n-r}$ y describa el significado de ambos lados.
+13. Diseñe en GeoGebra una tabla con las filas $n=0,1,\ldots,8$ del triángulo de Pascal. Identifique dos patrones.
+14. Proponga un modelo de probabilidades para los niveles bajo, medio y alto de demanda de un producto. Justifique la asignación y formule un evento compuesto.
+15. Escriba un programa en R que reciba un vector de probabilidades puntuales, compruebe que no son negativas y determine si suman 1 dentro de una tolerancia numérica.
+
+## Referencias del capítulo
+
+El desarrollo de los axiomas, las reglas elementales y los métodos de conteo sigue el tratamiento introductorio de @walpole2012 y se complementa con la perspectiva aplicada de @montgomery2018.
