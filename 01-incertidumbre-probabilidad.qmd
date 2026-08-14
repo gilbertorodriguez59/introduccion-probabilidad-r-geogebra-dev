@@ -47,12 +47,6 @@ Simulemos lanzamientos de una moneda equilibrada.
 set.seed(123)
 n <- 1000
 lanzamientos <- sample(c("cara", "cruz"), n, replace = TRUE)
-media(lanzamientos == "cara")
-```
-
-En R la función correcta para calcular la proporción es `mean()`:
-
-```{r}
 mean(lanzamientos == "cara")
 ```
 
