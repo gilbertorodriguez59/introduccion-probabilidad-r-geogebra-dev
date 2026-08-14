@@ -1,0 +1,5 @@
+# Presentación {.unnumbered}
+
+La obra está organizada para acompañar un primer curso universitario de probabilidad. El recorrido inicia con conjuntos, experimentos aleatorios, espacios muestrales y eventos; continúa con probabilidad condicional, independencia y Bayes; y después aborda variables aleatorias, esperanza, distribuciones conjuntas y las principales distribuciones discretas y continuas.
+
+La versión aplicada incorpora simulación, gráficos y cálculo con R, además de recursos visuales e interactivos con GeoGebra. Los ejemplos se orientarán especialmente a problemas de ingeniería, ciencias y datos reales.
