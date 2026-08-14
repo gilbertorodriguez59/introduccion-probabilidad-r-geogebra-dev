@@ -1,0 +1,7 @@
+# Introducción {.unnumbered}
+
+La ingeniería y las ciencias trabajan constantemente con variación, ruido e incertidumbre. Dos mediciones realizadas bajo condiciones aparentemente iguales pueden producir resultados distintos; un componente puede fallar antes o después de lo esperado; una red puede recibir un número impredecible de solicitudes; y una variable ambiental puede fluctuar aun cuando las condiciones generales parezcan estables.
+
+La probabilidad proporciona un marco matemático para representar y cuantificar esa incertidumbre. En lugar de intentar eliminar la variación, construimos modelos capaces de describirla.
+
+A lo largo del libro combinaremos teoría, resolución manual de problemas, simulación y visualización. R permitirá experimentar con miles de repeticiones y contrastar resultados teóricos; GeoGebra ayudará a explorar de forma dinámica espacios muestrales, eventos, funciones de distribución y familias de distribuciones.
