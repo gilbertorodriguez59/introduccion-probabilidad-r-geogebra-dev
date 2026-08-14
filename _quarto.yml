@@ -2,6 +2,7 @@ project:
   type: book
   output-dir: docs
   resources:
+    - figures/**
     - interactivos/**
     - html/**
 
@@ -10,6 +11,7 @@ book:
   subtitle: "Teoría, simulación y aplicaciones para ingeniería y ciencias"
   author: "Jesús Gilberto Rodríguez Escobedo"
   date: "2026-08-14"
+  cover-image: figures/portada-editorial.png
   output-file: "Introduccion-a-la-Probabilidad-con-R-y-GeoGebra"
   chapters:
     - index.qmd
@@ -50,6 +52,9 @@ format:
   pdf:
     documentclass: scrreprt
     pdf-engine: xelatex
+    include-in-header: header.tex
+    template-partials:
+      - before-body.tex
     toc: true
     colorlinks: true
     keep-tex: false
