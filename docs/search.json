@@ -550,6 +550,206 @@
     ]
   },
   {
+    "objectID": "04-axiomas-probabilidad.html",
+    "href": "04-axiomas-probabilidad.html",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "",
+    "text": "4.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#objetivos-de-aprendizaje",
+    "href": "04-axiomas-probabilidad.html#objetivos-de-aprendizaje",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "",
+    "text": "interpretar la probabilidad como una asignación numérica coherente a los eventos;\nreconocer y aplicar los axiomas fundamentales de la probabilidad;\ndeducir y utilizar las reglas del complemento, diferencia y unión de eventos;\njustificar por qué una respuesta probabilística debe encontrarse entre 0 y 1;\nresolver problemas de ingeniería y ciencias mediante reglas de probabilidad;\ncomprobar resultados mediante R y simulación;\nexplorar de manera interactiva cómo se distribuye la probabilidad entre regiones de eventos.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#de-contar-resultados-a-medir-incertidumbre",
+    "href": "04-axiomas-probabilidad.html#de-contar-resultados-a-medir-incertidumbre",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.2 De contar resultados a medir incertidumbre",
+    "text": "4.2 De contar resultados a medir incertidumbre\nEn los capítulos anteriores aprendimos a describir experimentos, construir espacios muestrales, representar eventos y contar resultados. Ahora damos un paso fundamental: asignar a cada evento un número que represente su grado de posibilidad.\nLa probabilidad de un evento \\(A\\) se denota por\n\\[\nP(A).\n\\]\nEse número no puede asignarse arbitrariamente. Debe satisfacer ciertas reglas de coherencia. Estas reglas son los axiomas de la probabilidad.\nUn modelo probabilístico completo puede escribirse como\n\\[\n(\\Omega,\\mathcal F,P),\n\\]\ndonde:\n\n\\(\\Omega\\) es el espacio muestral;\n\\(\\mathcal F\\) es la familia de eventos que pueden recibir probabilidad;\n\\(P\\) es la función que asigna probabilidades.\n\nEn este libro aplicado trabajaremos primero con la interpretación y el uso de estas reglas. La formulación más formal se desarrolla paralelamente en Fundamentos Teóricos de Introducción a la Probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#los-tres-axiomas-fundamentales",
+    "href": "04-axiomas-probabilidad.html#los-tres-axiomas-fundamentales",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.3 Los tres axiomas fundamentales",
+    "text": "4.3 Los tres axiomas fundamentales\n\nNo negatividad\nPara cualquier evento \\(A\\),\n\\[\nP(A)\\geq 0.\n\\]\nUna probabilidad negativa no tiene interpretación como grado de posibilidad.\n\n\nNormalización\nEl espacio muestral representa el evento seguro. Por tanto,\n\\[\nP(\\Omega)=1.\n\\]\nDecir que un resultado pertenece a \\(\\Omega\\) significa que alguno de los resultados considerados por el modelo necesariamente ocurrirá.\n\n\nAditividad\nSi \\(A\\) y \\(B\\) son eventos mutuamente excluyentes,\n\\[\nA\\cap B=\\varnothing,\n\\]\nentonces\n\\[\nP(A\\cup B)=P(A)+P(B).\n\\]\nLa formulación general del axioma se aplica a una colección numerable de eventos mutuamente excluyentes:\n\\[\nP\\left(\\bigcup_{i=1}^{\\infty}A_i\\right)\n=\\sum_{i=1}^{\\infty}P(A_i).\n\\]\nEn los problemas elementales utilizaremos con mayor frecuencia su versión finita.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#consecuencias-inmediatas",
+    "href": "04-axiomas-probabilidad.html#consecuencias-inmediatas",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.4 Consecuencias inmediatas",
+    "text": "4.4 Consecuencias inmediatas\nLos axiomas permiten deducir muchas de las fórmulas que usamos en la práctica. No son reglas independientes: se derivan de una estructura común.\n\nProbabilidad del evento imposible\nComo\n\\[\n\\Omega=\\Omega\\cup\\varnothing\n\\]\ny los conjuntos son disjuntos,\n\\[\nP(\\Omega)=P(\\Omega)+P(\\varnothing).\n\\]\nPor tanto,\n\\[\n\\boxed{P(\\varnothing)=0}.\n\\]\n\n\nRegla del complemento\nLos eventos \\(A\\) y \\(A^c\\) son mutuamente excluyentes y\n\\[\nA\\cup A^c=\\Omega.\n\\]\nEntonces\n\\[\nP(A)+P(A^c)=1,\n\\]\nde donde\n\\[\n\\boxed{P(A^c)=1-P(A)}.\n\\]\nEsta regla es especialmente útil para eventos expresados como “al menos uno”. Con frecuencia resulta más sencillo calcular el complemento “ninguno”.\n\n\nLas probabilidades están entre 0 y 1\nComo \\(A\\subseteq\\Omega\\),\n\\[\n0\\leq P(A)\\leq 1.\n\\]\nEste hecho proporciona una comprobación elemental de cualquier cálculo. Si obtenemos \\(-0.2\\) o \\(1.4\\), hay un error en el planteamiento o en las operaciones.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#monotonía",
+    "href": "04-axiomas-probabilidad.html#monotonía",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.5 Monotonía",
+    "text": "4.5 Monotonía\nSi\n\\[\nA\\subseteq B,\n\\]\nentonces todo resultado que hace ocurrir \\(A\\) también hace ocurrir \\(B\\). En consecuencia,\n\\[\n\\boxed{P(A)\\leq P(B)}.\n\\]\n\nEjemplo\nSea\n\n\\(A=\\) “un sistema presenta exactamente dos fallas durante el día”;\n\\(B=\\) “el sistema presenta al menos una falla durante el día”.\n\nClaramente \\(A\\subseteq B\\), de modo que necesariamente\n\\[\nP(A)\\leq P(B).\n\\]\nSi unos datos produjeran estimaciones que violaran esta relación, tendríamos que revisar la definición de los eventos o el procedimiento de estimación.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#regla-de-la-diferencia",
+    "href": "04-axiomas-probabilidad.html#regla-de-la-diferencia",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.6 Regla de la diferencia",
+    "text": "4.6 Regla de la diferencia\nSi queremos que ocurra \\(A\\) pero no \\(B\\), utilizamos\n\\[\nA\\setminus B=A\\cap B^c.\n\\]\nComo\n\\[\nA=(A\\setminus B)\\cup(A\\cap B)\n\\]\ny las dos regiones son disjuntas,\n\\[\nP(A)=P(A\\setminus B)+P(A\\cap B).\n\\]\nPor tanto,\n\\[\n\\boxed{P(A\\setminus B)=P(A)-P(A\\cap B)}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#regla-general-de-la-adición",
+    "href": "04-axiomas-probabilidad.html#regla-general-de-la-adición",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.7 Regla general de la adición",
+    "text": "4.7 Regla general de la adición\nCuando \\(A\\) y \\(B\\) se superponen, no podemos sumar directamente \\(P(A)\\) y \\(P(B)\\) porque la intersección se contaría dos veces.\nLa regla correcta es\n\\[\n\\boxed{P(A\\cup B)=P(A)+P(B)-P(A\\cap B)}.\n\\]\n\nEjemplo: fallas de manufactura\nEn una línea de producción definimos:\n\n\\(A=\\) “la pieza tiene defecto dimensional”;\n\\(B=\\) “la pieza tiene defecto superficial”.\n\nSupongamos que\n\\[\nP(A)=0.08,\\qquad\nP(B)=0.05,\\qquad\nP(A\\cap B)=0.02.\n\\]\nEntonces\n\\[\nP(A\\cup B)=0.08+0.05-0.02=0.11.\n\\]\nLa probabilidad de que una pieza tenga al menos uno de los dos defectos es \\(0.11\\).\nLa probabilidad de que no tenga ninguno es\n\\[\nP((A\\cup B)^c)=1-0.11=0.89.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#exactamente-uno-de-dos-eventos",
+    "href": "04-axiomas-probabilidad.html#exactamente-uno-de-dos-eventos",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.8 Exactamente uno de dos eventos",
+    "text": "4.8 Exactamente uno de dos eventos\nEl evento “ocurre exactamente uno de \\(A\\) y \\(B\\)” es la diferencia simétrica\n\\[\nA\\triangle B=(A\\setminus B)\\cup(B\\setminus A).\n\\]\nComo las dos partes son disjuntas,\n\\[\nP(A\\triangle B)\n=P(A)+P(B)-2P(A\\cap B).\n\\]\nEn el ejemplo anterior,\n\\[\nP(A\\triangle B)=0.08+0.05-2(0.02)=0.09.\n\\]\nPor tanto, 9% de las piezas presentan exactamente uno de esos defectos.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#tres-eventos-principio-de-inclusión-exclusión",
+    "href": "04-axiomas-probabilidad.html#tres-eventos-principio-de-inclusión-exclusión",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.9 Tres eventos: principio de inclusión-exclusión",
+    "text": "4.9 Tres eventos: principio de inclusión-exclusión\nPara tres eventos,\n\\[\n\\begin{aligned}\nP(A\\cup B\\cup C)\n={}&P(A)+P(B)+P(C)\\\\\n&-P(A\\cap B)-P(A\\cap C)-P(B\\cap C)\\\\\n&+P(A\\cap B\\cap C).\n\\end{aligned}\n\\]\nLa triple intersección se suma al final porque al restar las tres intersecciones dobles quedó eliminada demasiadas veces.\n\nEjemplo: tres alarmas\nTres subsistemas generan alertas \\(A\\), \\(B\\) y \\(C\\). Supongamos:\n\\[\nP(A)=0.12,\\quad P(B)=0.09,\\quad P(C)=0.07,\n\\]\n\\[\nP(A\\cap B)=0.03,\\quad\nP(A\\cap C)=0.02,\\quad\nP(B\\cap C)=0.01,\n\\]\n\\[\nP(A\\cap B\\cap C)=0.005.\n\\]\nEntonces\n\\[\nP(A\\cup B\\cup C)\n=0.12+0.09+0.07-0.03-0.02-0.01+0.005\n=0.225.\n\\]\nPor tanto, la probabilidad de que se active al menos una alarma es 0.225.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#asignación-de-probabilidades-en-espacios-finitos",
+    "href": "04-axiomas-probabilidad.html#asignación-de-probabilidades-en-espacios-finitos",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.10 Asignación de probabilidades en espacios finitos",
+    "text": "4.10 Asignación de probabilidades en espacios finitos\nSea\n\\[\n\\Omega=\\{\\omega_1,\\omega_2,\\ldots,\\omega_N\\}.\n\\]\nPodemos asignar a cada resultado elemental una probabilidad \\(p_i\\) siempre que\n\\[\np_i\\geq0\n\\]\ny\n\\[\n\\sum_{i=1}^{N}p_i=1.\n\\]\nPara un evento \\(A\\),\n\\[\nP(A)=\\sum_{\\omega_i\\in A}p_i.\n\\]\n\nCaso equiprobable\nSi los \\(N\\) resultados son igualmente probables,\n\\[\nP(\\{\\omega_i\\})=\\frac{1}{N},\n\\]\ny por tanto\n\\[\n\\boxed{P(A)=\\frac{|A|}{|\\Omega|}}.\n\\]\nEsta fórmula sólo es válida cuando la equiprobabilidad está justificada.\n\n\nEjemplo: dos dados equilibrados\nAl lanzar dos dados equilibrados existen 36 pares ordenados equiprobables. El evento\n\\[\nA=\\{\\text{suma }\\geq 10\\}\n\\]\ncontiene los resultados\n\\[\n(4,6),(5,5),(5,6),(6,4),(6,5),(6,6).\n\\]\nPor tanto,\n\\[\nP(A)=\\frac{6}{36}=\\frac16.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#comprobación-con-r",
+    "href": "04-axiomas-probabilidad.html#comprobación-con-r",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.11 Comprobación con R",
+    "text": "4.11 Comprobación con R\nPodemos representar directamente las probabilidades de cuatro regiones determinadas por dos eventos:\n\np_A &lt;- 0.08\np_B &lt;- 0.05\np_AB &lt;- 0.02\n\np_union &lt;- p_A + p_B - p_AB\np_ninguno &lt;- 1 - p_union\np_exactamente_uno &lt;- p_A + p_B - 2 * p_AB\n\nc(union = p_union,\n  ninguno = p_ninguno,\n  exactamente_uno = p_exactamente_uno)\n\n          union         ninguno exactamente_uno \n           0.11            0.89            0.09 \n\n\n\nUna función para verificar coherencia\n\nverificar_dos_eventos &lt;- function(pA, pB, pAB) {\n  inferior &lt;- max(0, pA + pB - 1)\n  superior &lt;- min(pA, pB)\n\n  c(\n    interseccion_minima = inferior,\n    interseccion_maxima = superior,\n    interseccion_valida = pAB &gt;= inferior && pAB &lt;= superior,\n    union = pA + pB - pAB\n  )\n}\n\nverificar_dos_eventos(0.55, 0.40, 0.20)\n\ninterseccion_minima interseccion_maxima interseccion_valida               union \n               0.00                0.40                1.00                0.75 \n\n\nPara que una intersección sea posible debe satisfacer\n\\[\n\\max\\{0,P(A)+P(B)-1\\}\n\\leq P(A\\cap B)\n\\leq \\min\\{P(A),P(B)\\}.\n\\]\nEstas cotas evitan asignaciones incompatibles.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#simulación-para-comprobar-una-regla",
+    "href": "04-axiomas-probabilidad.html#simulación-para-comprobar-una-regla",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.12 Simulación para comprobar una regla",
+    "text": "4.12 Simulación para comprobar una regla\nConstruyamos un modelo con cuatro regiones:\n\nsólo \\(A\\): 0.35;\nsólo \\(B\\): 0.20;\n\\(A\\cap B\\): 0.15;\nninguno: 0.30.\n\nEntonces\n\\[\nP(A)=0.50,\\qquad P(B)=0.35,\n\\]\ny\n\\[\nP(A\\cup B)=0.70.\n\\]\n\nset.seed(2026)\nn &lt;- 20000\nregion &lt;- sample(\n  c(\"solo_A\", \"solo_B\", \"ambos\", \"ninguno\"),\n  size = n,\n  replace = TRUE,\n  prob = c(0.35, 0.20, 0.15, 0.30)\n)\n\nA &lt;- region %in% c(\"solo_A\", \"ambos\")\nB &lt;- region %in% c(\"solo_B\", \"ambos\")\n\nc(\n  P_A = mean(A),\n  P_B = mean(B),\n  P_AB = mean(A & B),\n  P_union = mean(A | B),\n  formula_union = mean(A) + mean(B) - mean(A & B)\n)\n\n          P_A           P_B          P_AB       P_union formula_union \n      0.50555       0.34665       0.15275       0.69945       0.69945 \n\n\nLas dos últimas cantidades serán muy próximas. La pequeña diferencia respecto de los valores teóricos se debe a la variabilidad de la simulación.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#interactivo-del-capítulo",
+    "href": "04-axiomas-probabilidad.html#interactivo-del-capítulo",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.13 Interactivo del capítulo",
+    "text": "4.13 Interactivo del capítulo\nLa edición web incluye un recurso dinámico para experimentar con \\(P(A)\\), \\(P(B)\\) y \\(P(A\\cap B)\\). Al modificar los controles se actualizan automáticamente:\n\\[\nP(A\\cup B),\\qquad\nP((A\\cup B)^c),\\qquad\nP(A\\triangle B).\n\\]\nEl interactivo impide seleccionar una intersección incompatible con las probabilidades marginales. Esto permite visualizar que los axiomas no sólo producen fórmulas: también restringen qué combinaciones de números pueden constituir un modelo probabilístico válido.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#actividad-con-geogebra",
+    "href": "04-axiomas-probabilidad.html#actividad-con-geogebra",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.14 Actividad con GeoGebra",
+    "text": "4.14 Actividad con GeoGebra\nConstruye en GeoGebra una representación de cuatro regiones correspondientes a\n\\[\nA\\cap B,\\qquad A\\cap B^c,\\qquad A^c\\cap B,\\qquad A^c\\cap B^c.\n\\]\nAsocia a cada región un deslizador no negativo y obliga a que la suma de las cuatro probabilidades sea 1. Después define dinámicamente:\n\\[\nP(A)=P(A\\cap B)+P(A\\cap B^c),\n\\]\n\\[\nP(B)=P(A\\cap B)+P(A^c\\cap B),\n\\]\ny comprueba visualmente que\n\\[\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B).\n\\]\nLa construcción puede utilizar rectángulos coloreados en lugar de círculos; así cada área representa de manera conceptual una de las cuatro regiones disjuntas.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#estrategia-para-resolver-problemas",
+    "href": "04-axiomas-probabilidad.html#estrategia-para-resolver-problemas",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.15 Estrategia para resolver problemas",
+    "text": "4.15 Estrategia para resolver problemas\nCuando trabajes con reglas básicas de probabilidad:\n\nDefine claramente los eventos.\nTraduce expresiones como “al menos uno”, “ninguno” y “exactamente uno”.\nIdentifica qué regiones se superponen.\nDecide si conviene trabajar con el evento o con su complemento.\nAplica la regla correspondiente.\nVerifica que el resultado esté entre 0 y 1.\nComprueba que respete relaciones de inclusión conocidas.\nInterpreta la respuesta en el contexto original.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#errores-frecuentes",
+    "href": "04-axiomas-probabilidad.html#errores-frecuentes",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.16 Errores frecuentes",
+    "text": "4.16 Errores frecuentes\n\nSumar \\(P(A)+P(B)\\) sin restar la intersección cuando los eventos pueden ocurrir simultáneamente.\nUtilizar \\(P(A)=|A|/|\\Omega|\\) cuando los resultados no son equiprobables.\nConfundir \\(A^c\\) con “lo contrario verbalmente” sin definir primero el universo \\(\\Omega\\).\nInterpretar \\(P(\\varnothing)=0\\) como si todo evento de probabilidad cero fuera necesariamente imposible; esta diferencia será importante en modelos continuos.\nAceptar una probabilidad mayor que 1 o negativa sin revisar el cálculo.\nConfundir eventos mutuamente excluyentes con eventos independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#resumen",
+    "href": "04-axiomas-probabilidad.html#resumen",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.17 Resumen",
+    "text": "4.17 Resumen\n\nLa probabilidad es una función coherente definida sobre eventos.\nLos axiomas fundamentales son no negatividad, normalización y aditividad numerable.\nDe ellos se deducen \\(P(\\varnothing)=0\\), la regla del complemento y la monotonía.\nPara dos eventos,\n\n\\[\nP(A\\cup B)=P(A)+P(B)-P(A\\cap B).\n\\]\n\nEn espacios finitos equiprobables,\n\n\\[\nP(A)=\\frac{|A|}{|\\Omega|}.\n\\]\n\nR y la simulación permiten comprobar cálculos y detectar asignaciones incompatibles.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#ejercicios",
+    "href": "04-axiomas-probabilidad.html#ejercicios",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.18 Ejercicios",
+    "text": "4.18 Ejercicios\n\nSean \\(P(A)=0.42\\), \\(P(B)=0.35\\) y \\(P(A\\cap B)=0.18\\). Calcula \\(P(A\\cup B)\\), \\(P((A\\cup B)^c)\\) y \\(P(A\\triangle B)\\).\nUna estación de monitoreo registra una alarma de ozono con probabilidad 0.12 y una alarma de PM\\(_{10}\\) con probabilidad 0.18. Ambas aparecen simultáneamente con probabilidad 0.05. Calcula la probabilidad de al menos una alarma y de ninguna alarma.\nSi \\(A\\subseteq B\\), \\(P(A)=0.31\\) y \\(P(B)=0.28\\), explica por qué los datos son incompatibles.\nDetermina el intervalo de valores posibles para \\(P(A\\cap B)\\) si \\(P(A)=0.70\\) y \\(P(B)=0.55\\).\nAl lanzar dos dados equilibrados, calcula la probabilidad de obtener suma 7 o al menos un 6.\nVerifica mediante enumeración en R la respuesta del ejercicio anterior.\nTres sistemas de alarma satisfacen \\(P(A)=0.20\\), \\(P(B)=0.15\\), \\(P(C)=0.10\\), \\(P(A\\cap B)=0.06\\), \\(P(A\\cap C)=0.04\\), \\(P(B\\cap C)=0.03\\) y \\(P(A\\cap B\\cap C)=0.02\\). Calcula \\(P(A\\cup B\\cup C)\\).\nSimula en R 50 000 repeticiones de un modelo con cuatro regiones de probabilidades 0.25, 0.30, 0.10 y 0.35. Define adecuadamente \\(A\\) y \\(B\\) y verifica la regla de adición.\nExplica con tus propias palabras por qué restamos \\(P(A\\cap B)\\) en la regla de la unión.\nReto ★. Prueba, usando sólo reglas de este capítulo, que\n\n\\[\nP(A\\cup B)\\leq P(A)+P(B).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "04-axiomas-probabilidad.html#referencias-del-capítulo",
+    "href": "04-axiomas-probabilidad.html#referencias-del-capítulo",
+    "title": "4  Axiomas y propiedades de la probabilidad",
+    "section": "4.19 Referencias del capítulo",
+    "text": "4.19 Referencias del capítulo\nEl tratamiento de axiomas, reglas de probabilidad y aplicaciones sigue la estructura conceptual habitual de textos de probabilidad para ingeniería y ciencias, especialmente Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). La integración computacional con R se desarrolla con código original y toma como referencia general el enfoque de Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Axiomas y propiedades de la probabilidad</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "Referencias",
