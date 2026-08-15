@@ -1,0 +1,14 @@
+---
+title: "Capítulo 3. Técnicas de conteo y enumeración"
+output: html_notebook
+---
+
+```{r}
+n <- 8; r <- 3
+c(factorial=factorial(n), arreglos=factorial(n)/factorial(n-r), combinaciones=choose(n,r))
+```
+
+```{r}
+combn(1:6,3)
+expand.grid(A=1:3,B=1:4)
+```

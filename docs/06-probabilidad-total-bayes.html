@@ -90,7 +90,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./07-variable-aleatoria-cdf.html" rel="next">
 <link href="./05-condicional-independencia.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -264,6 +264,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-variable-aleatoria-cdf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-variables-discretas-pmf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -829,36 +841,14 @@ Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Pr
 document.addEventListener('DOMContentLoaded', function () {
   const path = window.location.pathname.split('/').pop();
   const mapa = {
-    '01-incertidumbre-probabilidad.html': {
-      titulo: 'Interactivo del capítulo: frecuencia relativa',
-      archivo: 'interactivos/cap01-frecuencia-relativa.html',
-      texto: 'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'
-    },
-    '02-espacios-eventos.html': {
-      titulo: 'Interactivo del capítulo: operaciones con eventos',
-      archivo: 'interactivos/cap02-eventos-venn.html',
-      texto: 'Explora visualmente unión, intersección, complementos y diferencia de eventos.'
-    },
-    '03-conteo-probabilidad.html': {
-      titulo: 'Interactivo del capítulo: conteo, arreglos y combinaciones',
-      archivo: 'interactivos/cap03-conteo.html',
-      texto: 'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'
-    },
-    '04-axiomas-probabilidad.html': {
-      titulo: 'Interactivo del capítulo: axiomas y regiones de probabilidad',
-      archivo: 'interactivos/cap04-axiomas.html',
-      texto: 'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'
-    },
-    '05-condicional-independencia.html': {
-      titulo: 'Interactivo del capítulo: probabilidad condicional e independencia',
-      archivo: 'interactivos/cap05-condicional-independencia.html',
-      texto: 'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'
-    },
-    '06-probabilidad-total-bayes.html': {
-      titulo: 'Interactivo del capítulo: teorema de Bayes y tasa base',
-      archivo: 'interactivos/cap06-bayes.html',
-      texto: 'Modifica la probabilidad previa, la sensibilidad y la tasa de falso positivo; observa cómo cambia la probabilidad posterior y las frecuencias esperadas.'
-    }
+    '01-incertidumbre-probabilidad.html': {titulo:'Interactivo del capítulo: frecuencia relativa',archivo:'interactivos/cap01-frecuencia-relativa.html',texto:'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'},
+    '02-espacios-eventos.html': {titulo:'Interactivo del capítulo: operaciones con eventos',archivo:'interactivos/cap02-eventos-venn.html',texto:'Explora visualmente unión, intersección, complementos y diferencia de eventos.'},
+    '03-conteo-probabilidad.html': {titulo:'Interactivo del capítulo: conteo, arreglos y combinaciones',archivo:'interactivos/cap03-conteo.html',texto:'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'},
+    '04-axiomas-probabilidad.html': {titulo:'Interactivo del capítulo: axiomas y regiones de probabilidad',archivo:'interactivos/cap04-axiomas.html',texto:'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'},
+    '05-condicional-independencia.html': {titulo:'Interactivo del capítulo: probabilidad condicional e independencia',archivo:'interactivos/cap05-condicional-independencia.html',texto:'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'},
+    '06-probabilidad-total-bayes.html': {titulo:'Interactivo del capítulo: teorema de Bayes y tasa base',archivo:'interactivos/cap06-bayes.html',texto:'Modifica la probabilidad previa, la sensibilidad y la tasa de falso positivo; observa cómo cambia la probabilidad posterior y las frecuencias esperadas.'},
+    '07-variable-aleatoria-cdf.html': {titulo:'Interactivo del capítulo: variable aleatoria y CDF',archivo:'interactivos/cap07-variable-aleatoria-cdf.html',texto:'Transforma resultados elementales en valores numéricos y observa cómo se construyen la distribución de X y F_X(x).'},
+    '08-variables-discretas-pmf.html': {titulo:'Interactivo del capítulo: PMF y CDF discreta',archivo:'interactivos/cap08-pmf-cdf.html',texto:'Modifica las masas de probabilidad y observa simultáneamente la PMF, la CDF y el tamaño de sus saltos.'}
   };
   const cfg = mapa[path];
   if (!cfg) return;
@@ -866,13 +856,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!main || document.getElementById('interactivo-capitulo')) return;
   const section = document.createElement('section');
   section.id = 'interactivo-capitulo';
-  section.innerHTML = `
-    <h2>${cfg.titulo}</h2>
-    <p>${cfg.texto}</p>
-    <div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;">
-      <iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe>
-    </div>
-    <p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  section.innerHTML = `<h2>${cfg.titulo}</h2><p>${cfg.texto}</p><div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;"><iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe></div><p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
   main.appendChild(section);
 });
 </script>
@@ -1283,8 +1267,8 @@ document.addEventListener('DOMContentLoaded', function () {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="Referencias">
-        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-variable-aleatoria-cdf.html" class="pagination-link" aria-label="Variable aleatoria y función de distribución acumulada">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

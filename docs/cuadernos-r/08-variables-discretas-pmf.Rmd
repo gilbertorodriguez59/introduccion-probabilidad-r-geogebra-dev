@@ -1,0 +1,60 @@
+---
+title: "Capítulo 8. Variables aleatorias discretas y PMF"
+output: html_document
+---
+
+## Objetivo
+
+Explorar en R funciones de masa de probabilidad, acumuladas y simulación de variables aleatorias discretas.
+
+```{r}
+x <- 0:3
+p <- c(0.10, 0.25, 0.40, 0.25)
+sum(p)
+```
+
+## Probabilidades a partir de la PMF
+
+```{r}
+sum(p[x >= 2])
+sum(p[x < 2])
+```
+
+## Gráfica de la PMF
+
+```{r}
+plot(x, p, type = "h", lwd = 5,
+     ylim = c(0, 0.5),
+     xlab = "x", ylab = "p_X(x)")
+points(x, p, pch = 19)
+```
+
+## Construcción de la CDF
+
+```{r}
+F <- cumsum(p)
+data.frame(x = x, pmf = p, cdf = F)
+```
+
+```{r}
+plot(x, F, type = "s", ylim = c(0, 1.05),
+     xlab = "x", ylab = "F_X(x)")
+points(x, F, pch = 19)
+```
+
+## Simulación
+
+```{r}
+set.seed(2026)
+n <- 50000
+muestra <- sample(x, n, replace = TRUE, prob = p)
+prop.table(table(muestra))
+```
+
+## Actividad
+
+1. Cambia el vector `p` por otra PMF válida.
+2. Comprueba que suma 1.
+3. Calcula $P(X\ge 2)$ y $P(X\le 1)$.
+4. Compara la PMF teórica con las frecuencias simuladas.
+5. Construye una PMF proporcional a $x+1$ para $x=0,1,2,3$.

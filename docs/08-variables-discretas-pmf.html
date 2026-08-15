@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Variables aleatorias discretas y función de masa de probabilidad – Introducción a la Probabilidad con R y GeoGebra</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./07-variable-aleatoria-cdf.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-41479178cf16c74431ccbac30d902985.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-variables-discretas-pmf.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Contenido del libro</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./Introduccion-a-la-Probabilidad-con-R-y-GeoGebra.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bienvenida.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notación general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Técnicas de conteo y enumeración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-axiomas-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Axiomas y propiedades de la probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-condicional-independencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-variable-aleatoria-cdf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-variables-discretas-pmf.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En este capítulo</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">8.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#de-la-variable-aleatoria-a-su-distribución" id="toc-de-la-variable-aleatoria-a-su-distribución" class="nav-link" data-scroll-target="#de-la-variable-aleatoria-a-su-distribución"><span class="header-section-number">8.2</span> De la variable aleatoria a su distribución</a></li>
+  <li><a href="#variable-aleatoria-discreta" id="toc-variable-aleatoria-discreta" class="nav-link" data-scroll-target="#variable-aleatoria-discreta"><span class="header-section-number">8.3</span> Variable aleatoria discreta</a></li>
+  <li><a href="#función-de-masa-de-probabilidad" id="toc-función-de-masa-de-probabilidad" class="nav-link" data-scroll-target="#función-de-masa-de-probabilidad"><span class="header-section-number">8.4</span> Función de masa de probabilidad</a></li>
+  <li><a href="#ejemplo-tres-lanzamientos-de-moneda" id="toc-ejemplo-tres-lanzamientos-de-moneda" class="nav-link" data-scroll-target="#ejemplo-tres-lanzamientos-de-moneda"><span class="header-section-number">8.5</span> Ejemplo: tres lanzamientos de moneda</a></li>
+  <li><a href="#calcular-probabilidades-con-una-pmf" id="toc-calcular-probabilidades-con-una-pmf" class="nav-link" data-scroll-target="#calcular-probabilidades-con-una-pmf"><span class="header-section-number">8.6</span> Calcular probabilidades con una PMF</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#construcción-de-una-distribución-a-partir-de-una-constante" id="toc-construcción-de-una-distribución-a-partir-de-una-constante" class="nav-link" data-scroll-target="#construcción-de-una-distribución-a-partir-de-una-constante"><span class="header-section-number">8.7</span> Construcción de una distribución a partir de una constante</a></li>
+  <li><a href="#probabilidades-mediante-complemento" id="toc-probabilidades-mediante-complemento" class="nav-link" data-scroll-target="#probabilidades-mediante-complemento"><span class="header-section-number">8.8</span> Probabilidades mediante complemento</a></li>
+  <li><a href="#representación-gráfica-de-la-pmf" id="toc-representación-gráfica-de-la-pmf" class="nav-link" data-scroll-target="#representación-gráfica-de-la-pmf"><span class="header-section-number">8.9</span> Representación gráfica de la PMF</a>
+  <ul class="collapse">
+  <li><a href="#r-gráfica-de-una-pmf" id="toc-r-gráfica-de-una-pmf" class="nav-link" data-scroll-target="#r-gráfica-de-una-pmf">R: gráfica de una PMF</a></li>
+  </ul></li>
+  <li><a href="#relación-entre-pmf-y-cdf" id="toc-relación-entre-pmf-y-cdf" class="nav-link" data-scroll-target="#relación-entre-pmf-y-cdf"><span class="header-section-number">8.10</span> Relación entre PMF y CDF</a></li>
+  <li><a href="#recuperar-la-pmf-desde-la-cdf" id="toc-recuperar-la-pmf-desde-la-cdf" class="nav-link" data-scroll-target="#recuperar-la-pmf-desde-la-cdf"><span class="header-section-number">8.11</span> Recuperar la PMF desde la CDF</a></li>
+  <li><a href="#ejemplo-de-ingeniería-número-de-sensores-activos" id="toc-ejemplo-de-ingeniería-número-de-sensores-activos" class="nav-link" data-scroll-target="#ejemplo-de-ingeniería-número-de-sensores-activos"><span class="header-section-number">8.12</span> Ejemplo de ingeniería: número de sensores activos</a></li>
+  <li><a href="#ejemplo-número-de-retransmisiones" id="toc-ejemplo-número-de-retransmisiones" class="nav-link" data-scroll-target="#ejemplo-número-de-retransmisiones"><span class="header-section-number">8.13</span> Ejemplo: número de retransmisiones</a></li>
+  <li><a href="#construcción-y-cálculo-en-r" id="toc-construcción-y-cálculo-en-r" class="nav-link" data-scroll-target="#construcción-y-cálculo-en-r"><span class="header-section-number">8.14</span> Construcción y cálculo en R</a></li>
+  <li><a href="#cdf-a-partir-de-una-pmf-en-r" id="toc-cdf-a-partir-de-una-pmf-en-r" class="nav-link" data-scroll-target="#cdf-a-partir-de-una-pmf-en-r"><span class="header-section-number">8.15</span> CDF a partir de una PMF en R</a></li>
+  <li><a href="#simulación-desde-una-pmf" id="toc-simulación-desde-una-pmf" class="nav-link" data-scroll-target="#simulación-desde-una-pmf"><span class="header-section-number">8.16</span> Simulación desde una PMF</a></li>
+  <li><a href="#comparación-entre-distribución-teórica-y-empírica" id="toc-comparación-entre-distribución-teórica-y-empírica" class="nav-link" data-scroll-target="#comparación-entre-distribución-teórica-y-empírica"><span class="header-section-number">8.17</span> Comparación entre distribución teórica y empírica</a></li>
+  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">8.18</span> Interactivo del capítulo</a></li>
+  <li><a href="#actividad-con-geogebra" id="toc-actividad-con-geogebra" class="nav-link" data-scroll-target="#actividad-con-geogebra"><span class="header-section-number">8.19</span> Actividad con GeoGebra</a></li>
+  <li><a href="#validación-de-una-pmf" id="toc-validación-de-una-pmf" class="nav-link" data-scroll-target="#validación-de-una-pmf"><span class="header-section-number">8.20</span> Validación de una PMF</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-función-inválida" id="toc-ejemplo-de-función-inválida" class="nav-link" data-scroll-target="#ejemplo-de-función-inválida">Ejemplo de función inválida</a></li>
+  </ul></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">8.21</span> Errores frecuentes</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">8.22</span> Resumen</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">8.23</span> Ejercicios</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">8.24</span> Referencias del capítulo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-de-aprendizaje" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">8.1</span> Objetivos de aprendizaje</h2>
+<p>Al finalizar este capítulo, el estudiante será capaz de:</p>
+<ul>
+<li>reconocer cuándo una variable aleatoria es discreta;</li>
+<li>identificar su soporte o conjunto de valores posibles;</li>
+<li>construir una función de masa de probabilidad;</li>
+<li>verificar que una función propuesta puede ser una PMF válida;</li>
+<li>calcular probabilidades mediante sumas de masas;</li>
+<li>relacionar la PMF con la función de distribución acumulada;</li>
+<li>construir tablas y gráficas de distribuciones discretas;</li>
+<li>utilizar R para calcular, representar y simular variables discretas;</li>
+<li>explorar interactivamente cómo cambian la PMF y la CDF al modificar probabilidades.</li>
+</ul>
+</section>
+<section id="de-la-variable-aleatoria-a-su-distribución" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="de-la-variable-aleatoria-a-su-distribución"><span class="header-section-number">8.2</span> De la variable aleatoria a su distribución</h2>
+<p>En el capítulo anterior introdujimos una variable aleatoria como una función</p>
+<p><span class="math display">\[
+X:\Omega\to\mathbb R.
+\]</span></p>
+<p>Ahora nos concentraremos en el caso en que <span class="math inline">\(X\)</span> sólo puede tomar valores aislados: por ejemplo,</p>
+<p><span class="math display">\[
+0,1,2,3,
+\]</span></p>
+<p>o bien</p>
+<p><span class="math display">\[
+0,1,2,\ldots
+\]</span></p>
+<p>Este tipo de variable aparece de manera natural cuando contamos objetos, fallas, llamadas, defectos, éxitos o eventos.</p>
+</section>
+<section id="variable-aleatoria-discreta" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="variable-aleatoria-discreta"><span class="header-section-number">8.3</span> Variable aleatoria discreta</h2>
+<p>Una variable aleatoria <span class="math inline">\(X\)</span> es <strong>discreta</strong> cuando su conjunto de valores posibles es finito o infinito numerable.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>número de piezas defectuosas en una muestra de 10;</li>
+<li>número de paquetes perdidos durante una hora;</li>
+<li>número de intentos necesarios hasta lograr una transmisión correcta;</li>
+<li>número de alarmas activadas en una red de sensores;</li>
+<li>número de pacientes que llegan a un servicio durante un intervalo.</li>
+</ul>
+<p>El conjunto de valores posibles de <span class="math inline">\(X\)</span> se denomina <strong>soporte</strong> y puede escribirse como</p>
+<p><span class="math display">\[
+\mathcal S_X=\{x:P(X=x)&gt;0\}.
+\]</span></p>
+</section>
+<section id="función-de-masa-de-probabilidad" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="función-de-masa-de-probabilidad"><span class="header-section-number">8.4</span> Función de masa de probabilidad</h2>
+<p>Para una variable aleatoria discreta, definimos la <strong>función de masa de probabilidad</strong> o PMF por</p>
+<p><span class="math display">\[
+\boxed{p_X(x)=P(X=x)}.
+\]</span></p>
+<p>Para que una función sea una PMF válida debe satisfacer:</p>
+<p><span class="math display">\[
+p_X(x)\geq0
+\]</span></p>
+<p>para todo <span class="math inline">\(x\)</span>, y</p>
+<p><span class="math display">\[
+\sum_{x\in\mathcal S_X}p_X(x)=1.
+\]</span></p>
+<p>Estas dos condiciones expresan exactamente los axiomas fundamentales de la probabilidad aplicados a los valores de una variable discreta.</p>
+</section>
+<section id="ejemplo-tres-lanzamientos-de-moneda" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="ejemplo-tres-lanzamientos-de-moneda"><span class="header-section-number">8.5</span> Ejemplo: tres lanzamientos de moneda</h2>
+<p>Sea <span class="math inline">\(X\)</span> el número de caras obtenidas al lanzar tres veces una moneda equilibrada.</p>
+<p>El soporte es</p>
+<p><span class="math display">\[
+\mathcal S_X=\{0,1,2,3\}.
+\]</span></p>
+<p>Los ocho resultados elementales son equiprobables. Al agruparlos según el valor de <span class="math inline">\(X\)</span> obtenemos:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(x\)</span></th>
+<th>Resultados con <span class="math inline">\(X=x\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p_X(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td>XXX</td>
+<td style="text-align: right;"><span class="math inline">\(1/8\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td>CXX, XCX, XXC</td>
+<td style="text-align: right;"><span class="math inline">\(3/8\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td>CCX, CXC, XCC</td>
+<td style="text-align: right;"><span class="math inline">\(3/8\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td>CCC</td>
+<td style="text-align: right;"><span class="math inline">\(1/8\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+p_X(0)=\frac18,
+\quad
+p_X(1)=\frac38,
+\quad
+p_X(2)=\frac38,
+\quad
+p_X(3)=\frac18.
+\]</span></p>
+<p>Y comprobamos</p>
+<p><span class="math display">\[
+\frac18+\frac38+\frac38+\frac18=1.
+\]</span></p>
+</section>
+<section id="calcular-probabilidades-con-una-pmf" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="calcular-probabilidades-con-una-pmf"><span class="header-section-number">8.6</span> Calcular probabilidades con una PMF</h2>
+<p>Si queremos la probabilidad de que <span class="math inline">\(X\)</span> pertenezca a un conjunto <span class="math inline">\(A\)</span>, sumamos las masas correspondientes:</p>
+<p><span class="math display">\[
+P(X\in A)=\sum_{x\in A}p_X(x).
+\]</span></p>
+<section id="ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<p>Para la variable anterior,</p>
+<p><span class="math display">\[
+P(X\geq2)=p_X(2)+p_X(3)
+=\frac38+\frac18
+=\frac12.
+\]</span></p>
+<p>También</p>
+<p><span class="math display">\[
+P(1\leq X\leq2)=p_X(1)+p_X(2)=\frac34.
+\]</span></p>
+</section>
+</section>
+<section id="construcción-de-una-distribución-a-partir-de-una-constante" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="construcción-de-una-distribución-a-partir-de-una-constante"><span class="header-section-number">8.7</span> Construcción de una distribución a partir de una constante</h2>
+<p>Supongamos que una variable discreta tiene soporte</p>
+<p><span class="math display">\[
+\{1,2,3,4\}
+\]</span></p>
+<p>y PMF</p>
+<p><span class="math display">\[
+p_X(x)=cx,
+\qquad x=1,2,3,4.
+\]</span></p>
+<p>Para determinar <span class="math inline">\(c\)</span>, utilizamos la condición de normalización:</p>
+<p><span class="math display">\[
+\sum_{x=1}^{4}cx=1.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+c(1+2+3+4)=1,
+\]</span></p>
+<p><span class="math display">\[
+10c=1,
+\]</span></p>
+<p>por lo que</p>
+<p><span class="math display">\[
+\boxed{c=0.1}.
+\]</span></p>
+<p>La distribución queda</p>
+<p><span class="math display">\[
+p_X(1)=0.1,
+\quad
+p_X(2)=0.2,
+\quad
+p_X(3)=0.3,
+\quad
+p_X(4)=0.4.
+\]</span></p>
+</section>
+<section id="probabilidades-mediante-complemento" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="probabilidades-mediante-complemento"><span class="header-section-number">8.8</span> Probabilidades mediante complemento</h2>
+<p>Aunque las probabilidades discretas se calculan sumando masas, a veces resulta más fácil utilizar el complemento.</p>
+<p>Por ejemplo,</p>
+<p><span class="math display">\[
+P(X\geq1)=1-P(X=0).
+\]</span></p>
+<p>Si <span class="math inline">\(X\)</span> representa el número de fallas en un periodo, esta forma es muy útil para calcular la probabilidad de <strong>al menos una falla</strong>.</p>
+</section>
+<section id="representación-gráfica-de-la-pmf" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="representación-gráfica-de-la-pmf"><span class="header-section-number">8.9</span> Representación gráfica de la PMF</h2>
+<p>Una PMF se representa mediante barras o segmentos verticales en los valores posibles de <span class="math inline">\(X\)</span>.</p>
+<p>La altura en <span class="math inline">\(x\)</span> es</p>
+<p><span class="math display">\[
+p_X(x).
+\]</span></p>
+<p>A diferencia de una densidad continua, aquí la probabilidad está concentrada directamente en puntos aislados.</p>
+<section id="r-gráfica-de-una-pmf" class="level3">
+<h3 class="anchored" data-anchor-id="r-gráfica-de-una-pmf">R: gráfica de una PMF</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">8</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, p,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"h"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">5</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.45</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"p_X(x)"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, p, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-variables-discretas-pmf_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="relación-entre-pmf-y-cdf" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="relación-entre-pmf-y-cdf"><span class="header-section-number">8.10</span> Relación entre PMF y CDF</h2>
+<p>La función de distribución acumulada es</p>
+<p><span class="math display">\[
+F_X(x)=P(X\leq x).
+\]</span></p>
+<p>Si <span class="math inline">\(X\)</span> es discreta,</p>
+<p><span class="math display">\[
+\boxed{
+F_X(x)=\sum_{t\leq x}p_X(t)
+}
+\]</span></p>
+<p>La CDF es, por tanto, la suma acumulada de las masas.</p>
+<p>Para el ejemplo de tres monedas:</p>
+<p><span class="math display">\[
+F_X(x)=
+\begin{cases}
+0, &amp; x&lt;0,\\
+1/8, &amp; 0\leq x&lt;1,\\
+4/8, &amp; 1\leq x&lt;2,\\
+7/8, &amp; 2\leq x&lt;3,\\
+1, &amp; x\geq3.
+\end{cases}
+\]</span></p>
+<p>La CDF de una variable discreta tiene forma escalonada. Cada salto en <span class="math inline">\(x\)</span> tiene tamaño</p>
+<p><span class="math display">\[
+p_X(x).
+\]</span></p>
+</section>
+<section id="recuperar-la-pmf-desde-la-cdf" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="recuperar-la-pmf-desde-la-cdf"><span class="header-section-number">8.11</span> Recuperar la PMF desde la CDF</h2>
+<p>En una variable discreta,</p>
+<p><span class="math display">\[
+\boxed{
+p_X(x)=F_X(x)-F_X(x^-)
+}
+\]</span></p>
+<p>donde <span class="math inline">\(F_X(x^-)\)</span> representa el valor límite de la CDF inmediatamente antes de <span class="math inline">\(x\)</span>.</p>
+<p>En términos intuitivos, la masa puntual es exactamente el tamaño del salto de la CDF.</p>
+</section>
+<section id="ejemplo-de-ingeniería-número-de-sensores-activos" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="ejemplo-de-ingeniería-número-de-sensores-activos"><span class="header-section-number">8.12</span> Ejemplo de ingeniería: número de sensores activos</h2>
+<p>Un sistema contiene tres sensores. Después de una prueba se registra</p>
+<p><span class="math display">\[
+X=\text{número de sensores que responden correctamente}.
+\]</span></p>
+<p>Supongamos la siguiente distribución experimental:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(p_X(x)\)</span></td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0.08</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.65</td>
+</tr>
+</tbody>
+</table>
+<p>La probabilidad de que funcionen al menos dos sensores es</p>
+<p><span class="math display">\[
+P(X\geq2)=0.25+0.65=0.90.
+\]</span></p>
+<p>La probabilidad de que no funcionen los tres es</p>
+<p><span class="math display">\[
+P(X&lt;3)=1-0.65=0.35.
+\]</span></p>
+<p>La distribución completa contiene mucho más información que una sola probabilidad aislada.</p>
+</section>
+<section id="ejemplo-número-de-retransmisiones" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="ejemplo-número-de-retransmisiones"><span class="header-section-number">8.13</span> Ejemplo: número de retransmisiones</h2>
+<p>Supongamos que <span class="math inline">\(X\)</span> es el número de retransmisiones requeridas por un paquete, con soporte</p>
+<p><span class="math display">\[
+\{0,1,2,3\}
+\]</span></p>
+<p>y PMF</p>
+<p><span class="math display">\[
+(0.70,0.20,0.08,0.02).
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+P(X\leq1)=0.70+0.20=0.90,
+\]</span></p>
+<p>mientras que</p>
+<p><span class="math display">\[
+P(X\geq2)=0.08+0.02=0.10.
+\]</span></p>
+<p>La PMF permite cuantificar directamente el comportamiento operativo del sistema.</p>
+</section>
+<section id="construcción-y-cálculo-en-r" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="construcción-y-cálculo-en-r"><span class="header-section-number">8.14</span> Construcción y cálculo en R</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.70</span>, <span class="fl">0.20</span>, <span class="fl">0.08</span>, <span class="fl">0.02</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(p)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p[p <span class="sc">&gt;=</span> <span class="dv">0</span>]</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.70 0.20 0.08 0.02</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>P_menor_igual_1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(p[x <span class="sc">&lt;=</span> <span class="dv">1</span>])</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>P_mayor_igual_2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(p[x <span class="sc">&gt;=</span> <span class="dv">2</span>])</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">P_X_le_1 =</span> P_menor_igual_1,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_X_ge_2 =</span> P_mayor_igual_2)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P_X_le_1 P_X_ge_2 
+     0.9      0.1 </code></pre>
+</div>
+</div>
+</section>
+<section id="cdf-a-partir-de-una-pmf-en-r" class="level2" data-number="8.15">
+<h2 data-number="8.15" class="anchored" data-anchor-id="cdf-a-partir-de-una-pmf-en-r"><span class="header-section-number">8.15</span> CDF a partir de una PMF en R</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>F <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(p)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">pmf =</span> p,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cdf =</span> F</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x  pmf  cdf
+1 0 0.70 0.70
+2 1 0.20 0.90
+3 2 0.08 0.98
+4 3 0.02 1.00</code></pre>
+</div>
+</div>
+<p>Podemos representar la CDF con una gráfica escalonada:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, F,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"s"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">1.05</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"F_X(x)"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, F, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08-variables-discretas-pmf_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="simulación-desde-una-pmf" class="level2" data-number="8.16">
+<h2 data-number="8.16" class="anchored" data-anchor-id="simulación-desde-una-pmf"><span class="header-section-number">8.16</span> Simulación desde una PMF</h2>
+<p>En R podemos generar observaciones de una variable discreta mediante <code>sample()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20000</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  x,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(muestra))</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>tabla</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>muestra
+      0       1       2       3 
+0.70030 0.19845 0.08065 0.02060 </code></pre>
+</div>
+</div>
+<p>Las frecuencias relativas se aproximan a las probabilidades teóricas cuando el tamaño de la simulación es grande.</p>
+</section>
+<section id="comparación-entre-distribución-teórica-y-empírica" class="level2" data-number="8.17">
+<h2 data-number="8.17" class="anchored" data-anchor-id="comparación-entre-distribución-teórica-y-empírica"><span class="header-section-number">8.17</span> Comparación entre distribución teórica y empírica</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>teorica <span class="ot">&lt;-</span> p</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>empirica <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tabla[<span class="fu">as.character</span>(x)])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>comparacion <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">teorica =</span> teorica,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">empirica =</span> empirica</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>comparacion</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x teorica empirica
+1 0    0.70  0.70030
+2 1    0.20  0.19845
+3 2    0.08  0.08065
+4 3    0.02  0.02060</code></pre>
+</div>
+</div>
+<p>Esta comparación ayuda a distinguir entre:</p>
+<ul>
+<li>una <strong>distribución teórica</strong>, definida por el modelo;</li>
+<li>una <strong>distribución empírica</strong>, obtenida a partir de observaciones.</li>
+</ul>
+</section>
+<section id="interactivo-del-capítulo" class="level2" data-number="8.18">
+<h2 data-number="8.18" class="anchored" data-anchor-id="interactivo-del-capítulo"><span class="header-section-number">8.18</span> Interactivo del capítulo</h2>
+<p>La edición web incluye un recurso que permite modificar las probabilidades asociadas a cuatro valores discretos.</p>
+<p>El interactivo:</p>
+<ul>
+<li>normaliza automáticamente las masas para que sumen 1;</li>
+<li>muestra la PMF mediante barras;</li>
+<li>construye la CDF acumulada;</li>
+<li>permite seleccionar un valor <span class="math inline">\(x\)</span> y leer <span class="math inline">\(p_X(x)\)</span> y <span class="math inline">\(F_X(x)\)</span>;</li>
+<li>muestra visualmente que el tamaño de cada salto de la CDF coincide con la masa puntual.</li>
+</ul>
+<p>Esta relación entre PMF y CDF será central en los siguientes capítulos.</p>
+</section>
+<section id="actividad-con-geogebra" class="level2" data-number="8.19">
+<h2 data-number="8.19" class="anchored" data-anchor-id="actividad-con-geogebra"><span class="header-section-number">8.19</span> Actividad con GeoGebra</h2>
+<p>Construye cuatro deslizadores positivos <span class="math inline">\(w_0,w_1,w_2,w_3\)</span> y define</p>
+<p><span class="math display">\[
+p_i=\frac{w_i}{w_0+w_1+w_2+w_3}.
+\]</span></p>
+<p>Representa las barras</p>
+<p><span class="math display">\[
+(0,p_0),(1,p_1),(2,p_2),(3,p_3)
+\]</span></p>
+<p>y calcula las acumuladas</p>
+<p><span class="math display">\[
+F_0=p_0,
+\]</span></p>
+<p><span class="math display">\[
+F_1=p_0+p_1,
+\]</span></p>
+<p><span class="math display">\[
+F_2=p_0+p_1+p_2,
+\]</span></p>
+<p><span class="math display">\[
+F_3=1.
+\]</span></p>
+<p>Mueve los deslizadores y observa simultáneamente cómo cambia la distribución puntual y su acumulación.</p>
+</section>
+<section id="validación-de-una-pmf" class="level2" data-number="8.20">
+<h2 data-number="8.20" class="anchored" data-anchor-id="validación-de-una-pmf"><span class="header-section-number">8.20</span> Validación de una PMF</h2>
+<p>Ante una función propuesta <span class="math inline">\(p(x)\)</span>, verifica siempre:</p>
+<ol type="1">
+<li>que ningún valor sea negativo;</li>
+<li>que la suma de todas las masas sea 1;</li>
+<li>que el soporte esté claramente identificado.</li>
+</ol>
+<section id="ejemplo-de-función-inválida" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-de-función-inválida">Ejemplo de función inválida</h3>
+<p>Supongamos</p>
+<p><span class="math display">\[
+p_X(0)=0.20,
+\quad
+p_X(1)=0.55,
+\quad
+p_X(2)=0.40.
+\]</span></p>
+<p>Aunque todos los valores son no negativos,</p>
+<p><span class="math display">\[
+0.20+0.55+0.40=1.15,
+\]</span></p>
+<p>por lo que no puede ser una distribución de probabilidad válida.</p>
+</section>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="8.21">
+<h2 data-number="8.21" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">8.21</span> Errores frecuentes</h2>
+<ul>
+<li>Confundir <span class="math inline">\(p_X(x)\)</span> con <span class="math inline">\(F_X(x)\)</span>.</li>
+<li>Olvidar que las masas deben sumar 1.</li>
+<li>Asignar probabilidad positiva a valores fuera del soporte.</li>
+<li>Interpretar la altura de una PMF como densidad continua.</li>
+<li>Sumar valores de <span class="math inline">\(x\)</span> en lugar de sumar probabilidades.</li>
+<li>Utilizar una gráfica de barras sin distinguir entre frecuencia empírica y probabilidad teórica.</li>
+</ul>
+</section>
+<section id="resumen" class="level2" data-number="8.22">
+<h2 data-number="8.22" class="anchored" data-anchor-id="resumen"><span class="header-section-number">8.22</span> Resumen</h2>
+<p>Una variable aleatoria discreta toma valores en un conjunto finito o numerable. Su PMF es</p>
+<p><span class="math display">\[
+p_X(x)=P(X=x),
+\]</span></p>
+<p>con</p>
+<p><span class="math display">\[
+p_X(x)\geq0,
+\qquad
+\sum_xp_X(x)=1.
+\]</span></p>
+<p>Las probabilidades de eventos se obtienen sumando masas:</p>
+<p><span class="math display">\[
+P(X\in A)=\sum_{x\in A}p_X(x).
+\]</span></p>
+<p>La CDF se obtiene acumulando:</p>
+<p><span class="math display">\[
+F_X(x)=\sum_{t\leq x}p_X(t).
+\]</span></p>
+<p>Y la masa puntual coincide con el tamaño del salto de la CDF.</p>
+</section>
+<section id="ejercicios" class="level2" data-number="8.23">
+<h2 data-number="8.23" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">8.23</span> Ejercicios</h2>
+<ol type="1">
+<li>Una variable tiene soporte <span class="math inline">\(\{0,1,2,3\}\)</span> y PMF <span class="math inline">\((0.10,0.25,0.40,0.25)\)</span>. Calcula <span class="math inline">\(P(X\geq2)\)</span>, <span class="math inline">\(P(X&lt;2)\)</span> y <span class="math inline">\(P(1\leq X\leq3)\)</span>.</li>
+<li>Decide si <span class="math inline">\((0.15,0.30,0.35,0.25)\)</span> define una PMF válida. Justifica.</li>
+<li>Sea <span class="math inline">\(p_X(x)=c(x+1)\)</span> para <span class="math inline">\(x=0,1,2,3\)</span>. Determina <span class="math inline">\(c\)</span> y calcula <span class="math inline">\(P(X\geq2)\)</span>.</li>
+<li>Construye la CDF completa del ejercicio anterior.</li>
+<li>El número de sensores activos tiene distribución <span class="math inline">\((0.01,0.04,0.20,0.75)\)</span> para <span class="math inline">\(x=0,1,2,3\)</span>. Calcula la probabilidad de que funcionen al menos dos.</li>
+<li>Representa en R la PMF y CDF del ejercicio 5.</li>
+<li>Simula 50 000 valores de la distribución del ejercicio 5 y compara las frecuencias empíricas con las probabilidades teóricas.</li>
+<li>Una CDF presenta saltos de tamaños 0.20, 0.35 y 0.45 en <span class="math inline">\(x=1,2,5\)</span>. Escribe la PMF correspondiente.</li>
+<li>Explica por qué una variable discreta puede tener soporte infinito numerable aunque la suma total de probabilidades deba ser 1.</li>
+<li><strong>Reto ★.</strong> Supón que <span class="math inline">\(X\)</span> tiene soporte <span class="math inline">\(\{1,2,3,\ldots\}\)</span> y</li>
+</ol>
+<p><span class="math display">\[
+p_X(x)=\frac{c}{2^x}.
+\]</span></p>
+<p>Determina <span class="math inline">\(c\)</span> y calcula <span class="math inline">\(P(X\geq4)\)</span>.</p>
+</section>
+<section id="referencias-del-capítulo" class="level2" data-number="8.24">
+<h2 data-number="8.24" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">8.24</span> Referencias del capítulo</h2>
+<p>El tratamiento de variables aleatorias discretas, funciones de masa y funciones de distribución acumulada sigue la organización estándar de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. Los ejemplos, ejercicios, simulaciones y código R son originales; el enfoque computacional general toma como referencia <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-devore2016" class="csl-entry" role="listitem">
+Devore, Jay L. 2016. <em>Probability and Statistics for Engineering and the Sciences</em>. 9.ª ed. Cengage Learning.
+</div>
+<div id="ref-johnson2018" class="csl-entry" role="listitem">
+Johnson, Richard A. 2018. <em>Miller &amp; Freund’s Probability and Statistics for Engineers</em>. 9.ª ed. Pearson.
+</div>
+<div id="ref-kerns2010" class="csl-entry" role="listitem">
+Kerns, G. Jay. 2010. <em>Introduction to Probability and Statistics Using R</em>. 1.ª ed.
+</div>
+<div id="ref-montgomery2018" class="csl-entry" role="listitem">
+Montgomery, Douglas C., y George C. Runger. 2018. <em>Applied Statistics and Probability for Engineers</em>. 7.ª ed. Wiley.
+</div>
+<div id="ref-walpole2012" class="csl-entry" role="listitem">
+Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Probabilidad y estadística para ingeniería y ciencias</em>. 9.ª ed. Pearson.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const path = window.location.pathname.split('/').pop();
+  const mapa = {
+    '01-incertidumbre-probabilidad.html': {titulo:'Interactivo del capítulo: frecuencia relativa',archivo:'interactivos/cap01-frecuencia-relativa.html',texto:'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'},
+    '02-espacios-eventos.html': {titulo:'Interactivo del capítulo: operaciones con eventos',archivo:'interactivos/cap02-eventos-venn.html',texto:'Explora visualmente unión, intersección, complementos y diferencia de eventos.'},
+    '03-conteo-probabilidad.html': {titulo:'Interactivo del capítulo: conteo, arreglos y combinaciones',archivo:'interactivos/cap03-conteo.html',texto:'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'},
+    '04-axiomas-probabilidad.html': {titulo:'Interactivo del capítulo: axiomas y regiones de probabilidad',archivo:'interactivos/cap04-axiomas.html',texto:'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'},
+    '05-condicional-independencia.html': {titulo:'Interactivo del capítulo: probabilidad condicional e independencia',archivo:'interactivos/cap05-condicional-independencia.html',texto:'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'},
+    '06-probabilidad-total-bayes.html': {titulo:'Interactivo del capítulo: teorema de Bayes y tasa base',archivo:'interactivos/cap06-bayes.html',texto:'Modifica la probabilidad previa, la sensibilidad y la tasa de falso positivo; observa cómo cambia la probabilidad posterior y las frecuencias esperadas.'},
+    '07-variable-aleatoria-cdf.html': {titulo:'Interactivo del capítulo: variable aleatoria y CDF',archivo:'interactivos/cap07-variable-aleatoria-cdf.html',texto:'Transforma resultados elementales en valores numéricos y observa cómo se construyen la distribución de X y F_X(x).'},
+    '08-variables-discretas-pmf.html': {titulo:'Interactivo del capítulo: PMF y CDF discreta',archivo:'interactivos/cap08-pmf-cdf.html',texto:'Modifica las masas de probabilidad y observa simultáneamente la PMF, la CDF y el tamaño de sus saltos.'}
+  };
+  const cfg = mapa[path];
+  if (!cfg) return;
+  const main = document.querySelector('main.content') || document.querySelector('main') || document.querySelector('#quarto-document-content');
+  if (!main || document.getElementById('interactivo-capitulo')) return;
+  const section = document.createElement('section');
+  section.id = 'interactivo-capitulo';
+  section.innerHTML = `<h2>${cfg.titulo}</h2><p>${cfg.texto}</p><div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;"><iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe></div><p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  main.appendChild(section);
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-variable-aleatoria-cdf.html" class="pagination-link" aria-label="Variable aleatoria y función de distribución acumulada">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Licencia CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

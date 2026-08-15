@@ -1220,6 +1220,466 @@
     ]
   },
   {
+    "objectID": "07-variable-aleatoria-cdf.html",
+    "href": "07-variable-aleatoria-cdf.html",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "",
+    "text": "7.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#objetivos-de-aprendizaje",
+    "href": "07-variable-aleatoria-cdf.html#objetivos-de-aprendizaje",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "",
+    "text": "interpretar una variable aleatoria como una función definida sobre el espacio muestral;\ndistinguir entre resultados del experimento y valores numéricos de una variable aleatoria;\nidentificar variables aleatorias discretas y continuas;\nconstruir y utilizar la función de distribución acumulada;\ninterpretar probabilidades mediante \\(F_X(x)=P(X\\le x)\\);\nrecuperar probabilidades de intervalos a partir de la función de distribución;\nrepresentar variables aleatorias y funciones de distribución con R;\nutilizar simulación para estudiar distribuciones empíricas;\nexplorar interactivamente cómo una variable aleatoria transforma resultados en valores numéricos.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#del-resultado-del-experimento-a-un-número",
+    "href": "07-variable-aleatoria-cdf.html#del-resultado-del-experimento-a-un-número",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.2 Del resultado del experimento a un número",
+    "text": "7.2 Del resultado del experimento a un número\nUn experimento aleatorio produce resultados en un espacio muestral \\(\\Omega\\). Sin embargo, en muchas aplicaciones no interesa conservar toda la descripción del resultado: necesitamos asociarle un valor numérico.\nUna variable aleatoria es una función\n\\[\nX:\\Omega\\longrightarrow\\mathbb R.\n\\]\nA cada resultado elemental \\(\\omega\\in\\Omega\\) le asigna un número real \\(X(\\omega)\\).\nLa palabra “variable” puede ser engañosa al principio. Una variable aleatoria no es un número que cambia caprichosamente: es una función perfectamente definida. Lo aleatorio proviene de que no sabemos qué \\(\\omega\\) ocurrirá.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#ejemplo-dos-lanzamientos-de-moneda",
+    "href": "07-variable-aleatoria-cdf.html#ejemplo-dos-lanzamientos-de-moneda",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.3 Ejemplo: dos lanzamientos de moneda",
+    "text": "7.3 Ejemplo: dos lanzamientos de moneda\nConsideremos\n\\[\n\\Omega=\\{CC,CS,SC,SS\\},\n\\]\ndonde \\(C\\) significa cara y \\(S\\) sello. Definamos\n\\[\nX=\\text{número de caras obtenidas}.\n\\]\nEntonces\n\\[\nX(CC)=2,\n\\]\n\\[\nX(CS)=X(SC)=1,\n\\]\ny\n\\[\nX(SS)=0.\n\\]\nLa variable aleatoria transforma cuatro resultados elementales en sólo tres valores posibles:\n\\[\n\\{0,1,2\\}.\n\\]\nSi la moneda es equilibrada,\n\\[\nP(X=0)=\\frac14,\n\\qquad\nP(X=1)=\\frac12,\n\\qquad\nP(X=2)=\\frac14.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#preimagen-de-un-evento-numérico",
+    "href": "07-variable-aleatoria-cdf.html#preimagen-de-un-evento-numérico",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.4 Preimagen de un evento numérico",
+    "text": "7.4 Preimagen de un evento numérico\nLa expresión\n\\[\n\\{X\\le 1\\}\n\\]\nrepresenta en realidad el conjunto de resultados elementales para los cuales la variable toma un valor menor o igual que 1:\n\\[\n\\{X\\le1\\}=\\{SS,CS,SC\\}.\n\\]\nPor eso podemos escribir\n\\[\nP(X\\le1)=\\frac34.\n\\]\nEsta conexión entre eventos en \\(\\Omega\\) e intervalos de números reales es central para toda la teoría de variables aleatorias.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#variables-discretas-y-continuas",
+    "href": "07-variable-aleatoria-cdf.html#variables-discretas-y-continuas",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.5 Variables discretas y continuas",
+    "text": "7.5 Variables discretas y continuas\n\nVariable aleatoria discreta\nUna variable es discreta cuando sus valores posibles forman un conjunto finito o numerable.\nEjemplos:\n\nnúmero de fallas en una máquina durante una semana;\nnúmero de paquetes perdidos en una transmisión;\nnúmero de pacientes que llegan a urgencias durante una hora;\nnúmero de caras en varios lanzamientos de moneda.\n\n\n\nVariable aleatoria continua\nUna variable es continua cuando puede tomar valores en intervalos de la recta real.\nEjemplos:\n\ntiempo hasta la falla de un componente;\nconcentración de ozono;\ntemperatura;\nresistencia eléctrica medida en un material.\n\nEn los capítulos siguientes estudiaremos por separado las distribuciones discretas y continuas.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#función-de-distribución-acumulada",
+    "href": "07-variable-aleatoria-cdf.html#función-de-distribución-acumulada",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.6 Función de distribución acumulada",
+    "text": "7.6 Función de distribución acumulada\nPara cualquier variable aleatoria \\(X\\), definimos su función de distribución acumulada por\n\\[\n\\boxed{\nF_X(x)=P(X\\le x)\n}\n\\]\npara todo \\(x\\in\\mathbb R\\).\nLa función \\(F_X\\) responde una pregunta muy concreta:\n\n¿qué probabilidad se ha acumulado hasta el valor \\(x\\)?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#cdf-del-ejemplo-de-las-dos-monedas",
+    "href": "07-variable-aleatoria-cdf.html#cdf-del-ejemplo-de-las-dos-monedas",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.7 CDF del ejemplo de las dos monedas",
+    "text": "7.7 CDF del ejemplo de las dos monedas\nPara \\(X=\\) número de caras en dos lanzamientos,\n\\[\nP(X=0)=\\frac14,\n\\qquad\nP(X=1)=\\frac12,\n\\qquad\nP(X=2)=\\frac14.\n\\]\nPor tanto,\n\\[\nF_X(x)=\n\\begin{cases}\n0, & x&lt;0,\\\\\n\\frac14, & 0\\le x&lt;1,\\\\\n\\frac34, & 1\\le x&lt;2,\\\\\n1, & x\\ge2.\n\\end{cases}\n\\]\nLa CDF de una variable discreta tiene forma escalonada. Cada salto corresponde a una probabilidad puntual.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#propiedades-fundamentales-de-la-cdf",
+    "href": "07-variable-aleatoria-cdf.html#propiedades-fundamentales-de-la-cdf",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.8 Propiedades fundamentales de la CDF",
+    "text": "7.8 Propiedades fundamentales de la CDF\nToda función de distribución acumulada satisface:\n\n\\(0\\le F_X(x)\\le1\\).\n\\(F_X(x)\\) es no decreciente.\n\n\n\\[\n\\lim_{x\\to-\\infty}F_X(x)=0.\n\\]\n\n\n\n\\[\n\\lim_{x\\to\\infty}F_X(x)=1.\n\\]\n\nEs continua por la derecha:\n\n\\[\n\\lim_{t\\downarrow x}F_X(t)=F_X(x).\n\\]\nEn una variable discreta, la magnitud del salto en \\(x\\) es precisamente\n\\[\nP(X=x)=F_X(x)-F_X(x^-),\n\\]\ndonde\n\\[\nF_X(x^-)=\\lim_{t\\uparrow x}F_X(t).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#probabilidades-de-intervalos-usando-la-cdf",
+    "href": "07-variable-aleatoria-cdf.html#probabilidades-de-intervalos-usando-la-cdf",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.9 Probabilidades de intervalos usando la CDF",
+    "text": "7.9 Probabilidades de intervalos usando la CDF\nLa CDF permite obtener muchas probabilidades sin volver al espacio muestral.\n\nIntervalo de la forma \\((a,b]\\)\n\\[\n\\boxed{\nP(a&lt;X\\le b)=F_X(b)-F_X(a)\n}\n\\]\n\n\nProbabilidad de exceder un valor\n\\[\nP(X&gt;x)=1-F_X(x).\n\\]\n\n\nProbabilidad de un punto\nEn general,\n\\[\nP(X=x)=F_X(x)-F_X(x^-).\n\\]\nPara una variable continua, este salto es cero en todos los puntos.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#ejemplo-de-ingeniería",
+    "href": "07-variable-aleatoria-cdf.html#ejemplo-de-ingeniería",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.10 Ejemplo de ingeniería",
+    "text": "7.10 Ejemplo de ingeniería\nSea \\(X\\) el número de paquetes perdidos en un bloque de transmisión y supongamos\n\\[\nP(X=0)=0.70,\n\\]\n\\[\nP(X=1)=0.20,\n\\]\n\\[\nP(X=2)=0.08,\n\\]\n\\[\nP(X=3)=0.02.\n\\]\nEntonces\n\\[\nF_X(0)=0.70,\n\\]\n\\[\nF_X(1)=0.90,\n\\]\n\\[\nF_X(2)=0.98,\n\\]\ny\n\\[\nF_X(3)=1.\n\\]\nLa probabilidad de perder más de un paquete es\n\\[\nP(X&gt;1)=1-F_X(1)=0.10.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#construcción-con-r",
+    "href": "07-variable-aleatoria-cdf.html#construcción-con-r",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.11 Construcción con R",
+    "text": "7.11 Construcción con R\nPodemos representar una distribución discreta mediante sus valores y probabilidades.\n\nx &lt;- 0:3\np &lt;- c(0.70, 0.20, 0.08, 0.02)\nF &lt;- cumsum(p)\n\ndata.frame(x = x, probabilidad = p, acumulada = F)\n\n  x probabilidad acumulada\n1 0         0.70      0.70\n2 1         0.20      0.90\n3 2         0.08      0.98\n4 3         0.02      1.00\n\n\nLa función escalonada puede graficarse con:\n\nplot(x, F, type = \"s\",\n     ylim = c(0, 1),\n     xlab = \"x\",\n     ylab = \"F_X(x)\")\npoints(x, F, pch = 19)",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#simulación-y-cdf-empírica",
+    "href": "07-variable-aleatoria-cdf.html#simulación-y-cdf-empírica",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.12 Simulación y CDF empírica",
+    "text": "7.12 Simulación y CDF empírica\nLa función ecdf() de R construye una función de distribución empírica a partir de una muestra.\n\nset.seed(2026)\nvalores &lt;- sample(\n  0:3,\n  size = 5000,\n  replace = TRUE,\n  prob = c(0.70, 0.20, 0.08, 0.02)\n)\n\nF_emp &lt;- ecdf(valores)\nplot(F_emp,\n     xlab = \"Número de paquetes perdidos\",\n     ylab = \"Frecuencia acumulada\")\n\n\n\n\n\n\n\n\nAl aumentar el tamaño de la simulación, la CDF empírica se aproxima a la CDF teórica.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#variable-aleatoria-como-transformación",
+    "href": "07-variable-aleatoria-cdf.html#variable-aleatoria-como-transformación",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.13 Variable aleatoria como transformación",
+    "text": "7.13 Variable aleatoria como transformación\nEn aplicaciones reales, una variable aleatoria resume aspectos relevantes de un resultado complejo.\nPor ejemplo, el resultado de un sistema de sensores podría ser un vector completo de mediciones. Podemos definir\n\\[\nX(\\omega)=\\text{máxima temperatura registrada},\n\\]\no\n\\[\nY(\\omega)=\\text{número de sensores que excedieron un umbral}.\n\\]\nDos variables diferentes pueden construirse sobre el mismo experimento y responder preguntas distintas.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#interactivo-del-capítulo",
+    "href": "07-variable-aleatoria-cdf.html#interactivo-del-capítulo",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.14 Interactivo del capítulo",
+    "text": "7.14 Interactivo del capítulo\nLa edición web incluye un recurso interactivo basado en tres lanzamientos de moneda. El estudiante puede elegir una regla de transformación, por ejemplo:\n\nnúmero de caras;\nnúmero de cambios entre resultados consecutivos;\nindicador de que aparece al menos una cara.\n\nEl recurso muestra:\n\nlos resultados del espacio muestral;\nel valor \\(X(\\omega)\\) asignado a cada resultado;\nla distribución de probabilidades de \\(X\\);\nla función acumulada \\(F_X(x)\\).\n\nAsí se observa directamente que una variable aleatoria es una función que agrupa resultados y que la CDF acumula probabilidades.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#actividad-con-geogebra",
+    "href": "07-variable-aleatoria-cdf.html#actividad-con-geogebra",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.15 Actividad con GeoGebra",
+    "text": "7.15 Actividad con GeoGebra\nRepresenta en una tabla los valores posibles \\(x_1&lt;\\cdots&lt;x_m\\) y sus probabilidades \\(p_i\\). Construye los acumulados\n\\[\nF_i=\\sum_{j=1}^{i}p_j.\n\\]\nDespués representa la función escalonada que mantiene el valor \\(F_i\\) desde \\(x_i\\) hasta antes de \\(x_{i+1}\\).\nUtiliza deslizadores para modificar las probabilidades \\(p_i\\) manteniendo\n\\[\n\\sum_i p_i=1.\n\\]\nObserva cómo cambian simultáneamente la distribución puntual y la CDF.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#materiales-complementarios-del-capítulo",
+    "href": "07-variable-aleatoria-cdf.html#materiales-complementarios-del-capítulo",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.16 Materiales complementarios del capítulo",
+    "text": "7.16 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nExperimentar con transformaciones y CDF mediante código ejecutable.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir los ejemplos y simulaciones del capítulo en R/RStudio.\n\n\nInteractivo\nHTML/GeoGebra\nIntegrado en la edición web\nExplorar visualmente la transformación \\(\\omega\\mapsto X(\\omega)\\) y la CDF.\n\n\nPresentación\nPDF / PPT\nPróximamente\nMaterial de clase; se incorporará cuando estén disponibles los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual del capítulo.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de conceptos y fórmulas principales.\n\n\n\nLos cuadernos de R acompañan cada capítulo para que los ejemplos puedan reproducirse, modificarse y extenderse localmente en R/RStudio. Los cuadernos de Google Colab permiten trabajar desde el navegador sin preparar previamente el entorno local.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#errores-frecuentes",
+    "href": "07-variable-aleatoria-cdf.html#errores-frecuentes",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.17 Errores frecuentes",
+    "text": "7.17 Errores frecuentes\n\nConfundir el resultado \\(\\omega\\) con el número \\(X(\\omega)\\).\nPensar que una variable aleatoria debe tomar valores diferentes para todos los resultados.\nConfundir \\(P(X=x)\\) con \\(F_X(x)\\).\nOlvidar que \\(F_X(x)\\) utiliza \\(X\\le x\\), no \\(X&lt;x\\).\nDibujar una CDF decreciente.\nSuponer que toda CDF debe ser continua.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#resumen",
+    "href": "07-variable-aleatoria-cdf.html#resumen",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.18 Resumen",
+    "text": "7.18 Resumen\nUna variable aleatoria es una función\n\\[\nX:\\Omega\\to\\mathbb R.\n\\]\nSu función de distribución acumulada es\n\\[\nF_X(x)=P(X\\le x).\n\\]\nLa CDF existe para cualquier variable aleatoria, discreta o continua, y permite obtener probabilidades de intervalos. En los próximos capítulos estudiaremos las funciones específicas que describen distribuciones discretas y continuas.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#ejercicios",
+    "href": "07-variable-aleatoria-cdf.html#ejercicios",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.19 Ejercicios",
+    "text": "7.19 Ejercicios\n\nPara tres lanzamientos de moneda, define \\(X=\\) número de caras. Construye la tabla de valores posibles y probabilidades.\nPara la variable del ejercicio anterior, escribe explícitamente \\(F_X(x)\\).\nCalcula \\(P(1&lt;X\\le3)\\) utilizando la CDF.\nSea \\(X\\) el número de fallas de una unidad con probabilidades \\(0.55,0.30,0.10,0.05\\) para \\(x=0,1,2,3\\). Construye su CDF.\nCon la distribución anterior calcula \\(P(X&gt;1)\\) y \\(P(X\\le2)\\).\nImplementa en R una función que reciba un vector de probabilidades y devuelva sus acumulados.\nSimula 20 000 observaciones de la distribución del ejercicio 4 y compara la CDF empírica con la teórica.\nPropón dos variables aleatorias diferentes definidas sobre el resultado de dos dados y explica qué información resume cada una.\n¿Puede una variable aleatoria asignar el mismo valor a varios resultados? Explica con un ejemplo.\nReto ★. Demuestra, usando propiedades de probabilidad, que toda CDF es no decreciente.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "07-variable-aleatoria-cdf.html#referencias-del-capítulo",
+    "href": "07-variable-aleatoria-cdf.html#referencias-del-capítulo",
+    "title": "7  Variable aleatoria y función de distribución acumulada",
+    "section": "7.20 Referencias del capítulo",
+    "text": "7.20 Referencias del capítulo\nEl concepto de variable aleatoria y función de distribución acumulada sigue el tratamiento estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). El código y las simulaciones son originales y se desarrollan en el espíritu computacional de Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Variable aleatoria y función de distribución acumulada</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html",
+    "href": "08-variables-discretas-pmf.html",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "",
+    "text": "8.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#objetivos-de-aprendizaje",
+    "href": "08-variables-discretas-pmf.html#objetivos-de-aprendizaje",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "",
+    "text": "reconocer cuándo una variable aleatoria es discreta;\nidentificar su soporte o conjunto de valores posibles;\nconstruir una función de masa de probabilidad;\nverificar que una función propuesta puede ser una PMF válida;\ncalcular probabilidades mediante sumas de masas;\nrelacionar la PMF con la función de distribución acumulada;\nconstruir tablas y gráficas de distribuciones discretas;\nutilizar R para calcular, representar y simular variables discretas;\nexplorar interactivamente cómo cambian la PMF y la CDF al modificar probabilidades.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#de-la-variable-aleatoria-a-su-distribución",
+    "href": "08-variables-discretas-pmf.html#de-la-variable-aleatoria-a-su-distribución",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.2 De la variable aleatoria a su distribución",
+    "text": "8.2 De la variable aleatoria a su distribución\nEn el capítulo anterior introdujimos una variable aleatoria como una función\n\\[\nX:\\Omega\\to\\mathbb R.\n\\]\nAhora nos concentraremos en el caso en que \\(X\\) sólo puede tomar valores aislados: por ejemplo,\n\\[\n0,1,2,3,\n\\]\no bien\n\\[\n0,1,2,\\ldots\n\\]\nEste tipo de variable aparece de manera natural cuando contamos objetos, fallas, llamadas, defectos, éxitos o eventos.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#variable-aleatoria-discreta",
+    "href": "08-variables-discretas-pmf.html#variable-aleatoria-discreta",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.3 Variable aleatoria discreta",
+    "text": "8.3 Variable aleatoria discreta\nUna variable aleatoria \\(X\\) es discreta cuando su conjunto de valores posibles es finito o infinito numerable.\nEjemplos:\n\nnúmero de piezas defectuosas en una muestra de 10;\nnúmero de paquetes perdidos durante una hora;\nnúmero de intentos necesarios hasta lograr una transmisión correcta;\nnúmero de alarmas activadas en una red de sensores;\nnúmero de pacientes que llegan a un servicio durante un intervalo.\n\nEl conjunto de valores posibles de \\(X\\) se denomina soporte y puede escribirse como\n\\[\n\\mathcal S_X=\\{x:P(X=x)&gt;0\\}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#función-de-masa-de-probabilidad",
+    "href": "08-variables-discretas-pmf.html#función-de-masa-de-probabilidad",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.4 Función de masa de probabilidad",
+    "text": "8.4 Función de masa de probabilidad\nPara una variable aleatoria discreta, definimos la función de masa de probabilidad o PMF por\n\\[\n\\boxed{p_X(x)=P(X=x)}.\n\\]\nPara que una función sea una PMF válida debe satisfacer:\n\\[\np_X(x)\\geq0\n\\]\npara todo \\(x\\), y\n\\[\n\\sum_{x\\in\\mathcal S_X}p_X(x)=1.\n\\]\nEstas dos condiciones expresan exactamente los axiomas fundamentales de la probabilidad aplicados a los valores de una variable discreta.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#ejemplo-tres-lanzamientos-de-moneda",
+    "href": "08-variables-discretas-pmf.html#ejemplo-tres-lanzamientos-de-moneda",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.5 Ejemplo: tres lanzamientos de moneda",
+    "text": "8.5 Ejemplo: tres lanzamientos de moneda\nSea \\(X\\) el número de caras obtenidas al lanzar tres veces una moneda equilibrada.\nEl soporte es\n\\[\n\\mathcal S_X=\\{0,1,2,3\\}.\n\\]\nLos ocho resultados elementales son equiprobables. Al agruparlos según el valor de \\(X\\) obtenemos:\n\n\n\n\\(x\\)\nResultados con \\(X=x\\)\n\\(p_X(x)\\)\n\n\n\n\n0\nXXX\n\\(1/8\\)\n\n\n1\nCXX, XCX, XXC\n\\(3/8\\)\n\n\n2\nCCX, CXC, XCC\n\\(3/8\\)\n\n\n3\nCCC\n\\(1/8\\)\n\n\n\nPor tanto,\n\\[\np_X(0)=\\frac18,\n\\quad\np_X(1)=\\frac38,\n\\quad\np_X(2)=\\frac38,\n\\quad\np_X(3)=\\frac18.\n\\]\nY comprobamos\n\\[\n\\frac18+\\frac38+\\frac38+\\frac18=1.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#calcular-probabilidades-con-una-pmf",
+    "href": "08-variables-discretas-pmf.html#calcular-probabilidades-con-una-pmf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.6 Calcular probabilidades con una PMF",
+    "text": "8.6 Calcular probabilidades con una PMF\nSi queremos la probabilidad de que \\(X\\) pertenezca a un conjunto \\(A\\), sumamos las masas correspondientes:\n\\[\nP(X\\in A)=\\sum_{x\\in A}p_X(x).\n\\]\n\nEjemplo\nPara la variable anterior,\n\\[\nP(X\\geq2)=p_X(2)+p_X(3)\n=\\frac38+\\frac18\n=\\frac12.\n\\]\nTambién\n\\[\nP(1\\leq X\\leq2)=p_X(1)+p_X(2)=\\frac34.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#construcción-de-una-distribución-a-partir-de-una-constante",
+    "href": "08-variables-discretas-pmf.html#construcción-de-una-distribución-a-partir-de-una-constante",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.7 Construcción de una distribución a partir de una constante",
+    "text": "8.7 Construcción de una distribución a partir de una constante\nSupongamos que una variable discreta tiene soporte\n\\[\n\\{1,2,3,4\\}\n\\]\ny PMF\n\\[\np_X(x)=cx,\n\\qquad x=1,2,3,4.\n\\]\nPara determinar \\(c\\), utilizamos la condición de normalización:\n\\[\n\\sum_{x=1}^{4}cx=1.\n\\]\nEntonces\n\\[\nc(1+2+3+4)=1,\n\\]\n\\[\n10c=1,\n\\]\npor lo que\n\\[\n\\boxed{c=0.1}.\n\\]\nLa distribución queda\n\\[\np_X(1)=0.1,\n\\quad\np_X(2)=0.2,\n\\quad\np_X(3)=0.3,\n\\quad\np_X(4)=0.4.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#probabilidades-mediante-complemento",
+    "href": "08-variables-discretas-pmf.html#probabilidades-mediante-complemento",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.8 Probabilidades mediante complemento",
+    "text": "8.8 Probabilidades mediante complemento\nAunque las probabilidades discretas se calculan sumando masas, a veces resulta más fácil utilizar el complemento.\nPor ejemplo,\n\\[\nP(X\\geq1)=1-P(X=0).\n\\]\nSi \\(X\\) representa el número de fallas en un periodo, esta forma es muy útil para calcular la probabilidad de al menos una falla.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#representación-gráfica-de-la-pmf",
+    "href": "08-variables-discretas-pmf.html#representación-gráfica-de-la-pmf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.9 Representación gráfica de la PMF",
+    "text": "8.9 Representación gráfica de la PMF\nUna PMF se representa mediante barras o segmentos verticales en los valores posibles de \\(X\\).\nLa altura en \\(x\\) es\n\\[\np_X(x).\n\\]\nA diferencia de una densidad continua, aquí la probabilidad está concentrada directamente en puntos aislados.\n\nR: gráfica de una PMF\n\nx &lt;- 0:3\np &lt;- c(1, 3, 3, 1) / 8\n\nplot(x, p,\n     type = \"h\",\n     lwd = 5,\n     ylim = c(0, 0.45),\n     xlab = \"x\",\n     ylab = \"p_X(x)\")\npoints(x, p, pch = 19)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#relación-entre-pmf-y-cdf",
+    "href": "08-variables-discretas-pmf.html#relación-entre-pmf-y-cdf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.10 Relación entre PMF y CDF",
+    "text": "8.10 Relación entre PMF y CDF\nLa función de distribución acumulada es\n\\[\nF_X(x)=P(X\\leq x).\n\\]\nSi \\(X\\) es discreta,\n\\[\n\\boxed{\nF_X(x)=\\sum_{t\\leq x}p_X(t)\n}\n\\]\nLa CDF es, por tanto, la suma acumulada de las masas.\nPara el ejemplo de tres monedas:\n\\[\nF_X(x)=\n\\begin{cases}\n0, & x&lt;0,\\\\\n1/8, & 0\\leq x&lt;1,\\\\\n4/8, & 1\\leq x&lt;2,\\\\\n7/8, & 2\\leq x&lt;3,\\\\\n1, & x\\geq3.\n\\end{cases}\n\\]\nLa CDF de una variable discreta tiene forma escalonada. Cada salto en \\(x\\) tiene tamaño\n\\[\np_X(x).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#recuperar-la-pmf-desde-la-cdf",
+    "href": "08-variables-discretas-pmf.html#recuperar-la-pmf-desde-la-cdf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.11 Recuperar la PMF desde la CDF",
+    "text": "8.11 Recuperar la PMF desde la CDF\nEn una variable discreta,\n\\[\n\\boxed{\np_X(x)=F_X(x)-F_X(x^-)\n}\n\\]\ndonde \\(F_X(x^-)\\) representa el valor límite de la CDF inmediatamente antes de \\(x\\).\nEn términos intuitivos, la masa puntual es exactamente el tamaño del salto de la CDF.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#ejemplo-de-ingeniería-número-de-sensores-activos",
+    "href": "08-variables-discretas-pmf.html#ejemplo-de-ingeniería-número-de-sensores-activos",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.12 Ejemplo de ingeniería: número de sensores activos",
+    "text": "8.12 Ejemplo de ingeniería: número de sensores activos\nUn sistema contiene tres sensores. Después de una prueba se registra\n\\[\nX=\\text{número de sensores que responden correctamente}.\n\\]\nSupongamos la siguiente distribución experimental:\n\n\n\n\\(x\\)\n0\n1\n2\n3\n\n\n\n\n\\(p_X(x)\\)\n0.02\n0.08\n0.25\n0.65\n\n\n\nLa probabilidad de que funcionen al menos dos sensores es\n\\[\nP(X\\geq2)=0.25+0.65=0.90.\n\\]\nLa probabilidad de que no funcionen los tres es\n\\[\nP(X&lt;3)=1-0.65=0.35.\n\\]\nLa distribución completa contiene mucho más información que una sola probabilidad aislada.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#ejemplo-número-de-retransmisiones",
+    "href": "08-variables-discretas-pmf.html#ejemplo-número-de-retransmisiones",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.13 Ejemplo: número de retransmisiones",
+    "text": "8.13 Ejemplo: número de retransmisiones\nSupongamos que \\(X\\) es el número de retransmisiones requeridas por un paquete, con soporte\n\\[\n\\{0,1,2,3\\}\n\\]\ny PMF\n\\[\n(0.70,0.20,0.08,0.02).\n\\]\nEntonces\n\\[\nP(X\\leq1)=0.70+0.20=0.90,\n\\]\nmientras que\n\\[\nP(X\\geq2)=0.08+0.02=0.10.\n\\]\nLa PMF permite cuantificar directamente el comportamiento operativo del sistema.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#construcción-y-cálculo-en-r",
+    "href": "08-variables-discretas-pmf.html#construcción-y-cálculo-en-r",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.14 Construcción y cálculo en R",
+    "text": "8.14 Construcción y cálculo en R\n\nx &lt;- 0:3\np &lt;- c(0.70, 0.20, 0.08, 0.02)\n\nsum(p)\n\n[1] 1\n\np[p &gt;= 0]\n\n[1] 0.70 0.20 0.08 0.02\n\nP_menor_igual_1 &lt;- sum(p[x &lt;= 1])\nP_mayor_igual_2 &lt;- sum(p[x &gt;= 2])\n\nc(P_X_le_1 = P_menor_igual_1,\n  P_X_ge_2 = P_mayor_igual_2)\n\nP_X_le_1 P_X_ge_2 \n     0.9      0.1",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#cdf-a-partir-de-una-pmf-en-r",
+    "href": "08-variables-discretas-pmf.html#cdf-a-partir-de-una-pmf-en-r",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.15 CDF a partir de una PMF en R",
+    "text": "8.15 CDF a partir de una PMF en R\n\nF &lt;- cumsum(p)\n\ndata.frame(\n  x = x,\n  pmf = p,\n  cdf = F\n)\n\n  x  pmf  cdf\n1 0 0.70 0.70\n2 1 0.20 0.90\n3 2 0.08 0.98\n4 3 0.02 1.00\n\n\nPodemos representar la CDF con una gráfica escalonada:\n\nplot(x, F,\n     type = \"s\",\n     ylim = c(0, 1.05),\n     xlab = \"x\",\n     ylab = \"F_X(x)\")\npoints(x, F, pch = 19)",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#simulación-desde-una-pmf",
+    "href": "08-variables-discretas-pmf.html#simulación-desde-una-pmf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.16 Simulación desde una PMF",
+    "text": "8.16 Simulación desde una PMF\nEn R podemos generar observaciones de una variable discreta mediante sample():\n\nset.seed(2026)\nn &lt;- 20000\n\nmuestra &lt;- sample(\n  x,\n  size = n,\n  replace = TRUE,\n  prob = p\n)\n\ntabla &lt;- prop.table(table(muestra))\ntabla\n\nmuestra\n      0       1       2       3 \n0.70030 0.19845 0.08065 0.02060 \n\n\nLas frecuencias relativas se aproximan a las probabilidades teóricas cuando el tamaño de la simulación es grande.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#comparación-entre-distribución-teórica-y-empírica",
+    "href": "08-variables-discretas-pmf.html#comparación-entre-distribución-teórica-y-empírica",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.17 Comparación entre distribución teórica y empírica",
+    "text": "8.17 Comparación entre distribución teórica y empírica\n\nteorica &lt;- p\nempirica &lt;- as.numeric(tabla[as.character(x)])\n\ncomparacion &lt;- data.frame(\n  x = x,\n  teorica = teorica,\n  empirica = empirica\n)\ncomparacion\n\n  x teorica empirica\n1 0    0.70  0.70030\n2 1    0.20  0.19845\n3 2    0.08  0.08065\n4 3    0.02  0.02060\n\n\nEsta comparación ayuda a distinguir entre:\n\nuna distribución teórica, definida por el modelo;\nuna distribución empírica, obtenida a partir de observaciones.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#interactivo-del-capítulo",
+    "href": "08-variables-discretas-pmf.html#interactivo-del-capítulo",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.18 Interactivo del capítulo",
+    "text": "8.18 Interactivo del capítulo\nLa edición web incluye un recurso que permite modificar las probabilidades asociadas a cuatro valores discretos.\nEl interactivo:\n\nnormaliza automáticamente las masas para que sumen 1;\nmuestra la PMF mediante barras;\nconstruye la CDF acumulada;\npermite seleccionar un valor \\(x\\) y leer \\(p_X(x)\\) y \\(F_X(x)\\);\nmuestra visualmente que el tamaño de cada salto de la CDF coincide con la masa puntual.\n\nEsta relación entre PMF y CDF será central en los siguientes capítulos.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#actividad-con-geogebra",
+    "href": "08-variables-discretas-pmf.html#actividad-con-geogebra",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.19 Actividad con GeoGebra",
+    "text": "8.19 Actividad con GeoGebra\nConstruye cuatro deslizadores positivos \\(w_0,w_1,w_2,w_3\\) y define\n\\[\np_i=\\frac{w_i}{w_0+w_1+w_2+w_3}.\n\\]\nRepresenta las barras\n\\[\n(0,p_0),(1,p_1),(2,p_2),(3,p_3)\n\\]\ny calcula las acumuladas\n\\[\nF_0=p_0,\n\\]\n\\[\nF_1=p_0+p_1,\n\\]\n\\[\nF_2=p_0+p_1+p_2,\n\\]\n\\[\nF_3=1.\n\\]\nMueve los deslizadores y observa simultáneamente cómo cambia la distribución puntual y su acumulación.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#validación-de-una-pmf",
+    "href": "08-variables-discretas-pmf.html#validación-de-una-pmf",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.20 Validación de una PMF",
+    "text": "8.20 Validación de una PMF\nAnte una función propuesta \\(p(x)\\), verifica siempre:\n\nque ningún valor sea negativo;\nque la suma de todas las masas sea 1;\nque el soporte esté claramente identificado.\n\n\nEjemplo de función inválida\nSupongamos\n\\[\np_X(0)=0.20,\n\\quad\np_X(1)=0.55,\n\\quad\np_X(2)=0.40.\n\\]\nAunque todos los valores son no negativos,\n\\[\n0.20+0.55+0.40=1.15,\n\\]\npor lo que no puede ser una distribución de probabilidad válida.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#errores-frecuentes",
+    "href": "08-variables-discretas-pmf.html#errores-frecuentes",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.21 Errores frecuentes",
+    "text": "8.21 Errores frecuentes\n\nConfundir \\(p_X(x)\\) con \\(F_X(x)\\).\nOlvidar que las masas deben sumar 1.\nAsignar probabilidad positiva a valores fuera del soporte.\nInterpretar la altura de una PMF como densidad continua.\nSumar valores de \\(x\\) en lugar de sumar probabilidades.\nUtilizar una gráfica de barras sin distinguir entre frecuencia empírica y probabilidad teórica.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#resumen",
+    "href": "08-variables-discretas-pmf.html#resumen",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.22 Resumen",
+    "text": "8.22 Resumen\nUna variable aleatoria discreta toma valores en un conjunto finito o numerable. Su PMF es\n\\[\np_X(x)=P(X=x),\n\\]\ncon\n\\[\np_X(x)\\geq0,\n\\qquad\n\\sum_xp_X(x)=1.\n\\]\nLas probabilidades de eventos se obtienen sumando masas:\n\\[\nP(X\\in A)=\\sum_{x\\in A}p_X(x).\n\\]\nLa CDF se obtiene acumulando:\n\\[\nF_X(x)=\\sum_{t\\leq x}p_X(t).\n\\]\nY la masa puntual coincide con el tamaño del salto de la CDF.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#ejercicios",
+    "href": "08-variables-discretas-pmf.html#ejercicios",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.23 Ejercicios",
+    "text": "8.23 Ejercicios\n\nUna variable tiene soporte \\(\\{0,1,2,3\\}\\) y PMF \\((0.10,0.25,0.40,0.25)\\). Calcula \\(P(X\\geq2)\\), \\(P(X&lt;2)\\) y \\(P(1\\leq X\\leq3)\\).\nDecide si \\((0.15,0.30,0.35,0.25)\\) define una PMF válida. Justifica.\nSea \\(p_X(x)=c(x+1)\\) para \\(x=0,1,2,3\\). Determina \\(c\\) y calcula \\(P(X\\geq2)\\).\nConstruye la CDF completa del ejercicio anterior.\nEl número de sensores activos tiene distribución \\((0.01,0.04,0.20,0.75)\\) para \\(x=0,1,2,3\\). Calcula la probabilidad de que funcionen al menos dos.\nRepresenta en R la PMF y CDF del ejercicio 5.\nSimula 50 000 valores de la distribución del ejercicio 5 y compara las frecuencias empíricas con las probabilidades teóricas.\nUna CDF presenta saltos de tamaños 0.20, 0.35 y 0.45 en \\(x=1,2,5\\). Escribe la PMF correspondiente.\nExplica por qué una variable discreta puede tener soporte infinito numerable aunque la suma total de probabilidades deba ser 1.\nReto ★. Supón que \\(X\\) tiene soporte \\(\\{1,2,3,\\ldots\\}\\) y\n\n\\[\np_X(x)=\\frac{c}{2^x}.\n\\]\nDetermina \\(c\\) y calcula \\(P(X\\geq4)\\).",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
+    "objectID": "08-variables-discretas-pmf.html#referencias-del-capítulo",
+    "href": "08-variables-discretas-pmf.html#referencias-del-capítulo",
+    "title": "8  Variables aleatorias discretas y función de masa de probabilidad",
+    "section": "8.24 Referencias del capítulo",
+    "text": "8.24 Referencias del capítulo\nEl tratamiento de variables aleatorias discretas, funciones de masa y funciones de distribución acumulada sigue la organización estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables aleatorias discretas y función de masa de probabilidad</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "Referencias",
