@@ -1,0 +1,17 @@
+---
+title: "Capítulo 6. Probabilidad total y Bayes"
+output: html_notebook
+---
+
+```{r}
+prior <- c(.50,.30,.20)
+likelihood <- c(.01,.03,.05)
+p_evidencia <- sum(prior*likelihood)
+posterior <- prior*likelihood/p_evidencia
+c(P_evidencia=p_evidencia, posterior)
+```
+
+```{r}
+bayes_discreto <- function(prior, likelihood){n <- prior*likelihood; n/sum(n)}
+bayes_discreto(c(.99,.01), c(.10,.95))
+```
