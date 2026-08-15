@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Axiomas y regiones de probabilidad</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;padding:18px;background:#f8fafc;color:#172033}.panel{max-width:960px;margin:auto;background:white;border:1px solid #dbe3ec;border-radius:12px;padding:18px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px}.bar{height:24px;border-radius:6px;overflow:hidden;display:flex;border:1px solid #cbd5e1;margin:14px 0}.r1{background:#60a5fa}.r2{background:#2dd4bf}.r3{background:#f59e0b}.r4{background:#cbd5e1}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}.stat{border:1px solid #e2e8f0;border-radius:9px;padding:10px}.warn{color:#b91c1c;font-weight:600}.ok{color:#166534;font-weight:600}input{width:100%}small{color:#64748b}</style>
+</head>
+<body><div class="panel">
+<h2>Axiomas y regiones de probabilidad</h2>
+<p>Modifica <b>P(A)</b>, <b>P(B)</b> y <b>P(A∩B)</b>. El simulador verifica automáticamente si la asignación es coherente.</p>
+<div class="controls">
+<div class="box"><label>P(A): <span id="aVal"></span></label><input id="a" type="range" min="0" max="1" step="0.01" value="0.55"></div>
+<div class="box"><label>P(B): <span id="bVal"></span></label><input id="b" type="range" min="0" max="1" step="0.01" value="0.40"></div>
+<div class="box"><label>P(A∩B): <span id="abVal"></span></label><input id="ab" type="range" min="0" max="1" step="0.01" value="0.20"></div>
+</div>
+<p id="estado"></p>
+<div class="bar" title="Partición en cuatro regiones">
+<div id="soloA" class="r1"></div><div id="ambos" class="r2"></div><div id="soloB" class="r3"></div><div id="ninguno" class="r4"></div>
+</div>
+<small>Barra conceptual: sólo A | A∩B | sólo B | ninguno.</small>
+<div class="stats">
+<div class="stat">P(A∪B)<br><b id="union"></b></div>
+<div class="stat">P(ninguno)<br><b id="none"></b></div>
+<div class="stat">P(exactamente uno)<br><b id="xor"></b></div>
+<div class="stat">Cota inferior de P(A∩B)<br><b id="lo"></b></div>
+<div class="stat">Cota superior de P(A∩B)<br><b id="hi"></b></div>
+</div>
+</div>
+<script>
+const a=document.getElementById('a'),b=document.getElementById('b'),ab=document.getElementById('ab');
+function pct(x){return (100*Math.max(0,x)).toFixed(0)+'%'}
+function f(){let A=+a.value,B=+b.value,I=+ab.value,lo=Math.max(0,A+B-1),hi=Math.min(A,B),valid=I>=lo-1e-9&&I<=hi+1e-9;
+aVal.textContent=A.toFixed(2);bVal.textContent=B.toFixed(2);abVal.textContent=I.toFixed(2);document.getElementById('lo').textContent=lo.toFixed(2);document.getElementById('hi').textContent=hi.toFixed(2);
+let U=A+B-I,N=1-U,X=A+B-2*I;document.getElementById('union').textContent=valid?U.toFixed(2):'—';document.getElementById('none').textContent=valid?N.toFixed(2):'—';document.getElementById('xor').textContent=valid?X.toFixed(2):'—';
+const e=document.getElementById('estado');e.className=valid?'ok':'warn';e.textContent=valid?'Asignación coherente con los axiomas.':'Asignación imposible: P(A∩B) debe estar entre '+lo.toFixed(2)+' y '+hi.toFixed(2)+'.';
+const vals=valid?[A-I,I,B-I,N]:[0,0,0,1];['soloA','ambos','soloB','ninguno'].forEach((id,i)=>document.getElementById(id).style.width=pct(vals[i]));}
+[a,b,ab].forEach(x=>x.addEventListener('input',f));f();
+</script></body></html>
