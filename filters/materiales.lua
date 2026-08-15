@@ -10,13 +10,30 @@ local capitulos = {
   ["variables aleatorias continuas y función de densidad"]={colab="09-variables-continuas-densidad-colab.ipynb",r="09-variables-continuas-densidad.Rmd",interactivo="cap09-densidad-area.html"}
 }
 
+local function clean(s)
+  if not s then return nil end
+  return pandoc.utils.stringify(s):lower():gsub("^%s+", ""):gsub("%s+$", "")
+end
+
 local function chapter_title(doc)
+  local mt = clean(doc.meta and doc.meta.title)
+  if mt and capitulos[mt] then return mt end
   for _, b in ipairs(doc.blocks) do
     if b.t == "Header" and b.level == 1 then
-      return pandoc.utils.stringify(b.content):lower()
+      local ht = clean(b.content)
+      if ht and capitulos[ht] then return ht end
     end
   end
-  return nil
+  return mt
+end
+
+local function already_has_materials(doc)
+  for _, b in ipairs(doc.blocks) do
+    if b.t == "Header" and clean(b.content) == "materiales complementarios del capítulo" then
+      return true
+    end
+  end
+  return false
 end
 
 local function material_blocks(cfg)
@@ -40,14 +57,16 @@ Los **cuadernos de R** acompañan cada capítulo para reproducir, modificar y ex
 end
 
 function Pandoc(doc)
+  if already_has_materials(doc) then return doc end
   local titulo = chapter_title(doc)
   local cfg = titulo and capitulos[titulo] or nil
   if not cfg then return doc end
+
   local extra=material_blocks(cfg)
   local nuevos={}
   local insertado=false
   for _,b in ipairs(doc.blocks) do
-    if not insertado and b.t=="Header" and pandoc.utils.stringify(b.content):lower():match("referencias del capítulo") then
+    if not insertado and b.t=="Header" and clean(b.content)=="referencias del capítulo" then
       for _,x in ipairs(extra) do table.insert(nuevos,x) end
       insertado=true
     end
