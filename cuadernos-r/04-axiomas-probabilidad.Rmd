@@ -1,0 +1,15 @@
+---
+title: "Capítulo 4. Axiomas y propiedades de la probabilidad"
+output: html_notebook
+---
+
+```{r}
+pA <- .55; pB <- .40; pAB <- .20
+c(union=pA+pB-pAB, ninguno=1-(pA+pB-pAB), exactamente_uno=pA+pB-2*pAB)
+```
+
+```{r}
+inferior <- max(0,pA+pB-1)
+superior <- min(pA,pB)
+c(inferior=inferior, superior=superior, valida=pAB>=inferior && pAB<=superior)
+```
