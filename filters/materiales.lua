@@ -6,7 +6,8 @@ local capitulos = {
   ["05-condicional-independencia.qmd"]={colab="05-condicional-independencia-colab.ipynb",r="05-condicional-independencia.Rmd",interactivo="cap05-condicional-independencia.html"},
   ["06-probabilidad-total-bayes.qmd"]={colab="06-probabilidad-total-bayes-colab.ipynb",r="06-probabilidad-total-bayes.Rmd",interactivo="cap06-bayes.html"},
   ["07-variable-aleatoria-cdf.qmd"]={colab="07-variable-aleatoria-cdf-colab.ipynb",r="07-variable-aleatoria-cdf.Rmd",interactivo="cap07-variable-aleatoria-cdf.html"},
-  ["08-variables-discretas-pmf.qmd"]={colab="08-variables-discretas-pmf-colab.ipynb",r="08-variables-discretas-pmf.Rmd",interactivo="cap08-pmf-cdf.html"}
+  ["08-variables-discretas-pmf.qmd"]={colab="08-variables-discretas-pmf-colab.ipynb",r="08-variables-discretas-pmf.Rmd",interactivo="cap08-pmf-cdf.html"},
+  ["09-variables-continuas-densidad.qmd"]={colab="09-variables-continuas-densidad-colab.ipynb",r="09-variables-continuas-densidad.Rmd",interactivo="cap09-densidad-area.html"}
 }
 local function basename(path) return path:match("([^/\\]+)$") or path end
 local function material_blocks(cfg)
