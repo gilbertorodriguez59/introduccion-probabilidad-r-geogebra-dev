@@ -750,6 +750,246 @@
     ]
   },
   {
+    "objectID": "05-condicional-independencia.html",
+    "href": "05-condicional-independencia.html",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "",
+    "text": "5.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#objetivos-de-aprendizaje",
+    "href": "05-condicional-independencia.html#objetivos-de-aprendizaje",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "",
+    "text": "interpretar una probabilidad condicional como una actualización del espacio de referencia;\ncalcular \\(P(A\\mid B)\\) y distinguirla de \\(P(B\\mid A)\\);\naplicar la regla del producto para eventos sucesivos;\nconstruir y leer árboles de probabilidad;\nreconocer cuándo dos eventos son independientes;\ndiferenciar independencia de exclusión mutua;\nresolver problemas de confiabilidad, diagnóstico, comunicaciones y calidad;\ncomprobar resultados mediante R y simulación;\nexplorar interactivamente cómo cambia una probabilidad al incorporar información.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#cuando-aparece-nueva-información",
+    "href": "05-condicional-independencia.html#cuando-aparece-nueva-información",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.2 Cuando aparece nueva información",
+    "text": "5.2 Cuando aparece nueva información\nHasta ahora hemos calculado probabilidades utilizando todo el espacio muestral. En muchas aplicaciones, sin embargo, recibimos información adicional antes de responder una pregunta.\nSupongamos que elegimos al azar una pieza de una producción y queremos estudiar el evento\n\\[\nA=\\{\\text{la pieza presenta defecto eléctrico}\\}.\n\\]\nDespués nos informan que la pieza pertenece al turno nocturno. Si definimos\n\\[\nB=\\{\\text{la pieza proviene del turno nocturno}\\},\n\\]\nya no tiene sentido utilizar toda la producción como universo de referencia: ahora sabemos que el resultado pertenece a \\(B\\).\nLa probabilidad de \\(A\\) dada la información \\(B\\) se denota por\n\\[\nP(A\\mid B).\n\\]\nEl símbolo \\(\\mid\\) se lee “dado que”.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#definición-de-probabilidad-condicional",
+    "href": "05-condicional-independencia.html#definición-de-probabilidad-condicional",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.3 Definición de probabilidad condicional",
+    "text": "5.3 Definición de probabilidad condicional\nSi \\(P(B)&gt;0\\), definimos\n\\[\n\\boxed{\nP(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}\n}\n\\]\nLa fórmula tiene una interpretación geométrica muy sencilla:\n\nrestringimos la atención al evento \\(B\\);\ndentro de \\(B\\), identificamos la parte que también pertenece a \\(A\\);\ncomparamos la probabilidad de \\(A\\cap B\\) con la probabilidad total disponible en \\(B\\).\n\n\nEjemplo con datos de calidad\nEn una planta, 30% de las piezas provienen del turno nocturno:\n\\[\nP(B)=0.30.\n\\]\nEl 6% de todas las piezas proviene del turno nocturno y presenta defecto:\n\\[\nP(A\\cap B)=0.06.\n\\]\nEntonces\n\\[\nP(A\\mid B)=\\frac{0.06}{0.30}=0.20.\n\\]\nLa interpretación correcta es:\n\nentre las piezas del turno nocturno, 20% presenta el defecto considerado.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#el-orden-de-la-condición-importa",
+    "href": "05-condicional-independencia.html#el-orden-de-la-condición-importa",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.4 El orden de la condición importa",
+    "text": "5.4 El orden de la condición importa\nEn general,\n\\[\nP(A\\mid B)\\neq P(B\\mid A).\n\\]\nEn el ejemplo anterior, \\(P(A\\mid B)\\) responde:\n\n¿qué proporción de las piezas nocturnas es defectuosa?\n\nMientras que \\(P(B\\mid A)\\) responde:\n\nentre las piezas defectuosas, ¿qué proporción proviene del turno nocturno?\n\nSon preguntas diferentes y pueden tener respuestas muy distintas.\n\nEjemplo numérico\nSupongamos además que\n\\[\nP(A)=0.10.\n\\]\nComo \\(P(A\\cap B)=0.06\\),\n\\[\nP(B\\mid A)=\\frac{0.06}{0.10}=0.60.\n\\]\nPor tanto,\n\\[\nP(A\\mid B)=0.20,\n\\qquad\nP(B\\mid A)=0.60.\n\\]\nNo hay contradicción: los denominadores son distintos.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#regla-del-producto",
+    "href": "05-condicional-independencia.html#regla-del-producto",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.5 Regla del producto",
+    "text": "5.5 Regla del producto\nA partir de la definición,\n\\[\nP(A\\mid B)=\\frac{P(A\\cap B)}{P(B)},\n\\]\nobtenemos\n\\[\n\\boxed{\nP(A\\cap B)=P(B)P(A\\mid B)\n}\n\\]\nTambién podemos invertir el orden:\n\\[\n\\boxed{\nP(A\\cap B)=P(A)P(B\\mid A)\n}\n\\]\nPor tanto,\n\\[\nP(A)P(B\\mid A)=P(B)P(A\\mid B).\n\\]\nEsta identidad será la base del teorema de Bayes en el siguiente capítulo.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#experimentos-por-etapas",
+    "href": "05-condicional-independencia.html#experimentos-por-etapas",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.6 Experimentos por etapas",
+    "text": "5.6 Experimentos por etapas\nLa regla del producto resulta especialmente natural cuando un experimento ocurre secuencialmente.\n\nEjemplo: dos componentes sin reemplazo\nUna caja contiene 8 componentes, de los cuales 3 son defectuosos y 5 conformes. Se seleccionan dos componentes sin reemplazo.\nSea\n\n\\(D_1=\\) “el primero es defectuoso”;\n\\(D_2=\\) “el segundo es defectuoso”.\n\nEntonces\n\\[\nP(D_1)=\\frac38.\n\\]\nSi el primero fue defectuoso, quedan 2 defectuosos entre 7 componentes:\n\\[\nP(D_2\\mid D_1)=\\frac27.\n\\]\nPor tanto,\n\\[\nP(D_1\\cap D_2)\n=\\frac38\\cdot\\frac27\n=\\frac{3}{28}.\n\\]\nAquí las probabilidades cambian porque no hay reemplazo.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#regla-de-la-cadena",
+    "href": "05-condicional-independencia.html#regla-de-la-cadena",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.7 Regla de la cadena",
+    "text": "5.7 Regla de la cadena\nPara tres eventos,\n\\[\nP(A\\cap B\\cap C)\n=P(A)P(B\\mid A)P(C\\mid A\\cap B),\n\\]\nsi las probabilidades condicionales están definidas.\nEn general,\n\\[\nP\\left(\\bigcap_{i=1}^{n}A_i\\right)\n=P(A_1)\nP(A_2\\mid A_1)\nP(A_3\\mid A_1\\cap A_2)\\cdots\nP\\left(A_n\\mid\\bigcap_{i=1}^{n-1}A_i\\right).\n\\]\nEsta forma es muy útil en confiabilidad, procesos secuenciales y árboles de probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#árboles-de-probabilidad",
+    "href": "05-condicional-independencia.html#árboles-de-probabilidad",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.8 Árboles de probabilidad",
+    "text": "5.8 Árboles de probabilidad\nUn árbol organiza visualmente un experimento por etapas. Cada rama lleva una probabilidad condicional y la probabilidad de una trayectoria completa se obtiene multiplicando sus ramas.\nSupongamos:\n\\[\nP(A)=0.40,\n\\]\n\\[\nP(B\\mid A)=0.70,\n\\qquad\nP(B\\mid A^c)=0.20.\n\\]\nEntonces las cuatro hojas del árbol tienen probabilidades\n\\[\nP(A\\cap B)=0.40(0.70)=0.28,\n\\]\n\\[\nP(A\\cap B^c)=0.40(0.30)=0.12,\n\\]\n\\[\nP(A^c\\cap B)=0.60(0.20)=0.12,\n\\]\n\\[\nP(A^c\\cap B^c)=0.60(0.80)=0.48.\n\\]\nLa suma de las cuatro hojas es 1.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#independencia-de-dos-eventos",
+    "href": "05-condicional-independencia.html#independencia-de-dos-eventos",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.9 Independencia de dos eventos",
+    "text": "5.9 Independencia de dos eventos\nDos eventos \\(A\\) y \\(B\\) son independientes cuando conocer la ocurrencia de uno no modifica la probabilidad del otro.\nSi \\(P(B)&gt;0\\), una forma intuitiva de expresarlo es\n\\[\nP(A\\mid B)=P(A).\n\\]\nLa definición algebraica, válida sin exigir probabilidades positivas, es\n\\[\n\\boxed{\nP(A\\cap B)=P(A)P(B)\n}\n\\]\n\nEjemplo: dos lanzamientos de una moneda\nSea\n\n\\(A=\\) “el primer lanzamiento es cara”;\n\\(B=\\) “el segundo lanzamiento es cara”.\n\nPara una moneda equilibrada,\n\\[\nP(A)=\\frac12,\n\\qquad\nP(B)=\\frac12,\n\\]\ny\n\\[\nP(A\\cap B)=\\frac14.\n\\]\nComo\n\\[\n\\frac14=\\frac12\\cdot\\frac12,\n\\]\nlos eventos son independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#independencia-no-significa-exclusión-mutua",
+    "href": "05-condicional-independencia.html#independencia-no-significa-exclusión-mutua",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.10 Independencia no significa exclusión mutua",
+    "text": "5.10 Independencia no significa exclusión mutua\nEste punto es esencial.\nSi \\(A\\) y \\(B\\) son mutuamente excluyentes,\n\\[\nP(A\\cap B)=0.\n\\]\nSi además \\(P(A)&gt;0\\) y \\(P(B)&gt;0\\), entonces\n\\[\nP(A)P(B)&gt;0,\n\\]\npor lo que no pueden ser independientes.\nAsí, dos eventos positivos que no pueden ocurrir simultáneamente son dependientes, no independientes.\n\nEjemplo\nEn un lanzamiento de dado,\n\n\\(A=\\) “sale 2”;\n\\(B=\\) “sale 5”.\n\nSon mutuamente excluyentes, pero conocer que ocurrió \\(A\\) hace que la probabilidad de \\(B\\) sea cero. Por tanto, no son independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#independencia-y-complementos",
+    "href": "05-condicional-independencia.html#independencia-y-complementos",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.11 Independencia y complementos",
+    "text": "5.11 Independencia y complementos\nSi \\(A\\) y \\(B\\) son independientes, también son independientes:\n\\[\nA^c\\text{ y }B,\n\\]\n\\[\nA\\text{ y }B^c,\n\\]\ny\n\\[\nA^c\\text{ y }B^c.\n\\]\nPor ejemplo,\n\\[\nP(A^c\\cap B)\n=P(B)-P(A\\cap B)\n=P(B)-P(A)P(B)\n=P(A^c)P(B).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#con-reemplazo-y-sin-reemplazo",
+    "href": "05-condicional-independencia.html#con-reemplazo-y-sin-reemplazo",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.12 Con reemplazo y sin reemplazo",
+    "text": "5.12 Con reemplazo y sin reemplazo\nLa diferencia entre ambos esquemas aparece con frecuencia.\n\nCon reemplazo\nSi extraemos una pieza, registramos su estado y la devolvemos antes de la siguiente extracción, la composición original se conserva. Bajo las condiciones usuales de muestreo aleatorio, las extracciones sucesivas pueden modelarse como independientes.\n\n\nSin reemplazo\nSi no devolvemos la pieza, la composición cambia y las probabilidades de las siguientes extracciones dependen de lo ocurrido antes.\nEste contraste explica por qué el muestreo con y sin reemplazo produce modelos probabilísticos diferentes.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#aplicación-confiabilidad-de-dos-módulos",
+    "href": "05-condicional-independencia.html#aplicación-confiabilidad-de-dos-módulos",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.13 Aplicación: confiabilidad de dos módulos",
+    "text": "5.13 Aplicación: confiabilidad de dos módulos\nDos módulos electrónicos trabajan en paralelo. Sea\n\n\\(A=\\) “falla el módulo 1 durante la misión”;\n\\(B=\\) “falla el módulo 2 durante la misión”.\n\nSupongamos\n\\[\nP(A)=0.02,\n\\qquad\nP(B)=0.03.\n\\]\nSi las fallas pueden considerarse independientes,\n\\[\nP(A\\cap B)=0.02(0.03)=0.0006.\n\\]\nPor tanto, la probabilidad de que falle al menos uno es\n\\[\nP(A\\cup B)\n=0.02+0.03-0.0006\n=0.0494.\n\\]\nPero la independencia debe justificarse. Si ambos módulos comparten fuente de alimentación, temperatura o vibración, una causa común puede volver dependientes sus fallas.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#aplicación-comunicaciones",
+    "href": "05-condicional-independencia.html#aplicación-comunicaciones",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.14 Aplicación: comunicaciones",
+    "text": "5.14 Aplicación: comunicaciones\nUn paquete atraviesa dos enlaces. El primer enlace transmite correctamente con probabilidad 0.98. Si el primero transmite correctamente, el segundo lo hace con probabilidad 0.97.\nLa probabilidad de que el paquete supere ambos enlaces es\n\\[\n0.98(0.97)=0.9506.\n\\]\nObsérvese que no necesitamos asumir independencia para utilizar esta multiplicación: estamos usando explícitamente una probabilidad condicional.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#cálculos-con-r",
+    "href": "05-condicional-independencia.html#cálculos-con-r",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.15 Cálculos con R",
+    "text": "5.15 Cálculos con R\n\nProbabilidad condicional\n\np_A &lt;- 0.10\np_B &lt;- 0.30\np_AB &lt;- 0.06\n\np_A_dado_B &lt;- p_AB / p_B\np_B_dado_A &lt;- p_AB / p_A\n\nc(P_A_dado_B = p_A_dado_B,\n  P_B_dado_A = p_B_dado_A)\n\nP_A_dado_B P_B_dado_A \n       0.2        0.6 \n\n\n\n\nVerificar independencia\n\nes_independiente &lt;- function(pA, pB, pAB, tol = 1e-10) {\n  abs(pAB - pA * pB) &lt; tol\n}\n\nes_independiente(0.5, 0.5, 0.25)\n\n[1] TRUE\n\nes_independiente(0.4, 0.3, 0.18)\n\n[1] FALSE",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#simulación-dependencia-por-muestreo-sin-reemplazo",
+    "href": "05-condicional-independencia.html#simulación-dependencia-por-muestreo-sin-reemplazo",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.16 Simulación: dependencia por muestreo sin reemplazo",
+    "text": "5.16 Simulación: dependencia por muestreo sin reemplazo\n\nset.seed(2026)\nB &lt;- 50000\n\nresultado &lt;- replicate(B, {\n  caja &lt;- c(rep(\"D\", 3), rep(\"C\", 5))\n  muestra &lt;- sample(caja, 2, replace = FALSE)\n  c(D1 = muestra[1] == \"D\",\n    D2 = muestra[2] == \"D\")\n})\n\nD1 &lt;- resultado[\"D1\", ]\nD2 &lt;- resultado[\"D2\", ]\n\nc(\n  P_D1 = mean(D1),\n  P_D2 = mean(D2),\n  P_D2_dado_D1 = mean(D2[D1]),\n  P_D1_inter_D2 = mean(D1 & D2),\n  producto_marginales = mean(D1) * mean(D2)\n)\n\n               P_D1                P_D2        P_D2_dado_D1       P_D1_inter_D2 \n          0.3781200           0.3722800           0.2818682           0.1065800 \nproducto_marginales \n          0.1407665 \n\n\nSi hubiera independencia, esperaríamos que\n\\[\nP(D_2\\mid D_1)\\approx P(D_2).\n\\]\nLa simulación muestra que no ocurre: conocer el primer resultado cambia la composición de la caja.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#interactivo-del-capítulo",
+    "href": "05-condicional-independencia.html#interactivo-del-capítulo",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.17 Interactivo del capítulo",
+    "text": "5.17 Interactivo del capítulo\nLa edición web incluye un árbol dinámico con tres controles:\n\n\\(P(A)\\);\n\\(P(B\\mid A)\\);\n\\(P(B\\mid A^c)\\).\n\nEl recurso calcula automáticamente las probabilidades de las cuatro hojas, obtiene \\(P(B)\\) y compara\n\\[\nP(B\\mid A)\n\\quad\\text{con}\\quad\nP(B).\n\\]\nCuando ambas cantidades coinciden, \\(A\\) y \\(B\\) son independientes. Así puede observarse visualmente que independencia significa que las ramas hacia \\(B\\) mantienen la misma probabilidad independientemente de que haya ocurrido \\(A\\) o \\(A^c\\).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#actividad-geogebra-árbol-condicional",
+    "href": "05-condicional-independencia.html#actividad-geogebra-árbol-condicional",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.18 Actividad GeoGebra: árbol condicional",
+    "text": "5.18 Actividad GeoGebra: árbol condicional\nConstruye un árbol con un deslizador \\(p\\) para \\(P(A)\\) y dos deslizadores \\(q_1\\) y \\(q_0\\) para\n\\[\nP(B\\mid A)=q_1,\n\\qquad\nP(B\\mid A^c)=q_0.\n\\]\nMuestra en las hojas:\n\\[\npq_1,\n\\qquad\np(1-q_1),\n\\qquad\n(1-p)q_0,\n\\qquad\n(1-p)(1-q_0).\n\\]\nDespués calcula\n\\[\nP(B)=pq_1+(1-p)q_0.\n\\]\nExplora qué ocurre cuando \\(q_1=q_0\\). Esa configuración representa independencia entre \\(A\\) y \\(B\\).",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#estrategia-de-solución",
+    "href": "05-condicional-independencia.html#estrategia-de-solución",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.19 Estrategia de solución",
+    "text": "5.19 Estrategia de solución\nAnte un problema condicional:\n\nDefine los eventos antes de sustituir números.\nIdentifica claramente cuál evento aparece después de la barra \\(\\mid\\).\nPregunta si la información reduce el universo de referencia.\nSi el problema es secuencial, considera un árbol.\nPara una trayectoria, multiplica las probabilidades de sus ramas.\nNo supongas independencia sólo porque el problema no menciona dependencia.\nSi se afirma independencia, aprovecha\n\n\\[\nP(A\\cap B)=P(A)P(B).\n\\]\n\nInterpreta el resultado con palabras.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#errores-frecuentes",
+    "href": "05-condicional-independencia.html#errores-frecuentes",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.20 Errores frecuentes",
+    "text": "5.20 Errores frecuentes\n\nIntercambiar \\(P(A\\mid B)\\) y \\(P(B\\mid A)\\).\nMultiplicar \\(P(A)P(B)\\) sin haber establecido independencia.\nSumar probabilidades a lo largo de una misma trayectoria del árbol; en una trayectoria se multiplican.\nConfundir independencia con eventos mutuamente excluyentes.\nUsar una probabilidad condicional cuyo evento condicionante tiene probabilidad cero.\nIgnorar que el muestreo sin reemplazo modifica las probabilidades posteriores.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#resumen",
+    "href": "05-condicional-independencia.html#resumen",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.21 Resumen",
+    "text": "5.21 Resumen\nSi \\(P(B)&gt;0\\),\n\\[\nP(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}.\n\\]\nLa regla del producto es\n\\[\nP(A\\cap B)=P(B)P(A\\mid B)=P(A)P(B\\mid A).\n\\]\nDos eventos son independientes si\n\\[\nP(A\\cap B)=P(A)P(B).\n\\]\nCuando las probabilidades condicionales están definidas, la independencia equivale a que conocer uno de los eventos no altere la probabilidad del otro.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#ejercicios",
+    "href": "05-condicional-independencia.html#ejercicios",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.22 Ejercicios",
+    "text": "5.22 Ejercicios\n\nSi \\(P(A)=0.45\\), \\(P(B)=0.50\\) y \\(P(A\\cap B)=0.20\\), calcula \\(P(A\\mid B)\\) y \\(P(B\\mid A)\\).\nUna empresa recibe 40% de sus componentes del proveedor 1. El 3% de todos los componentes son simultáneamente del proveedor 1 y defectuosos. Calcula la probabilidad de defecto dado que el componente proviene del proveedor 1.\nDe una caja con 6 piezas conformes y 4 defectuosas se extraen dos sin reemplazo. Calcula la probabilidad de que ambas sean defectuosas.\nRepite el ejercicio anterior suponiendo reemplazo y compara los resultados.\nSean \\(P(A)=0.60\\), \\(P(B)=0.25\\) y \\(P(A\\cap B)=0.15\\). ¿Son independientes? Justifica.\nSean \\(A\\) y \\(B\\) mutuamente excluyentes con \\(P(A)=0.20\\) y \\(P(B)=0.30\\). ¿Son independientes? Explica.\nUn sistema tiene tres etapas con probabilidades condicionales de éxito 0.98, 0.95 y 0.99 a lo largo de una trayectoria de operación normal. Calcula la probabilidad de completar las tres etapas.\nConstruye en R un árbol de dos etapas para \\(P(A)=0.35\\), \\(P(B\\mid A)=0.80\\) y \\(P(B\\mid A^c)=0.25\\). Obtén las cuatro hojas y verifica que sumen 1.\nSimula 100 000 extracciones dobles sin reemplazo de una urna con 5 bolas blancas y 3 negras. Estima \\(P(N_2\\mid N_1)\\) y compárala con \\(P(N_2)\\).\nReto ★. Si \\(A\\) y \\(B\\) son independientes, demuestra utilizando reglas de probabilidad que \\(A^c\\) y \\(B^c\\) también son independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
+    "objectID": "05-condicional-independencia.html#referencias-del-capítulo",
+    "href": "05-condicional-independencia.html#referencias-del-capítulo",
+    "title": "5  Probabilidad condicional e independencia",
+    "section": "5.23 Referencias del capítulo",
+    "text": "5.23 Referencias del capítulo\nEl tratamiento de probabilidad condicional, regla del producto, árboles e independencia sigue el desarrollo estándar de probabilidad para ingeniería y ciencias de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, simulaciones y código R de este capítulo son originales; para el enfoque computacional se toma como referencia general Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Probabilidad condicional e independencia</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "Referencias",

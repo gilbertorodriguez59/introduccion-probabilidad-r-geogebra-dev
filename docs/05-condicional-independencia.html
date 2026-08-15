@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Probabilidad condicional e independencia – Introducción a la Probabilidad con R y GeoGebra</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./04-axiomas-probabilidad.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-41479178cf16c74431ccbac30d902985.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-condicional-independencia.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Contenido del libro</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./Introduccion-a-la-Probabilidad-con-R-y-GeoGebra.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bienvenida.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notación general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Técnicas de conteo y enumeración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-axiomas-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Axiomas y propiedades de la probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-condicional-independencia.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En este capítulo</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">5.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#cuando-aparece-nueva-información" id="toc-cuando-aparece-nueva-información" class="nav-link" data-scroll-target="#cuando-aparece-nueva-información"><span class="header-section-number">5.2</span> Cuando aparece nueva información</a></li>
+  <li><a href="#definición-de-probabilidad-condicional" id="toc-definición-de-probabilidad-condicional" class="nav-link" data-scroll-target="#definición-de-probabilidad-condicional"><span class="header-section-number">5.3</span> Definición de probabilidad condicional</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-con-datos-de-calidad" id="toc-ejemplo-con-datos-de-calidad" class="nav-link" data-scroll-target="#ejemplo-con-datos-de-calidad">Ejemplo con datos de calidad</a></li>
+  </ul></li>
+  <li><a href="#el-orden-de-la-condición-importa" id="toc-el-orden-de-la-condición-importa" class="nav-link" data-scroll-target="#el-orden-de-la-condición-importa"><span class="header-section-number">5.4</span> El orden de la condición importa</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-numérico" id="toc-ejemplo-numérico" class="nav-link" data-scroll-target="#ejemplo-numérico">Ejemplo numérico</a></li>
+  </ul></li>
+  <li><a href="#regla-del-producto" id="toc-regla-del-producto" class="nav-link" data-scroll-target="#regla-del-producto"><span class="header-section-number">5.5</span> Regla del producto</a></li>
+  <li><a href="#experimentos-por-etapas" id="toc-experimentos-por-etapas" class="nav-link" data-scroll-target="#experimentos-por-etapas"><span class="header-section-number">5.6</span> Experimentos por etapas</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-dos-componentes-sin-reemplazo" id="toc-ejemplo-dos-componentes-sin-reemplazo" class="nav-link" data-scroll-target="#ejemplo-dos-componentes-sin-reemplazo">Ejemplo: dos componentes sin reemplazo</a></li>
+  </ul></li>
+  <li><a href="#regla-de-la-cadena" id="toc-regla-de-la-cadena" class="nav-link" data-scroll-target="#regla-de-la-cadena"><span class="header-section-number">5.7</span> Regla de la cadena</a></li>
+  <li><a href="#árboles-de-probabilidad" id="toc-árboles-de-probabilidad" class="nav-link" data-scroll-target="#árboles-de-probabilidad"><span class="header-section-number">5.8</span> Árboles de probabilidad</a></li>
+  <li><a href="#independencia-de-dos-eventos" id="toc-independencia-de-dos-eventos" class="nav-link" data-scroll-target="#independencia-de-dos-eventos"><span class="header-section-number">5.9</span> Independencia de dos eventos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-dos-lanzamientos-de-una-moneda" id="toc-ejemplo-dos-lanzamientos-de-una-moneda" class="nav-link" data-scroll-target="#ejemplo-dos-lanzamientos-de-una-moneda">Ejemplo: dos lanzamientos de una moneda</a></li>
+  </ul></li>
+  <li><a href="#independencia-no-significa-exclusión-mutua" id="toc-independencia-no-significa-exclusión-mutua" class="nav-link" data-scroll-target="#independencia-no-significa-exclusión-mutua"><span class="header-section-number">5.10</span> Independencia no significa exclusión mutua</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#independencia-y-complementos" id="toc-independencia-y-complementos" class="nav-link" data-scroll-target="#independencia-y-complementos"><span class="header-section-number">5.11</span> Independencia y complementos</a></li>
+  <li><a href="#con-reemplazo-y-sin-reemplazo" id="toc-con-reemplazo-y-sin-reemplazo" class="nav-link" data-scroll-target="#con-reemplazo-y-sin-reemplazo"><span class="header-section-number">5.12</span> Con reemplazo y sin reemplazo</a>
+  <ul class="collapse">
+  <li><a href="#con-reemplazo" id="toc-con-reemplazo" class="nav-link" data-scroll-target="#con-reemplazo">Con reemplazo</a></li>
+  <li><a href="#sin-reemplazo" id="toc-sin-reemplazo" class="nav-link" data-scroll-target="#sin-reemplazo">Sin reemplazo</a></li>
+  </ul></li>
+  <li><a href="#aplicación-confiabilidad-de-dos-módulos" id="toc-aplicación-confiabilidad-de-dos-módulos" class="nav-link" data-scroll-target="#aplicación-confiabilidad-de-dos-módulos"><span class="header-section-number">5.13</span> Aplicación: confiabilidad de dos módulos</a></li>
+  <li><a href="#aplicación-comunicaciones" id="toc-aplicación-comunicaciones" class="nav-link" data-scroll-target="#aplicación-comunicaciones"><span class="header-section-number">5.14</span> Aplicación: comunicaciones</a></li>
+  <li><a href="#cálculos-con-r" id="toc-cálculos-con-r" class="nav-link" data-scroll-target="#cálculos-con-r"><span class="header-section-number">5.15</span> Cálculos con R</a>
+  <ul class="collapse">
+  <li><a href="#probabilidad-condicional" id="toc-probabilidad-condicional" class="nav-link" data-scroll-target="#probabilidad-condicional">Probabilidad condicional</a></li>
+  <li><a href="#verificar-independencia" id="toc-verificar-independencia" class="nav-link" data-scroll-target="#verificar-independencia">Verificar independencia</a></li>
+  </ul></li>
+  <li><a href="#simulación-dependencia-por-muestreo-sin-reemplazo" id="toc-simulación-dependencia-por-muestreo-sin-reemplazo" class="nav-link" data-scroll-target="#simulación-dependencia-por-muestreo-sin-reemplazo"><span class="header-section-number">5.16</span> Simulación: dependencia por muestreo sin reemplazo</a></li>
+  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">5.17</span> Interactivo del capítulo</a></li>
+  <li><a href="#actividad-geogebra-árbol-condicional" id="toc-actividad-geogebra-árbol-condicional" class="nav-link" data-scroll-target="#actividad-geogebra-árbol-condicional"><span class="header-section-number">5.18</span> Actividad GeoGebra: árbol condicional</a></li>
+  <li><a href="#estrategia-de-solución" id="toc-estrategia-de-solución" class="nav-link" data-scroll-target="#estrategia-de-solución"><span class="header-section-number">5.19</span> Estrategia de solución</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">5.20</span> Errores frecuentes</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">5.21</span> Resumen</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">5.22</span> Ejercicios</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">5.23</span> Referencias del capítulo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-de-aprendizaje" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">5.1</span> Objetivos de aprendizaje</h2>
+<p>Al finalizar este capítulo, el estudiante será capaz de:</p>
+<ul>
+<li>interpretar una probabilidad condicional como una actualización del espacio de referencia;</li>
+<li>calcular <span class="math inline">\(P(A\mid B)\)</span> y distinguirla de <span class="math inline">\(P(B\mid A)\)</span>;</li>
+<li>aplicar la regla del producto para eventos sucesivos;</li>
+<li>construir y leer árboles de probabilidad;</li>
+<li>reconocer cuándo dos eventos son independientes;</li>
+<li>diferenciar independencia de exclusión mutua;</li>
+<li>resolver problemas de confiabilidad, diagnóstico, comunicaciones y calidad;</li>
+<li>comprobar resultados mediante R y simulación;</li>
+<li>explorar interactivamente cómo cambia una probabilidad al incorporar información.</li>
+</ul>
+</section>
+<section id="cuando-aparece-nueva-información" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="cuando-aparece-nueva-información"><span class="header-section-number">5.2</span> Cuando aparece nueva información</h2>
+<p>Hasta ahora hemos calculado probabilidades utilizando todo el espacio muestral. En muchas aplicaciones, sin embargo, recibimos información adicional antes de responder una pregunta.</p>
+<p>Supongamos que elegimos al azar una pieza de una producción y queremos estudiar el evento</p>
+<p><span class="math display">\[
+A=\{\text{la pieza presenta defecto eléctrico}\}.
+\]</span></p>
+<p>Después nos informan que la pieza pertenece al turno nocturno. Si definimos</p>
+<p><span class="math display">\[
+B=\{\text{la pieza proviene del turno nocturno}\},
+\]</span></p>
+<p>ya no tiene sentido utilizar toda la producción como universo de referencia: ahora sabemos que el resultado pertenece a <span class="math inline">\(B\)</span>.</p>
+<p>La probabilidad de <span class="math inline">\(A\)</span> <strong>dada</strong> la información <span class="math inline">\(B\)</span> se denota por</p>
+<p><span class="math display">\[
+P(A\mid B).
+\]</span></p>
+<p>El símbolo <span class="math inline">\(\mid\)</span> se lee “dado que”.</p>
+</section>
+<section id="definición-de-probabilidad-condicional" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="definición-de-probabilidad-condicional"><span class="header-section-number">5.3</span> Definición de probabilidad condicional</h2>
+<p>Si <span class="math inline">\(P(B)&gt;0\)</span>, definimos</p>
+<p><span class="math display">\[
+\boxed{
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}
+}
+\]</span></p>
+<p>La fórmula tiene una interpretación geométrica muy sencilla:</p>
+<ol type="1">
+<li>restringimos la atención al evento <span class="math inline">\(B\)</span>;</li>
+<li>dentro de <span class="math inline">\(B\)</span>, identificamos la parte que también pertenece a <span class="math inline">\(A\)</span>;</li>
+<li>comparamos la probabilidad de <span class="math inline">\(A\cap B\)</span> con la probabilidad total disponible en <span class="math inline">\(B\)</span>.</li>
+</ol>
+<section id="ejemplo-con-datos-de-calidad" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-con-datos-de-calidad">Ejemplo con datos de calidad</h3>
+<p>En una planta, 30% de las piezas provienen del turno nocturno:</p>
+<p><span class="math display">\[
+P(B)=0.30.
+\]</span></p>
+<p>El 6% de todas las piezas proviene del turno nocturno <strong>y</strong> presenta defecto:</p>
+<p><span class="math display">\[
+P(A\cap B)=0.06.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+P(A\mid B)=\frac{0.06}{0.30}=0.20.
+\]</span></p>
+<p>La interpretación correcta es:</p>
+<blockquote class="blockquote">
+<p>entre las piezas del turno nocturno, 20% presenta el defecto considerado.</p>
+</blockquote>
+</section>
+</section>
+<section id="el-orden-de-la-condición-importa" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="el-orden-de-la-condición-importa"><span class="header-section-number">5.4</span> El orden de la condición importa</h2>
+<p>En general,</p>
+<p><span class="math display">\[
+P(A\mid B)\neq P(B\mid A).
+\]</span></p>
+<p>En el ejemplo anterior, <span class="math inline">\(P(A\mid B)\)</span> responde:</p>
+<blockquote class="blockquote">
+<p>¿qué proporción de las piezas nocturnas es defectuosa?</p>
+</blockquote>
+<p>Mientras que <span class="math inline">\(P(B\mid A)\)</span> responde:</p>
+<blockquote class="blockquote">
+<p>entre las piezas defectuosas, ¿qué proporción proviene del turno nocturno?</p>
+</blockquote>
+<p>Son preguntas diferentes y pueden tener respuestas muy distintas.</p>
+<section id="ejemplo-numérico" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-numérico">Ejemplo numérico</h3>
+<p>Supongamos además que</p>
+<p><span class="math display">\[
+P(A)=0.10.
+\]</span></p>
+<p>Como <span class="math inline">\(P(A\cap B)=0.06\)</span>,</p>
+<p><span class="math display">\[
+P(B\mid A)=\frac{0.06}{0.10}=0.60.
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+P(A\mid B)=0.20,
+\qquad
+P(B\mid A)=0.60.
+\]</span></p>
+<p>No hay contradicción: los denominadores son distintos.</p>
+</section>
+</section>
+<section id="regla-del-producto" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="regla-del-producto"><span class="header-section-number">5.5</span> Regla del producto</h2>
+<p>A partir de la definición,</p>
+<p><span class="math display">\[
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+\]</span></p>
+<p>obtenemos</p>
+<p><span class="math display">\[
+\boxed{
+P(A\cap B)=P(B)P(A\mid B)
+}
+\]</span></p>
+<p>También podemos invertir el orden:</p>
+<p><span class="math display">\[
+\boxed{
+P(A\cap B)=P(A)P(B\mid A)
+}
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+P(A)P(B\mid A)=P(B)P(A\mid B).
+\]</span></p>
+<p>Esta identidad será la base del teorema de Bayes en el siguiente capítulo.</p>
+</section>
+<section id="experimentos-por-etapas" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="experimentos-por-etapas"><span class="header-section-number">5.6</span> Experimentos por etapas</h2>
+<p>La regla del producto resulta especialmente natural cuando un experimento ocurre secuencialmente.</p>
+<section id="ejemplo-dos-componentes-sin-reemplazo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-dos-componentes-sin-reemplazo">Ejemplo: dos componentes sin reemplazo</h3>
+<p>Una caja contiene 8 componentes, de los cuales 3 son defectuosos y 5 conformes. Se seleccionan dos componentes sin reemplazo.</p>
+<p>Sea</p>
+<ul>
+<li><span class="math inline">\(D_1=\)</span> “el primero es defectuoso”;</li>
+<li><span class="math inline">\(D_2=\)</span> “el segundo es defectuoso”.</li>
+</ul>
+<p>Entonces</p>
+<p><span class="math display">\[
+P(D_1)=\frac38.
+\]</span></p>
+<p>Si el primero fue defectuoso, quedan 2 defectuosos entre 7 componentes:</p>
+<p><span class="math display">\[
+P(D_2\mid D_1)=\frac27.
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+P(D_1\cap D_2)
+=\frac38\cdot\frac27
+=\frac{3}{28}.
+\]</span></p>
+<p>Aquí las probabilidades cambian porque no hay reemplazo.</p>
+</section>
+</section>
+<section id="regla-de-la-cadena" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="regla-de-la-cadena"><span class="header-section-number">5.7</span> Regla de la cadena</h2>
+<p>Para tres eventos,</p>
+<p><span class="math display">\[
+P(A\cap B\cap C)
+=P(A)P(B\mid A)P(C\mid A\cap B),
+\]</span></p>
+<p>si las probabilidades condicionales están definidas.</p>
+<p>En general,</p>
+<p><span class="math display">\[
+P\left(\bigcap_{i=1}^{n}A_i\right)
+=P(A_1)
+P(A_2\mid A_1)
+P(A_3\mid A_1\cap A_2)\cdots
+P\left(A_n\mid\bigcap_{i=1}^{n-1}A_i\right).
+\]</span></p>
+<p>Esta forma es muy útil en confiabilidad, procesos secuenciales y árboles de probabilidad.</p>
+</section>
+<section id="árboles-de-probabilidad" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="árboles-de-probabilidad"><span class="header-section-number">5.8</span> Árboles de probabilidad</h2>
+<p>Un árbol organiza visualmente un experimento por etapas. Cada rama lleva una probabilidad condicional y la probabilidad de una trayectoria completa se obtiene multiplicando sus ramas.</p>
+<p>Supongamos:</p>
+<p><span class="math display">\[
+P(A)=0.40,
+\]</span></p>
+<p><span class="math display">\[
+P(B\mid A)=0.70,
+\qquad
+P(B\mid A^c)=0.20.
+\]</span></p>
+<p>Entonces las cuatro hojas del árbol tienen probabilidades</p>
+<p><span class="math display">\[
+P(A\cap B)=0.40(0.70)=0.28,
+\]</span></p>
+<p><span class="math display">\[
+P(A\cap B^c)=0.40(0.30)=0.12,
+\]</span></p>
+<p><span class="math display">\[
+P(A^c\cap B)=0.60(0.20)=0.12,
+\]</span></p>
+<p><span class="math display">\[
+P(A^c\cap B^c)=0.60(0.80)=0.48.
+\]</span></p>
+<p>La suma de las cuatro hojas es 1.</p>
+</section>
+<section id="independencia-de-dos-eventos" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="independencia-de-dos-eventos"><span class="header-section-number">5.9</span> Independencia de dos eventos</h2>
+<p>Dos eventos <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son <strong>independientes</strong> cuando conocer la ocurrencia de uno no modifica la probabilidad del otro.</p>
+<p>Si <span class="math inline">\(P(B)&gt;0\)</span>, una forma intuitiva de expresarlo es</p>
+<p><span class="math display">\[
+P(A\mid B)=P(A).
+\]</span></p>
+<p>La definición algebraica, válida sin exigir probabilidades positivas, es</p>
+<p><span class="math display">\[
+\boxed{
+P(A\cap B)=P(A)P(B)
+}
+\]</span></p>
+<section id="ejemplo-dos-lanzamientos-de-una-moneda" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-dos-lanzamientos-de-una-moneda">Ejemplo: dos lanzamientos de una moneda</h3>
+<p>Sea</p>
+<ul>
+<li><span class="math inline">\(A=\)</span> “el primer lanzamiento es cara”;</li>
+<li><span class="math inline">\(B=\)</span> “el segundo lanzamiento es cara”.</li>
+</ul>
+<p>Para una moneda equilibrada,</p>
+<p><span class="math display">\[
+P(A)=\frac12,
+\qquad
+P(B)=\frac12,
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+P(A\cap B)=\frac14.
+\]</span></p>
+<p>Como</p>
+<p><span class="math display">\[
+\frac14=\frac12\cdot\frac12,
+\]</span></p>
+<p>los eventos son independientes.</p>
+</section>
+</section>
+<section id="independencia-no-significa-exclusión-mutua" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="independencia-no-significa-exclusión-mutua"><span class="header-section-number">5.10</span> Independencia no significa exclusión mutua</h2>
+<p>Este punto es esencial.</p>
+<p>Si <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son mutuamente excluyentes,</p>
+<p><span class="math display">\[
+P(A\cap B)=0.
+\]</span></p>
+<p>Si además <span class="math inline">\(P(A)&gt;0\)</span> y <span class="math inline">\(P(B)&gt;0\)</span>, entonces</p>
+<p><span class="math display">\[
+P(A)P(B)&gt;0,
+\]</span></p>
+<p>por lo que no pueden ser independientes.</p>
+<p>Así, dos eventos positivos que no pueden ocurrir simultáneamente son <strong>dependientes</strong>, no independientes.</p>
+<section id="ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<p>En un lanzamiento de dado,</p>
+<ul>
+<li><span class="math inline">\(A=\)</span> “sale 2”;</li>
+<li><span class="math inline">\(B=\)</span> “sale 5”.</li>
+</ul>
+<p>Son mutuamente excluyentes, pero conocer que ocurrió <span class="math inline">\(A\)</span> hace que la probabilidad de <span class="math inline">\(B\)</span> sea cero. Por tanto, no son independientes.</p>
+</section>
+</section>
+<section id="independencia-y-complementos" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="independencia-y-complementos"><span class="header-section-number">5.11</span> Independencia y complementos</h2>
+<p>Si <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son independientes, también son independientes:</p>
+<p><span class="math display">\[
+A^c\text{ y }B,
+\]</span></p>
+<p><span class="math display">\[
+A\text{ y }B^c,
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+A^c\text{ y }B^c.
+\]</span></p>
+<p>Por ejemplo,</p>
+<p><span class="math display">\[
+P(A^c\cap B)
+=P(B)-P(A\cap B)
+=P(B)-P(A)P(B)
+=P(A^c)P(B).
+\]</span></p>
+</section>
+<section id="con-reemplazo-y-sin-reemplazo" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="con-reemplazo-y-sin-reemplazo"><span class="header-section-number">5.12</span> Con reemplazo y sin reemplazo</h2>
+<p>La diferencia entre ambos esquemas aparece con frecuencia.</p>
+<section id="con-reemplazo" class="level3">
+<h3 class="anchored" data-anchor-id="con-reemplazo">Con reemplazo</h3>
+<p>Si extraemos una pieza, registramos su estado y la devolvemos antes de la siguiente extracción, la composición original se conserva. Bajo las condiciones usuales de muestreo aleatorio, las extracciones sucesivas pueden modelarse como independientes.</p>
+</section>
+<section id="sin-reemplazo" class="level3">
+<h3 class="anchored" data-anchor-id="sin-reemplazo">Sin reemplazo</h3>
+<p>Si no devolvemos la pieza, la composición cambia y las probabilidades de las siguientes extracciones dependen de lo ocurrido antes.</p>
+<p>Este contraste explica por qué el muestreo con y sin reemplazo produce modelos probabilísticos diferentes.</p>
+</section>
+</section>
+<section id="aplicación-confiabilidad-de-dos-módulos" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="aplicación-confiabilidad-de-dos-módulos"><span class="header-section-number">5.13</span> Aplicación: confiabilidad de dos módulos</h2>
+<p>Dos módulos electrónicos trabajan en paralelo. Sea</p>
+<ul>
+<li><span class="math inline">\(A=\)</span> “falla el módulo 1 durante la misión”;</li>
+<li><span class="math inline">\(B=\)</span> “falla el módulo 2 durante la misión”.</li>
+</ul>
+<p>Supongamos</p>
+<p><span class="math display">\[
+P(A)=0.02,
+\qquad
+P(B)=0.03.
+\]</span></p>
+<p>Si las fallas pueden considerarse independientes,</p>
+<p><span class="math display">\[
+P(A\cap B)=0.02(0.03)=0.0006.
+\]</span></p>
+<p>Por tanto, la probabilidad de que falle al menos uno es</p>
+<p><span class="math display">\[
+P(A\cup B)
+=0.02+0.03-0.0006
+=0.0494.
+\]</span></p>
+<p>Pero la independencia debe justificarse. Si ambos módulos comparten fuente de alimentación, temperatura o vibración, una causa común puede volver dependientes sus fallas.</p>
+</section>
+<section id="aplicación-comunicaciones" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="aplicación-comunicaciones"><span class="header-section-number">5.14</span> Aplicación: comunicaciones</h2>
+<p>Un paquete atraviesa dos enlaces. El primer enlace transmite correctamente con probabilidad 0.98. Si el primero transmite correctamente, el segundo lo hace con probabilidad 0.97.</p>
+<p>La probabilidad de que el paquete supere ambos enlaces es</p>
+<p><span class="math display">\[
+0.98(0.97)=0.9506.
+\]</span></p>
+<p>Obsérvese que no necesitamos asumir independencia para utilizar esta multiplicación: estamos usando explícitamente una probabilidad condicional.</p>
+</section>
+<section id="cálculos-con-r" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="cálculos-con-r"><span class="header-section-number">5.15</span> Cálculos con R</h2>
+<section id="probabilidad-condicional" class="level3">
+<h3 class="anchored" data-anchor-id="probabilidad-condicional">Probabilidad condicional</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_A <span class="ot">&lt;-</span> <span class="fl">0.10</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_B <span class="ot">&lt;-</span> <span class="fl">0.30</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>p_AB <span class="ot">&lt;-</span> <span class="fl">0.06</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>p_A_dado_B <span class="ot">&lt;-</span> p_AB <span class="sc">/</span> p_B</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p_B_dado_A <span class="ot">&lt;-</span> p_AB <span class="sc">/</span> p_A</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">P_A_dado_B =</span> p_A_dado_B,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_B_dado_A =</span> p_B_dado_A)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P_A_dado_B P_B_dado_A 
+       0.2        0.6 </code></pre>
+</div>
+</div>
+</section>
+<section id="verificar-independencia" class="level3">
+<h3 class="anchored" data-anchor-id="verificar-independencia">Verificar independencia</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>es_independiente <span class="ot">&lt;-</span> <span class="cf">function</span>(pA, pB, pAB, <span class="at">tol =</span> <span class="fl">1e-10</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(pAB <span class="sc">-</span> pA <span class="sc">*</span> pB) <span class="sc">&lt;</span> tol</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">es_independiente</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">es_independiente</span>(<span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="fl">0.18</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="simulación-dependencia-por-muestreo-sin-reemplazo" class="level2" data-number="5.16">
+<h2 data-number="5.16" class="anchored" data-anchor-id="simulación-dependencia-por-muestreo-sin-reemplazo"><span class="header-section-number">5.16</span> Simulación: dependencia por muestreo sin reemplazo</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  caja <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"D"</span>, <span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"C"</span>, <span class="dv">5</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  muestra <span class="ot">&lt;-</span> <span class="fu">sample</span>(caja, <span class="dv">2</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">D1 =</span> muestra[<span class="dv">1</span>] <span class="sc">==</span> <span class="st">"D"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">D2 =</span> muestra[<span class="dv">2</span>] <span class="sc">==</span> <span class="st">"D"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>D1 <span class="ot">&lt;-</span> resultado[<span class="st">"D1"</span>, ]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>D2 <span class="ot">&lt;-</span> resultado[<span class="st">"D2"</span>, ]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_D1 =</span> <span class="fu">mean</span>(D1),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_D2 =</span> <span class="fu">mean</span>(D2),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_D2_dado_D1 =</span> <span class="fu">mean</span>(D2[D1]),</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">P_D1_inter_D2 =</span> <span class="fu">mean</span>(D1 <span class="sc">&amp;</span> D2),</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">producto_marginales =</span> <span class="fu">mean</span>(D1) <span class="sc">*</span> <span class="fu">mean</span>(D2)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               P_D1                P_D2        P_D2_dado_D1       P_D1_inter_D2 
+          0.3781200           0.3722800           0.2818682           0.1065800 
+producto_marginales 
+          0.1407665 </code></pre>
+</div>
+</div>
+<p>Si hubiera independencia, esperaríamos que</p>
+<p><span class="math display">\[
+P(D_2\mid D_1)\approx P(D_2).
+\]</span></p>
+<p>La simulación muestra que no ocurre: conocer el primer resultado cambia la composición de la caja.</p>
+</section>
+<section id="interactivo-del-capítulo" class="level2" data-number="5.17">
+<h2 data-number="5.17" class="anchored" data-anchor-id="interactivo-del-capítulo"><span class="header-section-number">5.17</span> Interactivo del capítulo</h2>
+<p>La edición web incluye un árbol dinámico con tres controles:</p>
+<ul>
+<li><span class="math inline">\(P(A)\)</span>;</li>
+<li><span class="math inline">\(P(B\mid A)\)</span>;</li>
+<li><span class="math inline">\(P(B\mid A^c)\)</span>.</li>
+</ul>
+<p>El recurso calcula automáticamente las probabilidades de las cuatro hojas, obtiene <span class="math inline">\(P(B)\)</span> y compara</p>
+<p><span class="math display">\[
+P(B\mid A)
+\quad\text{con}\quad
+P(B).
+\]</span></p>
+<p>Cuando ambas cantidades coinciden, <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son independientes. Así puede observarse visualmente que independencia significa que las ramas hacia <span class="math inline">\(B\)</span> mantienen la misma probabilidad independientemente de que haya ocurrido <span class="math inline">\(A\)</span> o <span class="math inline">\(A^c\)</span>.</p>
+</section>
+<section id="actividad-geogebra-árbol-condicional" class="level2" data-number="5.18">
+<h2 data-number="5.18" class="anchored" data-anchor-id="actividad-geogebra-árbol-condicional"><span class="header-section-number">5.18</span> Actividad GeoGebra: árbol condicional</h2>
+<p>Construye un árbol con un deslizador <span class="math inline">\(p\)</span> para <span class="math inline">\(P(A)\)</span> y dos deslizadores <span class="math inline">\(q_1\)</span> y <span class="math inline">\(q_0\)</span> para</p>
+<p><span class="math display">\[
+P(B\mid A)=q_1,
+\qquad
+P(B\mid A^c)=q_0.
+\]</span></p>
+<p>Muestra en las hojas:</p>
+<p><span class="math display">\[
+pq_1,
+\qquad
+p(1-q_1),
+\qquad
+(1-p)q_0,
+\qquad
+(1-p)(1-q_0).
+\]</span></p>
+<p>Después calcula</p>
+<p><span class="math display">\[
+P(B)=pq_1+(1-p)q_0.
+\]</span></p>
+<p>Explora qué ocurre cuando <span class="math inline">\(q_1=q_0\)</span>. Esa configuración representa independencia entre <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span>.</p>
+</section>
+<section id="estrategia-de-solución" class="level2" data-number="5.19">
+<h2 data-number="5.19" class="anchored" data-anchor-id="estrategia-de-solución"><span class="header-section-number">5.19</span> Estrategia de solución</h2>
+<p>Ante un problema condicional:</p>
+<ol type="1">
+<li>Define los eventos antes de sustituir números.</li>
+<li>Identifica claramente cuál evento aparece después de la barra <span class="math inline">\(\mid\)</span>.</li>
+<li>Pregunta si la información reduce el universo de referencia.</li>
+<li>Si el problema es secuencial, considera un árbol.</li>
+<li>Para una trayectoria, multiplica las probabilidades de sus ramas.</li>
+<li>No supongas independencia sólo porque el problema no menciona dependencia.</li>
+<li>Si se afirma independencia, aprovecha</li>
+</ol>
+<p><span class="math display">\[
+P(A\cap B)=P(A)P(B).
+\]</span></p>
+<ol start="8" type="1">
+<li>Interpreta el resultado con palabras.</li>
+</ol>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="5.20">
+<h2 data-number="5.20" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">5.20</span> Errores frecuentes</h2>
+<ul>
+<li>Intercambiar <span class="math inline">\(P(A\mid B)\)</span> y <span class="math inline">\(P(B\mid A)\)</span>.</li>
+<li>Multiplicar <span class="math inline">\(P(A)P(B)\)</span> sin haber establecido independencia.</li>
+<li>Sumar probabilidades a lo largo de una misma trayectoria del árbol; en una trayectoria se multiplican.</li>
+<li>Confundir independencia con eventos mutuamente excluyentes.</li>
+<li>Usar una probabilidad condicional cuyo evento condicionante tiene probabilidad cero.</li>
+<li>Ignorar que el muestreo sin reemplazo modifica las probabilidades posteriores.</li>
+</ul>
+</section>
+<section id="resumen" class="level2" data-number="5.21">
+<h2 data-number="5.21" class="anchored" data-anchor-id="resumen"><span class="header-section-number">5.21</span> Resumen</h2>
+<p>Si <span class="math inline">\(P(B)&gt;0\)</span>,</p>
+<p><span class="math display">\[
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
+\]</span></p>
+<p>La regla del producto es</p>
+<p><span class="math display">\[
+P(A\cap B)=P(B)P(A\mid B)=P(A)P(B\mid A).
+\]</span></p>
+<p>Dos eventos son independientes si</p>
+<p><span class="math display">\[
+P(A\cap B)=P(A)P(B).
+\]</span></p>
+<p>Cuando las probabilidades condicionales están definidas, la independencia equivale a que conocer uno de los eventos no altere la probabilidad del otro.</p>
+</section>
+<section id="ejercicios" class="level2" data-number="5.22">
+<h2 data-number="5.22" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">5.22</span> Ejercicios</h2>
+<ol type="1">
+<li>Si <span class="math inline">\(P(A)=0.45\)</span>, <span class="math inline">\(P(B)=0.50\)</span> y <span class="math inline">\(P(A\cap B)=0.20\)</span>, calcula <span class="math inline">\(P(A\mid B)\)</span> y <span class="math inline">\(P(B\mid A)\)</span>.</li>
+<li>Una empresa recibe 40% de sus componentes del proveedor 1. El 3% de todos los componentes son simultáneamente del proveedor 1 y defectuosos. Calcula la probabilidad de defecto dado que el componente proviene del proveedor 1.</li>
+<li>De una caja con 6 piezas conformes y 4 defectuosas se extraen dos sin reemplazo. Calcula la probabilidad de que ambas sean defectuosas.</li>
+<li>Repite el ejercicio anterior suponiendo reemplazo y compara los resultados.</li>
+<li>Sean <span class="math inline">\(P(A)=0.60\)</span>, <span class="math inline">\(P(B)=0.25\)</span> y <span class="math inline">\(P(A\cap B)=0.15\)</span>. ¿Son independientes? Justifica.</li>
+<li>Sean <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> mutuamente excluyentes con <span class="math inline">\(P(A)=0.20\)</span> y <span class="math inline">\(P(B)=0.30\)</span>. ¿Son independientes? Explica.</li>
+<li>Un sistema tiene tres etapas con probabilidades condicionales de éxito 0.98, 0.95 y 0.99 a lo largo de una trayectoria de operación normal. Calcula la probabilidad de completar las tres etapas.</li>
+<li>Construye en R un árbol de dos etapas para <span class="math inline">\(P(A)=0.35\)</span>, <span class="math inline">\(P(B\mid A)=0.80\)</span> y <span class="math inline">\(P(B\mid A^c)=0.25\)</span>. Obtén las cuatro hojas y verifica que sumen 1.</li>
+<li>Simula 100 000 extracciones dobles sin reemplazo de una urna con 5 bolas blancas y 3 negras. Estima <span class="math inline">\(P(N_2\mid N_1)\)</span> y compárala con <span class="math inline">\(P(N_2)\)</span>.</li>
+<li><strong>Reto ★.</strong> Si <span class="math inline">\(A\)</span> y <span class="math inline">\(B\)</span> son independientes, demuestra utilizando reglas de probabilidad que <span class="math inline">\(A^c\)</span> y <span class="math inline">\(B^c\)</span> también son independientes.</li>
+</ol>
+</section>
+<section id="referencias-del-capítulo" class="level2" data-number="5.23">
+<h2 data-number="5.23" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">5.23</span> Referencias del capítulo</h2>
+<p>El tratamiento de probabilidad condicional, regla del producto, árboles e independencia sigue el desarrollo estándar de probabilidad para ingeniería y ciencias de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. Los ejemplos, simulaciones y código R de este capítulo son originales; para el enfoque computacional se toma como referencia general <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-devore2016" class="csl-entry" role="listitem">
+Devore, Jay L. 2016. <em>Probability and Statistics for Engineering and the Sciences</em>. 9.ª ed. Cengage Learning.
+</div>
+<div id="ref-johnson2018" class="csl-entry" role="listitem">
+Johnson, Richard A. 2018. <em>Miller &amp; Freund’s Probability and Statistics for Engineers</em>. 9.ª ed. Pearson.
+</div>
+<div id="ref-kerns2010" class="csl-entry" role="listitem">
+Kerns, G. Jay. 2010. <em>Introduction to Probability and Statistics Using R</em>. 1.ª ed.
+</div>
+<div id="ref-montgomery2018" class="csl-entry" role="listitem">
+Montgomery, Douglas C., y George C. Runger. 2018. <em>Applied Statistics and Probability for Engineers</em>. 7.ª ed. Wiley.
+</div>
+<div id="ref-walpole2012" class="csl-entry" role="listitem">
+Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Probabilidad y estadística para ingeniería y ciencias</em>. 9.ª ed. Pearson.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const path = window.location.pathname.split('/').pop();
+  const mapa = {
+    '01-incertidumbre-probabilidad.html': {
+      titulo: 'Interactivo del capítulo: frecuencia relativa',
+      archivo: 'interactivos/cap01-frecuencia-relativa.html',
+      texto: 'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'
+    },
+    '02-espacios-eventos.html': {
+      titulo: 'Interactivo del capítulo: operaciones con eventos',
+      archivo: 'interactivos/cap02-eventos-venn.html',
+      texto: 'Explora visualmente unión, intersección, complementos y diferencia de eventos.'
+    },
+    '03-conteo-probabilidad.html': {
+      titulo: 'Interactivo del capítulo: conteo, arreglos y combinaciones',
+      archivo: 'interactivos/cap03-conteo.html',
+      texto: 'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'
+    },
+    '04-axiomas-probabilidad.html': {
+      titulo: 'Interactivo del capítulo: axiomas y regiones de probabilidad',
+      archivo: 'interactivos/cap04-axiomas.html',
+      texto: 'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'
+    },
+    '05-condicional-independencia.html': {
+      titulo: 'Interactivo del capítulo: probabilidad condicional e independencia',
+      archivo: 'interactivos/cap05-condicional-independencia.html',
+      texto: 'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'
+    }
+  };
+  const cfg = mapa[path];
+  if (!cfg) return;
+  const main = document.querySelector('main.content') || document.querySelector('main') || document.querySelector('#quarto-document-content');
+  if (!main || document.getElementById('interactivo-capitulo')) return;
+  const section = document.createElement('section');
+  section.id = 'interactivo-capitulo';
+  section.innerHTML = `
+    <h2>${cfg.titulo}</h2>
+    <p>${cfg.texto}</p>
+    <div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;">
+      <iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe>
+    </div>
+    <p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  main.appendChild(section);
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-axiomas-probabilidad.html" class="pagination-link" aria-label="Axiomas y propiedades de la probabilidad">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Axiomas y propiedades de la probabilidad</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Licencia CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
