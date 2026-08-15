@@ -1,15 +1,24 @@
 local capitulos = {
-  ["01-incertidumbre-probabilidad.qmd"]={colab="01-incertidumbre-probabilidad-colab.ipynb",r="01-incertidumbre-probabilidad.Rmd",interactivo="cap01-frecuencia-relativa.html"},
-  ["02-espacios-eventos.qmd"]={colab="02-espacios-eventos-colab.ipynb",r="02-espacios-eventos.Rmd",interactivo="cap02-eventos-venn.html"},
-  ["03-conteo-probabilidad.qmd"]={colab="03-conteo-probabilidad-colab.ipynb",r="03-conteo-probabilidad.Rmd",interactivo="cap03-conteo.html"},
-  ["04-axiomas-probabilidad.qmd"]={colab="04-axiomas-probabilidad-colab.ipynb",r="04-axiomas-probabilidad.Rmd",interactivo="cap04-axiomas.html"},
-  ["05-condicional-independencia.qmd"]={colab="05-condicional-independencia-colab.ipynb",r="05-condicional-independencia.Rmd",interactivo="cap05-condicional-independencia.html"},
-  ["06-probabilidad-total-bayes.qmd"]={colab="06-probabilidad-total-bayes-colab.ipynb",r="06-probabilidad-total-bayes.Rmd",interactivo="cap06-bayes.html"},
-  ["07-variable-aleatoria-cdf.qmd"]={colab="07-variable-aleatoria-cdf-colab.ipynb",r="07-variable-aleatoria-cdf.Rmd",interactivo="cap07-variable-aleatoria-cdf.html"},
-  ["08-variables-discretas-pmf.qmd"]={colab="08-variables-discretas-pmf-colab.ipynb",r="08-variables-discretas-pmf.Rmd",interactivo="cap08-pmf-cdf.html"},
-  ["09-variables-continuas-densidad.qmd"]={colab="09-variables-continuas-densidad-colab.ipynb",r="09-variables-continuas-densidad.Rmd",interactivo="cap09-densidad-area.html"}
+  ["incertidumbre y probabilidad"]={colab="01-incertidumbre-probabilidad-colab.ipynb",r="01-incertidumbre-probabilidad.Rmd",interactivo="cap01-frecuencia-relativa.html"},
+  ["conjuntos, espacios muestrales y eventos"]={colab="02-espacios-eventos-colab.ipynb",r="02-espacios-eventos.Rmd",interactivo="cap02-eventos-venn.html"},
+  ["técnicas de conteo y enumeración"]={colab="03-conteo-probabilidad-colab.ipynb",r="03-conteo-probabilidad.Rmd",interactivo="cap03-conteo.html"},
+  ["axiomas y propiedades de la probabilidad"]={colab="04-axiomas-probabilidad-colab.ipynb",r="04-axiomas-probabilidad.Rmd",interactivo="cap04-axiomas.html"},
+  ["probabilidad condicional e independencia"]={colab="05-condicional-independencia-colab.ipynb",r="05-condicional-independencia.Rmd",interactivo="cap05-condicional-independencia.html"},
+  ["particiones, probabilidad total y teorema de bayes"]={colab="06-probabilidad-total-bayes-colab.ipynb",r="06-probabilidad-total-bayes.Rmd",interactivo="cap06-bayes.html"},
+  ["variable aleatoria y función de distribución acumulada"]={colab="07-variable-aleatoria-cdf-colab.ipynb",r="07-variable-aleatoria-cdf.Rmd",interactivo="cap07-variable-aleatoria-cdf.html"},
+  ["variables aleatorias discretas y función de masa de probabilidad"]={colab="08-variables-discretas-pmf-colab.ipynb",r="08-variables-discretas-pmf.Rmd",interactivo="cap08-pmf-cdf.html"},
+  ["variables aleatorias continuas y función de densidad"]={colab="09-variables-continuas-densidad-colab.ipynb",r="09-variables-continuas-densidad.Rmd",interactivo="cap09-densidad-area.html"}
 }
-local function basename(path) return path:match("([^/\\]+)$") or path end
+
+local function chapter_title(doc)
+  for _, b in ipairs(doc.blocks) do
+    if b.t == "Header" and b.level == 1 then
+      return pandoc.utils.stringify(b.content):lower()
+    end
+  end
+  return nil
+end
+
 local function material_blocks(cfg)
   local colab="https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/"..cfg.colab
   local rurl="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/"..cfg.r
@@ -29,9 +38,10 @@ Los **cuadernos de R** acompañan cada capítulo para reproducir, modificar y ex
 ]],colab,rurl,inturl)
   return pandoc.read(md,"markdown").blocks
 end
+
 function Pandoc(doc)
-  if not PANDOC_STATE.input_files or #PANDOC_STATE.input_files==0 then return doc end
-  local cfg=capitulos[basename(PANDOC_STATE.input_files[1])]
+  local titulo = chapter_title(doc)
+  local cfg = titulo and capitulos[titulo] or nil
   if not cfg then return doc end
   local extra=material_blocks(cfg)
   local nuevos={}
@@ -43,7 +53,9 @@ function Pandoc(doc)
     end
     table.insert(nuevos,b)
   end
-  if not insertado then for _,x in ipairs(extra) do table.insert(nuevos,x) end end
+  if not insertado then
+    for _,x in ipairs(extra) do table.insert(nuevos,x) end
+  end
   doc.blocks=nuevos
   return doc
 end
