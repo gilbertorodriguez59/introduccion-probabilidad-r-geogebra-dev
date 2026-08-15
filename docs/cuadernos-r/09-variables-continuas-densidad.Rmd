@@ -1,0 +1,68 @@
+---
+title: "Capítulo 9. Variables aleatorias continuas y función de densidad"
+output: html_document
+---
+
+## Objetivo
+
+Este cuaderno reproduce y amplía los ejemplos computacionales del capítulo 9.
+
+## Densidad normalizada
+
+```{r}
+f <- function(x) ifelse(x >= 0 & x <= 2, x / 2, 0)
+integrate(f, 0, 2)
+```
+
+## Probabilidad de un intervalo
+
+```{r}
+integrate(f, 0.5, 1.5)
+```
+
+## Función de distribución acumulada
+
+```{r}
+F <- function(x) {
+  if (x <= 0) return(0)
+  if (x >= 2) return(1)
+  x^2 / 4
+}
+
+sapply(c(-1, 0, 0.5, 1, 1.5, 2, 3), F)
+```
+
+## Gráfica y área
+
+```{r}
+grid <- seq(0, 2, length.out = 500)
+y <- f(grid)
+plot(grid, y, type = "l", lwd = 2,
+     xlab = "x", ylab = "f_X(x)")
+a <- 0.5
+b <- 1.5
+sel <- grid >= a & grid <= b
+polygon(c(a, grid[sel], b), c(0, y[sel], 0), density = 20)
+```
+
+## Simulación por transformada inversa
+
+```{r}
+set.seed(2026)
+n <- 20000
+u <- runif(n)
+xsim <- 2 * sqrt(u)
+mean(xsim >= 0.5 & xsim <= 1.5)
+```
+
+## Histograma frente a densidad teórica
+
+```{r}
+hist(xsim, probability = TRUE, breaks = 30,
+     xlab = "x", main = "Simulación y densidad teórica")
+curve(x / 2, from = 0, to = 2, add = TRUE, lwd = 2)
+```
+
+## Actividad
+
+Modifica los límites del intervalo y compara la probabilidad teórica obtenida por integración con la frecuencia relativa de la simulación.

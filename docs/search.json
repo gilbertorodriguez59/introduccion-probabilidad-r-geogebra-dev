@@ -1680,6 +1680,266 @@
     ]
   },
   {
+    "objectID": "09-variables-continuas-densidad.html",
+    "href": "09-variables-continuas-densidad.html",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "",
+    "text": "9.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#objetivos-de-aprendizaje",
+    "href": "09-variables-continuas-densidad.html#objetivos-de-aprendizaje",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "",
+    "text": "reconocer cuándo una variable aleatoria se modela como continua;\ninterpretar una función de densidad de probabilidad;\nverificar si una función propuesta puede ser una densidad válida;\ncalcular probabilidades como áreas bajo una curva;\nrelacionar la densidad con la función de distribución acumulada;\ncomprender por qué \\(P(X=x)=0\\) para una variable continua;\ncalcular probabilidades de intervalos mediante integrales;\nutilizar R para integrar, graficar y simular modelos continuos;\nexplorar interactivamente cómo cambia un área de probabilidad al mover los límites de un intervalo.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#de-los-conteos-a-las-mediciones",
+    "href": "09-variables-continuas-densidad.html#de-los-conteos-a-las-mediciones",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.2 De los conteos a las mediciones",
+    "text": "9.2 De los conteos a las mediciones\nLas variables discretas aparecen cuando contamos. Las variables continuas aparecen con frecuencia cuando medimos.\nEjemplos típicos son:\n\ntiempo de vida de un componente;\ntemperatura ambiental;\nconcentración de un contaminante;\nvoltaje de una señal;\ndiámetro de una pieza manufacturada;\nvelocidad de un vehículo;\nduración de una llamada.\n\nAunque un instrumento digital muestre un número finito de decimales, el modelo matemático suele considerar que la variable puede tomar cualquier valor dentro de un intervalo.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#variable-aleatoria-continua",
+    "href": "09-variables-continuas-densidad.html#variable-aleatoria-continua",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.3 Variable aleatoria continua",
+    "text": "9.3 Variable aleatoria continua\nEn un modelo elemental, decimos que una variable aleatoria \\(X\\) es continua cuando existe una función no negativa \\(f_X(x)\\) tal que las probabilidades pueden obtenerse mediante áreas:\n\\[\nP(a&lt;X&lt;b)=\\int_a^b f_X(x)\\,dx.\n\\]\nLa función \\(f_X\\) se denomina función de densidad de probabilidad, o PDF por sus siglas en inglés.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#condiciones-para-una-densidad-válida",
+    "href": "09-variables-continuas-densidad.html#condiciones-para-una-densidad-válida",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.4 Condiciones para una densidad válida",
+    "text": "9.4 Condiciones para una densidad válida\nUna función \\(f_X\\) es una densidad de probabilidad si satisface:\n\\[\nf_X(x)\\geq 0\n\\]\npara todo \\(x\\), y\n\\[\n\\boxed{\\int_{-\\infty}^{\\infty} f_X(x)\\,dx=1}.\n\\]\nLa segunda condición expresa que el área total bajo la curva es 1.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#la-densidad-no-es-una-probabilidad-puntual",
+    "href": "09-variables-continuas-densidad.html#la-densidad-no-es-una-probabilidad-puntual",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.5 La densidad no es una probabilidad puntual",
+    "text": "9.5 La densidad no es una probabilidad puntual\nÉsta es una diferencia fundamental respecto de una PMF discreta.\nPara una variable continua,\n\\[\n\\boxed{P(X=x)=0}.\n\\]\nPor tanto,\n\\[\nf_X(x)\\neq P(X=x).\n\\]\nLa densidad describe concentración de probabilidad alrededor de un valor, mientras que la probabilidad se obtiene integrando sobre un intervalo.\nUna densidad incluso puede tomar valores mayores que 1 sin violar las reglas de probabilidad, siempre que el área total sea 1.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#probabilidad-como-área",
+    "href": "09-variables-continuas-densidad.html#probabilidad-como-área",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.6 Probabilidad como área",
+    "text": "9.6 Probabilidad como área\nSi \\(a&lt;b\\), entonces\n\\[\n\\boxed{P(a&lt;X&lt;b)=\\int_a^b f_X(x)\\,dx}.\n\\]\nComo un punto aislado tiene probabilidad cero, para variables continuas no importa incluir o excluir los extremos:\n\\[\nP(a&lt;X&lt;b)=P(a\\leq X&lt;b)=P(a&lt;X\\leq b)=P(a\\leq X\\leq b).\n\\]\nEsta igualdad no es cierta, en general, para variables discretas.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#ejemplo-densidad-uniforme-elemental",
+    "href": "09-variables-continuas-densidad.html#ejemplo-densidad-uniforme-elemental",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.7 Ejemplo: densidad uniforme elemental",
+    "text": "9.7 Ejemplo: densidad uniforme elemental\nSupongamos que\n\\[\nf_X(x)=\n\\begin{cases}\n\\frac{1}{10}, & 0\\leq x\\leq10,\\\\\n0, & \\text{en otro caso}.\n\\end{cases}\n\\]\nEl área total es\n\\[\n\\int_0^{10}\\frac{1}{10}\\,dx=1.\n\\]\nLa probabilidad de observar un valor entre 2 y 6 es\n\\[\nP(2\\leq X\\leq6)\n=\\int_2^6\\frac{1}{10}\\,dx\n=\\frac{4}{10}=0.4.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#determinar-una-constante-de-normalización",
+    "href": "09-variables-continuas-densidad.html#determinar-una-constante-de-normalización",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.8 Determinar una constante de normalización",
+    "text": "9.8 Determinar una constante de normalización\nSea\n\\[\nf_X(x)=\n\\begin{cases}\ncx, & 0\\leq x\\leq2,\\\\\n0, & \\text{en otro caso}.\n\\end{cases}\n\\]\nPara que sea una densidad,\n\\[\n\\int_0^2 cx\\,dx=1.\n\\]\nEntonces\n\\[\nc\\left[\\frac{x^2}{2}\\right]_0^2=1,\n\\]\n\\[\n2c=1,\n\\]\npor lo que\n\\[\n\\boxed{c=\\frac12}.\n\\]\nLa densidad es\n\\[\nf_X(x)=\\frac{x}{2},\\qquad 0\\leq x\\leq2.\n\\]\nPor ejemplo,\n\\[\nP(0.5&lt;X&lt;1.5)\n=\\int_{0.5}^{1.5}\\frac{x}{2}\\,dx\n=0.5.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#función-de-distribución-acumulada",
+    "href": "09-variables-continuas-densidad.html#función-de-distribución-acumulada",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.9 Función de distribución acumulada",
+    "text": "9.9 Función de distribución acumulada\nPara cualquier variable aleatoria,\n\\[\nF_X(x)=P(X\\leq x).\n\\]\nSi \\(X\\) tiene densidad \\(f_X\\), entonces\n\\[\n\\boxed{F_X(x)=\\int_{-\\infty}^{x}f_X(t)\\,dt}.\n\\]\nLa CDF acumula el área situada a la izquierda de \\(x\\).\nCuando \\(F_X\\) es diferenciable,\n\\[\n\\boxed{f_X(x)=F_X'(x)}.\n\\]\nAsí, densidad y distribución acumulada son dos formas relacionadas de describir el mismo modelo continuo.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#ejemplo-de-cdf-a-partir-de-una-densidad",
+    "href": "09-variables-continuas-densidad.html#ejemplo-de-cdf-a-partir-de-una-densidad",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.10 Ejemplo de CDF a partir de una densidad",
+    "text": "9.10 Ejemplo de CDF a partir de una densidad\nPara\n\\[\nf_X(x)=\\frac{x}{2},\\qquad 0\\leq x\\leq2,\n\\]\nobtenemos\n\\[\nF_X(x)=\n\\begin{cases}\n0, & x&lt;0,\\\\\n\\frac{x^2}{4}, & 0\\leq x\\leq2,\\\\\n1, & x&gt;2.\n\\end{cases}\n\\]\nPodemos verificar que\n\\[\nF_X(2)=1.\n\\]\nAdemás,\n\\[\nP(0.5&lt;X&lt;1.5)=F_X(1.5)-F_X(0.5).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#probabilidades-mediante-la-cdf",
+    "href": "09-variables-continuas-densidad.html#probabilidades-mediante-la-cdf",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.11 Probabilidades mediante la CDF",
+    "text": "9.11 Probabilidades mediante la CDF\nPara \\(a&lt;b\\),\n\\[\nP(a&lt;X\\leq b)=F_X(b)-F_X(a).\n\\]\nEn el caso continuo, como \\(P(X=a)=0\\),\n\\[\nP(a&lt;X&lt;b)=F_X(b)-F_X(a).\n\\]\nTambién\n\\[\nP(X&gt;x)=1-F_X(x).\n\\]\nEstas relaciones serán muy útiles cuando trabajemos con distribuciones continuas conocidas.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#ejemplo-de-ingeniería-error-de-medición",
+    "href": "09-variables-continuas-densidad.html#ejemplo-de-ingeniería-error-de-medición",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.12 Ejemplo de ingeniería: error de medición",
+    "text": "9.12 Ejemplo de ingeniería: error de medición\nSea \\(X\\) el error, en milímetros, de un instrumento de inspección. Supongamos que el modelo asigna una densidad triangular sobre el intervalo \\([-1,1]\\):\n\\[\nf_X(x)=\n\\begin{cases}\n1-|x|, & -1\\leq x\\leq1,\\\\\n0, & \\text{en otro caso}.\n\\end{cases}\n\\]\nEl área total es 1. La probabilidad de que el error absoluto sea menor que 0.25 mm es\n\\[\nP(|X|&lt;0.25)=\\int_{-0.25}^{0.25}(1-|x|)\\,dx.\n\\]\nPor simetría,\n\\[\nP(|X|&lt;0.25)=2\\int_0^{0.25}(1-x)\\,dx=0.4375.\n\\]\nEste tipo de cálculo relaciona directamente una tolerancia de ingeniería con un área de probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#ejemplo-ambiental-concentración-de-un-contaminante",
+    "href": "09-variables-continuas-densidad.html#ejemplo-ambiental-concentración-de-un-contaminante",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.13 Ejemplo ambiental: concentración de un contaminante",
+    "text": "9.13 Ejemplo ambiental: concentración de un contaminante\nSupongamos que \\(X\\) representa una concentración normalizada y que su densidad en \\(0\\leq x\\leq1\\) es\n\\[\nf_X(x)=2(1-x).\n\\]\nLa probabilidad de observar una concentración superior a 0.7 es\n\\[\nP(X&gt;0.7)=\\int_{0.7}^{1}2(1-x)\\,dx=0.09.\n\\]\nLa interpretación es que, bajo este modelo, aproximadamente 9% de las observaciones exceden 0.7.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#integración-en-r",
+    "href": "09-variables-continuas-densidad.html#integración-en-r",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.14 Integración en R",
+    "text": "9.14 Integración en R\nR puede calcular probabilidades mediante integrate().\n\nf &lt;- function(x) x / 2\n\nintegrate(f, lower = 0, upper = 2)\n\n1 with absolute error &lt; 1.1e-14\n\nintegrate(f, lower = 0.5, upper = 1.5)\n\n0.5 with absolute error &lt; 5.6e-15\n\n\nEl primer resultado debe ser 1 y el segundo corresponde a la probabilidad del intervalo.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#graficar-una-densidad-y-sombrear-un-intervalo",
+    "href": "09-variables-continuas-densidad.html#graficar-una-densidad-y-sombrear-un-intervalo",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.15 Graficar una densidad y sombrear un intervalo",
+    "text": "9.15 Graficar una densidad y sombrear un intervalo\n\nf &lt;- function(x) ifelse(x &gt;= 0 & x &lt;= 2, x / 2, 0)\n\ngrid &lt;- seq(0, 2, length.out = 500)\ny &lt;- f(grid)\n\nplot(grid, y, type = \"l\", lwd = 2,\n     xlab = \"x\", ylab = \"f_X(x)\")\n\na &lt;- 0.5\nb &lt;- 1.5\nsel &lt;- grid &gt;= a & grid &lt;= b\npolygon(c(a, grid[sel], b),\n        c(0, y[sel], 0),\n        density = 20)\n\n\n\n\n\n\n\n\nLa región sombreada representa exactamente una probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#construcción-numérica-de-la-cdf",
+    "href": "09-variables-continuas-densidad.html#construcción-numérica-de-la-cdf",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.16 Construcción numérica de la CDF",
+    "text": "9.16 Construcción numérica de la CDF\nPodemos definir la CDF directamente mediante integración:\n\nF &lt;- function(x) {\n  if (x &lt;= 0) return(0)\n  if (x &gt;= 2) return(1)\n  integrate(f, lower = 0, upper = x)$value\n}\n\nsapply(c(-1, 0, 0.5, 1, 1.5, 2, 3), F)\n\n[1] 0.0000 0.0000 0.0625 0.2500 0.5625 1.0000 1.0000",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#simulación-de-una-variable-continua",
+    "href": "09-variables-continuas-densidad.html#simulación-de-una-variable-continua",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.17 Simulación de una variable continua",
+    "text": "9.17 Simulación de una variable continua\nPara la densidad\n\\[\nf_X(x)=\\frac{x}{2},\\qquad0\\leq x\\leq2,\n\\]\nla CDF es\n\\[\nF_X(x)=\\frac{x^2}{4}.\n\\]\nSi \\(U\\) es uniforme en \\((0,1)\\), podemos resolver\n\\[\nU=\\frac{X^2}{4}\n\\]\npara obtener\n\\[\nX=2\\sqrt U.\n\\]\nEsto permite simular valores:\n\nset.seed(2026)\nn &lt;- 20000\nu &lt;- runif(n)\nxsim &lt;- 2 * sqrt(u)\n\nmean(xsim &gt;= 0.5 & xsim &lt;= 1.5)\n\n[1] 0.50265\n\n\nLa frecuencia relativa debe aproximarse a la probabilidad teórica 0.5.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#histograma-y-densidad-teórica",
+    "href": "09-variables-continuas-densidad.html#histograma-y-densidad-teórica",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.18 Histograma y densidad teórica",
+    "text": "9.18 Histograma y densidad teórica\n\nhist(xsim, probability = TRUE,\n     breaks = 30,\n     xlab = \"x\",\n     main = \"Simulación y densidad teórica\")\ncurve(x / 2, from = 0, to = 2,\n      add = TRUE, lwd = 2)\n\n\n\n\n\n\n\n\nEl histograma representa la distribución empírica; la curva representa el modelo teórico.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#interactivo-del-capítulo",
+    "href": "09-variables-continuas-densidad.html#interactivo-del-capítulo",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.19 Interactivo del capítulo",
+    "text": "9.19 Interactivo del capítulo\nLa edición web incluye una densidad triangular normalizada sobre \\([0,1]\\). El estudiante puede modificar:\n\nel punto modal de la distribución;\nel límite inferior \\(a\\);\nel límite superior \\(b\\).\n\nEl recurso sombrea automáticamente el área\n\\[\nP(a&lt;X&lt;b)\n\\]\ny muestra simultáneamente el valor de la probabilidad. También permite observar que mover los límites cambia el área, no la “altura puntual” como probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#actividad-con-geogebra",
+    "href": "09-variables-continuas-densidad.html#actividad-con-geogebra",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.20 Actividad con GeoGebra",
+    "text": "9.20 Actividad con GeoGebra\nConstruye una densidad triangular sobre \\([0,1]\\) con modo \\(m\\), donde \\(0&lt;m&lt;1\\):\n\\[\nf(x)=\n\\begin{cases}\n\\frac{2x}{m}, & 0\\leq x\\leq m,\\\\\n\\frac{2(1-x)}{1-m}, & m&lt;x\\leq1,\\\\\n0, & \\text{en otro caso}.\n\\end{cases}\n\\]\nCrea deslizadores para \\(m\\), \\(a\\) y \\(b\\) y utiliza el comando de integral para sombrear\n\\[\n\\int_a^b f(x)\\,dx.\n\\]\nComprueba que el área total bajo la densidad es siempre 1 aunque cambie el modo \\(m\\).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#densidad-frente-a-probabilidad",
+    "href": "09-variables-continuas-densidad.html#densidad-frente-a-probabilidad",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.21 Densidad frente a probabilidad",
+    "text": "9.21 Densidad frente a probabilidad\nConviene mantener esta distinción:\n\n\n\nConcepto\nDiscreto\nContinuo\n\n\n\n\nProbabilidad puntual\n\\(P(X=x)=p_X(x)\\)\n\\(P(X=x)=0\\)\n\n\nProbabilidad de intervalo\nsuma de masas\nintegral de densidad\n\n\nFunción básica\nPMF\nPDF\n\n\nCDF\nsuma acumulada\nintegral acumulada",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#errores-frecuentes",
+    "href": "09-variables-continuas-densidad.html#errores-frecuentes",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.22 Errores frecuentes",
+    "text": "9.22 Errores frecuentes\n\nInterpretar \\(f_X(x)\\) como \\(P(X=x)\\).\nExigir que una densidad nunca sea mayor que 1.\nOlvidar verificar que el área total sea 1.\nCalcular probabilidades continuas mediante sumas de alturas.\nConfundir área bajo la densidad con área bajo la CDF.\nOlvidar que incluir o excluir un extremo no cambia una probabilidad continua.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#resumen",
+    "href": "09-variables-continuas-densidad.html#resumen",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.23 Resumen",
+    "text": "9.23 Resumen\nUna variable continua puede describirse mediante una densidad \\(f_X\\) tal que\n\\[\nf_X(x)\\geq0,\n\\]\n\\[\n\\int_{-\\infty}^{\\infty}f_X(x)\\,dx=1,\n\\]\ny\n\\[\nP(a&lt;X&lt;b)=\\int_a^b f_X(x)\\,dx.\n\\]\nSu CDF es\n\\[\nF_X(x)=\\int_{-\\infty}^{x}f_X(t)\\,dt,\n\\]\ny, donde exista la derivada,\n\\[\nf_X(x)=F_X'(x).\n\\]\nPara una variable absolutamente continua,\n\\[\nP(X=x)=0.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#ejercicios",
+    "href": "09-variables-continuas-densidad.html#ejercicios",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.24 Ejercicios",
+    "text": "9.24 Ejercicios\n\nDecide si \\(f(x)=2x\\) para \\(0\\leq x\\leq1\\) y cero fuera de ese intervalo es una densidad válida.\nSea \\(f(x)=c(1+x)\\) para \\(0\\leq x\\leq1\\). Determina \\(c\\).\nPara la densidad del ejercicio 2, calcula \\(P(X&lt;0.4)\\) y \\(P(0.2&lt;X&lt;0.8)\\).\nObtén la CDF correspondiente al ejercicio 2.\nPara \\(f(x)=x/2\\) en \\([0,2]\\), verifica mediante R que \\(P(0.5&lt;X&lt;1.5)=0.5\\).\nSimula 50 000 valores del modelo anterior usando \\(X=2\\sqrt U\\) y compara la probabilidad empírica con la teórica.\nUna variable de error tiene densidad \\(f(x)=1-|x|\\) para \\(-1\\leq x\\leq1\\). Calcula \\(P(|X|&lt;0.5)\\).\nExplica por qué una densidad puede valer 2 en algún punto sin que exista una probabilidad mayor que 1.\nUna CDF continua y diferenciable está dada por \\(F(x)=x^2\\) para \\(0\\leq x\\leq1\\), con las extensiones usuales 0 y 1 fuera del intervalo. Obtén su densidad.\nReto ★. Para la densidad triangular con modo \\(m\\in(0,1)\\) utilizada en el interactivo, demuestra que el área total es 1 para cualquier valor de \\(m\\).",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
+    "objectID": "09-variables-continuas-densidad.html#referencias-del-capítulo",
+    "href": "09-variables-continuas-densidad.html#referencias-del-capítulo",
+    "title": "9  Variables aleatorias continuas y función de densidad",
+    "section": "9.25 Referencias del capítulo",
+    "text": "9.25 Referencias del capítulo\nEl tratamiento de variables continuas, densidades y funciones de distribución acumulada sigue el desarrollo estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, actividades, código R y simulaciones de este capítulo son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Variables aleatorias continuas y función de densidad</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "Referencias",

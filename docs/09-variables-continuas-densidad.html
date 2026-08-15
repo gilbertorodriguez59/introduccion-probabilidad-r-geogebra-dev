@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Particiones, probabilidad total y teorema de Bayes – Introducción a la Probabilidad con R y GeoGebra</title>
+<title>9&nbsp; Variables aleatorias continuas y función de densidad – Introducción a la Probabilidad con R y GeoGebra</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -90,8 +90,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-variable-aleatoria-cdf.html" rel="next">
-<link href="./05-condicional-independencia.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./08-variables-discretas-pmf.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -171,7 +171,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-probabilidad-total-bayes.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-variables-continuas-densidad.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variables aleatorias continuas y función de densidad</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -262,7 +262,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link active">
+  <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></span></a>
   </div>
 </li>
@@ -280,7 +280,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-variables-continuas-densidad.html" class="sidebar-item-text sidebar-link">
+  <a href="./09-variables-continuas-densidad.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variables aleatorias continuas y función de densidad</span></span></a>
   </div>
 </li>
@@ -300,39 +300,31 @@ window.Quarto = {
     <h2 id="toc-title">En este capítulo</h2>
    
   <ul>
-  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">6.1</span> Objetivos de aprendizaje</a></li>
-  <li><a href="#por-qué-necesitamos-una-partición" id="toc-por-qué-necesitamos-una-partición" class="nav-link" data-scroll-target="#por-qué-necesitamos-una-partición"><span class="header-section-number">6.2</span> Por qué necesitamos una partición</a>
-  <ul class="collapse">
-  <li><a href="#ejemplo-proveedores" id="toc-ejemplo-proveedores" class="nav-link" data-scroll-target="#ejemplo-proveedores">Ejemplo: proveedores</a></li>
-  </ul></li>
-  <li><a href="#ley-de-la-probabilidad-total" id="toc-ley-de-la-probabilidad-total" class="nav-link" data-scroll-target="#ley-de-la-probabilidad-total"><span class="header-section-number">6.3</span> Ley de la probabilidad total</a></li>
-  <li><a href="#ejemplo-defectos-por-proveedor" id="toc-ejemplo-defectos-por-proveedor" class="nav-link" data-scroll-target="#ejemplo-defectos-por-proveedor"><span class="header-section-number">6.4</span> Ejemplo: defectos por proveedor</a></li>
-  <li><a href="#de-la-causa-al-efecto-y-del-efecto-a-la-causa" id="toc-de-la-causa-al-efecto-y-del-efecto-a-la-causa" class="nav-link" data-scroll-target="#de-la-causa-al-efecto-y-del-efecto-a-la-causa"><span class="header-section-number">6.5</span> De la causa al efecto y del efecto a la causa</a></li>
-  <li><a href="#teorema-de-bayes" id="toc-teorema-de-bayes" class="nav-link" data-scroll-target="#teorema-de-bayes"><span class="header-section-number">6.6</span> Teorema de Bayes</a></li>
-  <li><a href="#continuación-del-ejemplo-de-proveedores" id="toc-continuación-del-ejemplo-de-proveedores" class="nav-link" data-scroll-target="#continuación-del-ejemplo-de-proveedores"><span class="header-section-number">6.7</span> Continuación del ejemplo de proveedores</a></li>
-  <li><a href="#interpretación-bayesiana-elemental" id="toc-interpretación-bayesiana-elemental" class="nav-link" data-scroll-target="#interpretación-bayesiana-elemental"><span class="header-section-number">6.8</span> Interpretación bayesiana elemental</a></li>
-  <li><a href="#árbol-de-probabilidad" id="toc-árbol-de-probabilidad" class="nav-link" data-scroll-target="#árbol-de-probabilidad"><span class="header-section-number">6.9</span> Árbol de probabilidad</a></li>
-  <li><a href="#ejemplo-de-diagnóstico" id="toc-ejemplo-de-diagnóstico" class="nav-link" data-scroll-target="#ejemplo-de-diagnóstico"><span class="header-section-number">6.10</span> Ejemplo de diagnóstico</a></li>
-  <li><a href="#la-importancia-de-la-tasa-base" id="toc-la-importancia-de-la-tasa-base" class="nav-link" data-scroll-target="#la-importancia-de-la-tasa-base"><span class="header-section-number">6.11</span> La importancia de la tasa base</a>
-  <ul class="collapse">
-  <li><a href="#interpretación-con-10-000-personas" id="toc-interpretación-con-10-000-personas" class="nav-link" data-scroll-target="#interpretación-con-10-000-personas">Interpretación con 10 000 personas</a></li>
-  </ul></li>
-  <li><a href="#aplicación-detección-de-fallas" id="toc-aplicación-detección-de-fallas" class="nav-link" data-scroll-target="#aplicación-detección-de-fallas"><span class="header-section-number">6.12</span> Aplicación: detección de fallas</a></li>
-  <li><a href="#actualización-sucesiva" id="toc-actualización-sucesiva" class="nav-link" data-scroll-target="#actualización-sucesiva"><span class="header-section-number">6.13</span> Actualización sucesiva</a></li>
-  <li><a href="#cálculos-con-r" id="toc-cálculos-con-r" class="nav-link" data-scroll-target="#cálculos-con-r"><span class="header-section-number">6.14</span> Cálculos con R</a>
-  <ul class="collapse">
-  <li><a href="#probabilidad-total" id="toc-probabilidad-total" class="nav-link" data-scroll-target="#probabilidad-total">Probabilidad total</a></li>
-  <li><a href="#bayes-para-todos-los-proveedores" id="toc-bayes-para-todos-los-proveedores" class="nav-link" data-scroll-target="#bayes-para-todos-los-proveedores">Bayes para todos los proveedores</a></li>
-  <li><a href="#función-general" id="toc-función-general" class="nav-link" data-scroll-target="#función-general">Función general</a></li>
-  </ul></li>
-  <li><a href="#simulación-de-un-problema-de-diagnóstico" id="toc-simulación-de-un-problema-de-diagnóstico" class="nav-link" data-scroll-target="#simulación-de-un-problema-de-diagnóstico"><span class="header-section-number">6.15</span> Simulación de un problema de diagnóstico</a></li>
-  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">6.16</span> Interactivo del capítulo</a></li>
-  <li><a href="#actividad-con-geogebra" id="toc-actividad-con-geogebra" class="nav-link" data-scroll-target="#actividad-con-geogebra"><span class="header-section-number">6.17</span> Actividad con GeoGebra</a></li>
-  <li><a href="#estrategia-para-resolver-problemas-de-bayes" id="toc-estrategia-para-resolver-problemas-de-bayes" class="nav-link" data-scroll-target="#estrategia-para-resolver-problemas-de-bayes"><span class="header-section-number">6.18</span> Estrategia para resolver problemas de Bayes</a></li>
-  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">6.19</span> Errores frecuentes</a></li>
-  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">6.20</span> Resumen</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">6.21</span> Ejercicios</a></li>
-  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">6.22</span> Referencias del capítulo</a></li>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">9.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#de-los-conteos-a-las-mediciones" id="toc-de-los-conteos-a-las-mediciones" class="nav-link" data-scroll-target="#de-los-conteos-a-las-mediciones"><span class="header-section-number">9.2</span> De los conteos a las mediciones</a></li>
+  <li><a href="#variable-aleatoria-continua" id="toc-variable-aleatoria-continua" class="nav-link" data-scroll-target="#variable-aleatoria-continua"><span class="header-section-number">9.3</span> Variable aleatoria continua</a></li>
+  <li><a href="#condiciones-para-una-densidad-válida" id="toc-condiciones-para-una-densidad-válida" class="nav-link" data-scroll-target="#condiciones-para-una-densidad-válida"><span class="header-section-number">9.4</span> Condiciones para una densidad válida</a></li>
+  <li><a href="#la-densidad-no-es-una-probabilidad-puntual" id="toc-la-densidad-no-es-una-probabilidad-puntual" class="nav-link" data-scroll-target="#la-densidad-no-es-una-probabilidad-puntual"><span class="header-section-number">9.5</span> La densidad no es una probabilidad puntual</a></li>
+  <li><a href="#probabilidad-como-área" id="toc-probabilidad-como-área" class="nav-link" data-scroll-target="#probabilidad-como-área"><span class="header-section-number">9.6</span> Probabilidad como área</a></li>
+  <li><a href="#ejemplo-densidad-uniforme-elemental" id="toc-ejemplo-densidad-uniforme-elemental" class="nav-link" data-scroll-target="#ejemplo-densidad-uniforme-elemental"><span class="header-section-number">9.7</span> Ejemplo: densidad uniforme elemental</a></li>
+  <li><a href="#determinar-una-constante-de-normalización" id="toc-determinar-una-constante-de-normalización" class="nav-link" data-scroll-target="#determinar-una-constante-de-normalización"><span class="header-section-number">9.8</span> Determinar una constante de normalización</a></li>
+  <li><a href="#función-de-distribución-acumulada" id="toc-función-de-distribución-acumulada" class="nav-link" data-scroll-target="#función-de-distribución-acumulada"><span class="header-section-number">9.9</span> Función de distribución acumulada</a></li>
+  <li><a href="#ejemplo-de-cdf-a-partir-de-una-densidad" id="toc-ejemplo-de-cdf-a-partir-de-una-densidad" class="nav-link" data-scroll-target="#ejemplo-de-cdf-a-partir-de-una-densidad"><span class="header-section-number">9.10</span> Ejemplo de CDF a partir de una densidad</a></li>
+  <li><a href="#probabilidades-mediante-la-cdf" id="toc-probabilidades-mediante-la-cdf" class="nav-link" data-scroll-target="#probabilidades-mediante-la-cdf"><span class="header-section-number">9.11</span> Probabilidades mediante la CDF</a></li>
+  <li><a href="#ejemplo-de-ingeniería-error-de-medición" id="toc-ejemplo-de-ingeniería-error-de-medición" class="nav-link" data-scroll-target="#ejemplo-de-ingeniería-error-de-medición"><span class="header-section-number">9.12</span> Ejemplo de ingeniería: error de medición</a></li>
+  <li><a href="#ejemplo-ambiental-concentración-de-un-contaminante" id="toc-ejemplo-ambiental-concentración-de-un-contaminante" class="nav-link" data-scroll-target="#ejemplo-ambiental-concentración-de-un-contaminante"><span class="header-section-number">9.13</span> Ejemplo ambiental: concentración de un contaminante</a></li>
+  <li><a href="#integración-en-r" id="toc-integración-en-r" class="nav-link" data-scroll-target="#integración-en-r"><span class="header-section-number">9.14</span> Integración en R</a></li>
+  <li><a href="#graficar-una-densidad-y-sombrear-un-intervalo" id="toc-graficar-una-densidad-y-sombrear-un-intervalo" class="nav-link" data-scroll-target="#graficar-una-densidad-y-sombrear-un-intervalo"><span class="header-section-number">9.15</span> Graficar una densidad y sombrear un intervalo</a></li>
+  <li><a href="#construcción-numérica-de-la-cdf" id="toc-construcción-numérica-de-la-cdf" class="nav-link" data-scroll-target="#construcción-numérica-de-la-cdf"><span class="header-section-number">9.16</span> Construcción numérica de la CDF</a></li>
+  <li><a href="#simulación-de-una-variable-continua" id="toc-simulación-de-una-variable-continua" class="nav-link" data-scroll-target="#simulación-de-una-variable-continua"><span class="header-section-number">9.17</span> Simulación de una variable continua</a></li>
+  <li><a href="#histograma-y-densidad-teórica" id="toc-histograma-y-densidad-teórica" class="nav-link" data-scroll-target="#histograma-y-densidad-teórica"><span class="header-section-number">9.18</span> Histograma y densidad teórica</a></li>
+  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">9.19</span> Interactivo del capítulo</a></li>
+  <li><a href="#actividad-con-geogebra" id="toc-actividad-con-geogebra" class="nav-link" data-scroll-target="#actividad-con-geogebra"><span class="header-section-number">9.20</span> Actividad con GeoGebra</a></li>
+  <li><a href="#densidad-frente-a-probabilidad" id="toc-densidad-frente-a-probabilidad" class="nav-link" data-scroll-target="#densidad-frente-a-probabilidad"><span class="header-section-number">9.21</span> Densidad frente a probabilidad</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">9.22</span> Errores frecuentes</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">9.23</span> Resumen</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">9.24</span> Ejercicios</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">9.25</span> Referencias del capítulo</a></li>
   </ul>
 </nav>
     </div>
@@ -341,7 +333,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variables aleatorias continuas y función de densidad</span></h1>
 </div>
 
 
@@ -358,469 +350,460 @@ window.Quarto = {
 </header>
 
 
-<section id="objetivos-de-aprendizaje" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">6.1</span> Objetivos de aprendizaje</h2>
+<section id="objetivos-de-aprendizaje" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">9.1</span> Objetivos de aprendizaje</h2>
 <p>Al finalizar este capítulo, el estudiante será capaz de:</p>
 <ul>
-<li>reconocer una partición del espacio muestral;</li>
-<li>aplicar la ley de la probabilidad total;</li>
-<li>utilizar el teorema de Bayes para actualizar probabilidades;</li>
-<li>distinguir probabilidades previas, verosimilitudes y probabilidades posteriores;</li>
-<li>construir árboles de probabilidad para organizar cálculos;</li>
-<li>interpretar el efecto de las tasas base en problemas de diagnóstico;</li>
-<li>resolver problemas de calidad, confiabilidad y clasificación;</li>
-<li>implementar cálculos de Bayes en R;</li>
-<li>explorar mediante un interactivo cómo cambia una probabilidad posterior al modificar la evidencia.</li>
+<li>reconocer cuándo una variable aleatoria se modela como continua;</li>
+<li>interpretar una función de densidad de probabilidad;</li>
+<li>verificar si una función propuesta puede ser una densidad válida;</li>
+<li>calcular probabilidades como áreas bajo una curva;</li>
+<li>relacionar la densidad con la función de distribución acumulada;</li>
+<li>comprender por qué <span class="math inline">\(P(X=x)=0\)</span> para una variable continua;</li>
+<li>calcular probabilidades de intervalos mediante integrales;</li>
+<li>utilizar R para integrar, graficar y simular modelos continuos;</li>
+<li>explorar interactivamente cómo cambia un área de probabilidad al mover los límites de un intervalo.</li>
 </ul>
 </section>
-<section id="por-qué-necesitamos-una-partición" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="por-qué-necesitamos-una-partición"><span class="header-section-number">6.2</span> Por qué necesitamos una partición</h2>
-<p>En muchos problemas un mismo evento puede ocurrir por diferentes causas o rutas. Una forma natural de organizar esas posibilidades es dividir el espacio muestral en regiones mutuamente excluyentes que, juntas, cubran todo el espacio.</p>
-<p>Una colección de eventos</p>
-<p><span class="math display">\[
-B_1,B_2,\ldots,B_k
-\]</span></p>
-<p>forma una <strong>partición</strong> de <span class="math inline">\(\Omega\)</span> si:</p>
-<ol type="1">
-<li><span class="math inline">\(B_i\cap B_j=\varnothing\)</span> para <span class="math inline">\(i\neq j\)</span>;</li>
-<li><span class="math inline">\(B_1\cup B_2\cup\cdots\cup B_k=\Omega\)</span>;</li>
-<li><span class="math inline">\(P(B_i)&gt;0\)</span> para los eventos que utilizaremos como condicionantes.</li>
-</ol>
-<p>Cada resultado pertenece exactamente a una de las partes.</p>
-<section id="ejemplo-proveedores" class="level3">
-<h3 class="anchored" data-anchor-id="ejemplo-proveedores">Ejemplo: proveedores</h3>
-<p>Una planta recibe componentes de tres proveedores:</p>
-<p><span class="math display">\[
-B_1=\{\text{proveedor 1}\},\qquad
-B_2=\{\text{proveedor 2}\},\qquad
-B_3=\{\text{proveedor 3}\}.
-\]</span></p>
-<p>Si todo componente proviene de uno y sólo uno de ellos, entonces <span class="math inline">\(B_1,B_2,B_3\)</span> forman una partición.</p>
+<section id="de-los-conteos-a-las-mediciones" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="de-los-conteos-a-las-mediciones"><span class="header-section-number">9.2</span> De los conteos a las mediciones</h2>
+<p>Las variables discretas aparecen cuando contamos. Las variables continuas aparecen con frecuencia cuando <strong>medimos</strong>.</p>
+<p>Ejemplos típicos son:</p>
+<ul>
+<li>tiempo de vida de un componente;</li>
+<li>temperatura ambiental;</li>
+<li>concentración de un contaminante;</li>
+<li>voltaje de una señal;</li>
+<li>diámetro de una pieza manufacturada;</li>
+<li>velocidad de un vehículo;</li>
+<li>duración de una llamada.</li>
+</ul>
+<p>Aunque un instrumento digital muestre un número finito de decimales, el modelo matemático suele considerar que la variable puede tomar cualquier valor dentro de un intervalo.</p>
 </section>
+<section id="variable-aleatoria-continua" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="variable-aleatoria-continua"><span class="header-section-number">9.3</span> Variable aleatoria continua</h2>
+<p>En un modelo elemental, decimos que una variable aleatoria <span class="math inline">\(X\)</span> es <strong>continua</strong> cuando existe una función no negativa <span class="math inline">\(f_X(x)\)</span> tal que las probabilidades pueden obtenerse mediante áreas:</p>
+<p><span class="math display">\[
+P(a&lt;X&lt;b)=\int_a^b f_X(x)\,dx.
+\]</span></p>
+<p>La función <span class="math inline">\(f_X\)</span> se denomina <strong>función de densidad de probabilidad</strong>, o PDF por sus siglas en inglés.</p>
 </section>
-<section id="ley-de-la-probabilidad-total" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="ley-de-la-probabilidad-total"><span class="header-section-number">6.3</span> Ley de la probabilidad total</h2>
-<p>Sea <span class="math inline">\(A\)</span> un evento y <span class="math inline">\(B_1,\ldots,B_k\)</span> una partición. Como</p>
+<section id="condiciones-para-una-densidad-válida" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="condiciones-para-una-densidad-válida"><span class="header-section-number">9.4</span> Condiciones para una densidad válida</h2>
+<p>Una función <span class="math inline">\(f_X\)</span> es una densidad de probabilidad si satisface:</p>
 <p><span class="math display">\[
-A=(A\cap B_1)\cup(A\cap B_2)\cup\cdots\cup(A\cap B_k),
+f_X(x)\geq 0
 \]</span></p>
-<p>y esas intersecciones son mutuamente excluyentes,</p>
+<p>para todo <span class="math inline">\(x\)</span>, y</p>
 <p><span class="math display">\[
-P(A)=\sum_{i=1}^{k}P(A\cap B_i).
+\boxed{\int_{-\infty}^{\infty} f_X(x)\,dx=1}.
 \]</span></p>
-<p>Aplicando la regla del producto,</p>
+<p>La segunda condición expresa que el área total bajo la curva es 1.</p>
+</section>
+<section id="la-densidad-no-es-una-probabilidad-puntual" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="la-densidad-no-es-una-probabilidad-puntual"><span class="header-section-number">9.5</span> La densidad no es una probabilidad puntual</h2>
+<p>Ésta es una diferencia fundamental respecto de una PMF discreta.</p>
+<p>Para una variable continua,</p>
 <p><span class="math display">\[
-P(A\cap B_i)=P(B_i)P(A\mid B_i),
+\boxed{P(X=x)=0}.
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+f_X(x)\neq P(X=x).
+\]</span></p>
+<p>La densidad describe <strong>concentración de probabilidad alrededor de un valor</strong>, mientras que la probabilidad se obtiene integrando sobre un intervalo.</p>
+<p>Una densidad incluso puede tomar valores mayores que 1 sin violar las reglas de probabilidad, siempre que el área total sea 1.</p>
+</section>
+<section id="probabilidad-como-área" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="probabilidad-como-área"><span class="header-section-number">9.6</span> Probabilidad como área</h2>
+<p>Si <span class="math inline">\(a&lt;b\)</span>, entonces</p>
+<p><span class="math display">\[
+\boxed{P(a&lt;X&lt;b)=\int_a^b f_X(x)\,dx}.
+\]</span></p>
+<p>Como un punto aislado tiene probabilidad cero, para variables continuas no importa incluir o excluir los extremos:</p>
+<p><span class="math display">\[
+P(a&lt;X&lt;b)=P(a\leq X&lt;b)=P(a&lt;X\leq b)=P(a\leq X\leq b).
+\]</span></p>
+<p>Esta igualdad no es cierta, en general, para variables discretas.</p>
+</section>
+<section id="ejemplo-densidad-uniforme-elemental" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="ejemplo-densidad-uniforme-elemental"><span class="header-section-number">9.7</span> Ejemplo: densidad uniforme elemental</h2>
+<p>Supongamos que</p>
+<p><span class="math display">\[
+f_X(x)=
+\begin{cases}
+\frac{1}{10}, &amp; 0\leq x\leq10,\\
+0, &amp; \text{en otro caso}.
+\end{cases}
+\]</span></p>
+<p>El área total es</p>
+<p><span class="math display">\[
+\int_0^{10}\frac{1}{10}\,dx=1.
+\]</span></p>
+<p>La probabilidad de observar un valor entre 2 y 6 es</p>
+<p><span class="math display">\[
+P(2\leq X\leq6)
+=\int_2^6\frac{1}{10}\,dx
+=\frac{4}{10}=0.4.
+\]</span></p>
+</section>
+<section id="determinar-una-constante-de-normalización" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="determinar-una-constante-de-normalización"><span class="header-section-number">9.8</span> Determinar una constante de normalización</h2>
+<p>Sea</p>
+<p><span class="math display">\[
+f_X(x)=
+\begin{cases}
+cx, &amp; 0\leq x\leq2,\\
+0, &amp; \text{en otro caso}.
+\end{cases}
+\]</span></p>
+<p>Para que sea una densidad,</p>
+<p><span class="math display">\[
+\int_0^2 cx\,dx=1.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+c\left[\frac{x^2}{2}\right]_0^2=1,
+\]</span></p>
+<p><span class="math display">\[
+2c=1,
+\]</span></p>
+<p>por lo que</p>
+<p><span class="math display">\[
+\boxed{c=\frac12}.
+\]</span></p>
+<p>La densidad es</p>
+<p><span class="math display">\[
+f_X(x)=\frac{x}{2},\qquad 0\leq x\leq2.
+\]</span></p>
+<p>Por ejemplo,</p>
+<p><span class="math display">\[
+P(0.5&lt;X&lt;1.5)
+=\int_{0.5}^{1.5}\frac{x}{2}\,dx
+=0.5.
+\]</span></p>
+</section>
+<section id="función-de-distribución-acumulada" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="función-de-distribución-acumulada"><span class="header-section-number">9.9</span> Función de distribución acumulada</h2>
+<p>Para cualquier variable aleatoria,</p>
+<p><span class="math display">\[
+F_X(x)=P(X\leq x).
+\]</span></p>
+<p>Si <span class="math inline">\(X\)</span> tiene densidad <span class="math inline">\(f_X\)</span>, entonces</p>
+<p><span class="math display">\[
+\boxed{F_X(x)=\int_{-\infty}^{x}f_X(t)\,dt}.
+\]</span></p>
+<p>La CDF acumula el área situada a la izquierda de <span class="math inline">\(x\)</span>.</p>
+<p>Cuando <span class="math inline">\(F_X\)</span> es diferenciable,</p>
+<p><span class="math display">\[
+\boxed{f_X(x)=F_X'(x)}.
+\]</span></p>
+<p>Así, densidad y distribución acumulada son dos formas relacionadas de describir el mismo modelo continuo.</p>
+</section>
+<section id="ejemplo-de-cdf-a-partir-de-una-densidad" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="ejemplo-de-cdf-a-partir-de-una-densidad"><span class="header-section-number">9.10</span> Ejemplo de CDF a partir de una densidad</h2>
+<p>Para</p>
+<p><span class="math display">\[
+f_X(x)=\frac{x}{2},\qquad 0\leq x\leq2,
 \]</span></p>
 <p>obtenemos</p>
 <p><span class="math display">\[
-\boxed{
-P(A)=\sum_{i=1}^{k}P(B_i)P(A\mid B_i)
-}.
+F_X(x)=
+\begin{cases}
+0, &amp; x&lt;0,\\
+\frac{x^2}{4}, &amp; 0\leq x\leq2,\\
+1, &amp; x&gt;2.
+\end{cases}
 \]</span></p>
-<p>Esta expresión se conoce como <strong>ley de la probabilidad total</strong>.</p>
-</section>
-<section id="ejemplo-defectos-por-proveedor" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="ejemplo-defectos-por-proveedor"><span class="header-section-number">6.4</span> Ejemplo: defectos por proveedor</h2>
-<p>Una empresa compra componentes de tres proveedores:</p>
+<p>Podemos verificar que</p>
 <p><span class="math display">\[
-P(B_1)=0.50,\qquad P(B_2)=0.30,\qquad P(B_3)=0.20.
+F_X(2)=1.
 \]</span></p>
-<p>Las tasas de defecto son</p>
+<p>Además,</p>
 <p><span class="math display">\[
-P(D\mid B_1)=0.01,
-\]</span></p>
-<p><span class="math display">\[
-P(D\mid B_2)=0.03,
-\]</span></p>
-<p><span class="math display">\[
-P(D\mid B_3)=0.05.
-\]</span></p>
-<p>La probabilidad total de seleccionar un componente defectuoso es</p>
-<p><span class="math display">\[
-\begin{aligned}
-P(D)
-&amp;=0.50(0.01)+0.30(0.03)+0.20(0.05)\\
-&amp;=0.005+0.009+0.010\\
-&amp;=0.024.
-\end{aligned}
-\]</span></p>
-<p>Por tanto, 2.4% de los componentes recibidos son defectuosos en promedio.</p>
-</section>
-<section id="de-la-causa-al-efecto-y-del-efecto-a-la-causa" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="de-la-causa-al-efecto-y-del-efecto-a-la-causa"><span class="header-section-number">6.5</span> De la causa al efecto y del efecto a la causa</h2>
-<p>La probabilidad total permite calcular un efecto a partir de las posibles causas:</p>
-<p><span class="math display">\[
-P(D\mid B_i)\quad\longrightarrow\quad P(D).
-\]</span></p>
-<p>Pero muchas veces observamos primero el efecto y queremos inferir la causa.</p>
-<p>Por ejemplo:</p>
-<blockquote class="blockquote">
-<p>Si encontramos un componente defectuoso, ¿qué probabilidad hay de que provenga del proveedor 3?</p>
-</blockquote>
-<p>La cantidad buscada es</p>
-<p><span class="math display">\[
-P(B_3\mid D).
-\]</span></p>
-<p>Ésta es precisamente la pregunta que resuelve el teorema de Bayes.</p>
-</section>
-<section id="teorema-de-bayes" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="teorema-de-bayes"><span class="header-section-number">6.6</span> Teorema de Bayes</h2>
-<p>Por definición de probabilidad condicional,</p>
-<p><span class="math display">\[
-P(B_i\mid A)=\frac{P(B_i\cap A)}{P(A)}.
-\]</span></p>
-<p>Por la regla del producto,</p>
-<p><span class="math display">\[
-P(B_i\cap A)=P(B_i)P(A\mid B_i).
-\]</span></p>
-<p>Y por la probabilidad total,</p>
-<p><span class="math display">\[
-P(A)=\sum_{j=1}^{k}P(B_j)P(A\mid B_j).
-\]</span></p>
-<p>Sustituyendo,</p>
-<p><span class="math display">\[
-\boxed{
-P(B_i\mid A)=
-\frac{P(B_i)P(A\mid B_i)}
-{\sum_{j=1}^{k}P(B_j)P(A\mid B_j)}
-}.
+P(0.5&lt;X&lt;1.5)=F_X(1.5)-F_X(0.5).
 \]</span></p>
 </section>
-<section id="continuación-del-ejemplo-de-proveedores" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="continuación-del-ejemplo-de-proveedores"><span class="header-section-number">6.7</span> Continuación del ejemplo de proveedores</h2>
-<p>Queremos calcular</p>
+<section id="probabilidades-mediante-la-cdf" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="probabilidades-mediante-la-cdf"><span class="header-section-number">9.11</span> Probabilidades mediante la CDF</h2>
+<p>Para <span class="math inline">\(a&lt;b\)</span>,</p>
 <p><span class="math display">\[
-P(B_3\mid D).
+P(a&lt;X\leq b)=F_X(b)-F_X(a).
 \]</span></p>
-<p>Ya sabemos que</p>
+<p>En el caso continuo, como <span class="math inline">\(P(X=a)=0\)</span>,</p>
 <p><span class="math display">\[
-P(D)=0.024.
+P(a&lt;X&lt;b)=F_X(b)-F_X(a).
 \]</span></p>
-<p>Entonces</p>
+<p>También</p>
 <p><span class="math display">\[
-P(B_3\mid D)
-=\frac{0.20(0.05)}{0.024}
-=\frac{0.010}{0.024}
-\approx0.4167.
+P(X&gt;x)=1-F_X(x).
 \]</span></p>
-<p>Aunque sólo 20% de los componentes provienen del proveedor 3, entre los defectuosos aproximadamente 41.7% proceden de él. La razón es que su tasa de defecto es mayor.</p>
+<p>Estas relaciones serán muy útiles cuando trabajemos con distribuciones continuas conocidas.</p>
 </section>
-<section id="interpretación-bayesiana-elemental" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="interpretación-bayesiana-elemental"><span class="header-section-number">6.8</span> Interpretación bayesiana elemental</h2>
-<p>En una aplicación de Bayes aparecen tres ideas:</p>
+<section id="ejemplo-de-ingeniería-error-de-medición" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="ejemplo-de-ingeniería-error-de-medición"><span class="header-section-number">9.12</span> Ejemplo de ingeniería: error de medición</h2>
+<p>Sea <span class="math inline">\(X\)</span> el error, en milímetros, de un instrumento de inspección. Supongamos que el modelo asigna una densidad triangular sobre el intervalo <span class="math inline">\([-1,1]\)</span>:</p>
+<p><span class="math display">\[
+f_X(x)=
+\begin{cases}
+1-|x|, &amp; -1\leq x\leq1,\\
+0, &amp; \text{en otro caso}.
+\end{cases}
+\]</span></p>
+<p>El área total es 1. La probabilidad de que el error absoluto sea menor que 0.25 mm es</p>
+<p><span class="math display">\[
+P(|X|&lt;0.25)=\int_{-0.25}^{0.25}(1-|x|)\,dx.
+\]</span></p>
+<p>Por simetría,</p>
+<p><span class="math display">\[
+P(|X|&lt;0.25)=2\int_0^{0.25}(1-x)\,dx=0.4375.
+\]</span></p>
+<p>Este tipo de cálculo relaciona directamente una tolerancia de ingeniería con un área de probabilidad.</p>
+</section>
+<section id="ejemplo-ambiental-concentración-de-un-contaminante" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="ejemplo-ambiental-concentración-de-un-contaminante"><span class="header-section-number">9.13</span> Ejemplo ambiental: concentración de un contaminante</h2>
+<p>Supongamos que <span class="math inline">\(X\)</span> representa una concentración normalizada y que su densidad en <span class="math inline">\(0\leq x\leq1\)</span> es</p>
+<p><span class="math display">\[
+f_X(x)=2(1-x).
+\]</span></p>
+<p>La probabilidad de observar una concentración superior a 0.7 es</p>
+<p><span class="math display">\[
+P(X&gt;0.7)=\int_{0.7}^{1}2(1-x)\,dx=0.09.
+\]</span></p>
+<p>La interpretación es que, bajo este modelo, aproximadamente 9% de las observaciones exceden 0.7.</p>
+</section>
+<section id="integración-en-r" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="integración-en-r"><span class="header-section-number">9.14</span> Integración en R</h2>
+<p>R puede calcular probabilidades mediante <code>integrate()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 with absolute error &lt; 1.1e-14</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f, <span class="at">lower =</span> <span class="fl">0.5</span>, <span class="at">upper =</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.5 with absolute error &lt; 5.6e-15</code></pre>
+</div>
+</div>
+<p>El primer resultado debe ser 1 y el segundo corresponde a la probabilidad del intervalo.</p>
+</section>
+<section id="graficar-una-densidad-y-sombrear-un-intervalo" class="level2" data-number="9.15">
+<h2 data-number="9.15" class="anchored" data-anchor-id="graficar-una-densidad-y-sombrear-un-intervalo"><span class="header-section-number">9.15</span> Graficar una densidad y sombrear un intervalo</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">2</span>, x <span class="sc">/</span> <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">f</span>(grid)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grid, y, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"f_X(x)"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>sel <span class="ot">&lt;-</span> grid <span class="sc">&gt;=</span> a <span class="sc">&amp;</span> grid <span class="sc">&lt;=</span> b</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(<span class="fu">c</span>(a, grid[sel], b),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="dv">0</span>, y[sel], <span class="dv">0</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">density =</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09-variables-continuas-densidad_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La región sombreada representa exactamente una probabilidad.</p>
+</section>
+<section id="construcción-numérica-de-la-cdf" class="level2" data-number="9.16">
+<h2 data-number="9.16" class="anchored" data-anchor-id="construcción-numérica-de-la-cdf"><span class="header-section-number">9.16</span> Construcción numérica de la CDF</h2>
+<p>Podemos definir la CDF directamente mediante integración:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>F <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&lt;=</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="dv">0</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="dv">1</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">integrate</span>(f, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> x)<span class="sc">$</span>value</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">3</span>), F)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0000 0.0000 0.0625 0.2500 0.5625 1.0000 1.0000</code></pre>
+</div>
+</div>
+</section>
+<section id="simulación-de-una-variable-continua" class="level2" data-number="9.17">
+<h2 data-number="9.17" class="anchored" data-anchor-id="simulación-de-una-variable-continua"><span class="header-section-number">9.17</span> Simulación de una variable continua</h2>
+<p>Para la densidad</p>
+<p><span class="math display">\[
+f_X(x)=\frac{x}{2},\qquad0\leq x\leq2,
+\]</span></p>
+<p>la CDF es</p>
+<p><span class="math display">\[
+F_X(x)=\frac{x^2}{4}.
+\]</span></p>
+<p>Si <span class="math inline">\(U\)</span> es uniforme en <span class="math inline">\((0,1)\)</span>, podemos resolver</p>
+<p><span class="math display">\[
+U=\frac{X^2}{4}
+\]</span></p>
+<p>para obtener</p>
+<p><span class="math display">\[
+X=2\sqrt U.
+\]</span></p>
+<p>Esto permite simular valores:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20000</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>xsim <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">sqrt</span>(u)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(xsim <span class="sc">&gt;=</span> <span class="fl">0.5</span> <span class="sc">&amp;</span> xsim <span class="sc">&lt;=</span> <span class="fl">1.5</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.50265</code></pre>
+</div>
+</div>
+<p>La frecuencia relativa debe aproximarse a la probabilidad teórica 0.5.</p>
+</section>
+<section id="histograma-y-densidad-teórica" class="level2" data-number="9.18">
+<h2 data-number="9.18" class="anchored" data-anchor-id="histograma-y-densidad-teórica"><span class="header-section-number">9.18</span> Histograma y densidad teórica</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(xsim, <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Simulación y densidad teórica"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(x <span class="sc">/</span> <span class="dv">2</span>, <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">2</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="09-variables-continuas-densidad_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>El histograma representa la distribución empírica; la curva representa el modelo teórico.</p>
+</section>
+<section id="interactivo-del-capítulo" class="level2" data-number="9.19">
+<h2 data-number="9.19" class="anchored" data-anchor-id="interactivo-del-capítulo"><span class="header-section-number">9.19</span> Interactivo del capítulo</h2>
+<p>La edición web incluye una densidad triangular normalizada sobre <span class="math inline">\([0,1]\)</span>. El estudiante puede modificar:</p>
 <ul>
-<li><strong>Probabilidad previa:</strong> <span class="math inline">\(P(B_i)\)</span>. Representa lo que sabemos sobre la causa antes de observar el evento <span class="math inline">\(A\)</span>.</li>
-<li><strong>Verosimilitud:</strong> <span class="math inline">\(P(A\mid B_i)\)</span>. Mide qué tan compatible es la evidencia observada con esa causa.</li>
-<li><strong>Probabilidad posterior:</strong> <span class="math inline">\(P(B_i\mid A)\)</span>. Es la probabilidad actualizada después de incorporar la evidencia.</li>
+<li>el punto modal de la distribución;</li>
+<li>el límite inferior <span class="math inline">\(a\)</span>;</li>
+<li>el límite superior <span class="math inline">\(b\)</span>.</li>
 </ul>
-<p>Podemos resumir la lógica como</p>
+<p>El recurso sombrea automáticamente el área</p>
 <p><span class="math display">\[
-\text{posterior}
-\propto
-\text{previa}\times\text{verosimilitud}.
+P(a&lt;X&lt;b)
 \]</span></p>
-<p>La constante de normalización es <span class="math inline">\(P(A)\)</span>.</p>
+<p>y muestra simultáneamente el valor de la probabilidad. También permite observar que mover los límites cambia el área, no la “altura puntual” como probabilidad.</p>
 </section>
-<section id="árbol-de-probabilidad" class="level2" data-number="6.9">
-<h2 data-number="6.9" class="anchored" data-anchor-id="árbol-de-probabilidad"><span class="header-section-number">6.9</span> Árbol de probabilidad</h2>
-<p>Los árboles son especialmente útiles en estos problemas.</p>
-<p>Primero se ramifica según la causa:</p>
+<section id="actividad-con-geogebra" class="level2" data-number="9.20">
+<h2 data-number="9.20" class="anchored" data-anchor-id="actividad-con-geogebra"><span class="header-section-number">9.20</span> Actividad con GeoGebra</h2>
+<p>Construye una densidad triangular sobre <span class="math inline">\([0,1]\)</span> con modo <span class="math inline">\(m\)</span>, donde <span class="math inline">\(0&lt;m&lt;1\)</span>:</p>
 <p><span class="math display">\[
-B_1, B_2, \ldots, B_k.
+f(x)=
+\begin{cases}
+\frac{2x}{m}, &amp; 0\leq x\leq m,\\
+\frac{2(1-x)}{1-m}, &amp; m&lt;x\leq1,\\
+0, &amp; \text{en otro caso}.
+\end{cases}
 \]</span></p>
-<p>Después, desde cada causa, se ramifica según la evidencia <span class="math inline">\(A\)</span> o <span class="math inline">\(A^c\)</span>.</p>
-<p>La probabilidad de una hoja es el producto de sus ramas:</p>
+<p>Crea deslizadores para <span class="math inline">\(m\)</span>, <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> y utiliza el comando de integral para sombrear</p>
 <p><span class="math display">\[
-P(B_i\cap A)=P(B_i)P(A\mid B_i).
+\int_a^b f(x)\,dx.
 \]</span></p>
-<p>Para calcular <span class="math inline">\(P(A)\)</span> se suman todas las hojas que terminan en <span class="math inline">\(A\)</span>. Para Bayes se divide la hoja correspondiente entre esa suma.</p>
+<p>Comprueba que el área total bajo la densidad es siempre 1 aunque cambie el modo <span class="math inline">\(m\)</span>.</p>
 </section>
-<section id="ejemplo-de-diagnóstico" class="level2" data-number="6.10">
-<h2 data-number="6.10" class="anchored" data-anchor-id="ejemplo-de-diagnóstico"><span class="header-section-number">6.10</span> Ejemplo de diagnóstico</h2>
-<p>Supongamos una condición médica con prevalencia</p>
-<p><span class="math display">\[
-P(E)=0.01.
-\]</span></p>
-<p>Una prueba tiene sensibilidad</p>
-<p><span class="math display">\[
-P(+\mid E)=0.95
-\]</span></p>
-<p>y especificidad</p>
-<p><span class="math display">\[
-P(-\mid E^c)=0.90.
-\]</span></p>
-<p>Entonces la tasa de falso positivo es</p>
-<p><span class="math display">\[
-P(+\mid E^c)=0.10.
-\]</span></p>
-<p>La probabilidad total de obtener un resultado positivo es</p>
-<p><span class="math display">\[
-P(+)=0.01(0.95)+0.99(0.10)=0.1085.
-\]</span></p>
-<p>Por Bayes,</p>
-<p><span class="math display">\[
-P(E\mid +)
-=\frac{0.01(0.95)}{0.1085}
-\approx0.0876.
-\]</span></p>
-<p>Es decir, un resultado positivo no implica una probabilidad posterior de 95%. En este ejemplo es aproximadamente 8.8%.</p>
+<section id="densidad-frente-a-probabilidad" class="level2" data-number="9.21">
+<h2 data-number="9.21" class="anchored" data-anchor-id="densidad-frente-a-probabilidad"><span class="header-section-number">9.21</span> Densidad frente a probabilidad</h2>
+<p>Conviene mantener esta distinción:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Concepto</th>
+<th>Discreto</th>
+<th>Continuo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Probabilidad puntual</td>
+<td><span class="math inline">\(P(X=x)=p_X(x)\)</span></td>
+<td><span class="math inline">\(P(X=x)=0\)</span></td>
+</tr>
+<tr class="even">
+<td>Probabilidad de intervalo</td>
+<td>suma de masas</td>
+<td>integral de densidad</td>
+</tr>
+<tr class="odd">
+<td>Función básica</td>
+<td>PMF</td>
+<td>PDF</td>
+</tr>
+<tr class="even">
+<td>CDF</td>
+<td>suma acumulada</td>
+<td>integral acumulada</td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="la-importancia-de-la-tasa-base" class="level2" data-number="6.11">
-<h2 data-number="6.11" class="anchored" data-anchor-id="la-importancia-de-la-tasa-base"><span class="header-section-number">6.11</span> La importancia de la tasa base</h2>
-<p>El ejemplo anterior ilustra la <strong>falacia de la tasa base</strong>: confundir la sensibilidad <span class="math inline">\(P(+\mid E)\)</span> con la probabilidad posterior <span class="math inline">\(P(E\mid +)\)</span>.</p>
-<p>Cuando una condición es poco frecuente, puede haber muchos falsos positivos incluso con una prueba razonablemente precisa.</p>
-<section id="interpretación-con-10-000-personas" class="level3">
-<h3 class="anchored" data-anchor-id="interpretación-con-10-000-personas">Interpretación con 10 000 personas</h3>
-<p>En una población de 10 000 personas:</p>
+<section id="errores-frecuentes" class="level2" data-number="9.22">
+<h2 data-number="9.22" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">9.22</span> Errores frecuentes</h2>
 <ul>
-<li>aproximadamente 100 tienen la condición;</li>
-<li>de ellas, unas 95 resultan positivas;</li>
-<li>aproximadamente 9900 no tienen la condición;</li>
-<li>con una tasa de falso positivo de 10%, unas 990 resultan positivas.</li>
+<li>Interpretar <span class="math inline">\(f_X(x)\)</span> como <span class="math inline">\(P(X=x)\)</span>.</li>
+<li>Exigir que una densidad nunca sea mayor que 1.</li>
+<li>Olvidar verificar que el área total sea 1.</li>
+<li>Calcular probabilidades continuas mediante sumas de alturas.</li>
+<li>Confundir área bajo la densidad con área bajo la CDF.</li>
+<li>Olvidar que incluir o excluir un extremo no cambia una probabilidad continua.</li>
 </ul>
-<p>En total habría aproximadamente</p>
-<p><span class="math display">\[
-95+990=1085
-\]</span></p>
-<p>resultados positivos, de los cuales sólo 95 corresponden a personas con la condición:</p>
-<p><span class="math display">\[
-\frac{95}{1085}\approx0.0876.
-\]</span></p>
-<p>La tabla de frecuencias suele hacer Bayes mucho más intuitivo.</p>
 </section>
-</section>
-<section id="aplicación-detección-de-fallas" class="level2" data-number="6.12">
-<h2 data-number="6.12" class="anchored" data-anchor-id="aplicación-detección-de-fallas"><span class="header-section-number">6.12</span> Aplicación: detección de fallas</h2>
-<p>Un sistema puede operar en dos estados:</p>
+<section id="resumen" class="level2" data-number="9.23">
+<h2 data-number="9.23" class="anchored" data-anchor-id="resumen"><span class="header-section-number">9.23</span> Resumen</h2>
+<p>Una variable continua puede describirse mediante una densidad <span class="math inline">\(f_X\)</span> tal que</p>
 <p><span class="math display">\[
-F=\{\text{falla real}\},
-\qquad
-F^c=\{\text{sin falla}\}.
-\]</span></p>
-<p>Supongamos</p>
-<p><span class="math display">\[
-P(F)=0.04,
+f_X(x)\geq0,
 \]</span></p>
 <p><span class="math display">\[
-P(A\mid F)=0.92,
-\]</span></p>
-<p><span class="math display">\[
-P(A\mid F^c)=0.08,
-\]</span></p>
-<p>donde <span class="math inline">\(A\)</span> significa “se activa la alarma”.</p>
-<p>Entonces</p>
-<p><span class="math display">\[
-P(A)=0.04(0.92)+0.96(0.08)=0.1136.
-\]</span></p>
-<p>Y</p>
-<p><span class="math display">\[
-P(F\mid A)=\frac{0.04(0.92)}{0.1136}\approx0.3239.
-\]</span></p>
-<p>La alarma aumenta la probabilidad de falla de 4% a aproximadamente 32.4%, pero no la convierte en certeza.</p>
-</section>
-<section id="actualización-sucesiva" class="level2" data-number="6.13">
-<h2 data-number="6.13" class="anchored" data-anchor-id="actualización-sucesiva"><span class="header-section-number">6.13</span> Actualización sucesiva</h2>
-<p>Bayes también puede utilizarse de manera secuencial. Una probabilidad posterior obtenida con una primera evidencia puede convertirse en la nueva probabilidad previa cuando llega una segunda evidencia.</p>
-<p>Conceptualmente:</p>
-<p><span class="math display">\[
-P(H)
-\xrightarrow{E_1}
-P(H\mid E_1)
-\xrightarrow{E_2}
-P(H\mid E_1,E_2).
-\]</span></p>
-<p>Esta idea aparece en filtrado, diagnóstico iterativo, clasificación y sistemas de decisión.</p>
-</section>
-<section id="cálculos-con-r" class="level2" data-number="6.14">
-<h2 data-number="6.14" class="anchored" data-anchor-id="cálculos-con-r"><span class="header-section-number">6.14</span> Cálculos con R</h2>
-<section id="probabilidad-total" class="level3">
-<h3 class="anchored" data-anchor-id="probabilidad-total">Probabilidad total</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p_proveedor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.50</span>, <span class="fl">0.30</span>, <span class="fl">0.20</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>p_defecto_dado_proveedor <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.03</span>, <span class="fl">0.05</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>p_defecto <span class="ot">&lt;-</span> <span class="fu">sum</span>(p_proveedor <span class="sc">*</span> p_defecto_dado_proveedor)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>p_defecto</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.024</code></pre>
-</div>
-</div>
-</section>
-<section id="bayes-para-todos-los-proveedores" class="level3">
-<h3 class="anchored" data-anchor-id="bayes-para-todos-los-proveedores">Bayes para todos los proveedores</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> p_proveedor <span class="sc">*</span> p_defecto_dado_proveedor <span class="sc">/</span> p_defecto</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>posterior</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2083333 0.3750000 0.4166667</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(posterior)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-</div>
-<p>La suma de las probabilidades posteriores debe ser 1.</p>
-</section>
-<section id="función-general" class="level3">
-<h3 class="anchored" data-anchor-id="función-general">Función general</h3>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bayes_discreto <span class="ot">&lt;-</span> <span class="cf">function</span>(prior, likelihood) {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  numerador <span class="ot">&lt;-</span> prior <span class="sc">*</span> likelihood</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  numerador <span class="sc">/</span> <span class="fu">sum</span>(numerador)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bayes_discreto</span>(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">c</span>(<span class="fl">0.50</span>, <span class="fl">0.30</span>, <span class="fl">0.20</span>),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">likelihood =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.03</span>, <span class="fl">0.05</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2083333 0.3750000 0.4166667</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="simulación-de-un-problema-de-diagnóstico" class="level2" data-number="6.15">
-<h2 data-number="6.15" class="anchored" data-anchor-id="simulación-de-un-problema-de-diagnóstico"><span class="header-section-number">6.15</span> Simulación de un problema de diagnóstico</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200000</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>estado <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.01</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>positivo <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  estado <span class="sc">==</span> <span class="dv">1</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.95</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.10</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(estado <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.010285</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(positivo <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.110065</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(estado[positivo <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.08931086</code></pre>
-</div>
-</div>
-<p>La última cantidad aproxima <span class="math inline">\(P(E\mid +)\)</span> y debe acercarse al resultado teórico.</p>
-</section>
-<section id="interactivo-del-capítulo" class="level2" data-number="6.16">
-<h2 data-number="6.16" class="anchored" data-anchor-id="interactivo-del-capítulo"><span class="header-section-number">6.16</span> Interactivo del capítulo</h2>
-<p>La edición web incluye un recurso de Bayes para dos hipótesis. El estudiante puede modificar:</p>
-<ul>
-<li>la probabilidad previa <span class="math inline">\(P(H)\)</span>;</li>
-<li>la sensibilidad <span class="math inline">\(P(+\mid H)\)</span>;</li>
-<li>la tasa de falso positivo <span class="math inline">\(P(+\mid H^c)\)</span>.</li>
-</ul>
-<p>El interactivo muestra en tiempo real:</p>
-<p><span class="math display">\[
-P(+),
-\]</span></p>
-<p><span class="math display">\[
-P(H\mid +),
-\]</span></p>
-<p>y una representación mediante frecuencias esperadas por cada 1000 observaciones.</p>
-<p>Esto permite visualizar inmediatamente el efecto de la prevalencia o tasa base.</p>
-</section>
-<section id="actividad-con-geogebra" class="level2" data-number="6.17">
-<h2 data-number="6.17" class="anchored" data-anchor-id="actividad-con-geogebra"><span class="header-section-number">6.17</span> Actividad con GeoGebra</h2>
-<p>Construye un árbol con dos primeras ramas:</p>
-<p><span class="math display">\[
-H\quad\text{y}\quad H^c.
-\]</span></p>
-<p>Utiliza deslizadores para</p>
-<p><span class="math display">\[
-p=P(H),
-\]</span></p>
-<p><span class="math display">\[
-s=P(+\mid H),
+\int_{-\infty}^{\infty}f_X(x)\,dx=1,
 \]</span></p>
 <p>y</p>
 <p><span class="math display">\[
-f=P(+\mid H^c).
+P(a&lt;X&lt;b)=\int_a^b f_X(x)\,dx.
 \]</span></p>
-<p>Muestra en las hojas</p>
+<p>Su CDF es</p>
 <p><span class="math display">\[
-ps,
-\qquad
-p(1-s),
-\qquad
-(1-p)f,
-\qquad
-(1-p)(1-f).
+F_X(x)=\int_{-\infty}^{x}f_X(t)\,dt,
 \]</span></p>
-<p>Después calcula</p>
+<p>y, donde exista la derivada,</p>
 <p><span class="math display">\[
-P(+)=ps+(1-p)f
+f_X(x)=F_X'(x).
 \]</span></p>
-<p>y</p>
+<p>Para una variable absolutamente continua,</p>
 <p><span class="math display">\[
-P(H\mid +)=\frac{ps}{ps+(1-p)f}.
+P(X=x)=0.
 \]</span></p>
-<p>Mueve el deslizador <span class="math inline">\(p\)</span> desde valores muy pequeños hasta valores grandes y observa cómo cambia la probabilidad posterior aun manteniendo constantes las características de la prueba.</p>
 </section>
-<section id="estrategia-para-resolver-problemas-de-bayes" class="level2" data-number="6.18">
-<h2 data-number="6.18" class="anchored" data-anchor-id="estrategia-para-resolver-problemas-de-bayes"><span class="header-section-number">6.18</span> Estrategia para resolver problemas de Bayes</h2>
+<section id="ejercicios" class="level2" data-number="9.24">
+<h2 data-number="9.24" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">9.24</span> Ejercicios</h2>
 <ol type="1">
-<li>Identifica las posibles causas o hipótesis.</li>
-<li>Comprueba que formen una partición.</li>
-<li>Escribe sus probabilidades previas.</li>
-<li>Escribe la probabilidad de la evidencia bajo cada causa.</li>
-<li>Calcula la probabilidad total de la evidencia.</li>
-<li>Aplica Bayes a la causa que interesa.</li>
-<li>Comprueba que el resultado esté entre 0 y 1.</li>
-<li>Si calculas todas las posteriores, verifica que sumen 1.</li>
-<li>Interpreta el resultado en palabras y compáralo con la probabilidad previa.</li>
+<li>Decide si <span class="math inline">\(f(x)=2x\)</span> para <span class="math inline">\(0\leq x\leq1\)</span> y cero fuera de ese intervalo es una densidad válida.</li>
+<li>Sea <span class="math inline">\(f(x)=c(1+x)\)</span> para <span class="math inline">\(0\leq x\leq1\)</span>. Determina <span class="math inline">\(c\)</span>.</li>
+<li>Para la densidad del ejercicio 2, calcula <span class="math inline">\(P(X&lt;0.4)\)</span> y <span class="math inline">\(P(0.2&lt;X&lt;0.8)\)</span>.</li>
+<li>Obtén la CDF correspondiente al ejercicio 2.</li>
+<li>Para <span class="math inline">\(f(x)=x/2\)</span> en <span class="math inline">\([0,2]\)</span>, verifica mediante R que <span class="math inline">\(P(0.5&lt;X&lt;1.5)=0.5\)</span>.</li>
+<li>Simula 50 000 valores del modelo anterior usando <span class="math inline">\(X=2\sqrt U\)</span> y compara la probabilidad empírica con la teórica.</li>
+<li>Una variable de error tiene densidad <span class="math inline">\(f(x)=1-|x|\)</span> para <span class="math inline">\(-1\leq x\leq1\)</span>. Calcula <span class="math inline">\(P(|X|&lt;0.5)\)</span>.</li>
+<li>Explica por qué una densidad puede valer 2 en algún punto sin que exista una probabilidad mayor que 1.</li>
+<li>Una CDF continua y diferenciable está dada por <span class="math inline">\(F(x)=x^2\)</span> para <span class="math inline">\(0\leq x\leq1\)</span>, con las extensiones usuales 0 y 1 fuera del intervalo. Obtén su densidad.</li>
+<li><strong>Reto ★.</strong> Para la densidad triangular con modo <span class="math inline">\(m\in(0,1)\)</span> utilizada en el interactivo, demuestra que el área total es 1 para cualquier valor de <span class="math inline">\(m\)</span>.</li>
 </ol>
 </section>
-<section id="errores-frecuentes" class="level2" data-number="6.19">
-<h2 data-number="6.19" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">6.19</span> Errores frecuentes</h2>
-<ul>
-<li>Confundir <span class="math inline">\(P(A\mid B)\)</span> con <span class="math inline">\(P(B\mid A)\)</span>.</li>
-<li>Omitir alguna rama al calcular la probabilidad total.</li>
-<li>Utilizar probabilidades previas que no suman 1.</li>
-<li>Confundir sensibilidad con valor predictivo positivo.</li>
-<li>Ignorar la tasa base o prevalencia.</li>
-<li>Sumar probabilidades dentro de una trayectoria del árbol; las ramas de una trayectoria se multiplican.</li>
-<li>Interpretar una probabilidad posterior como certeza.</li>
-</ul>
-</section>
-<section id="resumen" class="level2" data-number="6.20">
-<h2 data-number="6.20" class="anchored" data-anchor-id="resumen"><span class="header-section-number">6.20</span> Resumen</h2>
-<p>Si <span class="math inline">\(B_1,\ldots,B_k\)</span> forman una partición,</p>
-<p><span class="math display">\[
-P(A)=\sum_{i=1}^{k}P(B_i)P(A\mid B_i).
-\]</span></p>
-<p>El teorema de Bayes es</p>
-<p><span class="math display">\[
-P(B_i\mid A)=
-\frac{P(B_i)P(A\mid B_i)}
-{\sum_{j=1}^{k}P(B_j)P(A\mid B_j)}.
-\]</span></p>
-<p>Bayes actualiza una probabilidad previa utilizando evidencia observada. La magnitud de la probabilidad posterior depende tanto de la evidencia como de la tasa base.</p>
-</section>
-<section id="ejercicios" class="level2" data-number="6.21">
-<h2 data-number="6.21" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">6.21</span> Ejercicios</h2>
-<ol type="1">
-<li>Tres máquinas producen 40%, 35% y 25% de la producción. Sus tasas de defecto son 1%, 2% y 4%. Calcula la probabilidad de seleccionar una pieza defectuosa.</li>
-<li>Para el ejercicio anterior, si una pieza es defectuosa, calcula la probabilidad de que provenga de la tercera máquina.</li>
-<li>Una prueba tiene sensibilidad 0.90, especificidad 0.95 y la prevalencia de una condición es 0.02. Calcula <span class="math inline">\(P(+)\)</span> y <span class="math inline">\(P(E\mid +)\)</span>.</li>
-<li>Repite el ejercicio anterior para prevalencias 0.10 y 0.50. Explica el efecto de la tasa base.</li>
-<li>Una alarma se activa con probabilidad 0.97 cuando existe una falla y con probabilidad 0.04 cuando no existe. Si la probabilidad previa de falla es 0.03, calcula la probabilidad de falla dada una alarma.</li>
-<li>Construye en R una función que reciba un vector de probabilidades previas y un vector de verosimilitudes y devuelva el vector posterior.</li>
-<li>Simula en R el ejercicio 3 con 500 000 observaciones y compara el valor simulado con el teórico.</li>
-<li>En una población de 100 000 personas, traduce el ejercicio 3 a frecuencias naturales y explica Bayes sin usar fórmulas.</li>
-<li>Dos proveedores entregan 70% y 30% de las piezas. Una inspección rechaza una pieza con probabilidad 0.08 si proviene del primero y 0.18 si proviene del segundo. Si una pieza fue rechazada, ¿de cuál proveedor es más probable que proceda?</li>
-<li><strong>Reto ★.</strong> Demuestra que si <span class="math inline">\(B_1,\ldots,B_k\)</span> forman una partición, entonces las probabilidades posteriores <span class="math inline">\(P(B_i\mid A)\)</span> suman 1 siempre que <span class="math inline">\(P(A)&gt;0\)</span>.</li>
-</ol>
-</section>
-<section id="referencias-del-capítulo" class="level2" data-number="6.22">
-<h2 data-number="6.22" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">6.22</span> Referencias del capítulo</h2>
-<p>La exposición de particiones, probabilidad total y teorema de Bayes se apoya en el tratamiento estándar de probabilidad para ingeniería y ciencias de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. El código R, las simulaciones y los ejemplos del capítulo son originales; el enfoque computacional general es consistente con <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+<section id="referencias-del-capítulo" class="level2" data-number="9.25">
+<h2 data-number="9.25" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">9.25</span> Referencias del capítulo</h2>
+<p>El tratamiento de variables continuas, densidades y funciones de distribución acumulada sigue el desarrollo estándar de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. Los ejemplos, actividades, código R y simulaciones de este capítulo son originales; el enfoque computacional general toma como referencia <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1269,13 +1252,13 @@ document.addEventListener('DOMContentLoaded', function () {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-condicional-independencia.html" class="pagination-link" aria-label="Probabilidad condicional e independencia">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></span>
+      <a href="./08-variables-discretas-pmf.html" class="pagination-link" aria-label="Variables aleatorias discretas y función de masa de probabilidad">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-variable-aleatoria-cdf.html" class="pagination-link" aria-label="Variable aleatoria y función de distribución acumulada">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
