@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bayes interactivo</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f8fafc;color:#172033;padding:18px}.panel{max-width:980px;margin:auto;background:white;border:1px solid #dbe3ec;border-radius:14px;padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.controls label{display:block;margin:14px 0}.controls input{width:100%}.card{border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin:10px 0;background:#fff}.big{font-size:1.5rem;font-weight:700}.bar{height:18px;background:#e2e8f0;border-radius:9px;overflow:hidden}.fill{height:100%;background:#2563eb}.small{font-size:.92rem;color:#526173}table{border-collapse:collapse;width:100%;margin-top:12px}th,td{border:1px solid #e2e8f0;padding:8px;text-align:right}th:first-child,td:first-child{text-align:left}@media(max-width:760px){.grid{grid-template-columns:1fr}}</style>
+</head>
+<body><div class="panel">
+<h2>Teorema de Bayes: de probabilidad previa a posterior</h2>
+<p>Modifica la prevalencia, la sensibilidad y la tasa de falso positivo. Observa cómo cambia la probabilidad posterior después de un resultado positivo.</p>
+<div class="grid">
+<div class="controls">
+<label>Probabilidad previa P(H): <b id="pv">0.010</b><input id="p" type="range" min="0.001" max="0.5" step="0.001" value="0.01"></label>
+<label>Sensibilidad P(+|H): <b id="sv">0.950</b><input id="s" type="range" min="0.5" max="1" step="0.005" value="0.95"></label>
+<label>Falso positivo P(+|Hᶜ): <b id="fv">0.100</b><input id="f" type="range" min="0" max="0.5" step="0.005" value="0.10"></label>
+<div class="card"><div>P(+)</div><div class="big" id="pt">0</div></div>
+<div class="card"><div>P(H|+)</div><div class="big" id="post">0</div><div class="bar"><div id="fill" class="fill"></div></div></div>
+</div>
+<div>
+<div class="card"><b>Frecuencias esperadas por 1000 personas</b><table><thead><tr><th></th><th>Positivo</th><th>Negativo</th><th>Total</th></tr></thead><tbody><tr><td>H</td><td id="hp"></td><td id="hn"></td><td id="ht"></td></tr><tr><td>Hᶜ</td><td id="np"></td><td id="nn"></td><td id="nt"></td></tr><tr><td>Total</td><td id="tp"></td><td id="tn"></td><td>1000</td></tr></tbody></table></div>
+<p class="small">La sensibilidad no es lo mismo que la probabilidad posterior. La prevalencia o tasa base puede cambiar mucho el resultado final.</p>
+</div></div>
+</div>
+<script>
+const p=document.getElementById('p'),s=document.getElementById('s'),f=document.getElementById('f');
+function u(){const P=+p.value,S=+s.value,F=+f.value;const pos=P*S+(1-P)*F,post=P*S/pos;pv.textContent=P.toFixed(3);sv.textContent=S.toFixed(3);fv.textContent=F.toFixed(3);pt.textContent=pos.toFixed(4);document.getElementById('post').textContent=post.toFixed(4);document.getElementById('fill').style.width=(post*100)+'%';const N=1000,h=N*P,n=N*(1-P),hp=h*S,hn=h*(1-S),np=n*F,nn=n*(1-F);const fmt=x=>x.toFixed(1);document.getElementById('hp').textContent=fmt(hp);document.getElementById('hn').textContent=fmt(hn);document.getElementById('ht').textContent=fmt(h);document.getElementById('np').textContent=fmt(np);document.getElementById('nn').textContent=fmt(nn);document.getElementById('nt').textContent=fmt(n);document.getElementById('tp').textContent=fmt(hp+np);document.getElementById('tn').textContent=fmt(hn+nn)}
+[p,s,f].forEach(x=>x.addEventListener('input',u));u();
+</script></body></html>
