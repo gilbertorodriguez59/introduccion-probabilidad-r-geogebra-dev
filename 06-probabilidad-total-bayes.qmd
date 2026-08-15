@@ -1,0 +1,537 @@
+# Particiones, probabilidad total y teorema de Bayes
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- reconocer una partición del espacio muestral;
+- aplicar la ley de la probabilidad total;
+- utilizar el teorema de Bayes para actualizar probabilidades;
+- distinguir probabilidades previas, verosimilitudes y probabilidades posteriores;
+- construir árboles de probabilidad para organizar cálculos;
+- interpretar el efecto de las tasas base en problemas de diagnóstico;
+- resolver problemas de calidad, confiabilidad y clasificación;
+- implementar cálculos de Bayes en R;
+- explorar mediante un interactivo cómo cambia una probabilidad posterior al modificar la evidencia.
+
+## Por qué necesitamos una partición
+
+En muchos problemas un mismo evento puede ocurrir por diferentes causas o rutas. Una forma natural de organizar esas posibilidades es dividir el espacio muestral en regiones mutuamente excluyentes que, juntas, cubran todo el espacio.
+
+Una colección de eventos
+
+$$
+B_1,B_2,\ldots,B_k
+$$
+
+forma una **partición** de $\Omega$ si:
+
+1. $B_i\cap B_j=\varnothing$ para $i\neq j$;
+2. $B_1\cup B_2\cup\cdots\cup B_k=\Omega$;
+3. $P(B_i)>0$ para los eventos que utilizaremos como condicionantes.
+
+Cada resultado pertenece exactamente a una de las partes.
+
+### Ejemplo: proveedores
+
+Una planta recibe componentes de tres proveedores:
+
+$$
+B_1=\{\text{proveedor 1}\},\qquad
+B_2=\{\text{proveedor 2}\},\qquad
+B_3=\{\text{proveedor 3}\}.
+$$
+
+Si todo componente proviene de uno y sólo uno de ellos, entonces $B_1,B_2,B_3$ forman una partición.
+
+## Ley de la probabilidad total
+
+Sea $A$ un evento y $B_1,\ldots,B_k$ una partición. Como
+
+$$
+A=(A\cap B_1)\cup(A\cap B_2)\cup\cdots\cup(A\cap B_k),
+$$
+
+y esas intersecciones son mutuamente excluyentes,
+
+$$
+P(A)=\sum_{i=1}^{k}P(A\cap B_i).
+$$
+
+Aplicando la regla del producto,
+
+$$
+P(A\cap B_i)=P(B_i)P(A\mid B_i),
+$$
+
+obtenemos
+
+$$
+\boxed{
+P(A)=\sum_{i=1}^{k}P(B_i)P(A\mid B_i)
+}.
+$$
+
+Esta expresión se conoce como **ley de la probabilidad total**.
+
+## Ejemplo: defectos por proveedor
+
+Una empresa compra componentes de tres proveedores:
+
+$$
+P(B_1)=0.50,\qquad P(B_2)=0.30,\qquad P(B_3)=0.20.
+$$
+
+Las tasas de defecto son
+
+$$
+P(D\mid B_1)=0.01,
+$$
+
+$$
+P(D\mid B_2)=0.03,
+$$
+
+$$
+P(D\mid B_3)=0.05.
+$$
+
+La probabilidad total de seleccionar un componente defectuoso es
+
+$$
+\begin{aligned}
+P(D)
+&=0.50(0.01)+0.30(0.03)+0.20(0.05)\\
+&=0.005+0.009+0.010\\
+&=0.024.
+\end{aligned}
+$$
+
+Por tanto, 2.4% de los componentes recibidos son defectuosos en promedio.
+
+## De la causa al efecto y del efecto a la causa
+
+La probabilidad total permite calcular un efecto a partir de las posibles causas:
+
+$$
+P(D\mid B_i)\quad\longrightarrow\quad P(D).
+$$
+
+Pero muchas veces observamos primero el efecto y queremos inferir la causa.
+
+Por ejemplo:
+
+> Si encontramos un componente defectuoso, ¿qué probabilidad hay de que provenga del proveedor 3?
+
+La cantidad buscada es
+
+$$
+P(B_3\mid D).
+$$
+
+Ésta es precisamente la pregunta que resuelve el teorema de Bayes.
+
+## Teorema de Bayes
+
+Por definición de probabilidad condicional,
+
+$$
+P(B_i\mid A)=\frac{P(B_i\cap A)}{P(A)}.
+$$
+
+Por la regla del producto,
+
+$$
+P(B_i\cap A)=P(B_i)P(A\mid B_i).
+$$
+
+Y por la probabilidad total,
+
+$$
+P(A)=\sum_{j=1}^{k}P(B_j)P(A\mid B_j).
+$$
+
+Sustituyendo,
+
+$$
+\boxed{
+P(B_i\mid A)=
+\frac{P(B_i)P(A\mid B_i)}
+{\sum_{j=1}^{k}P(B_j)P(A\mid B_j)}
+}.
+$$
+
+## Continuación del ejemplo de proveedores
+
+Queremos calcular
+
+$$
+P(B_3\mid D).
+$$
+
+Ya sabemos que
+
+$$
+P(D)=0.024.
+$$
+
+Entonces
+
+$$
+P(B_3\mid D)
+=\frac{0.20(0.05)}{0.024}
+=\frac{0.010}{0.024}
+\approx0.4167.
+$$
+
+Aunque sólo 20% de los componentes provienen del proveedor 3, entre los defectuosos aproximadamente 41.7% proceden de él. La razón es que su tasa de defecto es mayor.
+
+## Interpretación bayesiana elemental
+
+En una aplicación de Bayes aparecen tres ideas:
+
+- **Probabilidad previa:** $P(B_i)$. Representa lo que sabemos sobre la causa antes de observar el evento $A$.
+- **Verosimilitud:** $P(A\mid B_i)$. Mide qué tan compatible es la evidencia observada con esa causa.
+- **Probabilidad posterior:** $P(B_i\mid A)$. Es la probabilidad actualizada después de incorporar la evidencia.
+
+Podemos resumir la lógica como
+
+$$
+\text{posterior}
+\propto
+\text{previa}\times\text{verosimilitud}.
+$$
+
+La constante de normalización es $P(A)$.
+
+## Árbol de probabilidad
+
+Los árboles son especialmente útiles en estos problemas.
+
+Primero se ramifica según la causa:
+
+$$
+B_1, B_2, \ldots, B_k.
+$$
+
+Después, desde cada causa, se ramifica según la evidencia $A$ o $A^c$.
+
+La probabilidad de una hoja es el producto de sus ramas:
+
+$$
+P(B_i\cap A)=P(B_i)P(A\mid B_i).
+$$
+
+Para calcular $P(A)$ se suman todas las hojas que terminan en $A$. Para Bayes se divide la hoja correspondiente entre esa suma.
+
+## Ejemplo de diagnóstico
+
+Supongamos una condición médica con prevalencia
+
+$$
+P(E)=0.01.
+$$
+
+Una prueba tiene sensibilidad
+
+$$
+P(+\mid E)=0.95
+$$
+
+y especificidad
+
+$$
+P(-\mid E^c)=0.90.
+$$
+
+Entonces la tasa de falso positivo es
+
+$$
+P(+\mid E^c)=0.10.
+$$
+
+La probabilidad total de obtener un resultado positivo es
+
+$$
+P(+)=0.01(0.95)+0.99(0.10)=0.1085.
+$$
+
+Por Bayes,
+
+$$
+P(E\mid +)
+=\frac{0.01(0.95)}{0.1085}
+\approx0.0876.
+$$
+
+Es decir, un resultado positivo no implica una probabilidad posterior de 95%. En este ejemplo es aproximadamente 8.8%.
+
+## La importancia de la tasa base
+
+El ejemplo anterior ilustra la **falacia de la tasa base**: confundir la sensibilidad $P(+\mid E)$ con la probabilidad posterior $P(E\mid +)$.
+
+Cuando una condición es poco frecuente, puede haber muchos falsos positivos incluso con una prueba razonablemente precisa.
+
+### Interpretación con 10 000 personas
+
+En una población de 10 000 personas:
+
+- aproximadamente 100 tienen la condición;
+- de ellas, unas 95 resultan positivas;
+- aproximadamente 9900 no tienen la condición;
+- con una tasa de falso positivo de 10%, unas 990 resultan positivas.
+
+En total habría aproximadamente
+
+$$
+95+990=1085
+$$
+
+resultados positivos, de los cuales sólo 95 corresponden a personas con la condición:
+
+$$
+\frac{95}{1085}\approx0.0876.
+$$
+
+La tabla de frecuencias suele hacer Bayes mucho más intuitivo.
+
+## Aplicación: detección de fallas
+
+Un sistema puede operar en dos estados:
+
+$$
+F=\{\text{falla real}\},
+\qquad
+F^c=\{\text{sin falla}\}.
+$$
+
+Supongamos
+
+$$
+P(F)=0.04,
+$$
+
+$$
+P(A\mid F)=0.92,
+$$
+
+$$
+P(A\mid F^c)=0.08,
+$$
+
+donde $A$ significa “se activa la alarma”.
+
+Entonces
+
+$$
+P(A)=0.04(0.92)+0.96(0.08)=0.1136.
+$$
+
+Y
+
+$$
+P(F\mid A)=\frac{0.04(0.92)}{0.1136}\approx0.3239.
+$$
+
+La alarma aumenta la probabilidad de falla de 4% a aproximadamente 32.4%, pero no la convierte en certeza.
+
+## Actualización sucesiva
+
+Bayes también puede utilizarse de manera secuencial. Una probabilidad posterior obtenida con una primera evidencia puede convertirse en la nueva probabilidad previa cuando llega una segunda evidencia.
+
+Conceptualmente:
+
+$$
+P(H)
+\xrightarrow{E_1}
+P(H\mid E_1)
+\xrightarrow{E_2}
+P(H\mid E_1,E_2).
+$$
+
+Esta idea aparece en filtrado, diagnóstico iterativo, clasificación y sistemas de decisión.
+
+## Cálculos con R
+
+### Probabilidad total
+
+```{r}
+p_proveedor <- c(0.50, 0.30, 0.20)
+p_defecto_dado_proveedor <- c(0.01, 0.03, 0.05)
+
+p_defecto <- sum(p_proveedor * p_defecto_dado_proveedor)
+p_defecto
+```
+
+### Bayes para todos los proveedores
+
+```{r}
+posterior <- p_proveedor * p_defecto_dado_proveedor / p_defecto
+posterior
+sum(posterior)
+```
+
+La suma de las probabilidades posteriores debe ser 1.
+
+### Función general
+
+```{r}
+bayes_discreto <- function(prior, likelihood) {
+  numerador <- prior * likelihood
+  numerador / sum(numerador)
+}
+
+bayes_discreto(
+  prior = c(0.50, 0.30, 0.20),
+  likelihood = c(0.01, 0.03, 0.05)
+)
+```
+
+## Simulación de un problema de diagnóstico
+
+```{r}
+set.seed(2026)
+n <- 200000
+
+estado <- rbinom(n, size = 1, prob = 0.01)
+positivo <- ifelse(
+  estado == 1,
+  rbinom(n, size = 1, prob = 0.95),
+  rbinom(n, size = 1, prob = 0.10)
+)
+
+mean(estado == 1)
+mean(positivo == 1)
+mean(estado[positivo == 1] == 1)
+```
+
+La última cantidad aproxima $P(E\mid +)$ y debe acercarse al resultado teórico.
+
+## Interactivo del capítulo
+
+La edición web incluye un recurso de Bayes para dos hipótesis. El estudiante puede modificar:
+
+- la probabilidad previa $P(H)$;
+- la sensibilidad $P(+\mid H)$;
+- la tasa de falso positivo $P(+\mid H^c)$.
+
+El interactivo muestra en tiempo real:
+
+$$
+P(+),
+$$
+
+$$
+P(H\mid +),
+$$
+
+y una representación mediante frecuencias esperadas por cada 1000 observaciones.
+
+Esto permite visualizar inmediatamente el efecto de la prevalencia o tasa base.
+
+## Actividad con GeoGebra
+
+Construye un árbol con dos primeras ramas:
+
+$$
+H\quad\text{y}\quad H^c.
+$$
+
+Utiliza deslizadores para
+
+$$
+p=P(H),
+$$
+
+$$
+s=P(+\mid H),
+$$
+
+y
+
+$$
+f=P(+\mid H^c).
+$$
+
+Muestra en las hojas
+
+$$
+ps,
+\qquad
+p(1-s),
+\qquad
+(1-p)f,
+\qquad
+(1-p)(1-f).
+$$
+
+Después calcula
+
+$$
+P(+)=ps+(1-p)f
+$$
+
+y
+
+$$
+P(H\mid +)=\frac{ps}{ps+(1-p)f}.
+$$
+
+Mueve el deslizador $p$ desde valores muy pequeños hasta valores grandes y observa cómo cambia la probabilidad posterior aun manteniendo constantes las características de la prueba.
+
+## Estrategia para resolver problemas de Bayes
+
+1. Identifica las posibles causas o hipótesis.
+2. Comprueba que formen una partición.
+3. Escribe sus probabilidades previas.
+4. Escribe la probabilidad de la evidencia bajo cada causa.
+5. Calcula la probabilidad total de la evidencia.
+6. Aplica Bayes a la causa que interesa.
+7. Comprueba que el resultado esté entre 0 y 1.
+8. Si calculas todas las posteriores, verifica que sumen 1.
+9. Interpreta el resultado en palabras y compáralo con la probabilidad previa.
+
+## Errores frecuentes
+
+- Confundir $P(A\mid B)$ con $P(B\mid A)$.
+- Omitir alguna rama al calcular la probabilidad total.
+- Utilizar probabilidades previas que no suman 1.
+- Confundir sensibilidad con valor predictivo positivo.
+- Ignorar la tasa base o prevalencia.
+- Sumar probabilidades dentro de una trayectoria del árbol; las ramas de una trayectoria se multiplican.
+- Interpretar una probabilidad posterior como certeza.
+
+## Resumen
+
+Si $B_1,\ldots,B_k$ forman una partición,
+
+$$
+P(A)=\sum_{i=1}^{k}P(B_i)P(A\mid B_i).
+$$
+
+El teorema de Bayes es
+
+$$
+P(B_i\mid A)=
+\frac{P(B_i)P(A\mid B_i)}
+{\sum_{j=1}^{k}P(B_j)P(A\mid B_j)}.
+$$
+
+Bayes actualiza una probabilidad previa utilizando evidencia observada. La magnitud de la probabilidad posterior depende tanto de la evidencia como de la tasa base.
+
+## Ejercicios
+
+1. Tres máquinas producen 40%, 35% y 25% de la producción. Sus tasas de defecto son 1%, 2% y 4%. Calcula la probabilidad de seleccionar una pieza defectuosa.
+2. Para el ejercicio anterior, si una pieza es defectuosa, calcula la probabilidad de que provenga de la tercera máquina.
+3. Una prueba tiene sensibilidad 0.90, especificidad 0.95 y la prevalencia de una condición es 0.02. Calcula $P(+)$ y $P(E\mid +)$.
+4. Repite el ejercicio anterior para prevalencias 0.10 y 0.50. Explica el efecto de la tasa base.
+5. Una alarma se activa con probabilidad 0.97 cuando existe una falla y con probabilidad 0.04 cuando no existe. Si la probabilidad previa de falla es 0.03, calcula la probabilidad de falla dada una alarma.
+6. Construye en R una función que reciba un vector de probabilidades previas y un vector de verosimilitudes y devuelva el vector posterior.
+7. Simula en R el ejercicio 3 con 500 000 observaciones y compara el valor simulado con el teórico.
+8. En una población de 100 000 personas, traduce el ejercicio 3 a frecuencias naturales y explica Bayes sin usar fórmulas.
+9. Dos proveedores entregan 70% y 30% de las piezas. Una inspección rechaza una pieza con probabilidad 0.08 si proviene del primero y 0.18 si proviene del segundo. Si una pieza fue rechazada, ¿de cuál proveedor es más probable que proceda?
+10. **Reto ★.** Demuestra que si $B_1,\ldots,B_k$ forman una partición, entonces las probabilidades posteriores $P(B_i\mid A)$ suman 1 siempre que $P(A)>0$.
+
+## Referencias del capítulo
+
+La exposición de particiones, probabilidad total y teorema de Bayes se apoya en el tratamiento estándar de probabilidad para ingeniería y ciencias de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. El código R, las simulaciones y los ejemplos del capítulo son originales; el enfoque computacional general es consistente con @kerns2010.
