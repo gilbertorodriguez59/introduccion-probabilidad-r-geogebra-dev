@@ -15,27 +15,6 @@ local function clean(s)
   return pandoc.utils.stringify(s):lower():gsub("^%s+", ""):gsub("%s+$", "")
 end
 
-local function chapter_title(doc)
-  local mt = clean(doc.meta and doc.meta.title)
-  if mt and capitulos[mt] then return mt end
-  for _, b in ipairs(doc.blocks) do
-    if b.t == "Header" and b.level == 1 then
-      local ht = clean(b.content)
-      if ht and capitulos[ht] then return ht end
-    end
-  end
-  return mt
-end
-
-local function already_has_materials(doc)
-  for _, b in ipairs(doc.blocks) do
-    if b.t == "Header" and clean(b.content) == "materiales complementarios del capítulo" then
-      return true
-    end
-  end
-  return false
-end
-
 local function material_blocks(cfg)
   local colab="https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/"..cfg.colab
   local rurl="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/"..cfg.r
@@ -57,24 +36,63 @@ Los **cuadernos de R** acompañan cada capítulo para reproducir, modificar y ex
 end
 
 function Pandoc(doc)
-  if already_has_materials(doc) then return doc end
-  local titulo = chapter_title(doc)
-  local cfg = titulo and capitulos[titulo] or nil
-  if not cfg then return doc end
+  local out={}
+  local actual=nil
+  local tiene_materiales=false
 
-  local extra=material_blocks(cfg)
-  local nuevos={}
-  local insertado=false
   for _,b in ipairs(doc.blocks) do
-    if not insertado and b.t=="Header" and clean(b.content)=="referencias del capítulo" then
-      for _,x in ipairs(extra) do table.insert(nuevos,x) end
-      insertado=true
+    if b.t=="Header" and b.level==1 then
+      local t=clean(b.content)
+      if capitulos[t] then
+        actual=t
+        tiene_materiales=false
+      else
+        actual=nil
+        tiene_materiales=false
+      end
     end
-    table.insert(nuevos,b)
+
+    if actual and b.t=="Header" and clean(b.content)=="materiales complementarios del capítulo" then
+      tiene_materiales=true
+    end
+
+    if actual and (not tiene_materiales) and b.t=="Header" and clean(b.content)=="referencias del capítulo" then
+      local extra=material_blocks(capitulos[actual])
+      for _,x in ipairs(extra) do table.insert(out,x) end
+      tiene_materiales=true
+    end
+
+    table.insert(out,b)
   end
-  if not insertado then
-    for _,x in ipairs(extra) do table.insert(nuevos,x) end
+
+  -- Si Quarto procesa un capítulo individual sin conservar el H1 en los bloques,
+  -- se usa el título del documento como respaldo.
+  if #out==#doc.blocks then
+    local mt=clean(doc.meta and doc.meta.title)
+    local cfg=mt and capitulos[mt] or nil
+    if cfg then
+      local existe=false
+      for _,b in ipairs(out) do
+        if b.t=="Header" and clean(b.content)=="materiales complementarios del capítulo" then existe=true break end
+      end
+      if not existe then
+        local nuevo={}
+        local inserted=false
+        for _,b in ipairs(out) do
+          if not inserted and b.t=="Header" and clean(b.content)=="referencias del capítulo" then
+            for _,x in ipairs(material_blocks(cfg)) do table.insert(nuevo,x) end
+            inserted=true
+          end
+          table.insert(nuevo,b)
+        end
+        if not inserted then
+          for _,x in ipairs(material_blocks(cfg)) do table.insert(nuevo,x) end
+        end
+        out=nuevo
+      end
+    end
   end
-  doc.blocks=nuevos
+
+  doc.blocks=out
   return doc
 end
