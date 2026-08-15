@@ -1,0 +1,426 @@
+# Variable aleatoria y función de distribución acumulada
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- interpretar una variable aleatoria como una función definida sobre el espacio muestral;
+- distinguir entre resultados del experimento y valores numéricos de una variable aleatoria;
+- identificar variables aleatorias discretas y continuas;
+- construir y utilizar la función de distribución acumulada;
+- interpretar probabilidades mediante $F_X(x)=P(X\le x)$;
+- recuperar probabilidades de intervalos a partir de la función de distribución;
+- representar variables aleatorias y funciones de distribución con R;
+- utilizar simulación para estudiar distribuciones empíricas;
+- explorar interactivamente cómo una variable aleatoria transforma resultados en valores numéricos.
+
+## Del resultado del experimento a un número
+
+Un experimento aleatorio produce resultados en un espacio muestral $\Omega$. Sin embargo, en muchas aplicaciones no interesa conservar toda la descripción del resultado: necesitamos asociarle un valor numérico.
+
+Una **variable aleatoria** es una función
+
+$$
+X:\Omega\longrightarrow\mathbb R.
+$$
+
+A cada resultado elemental $\omega\in\Omega$ le asigna un número real $X(\omega)$.
+
+La palabra “variable” puede ser engañosa al principio. Una variable aleatoria no es un número que cambia caprichosamente: es una función perfectamente definida. Lo aleatorio proviene de que no sabemos qué $\omega$ ocurrirá.
+
+## Ejemplo: dos lanzamientos de moneda
+
+Consideremos
+
+$$
+\Omega=\{CC,CS,SC,SS\},
+$$
+
+donde $C$ significa cara y $S$ sello. Definamos
+
+$$
+X=\text{número de caras obtenidas}.
+$$
+
+Entonces
+
+$$
+X(CC)=2,
+$$
+
+$$
+X(CS)=X(SC)=1,
+$$
+
+y
+
+$$
+X(SS)=0.
+$$
+
+La variable aleatoria transforma cuatro resultados elementales en sólo tres valores posibles:
+
+$$
+\{0,1,2\}.
+$$
+
+Si la moneda es equilibrada,
+
+$$
+P(X=0)=\frac14,
+\qquad
+P(X=1)=\frac12,
+\qquad
+P(X=2)=\frac14.
+$$
+
+## Preimagen de un evento numérico
+
+La expresión
+
+$$
+\{X\le 1\}
+$$
+
+representa en realidad el conjunto de resultados elementales para los cuales la variable toma un valor menor o igual que 1:
+
+$$
+\{X\le1\}=\{SS,CS,SC\}.
+$$
+
+Por eso podemos escribir
+
+$$
+P(X\le1)=\frac34.
+$$
+
+Esta conexión entre eventos en $\Omega$ e intervalos de números reales es central para toda la teoría de variables aleatorias.
+
+## Variables discretas y continuas
+
+### Variable aleatoria discreta
+
+Una variable es **discreta** cuando sus valores posibles forman un conjunto finito o numerable.
+
+Ejemplos:
+
+- número de fallas en una máquina durante una semana;
+- número de paquetes perdidos en una transmisión;
+- número de pacientes que llegan a urgencias durante una hora;
+- número de caras en varios lanzamientos de moneda.
+
+### Variable aleatoria continua
+
+Una variable es **continua** cuando puede tomar valores en intervalos de la recta real.
+
+Ejemplos:
+
+- tiempo hasta la falla de un componente;
+- concentración de ozono;
+- temperatura;
+- resistencia eléctrica medida en un material.
+
+En los capítulos siguientes estudiaremos por separado las distribuciones discretas y continuas.
+
+## Función de distribución acumulada
+
+Para cualquier variable aleatoria $X$, definimos su **función de distribución acumulada** por
+
+$$
+\boxed{
+F_X(x)=P(X\le x)
+}
+$$
+
+para todo $x\in\mathbb R$.
+
+La función $F_X$ responde una pregunta muy concreta:
+
+> ¿qué probabilidad se ha acumulado hasta el valor $x$?
+
+## CDF del ejemplo de las dos monedas
+
+Para $X=$ número de caras en dos lanzamientos,
+
+$$
+P(X=0)=\frac14,
+\qquad
+P(X=1)=\frac12,
+\qquad
+P(X=2)=\frac14.
+$$
+
+Por tanto,
+
+$$
+F_X(x)=
+\begin{cases}
+0, & x<0,\\
+\frac14, & 0\le x<1,\\
+\frac34, & 1\le x<2,\\
+1, & x\ge2.
+\end{cases}
+$$
+
+La CDF de una variable discreta tiene forma escalonada. Cada salto corresponde a una probabilidad puntual.
+
+## Propiedades fundamentales de la CDF
+
+Toda función de distribución acumulada satisface:
+
+1. $0\le F_X(x)\le1$.
+2. $F_X(x)$ es no decreciente.
+3. 
+
+$$
+\lim_{x\to-\infty}F_X(x)=0.
+$$
+
+4. 
+
+$$
+\lim_{x\to\infty}F_X(x)=1.
+$$
+
+5. Es continua por la derecha:
+
+$$
+\lim_{t\downarrow x}F_X(t)=F_X(x).
+$$
+
+En una variable discreta, la magnitud del salto en $x$ es precisamente
+
+$$
+P(X=x)=F_X(x)-F_X(x^-),
+$$
+
+donde
+
+$$
+F_X(x^-)=\lim_{t\uparrow x}F_X(t).
+$$
+
+## Probabilidades de intervalos usando la CDF
+
+La CDF permite obtener muchas probabilidades sin volver al espacio muestral.
+
+### Intervalo de la forma $(a,b]$
+
+$$
+\boxed{
+P(a<X\le b)=F_X(b)-F_X(a)
+}
+$$
+
+### Probabilidad de exceder un valor
+
+$$
+P(X>x)=1-F_X(x).
+$$
+
+### Probabilidad de un punto
+
+En general,
+
+$$
+P(X=x)=F_X(x)-F_X(x^-).
+$$
+
+Para una variable continua, este salto es cero en todos los puntos.
+
+## Ejemplo de ingeniería
+
+Sea $X$ el número de paquetes perdidos en un bloque de transmisión y supongamos
+
+$$
+P(X=0)=0.70,
+$$
+
+$$
+P(X=1)=0.20,
+$$
+
+$$
+P(X=2)=0.08,
+$$
+
+$$
+P(X=3)=0.02.
+$$
+
+Entonces
+
+$$
+F_X(0)=0.70,
+$$
+
+$$
+F_X(1)=0.90,
+$$
+
+$$
+F_X(2)=0.98,
+$$
+
+y
+
+$$
+F_X(3)=1.
+$$
+
+La probabilidad de perder más de un paquete es
+
+$$
+P(X>1)=1-F_X(1)=0.10.
+$$
+
+## Construcción con R
+
+Podemos representar una distribución discreta mediante sus valores y probabilidades.
+
+```{r}
+x <- 0:3
+p <- c(0.70, 0.20, 0.08, 0.02)
+F <- cumsum(p)
+
+data.frame(x = x, probabilidad = p, acumulada = F)
+```
+
+La función escalonada puede graficarse con:
+
+```{r}
+plot(x, F, type = "s",
+     ylim = c(0, 1),
+     xlab = "x",
+     ylab = "F_X(x)")
+points(x, F, pch = 19)
+```
+
+## Simulación y CDF empírica
+
+La función `ecdf()` de R construye una función de distribución empírica a partir de una muestra.
+
+```{r}
+set.seed(2026)
+valores <- sample(
+  0:3,
+  size = 5000,
+  replace = TRUE,
+  prob = c(0.70, 0.20, 0.08, 0.02)
+)
+
+F_emp <- ecdf(valores)
+plot(F_emp,
+     xlab = "Número de paquetes perdidos",
+     ylab = "Frecuencia acumulada")
+```
+
+Al aumentar el tamaño de la simulación, la CDF empírica se aproxima a la CDF teórica.
+
+## Variable aleatoria como transformación
+
+En aplicaciones reales, una variable aleatoria resume aspectos relevantes de un resultado complejo.
+
+Por ejemplo, el resultado de un sistema de sensores podría ser un vector completo de mediciones. Podemos definir
+
+$$
+X(\omega)=\text{máxima temperatura registrada},
+$$
+
+o
+
+$$
+Y(\omega)=\text{número de sensores que excedieron un umbral}.
+$$
+
+Dos variables diferentes pueden construirse sobre el mismo experimento y responder preguntas distintas.
+
+## Interactivo del capítulo
+
+La edición web incluye un recurso interactivo basado en tres lanzamientos de moneda. El estudiante puede elegir una regla de transformación, por ejemplo:
+
+- número de caras;
+- número de cambios entre resultados consecutivos;
+- indicador de que aparece al menos una cara.
+
+El recurso muestra:
+
+1. los resultados del espacio muestral;
+2. el valor $X(\omega)$ asignado a cada resultado;
+3. la distribución de probabilidades de $X$;
+4. la función acumulada $F_X(x)$.
+
+Así se observa directamente que una variable aleatoria es una función que agrupa resultados y que la CDF acumula probabilidades.
+
+## Actividad con GeoGebra
+
+Representa en una tabla los valores posibles $x_1<\cdots<x_m$ y sus probabilidades $p_i$. Construye los acumulados
+
+$$
+F_i=\sum_{j=1}^{i}p_j.
+$$
+
+Después representa la función escalonada que mantiene el valor $F_i$ desde $x_i$ hasta antes de $x_{i+1}$.
+
+Utiliza deslizadores para modificar las probabilidades $p_i$ manteniendo
+
+$$
+\sum_i p_i=1.
+$$
+
+Observa cómo cambian simultáneamente la distribución puntual y la CDF.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/07-variable-aleatoria-cdf-colab.ipynb) | Experimentar con transformaciones y CDF mediante código ejecutable. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](cuadernos-r/07-variable-aleatoria-cdf.Rmd) | Reproducir los ejemplos y simulaciones del capítulo en R/RStudio. |
+| Interactivo | HTML/GeoGebra | Integrado en la edición web | Explorar visualmente la transformación $\omega\mapsto X(\omega)$ y la CDF. |
+| Presentación | PDF / PPT | Próximamente | Material de clase; se incorporará cuando estén disponibles los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual del capítulo. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas principales. |
+
+Los **cuadernos de R** acompañan cada capítulo para que los ejemplos puedan reproducirse, modificarse y extenderse localmente en R/RStudio. Los cuadernos de Google Colab permiten trabajar desde el navegador sin preparar previamente el entorno local.
+
+## Errores frecuentes
+
+- Confundir el resultado $\omega$ con el número $X(\omega)$.
+- Pensar que una variable aleatoria debe tomar valores diferentes para todos los resultados.
+- Confundir $P(X=x)$ con $F_X(x)$.
+- Olvidar que $F_X(x)$ utiliza $X\le x$, no $X<x$.
+- Dibujar una CDF decreciente.
+- Suponer que toda CDF debe ser continua.
+
+## Resumen
+
+Una variable aleatoria es una función
+
+$$
+X:\Omega\to\mathbb R.
+$$
+
+Su función de distribución acumulada es
+
+$$
+F_X(x)=P(X\le x).
+$$
+
+La CDF existe para cualquier variable aleatoria, discreta o continua, y permite obtener probabilidades de intervalos. En los próximos capítulos estudiaremos las funciones específicas que describen distribuciones discretas y continuas.
+
+## Ejercicios
+
+1. Para tres lanzamientos de moneda, define $X=$ número de caras. Construye la tabla de valores posibles y probabilidades.
+2. Para la variable del ejercicio anterior, escribe explícitamente $F_X(x)$.
+3. Calcula $P(1<X\le3)$ utilizando la CDF.
+4. Sea $X$ el número de fallas de una unidad con probabilidades $0.55,0.30,0.10,0.05$ para $x=0,1,2,3$. Construye su CDF.
+5. Con la distribución anterior calcula $P(X>1)$ y $P(X\le2)$.
+6. Implementa en R una función que reciba un vector de probabilidades y devuelva sus acumulados.
+7. Simula 20 000 observaciones de la distribución del ejercicio 4 y compara la CDF empírica con la teórica.
+8. Propón dos variables aleatorias diferentes definidas sobre el resultado de dos dados y explica qué información resume cada una.
+9. ¿Puede una variable aleatoria asignar el mismo valor a varios resultados? Explica con un ejemplo.
+10. **Reto ★.** Demuestra, usando propiedades de probabilidad, que toda CDF es no decreciente.
+
+## Referencias del capítulo
+
+El concepto de variable aleatoria y función de distribución acumulada sigue el tratamiento estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. El código y las simulaciones son originales y se desarrollan en el espíritu computacional de @kerns2010.
