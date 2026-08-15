@@ -1,0 +1,15 @@
+---
+title: "Capítulo 5. Probabilidad condicional e independencia"
+output: html_notebook
+---
+
+```{r}
+pA <- .10; pB <- .30; pAB <- .06
+c(P_A_dado_B=pAB/pB, P_B_dado_A=pAB/pA)
+```
+
+```{r}
+es_independiente <- function(pA,pB,pAB,tol=1e-10) abs(pAB-pA*pB)<tol
+es_independiente(.5,.5,.25)
+es_independiente(.4,.3,.18)
+```
