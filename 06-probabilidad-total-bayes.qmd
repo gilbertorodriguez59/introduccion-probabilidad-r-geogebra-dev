@@ -532,6 +532,19 @@ Bayes actualiza una probabilidad previa utilizando evidencia observada. La magni
 9. Dos proveedores entregan 70% y 30% de las piezas. Una inspección rechaza una pieza con probabilidad 0.08 si proviene del primero y 0.18 si proviene del segundo. Si una pieza fue rechazada, ¿de cuál proveedor es más probable que proceda?
 10. **Reto ★.** Demuestra que si $B_1,\ldots,B_k$ forman una partición, entonces las probabilidades posteriores $P(B_i\mid A)$ suman 1 siempre que $P(A)>0$.
 
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/06-probabilidad-total-bayes-colab.ipynb) | Ejecutar, modificar y experimentar con los ejemplos computacionales del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/06-probabilidad-total-bayes.Rmd) | Reproducir y ampliar los ejemplos en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap06-bayes.html) | Explorar visualmente los conceptos centrales del capítulo. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
 ## Referencias del capítulo
 
 La exposición de particiones, probabilidad total y teorema de Bayes se apoya en el tratamiento estándar de probabilidad para ingeniería y ciencias de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. El código R, las simulaciones y los ejemplos del capítulo son originales; el enfoque computacional general es consistente con @kerns2010.

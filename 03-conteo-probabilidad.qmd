@@ -375,6 +375,19 @@ Una buena práctica es describir primero el proceso con palabras y después eleg
 9. Usa R para enumerar todos los resultados de cuatro transmisiones, cada una correcta o errónea, y verifica el principio multiplicativo.
 10. ★ Diseña un problema de ingeniería en el que usar una combinación en lugar de un arreglo produzca una respuesta incorrecta. Explica por qué.
 
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/03-conteo-probabilidad-colab.ipynb) | Ejecutar, modificar y experimentar con los ejemplos computacionales del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/03-conteo-probabilidad.Rmd) | Reproducir y ampliar los ejemplos en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap03-conteo.html) | Explorar visualmente los conceptos centrales del capítulo. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
 ## Referencias del capítulo
 
 El tratamiento de técnicas de conteo sigue el enfoque habitual de probabilidad para ingeniería y ciencias de @walpole2012, @devore2016, @montgomery2018 y @johnson2018, complementado con verificación computacional mediante R inspirada en @kerns2010.

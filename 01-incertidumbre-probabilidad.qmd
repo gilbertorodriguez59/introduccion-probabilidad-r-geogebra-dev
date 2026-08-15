@@ -87,6 +87,19 @@ Este tipo de preguntas motivará el desarrollo de eventos, probabilidad condicio
 4. Explica por qué una frecuencia relativa observada de 0.47 no demuestra que una moneda sea sesgada.
 5. Describe un experimento aleatorio relacionado con tu área de ingeniería e identifica al menos tres resultados posibles.
 
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/01-incertidumbre-probabilidad-colab.ipynb) | Ejecutar, modificar y experimentar con los ejemplos computacionales del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/01-incertidumbre-probabilidad.Rmd) | Reproducir y ampliar los ejemplos en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap01-frecuencia-relativa.html) | Explorar visualmente los conceptos centrales del capítulo. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
 ## Referencias del capítulo
 
 El desarrollo conceptual de este capítulo toma como referencia la organización y el enfoque aplicado de textos de probabilidad para ingeniería y ciencias, especialmente @walpole2012, @devore2016, @montgomery2018, @johnson2018 y el enfoque computacional con R de @kerns2010.

@@ -413,6 +413,19 @@ setdiff(S_componentes, B)
 13. Define un experimento aleatorio relacionado con ingeniería ambiental, biomédica, electrónica o telecomunicaciones. Especifica el procedimiento, la observación, el espacio muestral y tres eventos relevantes.
 14. Un sistema tiene tres alarmas binarias. Construye el espacio muestral y los eventos “exactamente una alarma se activa”, “al menos dos se activan” y “ninguna se activa”.
 
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/02-espacios-eventos-colab.ipynb) | Ejecutar, modificar y experimentar con los ejemplos computacionales del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/02-espacios-eventos.Rmd) | Reproducir y ampliar los ejemplos en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap02-eventos-venn.html) | Explorar visualmente los conceptos centrales del capítulo. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
 ## Referencias del capítulo
 
 El orden conceptual —espacio muestral, eventos y operaciones— sigue el programa oficial del curso y se apoya principalmente en @walpole2012. Se complementa con los enfoques para ingeniería y ciencias de @devore2016, @montgomery2018 y @johnson2018, y con el tratamiento computacional en R de @kerns2010.
