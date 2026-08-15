@@ -1,0 +1,19 @@
+---
+title: "Capítulo 1. Incertidumbre y probabilidad"
+output: html_notebook
+---
+
+Este cuaderno reproduce y amplía las simulaciones del capítulo.
+
+```{r}
+set.seed(123)
+n <- 1000
+lanzamientos <- sample(c("cara","cruz"), n, replace = TRUE)
+mean(lanzamientos == "cara")
+```
+
+```{r}
+frecuencia <- cumsum(lanzamientos == "cara")/seq_len(n)
+plot(frecuencia, type="l", xlab="Lanzamientos", ylab="Frecuencia relativa")
+abline(h=.5, lty=2)
+```
