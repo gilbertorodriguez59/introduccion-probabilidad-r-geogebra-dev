@@ -1,0 +1,81 @@
+---
+title: "Capítulo 10. Esperanza, varianza y desigualdad de Chebyshev"
+output: html_document
+---
+
+## Objetivo
+
+Este cuaderno reproduce y amplía los cálculos de esperanza, momentos, varianza, simulación y desigualdad de Chebyshev.
+
+## Distribución discreta
+
+```{r}
+x <- 0:3
+p <- c(0.70, 0.20, 0.08, 0.02)
+sum(p)
+```
+
+## Esperanza y segundo momento
+
+```{r}
+mu <- sum(x * p)
+EX2 <- sum(x^2 * p)
+c(media = mu, segundo_momento = EX2)
+```
+
+## Varianza y desviación estándar
+
+```{r}
+varX <- EX2 - mu^2
+sdX <- sqrt(varX)
+c(varianza = varX, desviacion = sdX)
+```
+
+## Esperanza de una función
+
+```{r}
+costo <- function(x) 5 + 3*x + 2*x^2
+sum(costo(x) * p)
+```
+
+## Simulación
+
+```{r}
+set.seed(2026)
+n <- 100000
+muestra <- sample(x, n, replace = TRUE, prob = p)
+c(media_empirica = mean(muestra),
+  varianza_empirica = var(muestra),
+  desviacion_empirica = sd(muestra))
+```
+
+## Desigualdad de Chebyshev
+
+```{r}
+k <- 2
+lim_inf <- mu - k * sdX
+lim_sup <- mu + k * sdX
+prob_real <- sum(p[x > lim_inf & x < lim_sup])
+cota <- 1 - 1/k^2
+c(limite_inferior = lim_inf,
+  limite_superior = lim_sup,
+  probabilidad_real = prob_real,
+  garantia_chebyshev = cota)
+```
+
+## Comparación para varios valores de k
+
+```{r}
+ks <- c(1.5, 2, 2.5, 3)
+comparar <- function(k) {
+  li <- mu - k*sdX
+  ls <- mu + k*sdX
+  real <- sum(p[x > li & x < ls])
+  c(k = k, real = real, chebyshev = max(0, 1 - 1/k^2))
+}
+t(sapply(ks, comparar))
+```
+
+## Actividad
+
+Modifica el vector `p`, verifica que sume 1 y observa cómo cambian la media, la varianza y la diferencia entre la probabilidad real y la garantía mínima de Chebyshev.
