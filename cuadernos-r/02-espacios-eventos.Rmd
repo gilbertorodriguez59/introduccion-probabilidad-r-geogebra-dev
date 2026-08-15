@@ -1,0 +1,15 @@
+---
+title: "Capítulo 2. Conjuntos, espacios muestrales y eventos"
+output: html_notebook
+---
+
+```{r}
+Omega <- 1:12
+A <- Omega[Omega %% 2 == 0]
+B <- Omega[Omega > 6]
+list(union=union(A,B), interseccion=intersect(A,B), complemento_A=setdiff(Omega,A))
+```
+
+```{r}
+expand.grid(dado1=1:6, dado2=1:6)
+```
