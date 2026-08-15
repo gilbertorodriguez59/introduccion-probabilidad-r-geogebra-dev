@@ -1,0 +1,641 @@
+# Esperanza matemática, momentos, varianza y desigualdad de Chebyshev
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- interpretar la esperanza matemática como centro de balance de una distribución;
+- calcular esperanzas de variables aleatorias discretas y continuas;
+- utilizar la esperanza de una función $g(X)$ sin construir primero la distribución de $g(X)$;
+- aplicar las propiedades de linealidad de la esperanza;
+- calcular momentos ordinarios y centrales;
+- obtener la varianza y la desviación estándar;
+- interpretar el efecto de transformaciones lineales sobre media y varianza;
+- utilizar indicadores para contar eventos esperados;
+- aplicar las desigualdades de Markov y Chebyshev;
+- verificar resultados mediante R, simulación e interactivos.
+
+## Del modelo completo a medidas resumen
+
+Una distribución de probabilidad contiene toda la información probabilística del modelo. Sin embargo, en muchas aplicaciones necesitamos resumirla mediante unas cuantas cantidades numéricas.
+
+Dos de las más importantes son:
+
+- una medida de **centro**: la esperanza o media;
+- una medida de **dispersión**: la varianza o desviación estándar.
+
+Estas medidas no sustituyen a la distribución, pero permiten compararla, interpretarla y utilizarla en modelos de ingeniería y ciencias.
+
+## Esperanza de una variable discreta
+
+Si $X$ es discreta, con soporte $\mathcal S_X$ y PMF $p_X(x)$, su esperanza se define como
+
+$$
+\boxed{E[X]=\sum_{x\in\mathcal S_X}x\,p_X(x)}.
+$$
+
+La esperanza es un promedio ponderado de los valores posibles de $X$.
+
+### Ejemplo: número de retransmisiones
+
+Supongamos
+
+| $x$ | 0 | 1 | 2 | 3 |
+|---:|---:|---:|---:|---:|
+| $p_X(x)$ | 0.70 | 0.20 | 0.08 | 0.02 |
+
+Entonces
+
+$$
+\begin{aligned}
+E[X]
+&=0(0.70)+1(0.20)+2(0.08)+3(0.02)\\
+&=0.42.
+\end{aligned}
+$$
+
+Esto no significa que una transmisión individual requiera 0.42 retransmisiones. Significa que, en muchas transmisiones, el promedio de retransmisiones por paquete tenderá a acercarse a 0.42.
+
+## Interpretación como centro de balance
+
+Podemos imaginar las probabilidades como masas colocadas en los puntos $x$. La esperanza es el punto donde la distribución quedaría equilibrada.
+
+Por ello, la media puede encontrarse incluso en un valor que la variable nunca toma.
+
+Por ejemplo, si
+
+$$
+P(X=0)=P(X=1)=0.5,
+$$
+
+entonces
+
+$$
+E[X]=0.5,
+$$
+
+aunque $X$ nunca tome el valor 0.5.
+
+## Esperanza de una variable continua
+
+Si $X$ es continua con densidad $f_X(x)$, entonces
+
+$$
+\boxed{E[X]=\int_{-\infty}^{\infty}x f_X(x)\,dx},
+$$
+
+si la integral existe.
+
+### Ejemplo
+
+Para
+
+$$
+f_X(x)=\frac{x}{2},\qquad 0\le x\le2,
+$$
+
+obtenemos
+
+$$
+E[X]
+=\int_0^2 x\frac{x}{2}\,dx
+=\frac12\int_0^2x^2\,dx
+=\frac43.
+$$
+
+## Esperanza de una función de la variable
+
+Con frecuencia interesa calcular
+
+$$
+E[g(X)].
+$$
+
+No es necesario obtener primero la distribución de $Y=g(X)$.
+
+Para una variable discreta,
+
+$$
+\boxed{E[g(X)]=\sum_x g(x)p_X(x)}.
+$$
+
+Para una variable continua,
+
+$$
+\boxed{E[g(X)]=\int_{-\infty}^{\infty}g(x)f_X(x)\,dx}.
+$$
+
+Esta regla suele llamarse ley del estadístico inconsciente o LOTUS.
+
+## Ejemplo: costo esperado
+
+Supongamos que el costo, en pesos, asociado a $X$ retransmisiones es
+
+$$
+C(X)=5+3X+2X^2.
+$$
+
+Si $X$ tiene la distribución del ejemplo anterior, entonces
+
+$$
+E[C(X)]=\sum_x(5+3x+2x^2)p_X(x).
+$$
+
+En R:
+
+```{r}
+x <- 0:3
+p <- c(0.70, 0.20, 0.08, 0.02)
+costo <- 5 + 3*x + 2*x^2
+sum(costo * p)
+```
+
+## Linealidad de la esperanza
+
+Para constantes $a$ y $b$,
+
+$$
+\boxed{E[aX+b]=aE[X]+b}.
+$$
+
+Más generalmente,
+
+$$
+E[aX+bY]=aE[X]+bE[Y],
+$$
+
+si las esperanzas existen.
+
+Un punto muy importante es que la linealidad de la esperanza **no requiere independencia**.
+
+## Variables indicadoras
+
+Sea $A$ un evento. Definimos su variable indicadora por
+
+$$
+I_A=
+\begin{cases}
+1, & \text{si ocurre }A,\\
+0, & \text{si no ocurre }A.
+\end{cases}
+$$
+
+Entonces
+
+$$
+\boxed{E[I_A]=P(A)}.
+$$
+
+Esta identidad es extremadamente útil para contar eventos.
+
+### Ejemplo: número esperado de sensores que fallan
+
+Si $I_i$ indica que el sensor $i$ falla y
+
+$$
+X=I_1+I_2+\cdots+I_n,
+$$
+
+entonces
+
+$$
+E[X]=\sum_{i=1}^nP(\text{falla del sensor }i).
+$$
+
+No necesitamos que las fallas sean independientes para calcular este valor esperado.
+
+## Momentos
+
+Los **momentos ordinarios** de una variable se definen como
+
+$$
+\mu_r'=E[X^r].
+$$
+
+En particular,
+
+$$
+\mu_1'=E[X].
+$$
+
+Los **momentos centrales** son
+
+$$
+\mu_r=E[(X-\mu)^r],
+$$
+
+donde
+
+$$
+\mu=E[X].
+$$
+
+El segundo momento central es la varianza.
+
+## Varianza
+
+La varianza mide la dispersión alrededor de la media:
+
+$$
+\boxed{\operatorname{Var}(X)=E[(X-\mu)^2]},
+$$
+
+donde $\mu=E[X]$.
+
+Una forma computacional muy útil es
+
+$$
+\boxed{\operatorname{Var}(X)=E[X^2]-\{E[X]\}^2}.
+$$
+
+La desviación estándar es
+
+$$
+\boxed{\sigma_X=\sqrt{\operatorname{Var}(X)}}.
+$$
+
+La desviación estándar tiene las mismas unidades que $X$, mientras que la varianza tiene unidades al cuadrado.
+
+## Ejemplo discreto completo
+
+Para
+
+$$
+x=0,1,2,3
+$$
+
+con probabilidades
+
+$$
+(0.70,0.20,0.08,0.02),
+$$
+
+ya obtuvimos
+
+$$
+E[X]=0.42.
+$$
+
+Además,
+
+$$
+E[X^2]
+=0^2(0.70)+1^2(0.20)+2^2(0.08)+3^2(0.02)
+=0.70.
+$$
+
+Por tanto,
+
+$$
+\operatorname{Var}(X)=0.70-(0.42)^2=0.5236.
+$$
+
+Y
+
+$$
+\sigma_X\approx0.7236.
+$$
+
+## Cálculo en R
+
+```{r}
+x <- 0:3
+p <- c(0.70, 0.20, 0.08, 0.02)
+
+mu <- sum(x * p)
+EX2 <- sum(x^2 * p)
+varX <- EX2 - mu^2
+sdX <- sqrt(varX)
+
+c(media = mu,
+  segundo_momento = EX2,
+  varianza = varX,
+  desviacion = sdX)
+```
+
+## Transformaciones lineales
+
+Si
+
+$$
+Y=aX+b,
+$$
+
+entonces
+
+$$
+E[Y]=aE[X]+b,
+$$
+
+mientras que
+
+$$
+\boxed{\operatorname{Var}(Y)=a^2\operatorname{Var}(X)}.
+$$
+
+El término $b$ desplaza la distribución, pero no altera su dispersión.
+
+Para la desviación estándar,
+
+$$
+\sigma_Y=|a|\sigma_X.
+$$
+
+### Ejemplo: conversión de temperatura
+
+Si
+
+$$
+F=1.8C+32,
+$$
+
+entonces
+
+$$
+E[F]=1.8E[C]+32
+$$
+
+y
+
+$$
+\operatorname{Var}(F)=1.8^2\operatorname{Var}(C).
+$$
+
+## Esperanza y varianza mediante simulación
+
+Supongamos que simulamos la variable de retransmisiones:
+
+```{r}
+set.seed(2026)
+n <- 100000
+muestra <- sample(x, n, replace = TRUE, prob = p)
+
+mean(muestra)
+var(muestra)
+sd(muestra)
+```
+
+Al aumentar $n$, la media y la varianza muestrales tienden a acercarse a los valores teóricos.
+
+## Desigualdad de Markov
+
+Si $X\ge0$ y $a>0$, entonces
+
+$$
+\boxed{P(X\ge a)\le\frac{E[X]}{a}}.
+$$
+
+Markov proporciona una cota válida aun cuando no conozcamos la distribución completa.
+
+### Ejemplo
+
+Si el tiempo de respuesta $T$ es no negativo y
+
+$$
+E[T]=4\text{ ms},
+$$
+
+entonces
+
+$$
+P(T\ge20)\le\frac{4}{20}=0.20.
+$$
+
+La cota puede ser conservadora, pero requiere muy poca información.
+
+## Desigualdad de Chebyshev
+
+Si $X$ tiene media $\mu$ y varianza finita $\sigma^2$, entonces para $k>0$,
+
+$$
+\boxed{
+P(|X-\mu|\ge k\sigma)\le\frac{1}{k^2}
+}.
+$$
+
+Equivalentemente,
+
+$$
+\boxed{
+P(|X-\mu|<k\sigma)\ge1-\frac{1}{k^2}
+}.
+$$
+
+Chebyshev no exige que la distribución sea normal ni simétrica.
+
+## Interpretación de Chebyshev
+
+Para cualquier distribución con varianza finita:
+
+- con $k=2$, al menos
+
+$$
+1-\frac14=0.75
+$$
+
+de la probabilidad se encuentra dentro de dos desviaciones estándar de la media;
+
+- con $k=3$, al menos
+
+$$
+1-\frac19=\frac89\approx0.8889
+$$
+
+de la probabilidad se encuentra dentro de tres desviaciones estándar.
+
+Estas son garantías mínimas, no valores exactos.
+
+## Ejemplo de ingeniería
+
+El diámetro $X$ de una pieza tiene
+
+$$
+E[X]=20\text{ mm}
+$$
+
+y
+
+$$
+\sigma=0.4\text{ mm}.
+$$
+
+Sin conocer la distribución, Chebyshev asegura que
+
+$$
+P(|X-20|<0.8)\ge0.75.
+$$
+
+Por tanto, al menos 75% de las piezas se encuentran entre
+
+$$
+19.2\text{ mm}
+$$
+
+y
+
+$$
+20.8\text{ mm}.
+$$
+
+## Comparar la cota con la probabilidad real
+
+Si conocemos la distribución completa, podemos comparar la cota de Chebyshev con la probabilidad real.
+
+```{r}
+k <- 2
+lim_inf <- mu - k * sdX
+lim_sup <- mu + k * sdX
+
+prob_real <- sum(p[x > lim_inf & x < lim_sup])
+cota_cheb <- 1 - 1/k^2
+
+c(probabilidad_real = prob_real,
+  cota_chebyshev = cota_cheb)
+```
+
+La probabilidad real puede ser mucho mayor que la cota.
+
+## Interactivo del capítulo
+
+El recurso interactivo permite modificar las masas de una distribución discreta sobre cuatro valores. En tiempo real muestra:
+
+- la media $\mu$;
+- la varianza $\sigma^2$;
+- la desviación estándar $\sigma$;
+- el intervalo $\mu\pm k\sigma$;
+- la probabilidad real que queda dentro del intervalo;
+- la garantía mínima de Chebyshev
+
+$$
+1-\frac{1}{k^2}.
+$$
+
+Al mover las probabilidades puede observarse cómo la media funciona como centro de balance y cómo aumenta o disminuye la dispersión.
+
+## Actividad con GeoGebra
+
+Construye cuatro puntos en
+
+$$
+x_0=0,\quad x_1=1,\quad x_2=2,\quad x_3=3
+$$
+
+con pesos positivos $w_i$. Normaliza mediante
+
+$$
+p_i=\frac{w_i}{\sum_jw_j}.
+$$
+
+Calcula
+
+$$
+\mu=\sum_i x_ip_i
+$$
+
+y
+
+$$
+\sigma^2=\sum_i(x_i-\mu)^2p_i.
+$$
+
+Agrega un deslizador $k>1$ y representa el intervalo
+
+$$
+[\mu-k\sigma,\mu+k\sigma].
+$$
+
+Compara la masa contenida en él con
+
+$$
+1-\frac1{k^2}.
+$$
+
+## Estrategia de resolución
+
+Ante un problema de esperanza o varianza:
+
+1. identifica el soporte y la PMF o densidad;
+2. verifica que el modelo esté normalizado;
+3. calcula $E[X]$;
+4. calcula $E[X^2]$ si necesitas la varianza;
+5. utiliza $\operatorname{Var}(X)=E[X^2]-E[X]^2$;
+6. interpreta las unidades;
+7. si existe una transformación lineal, usa las propiedades antes de recalcular todo;
+8. si sólo conoces media o varianza y necesitas una cota, considera Markov o Chebyshev.
+
+## Errores frecuentes
+
+- Interpretar la esperanza como un valor que necesariamente puede ocurrir.
+- Promediar valores posibles sin ponderarlos por sus probabilidades.
+- Confundir $E[X^2]$ con $E[X]^2$.
+- Olvidar elevar al cuadrado el factor $a$ en $\operatorname{Var}(aX+b)$.
+- Suponer que $\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)$ sin revisar la dependencia.
+- Interpretar Chebyshev como una probabilidad exacta.
+- Aplicar Markov a variables que pueden tomar valores negativos sin una transformación adecuada.
+
+## Resumen
+
+Para una variable discreta,
+
+$$
+E[X]=\sum_xxp_X(x),
+$$
+
+y para una variable continua,
+
+$$
+E[X]=\int xf_X(x)\,dx.
+$$
+
+La varianza es
+
+$$
+\operatorname{Var}(X)=E[(X-\mu)^2]
+=E[X^2]-\mu^2.
+$$
+
+Bajo una transformación $Y=aX+b$,
+
+$$
+E[Y]=aE[X]+b,
+$$
+
+$$
+\operatorname{Var}(Y)=a^2\operatorname{Var}(X).
+$$
+
+Chebyshev garantiza
+
+$$
+P(|X-\mu|<k\sigma)\ge1-\frac1{k^2}.
+$$
+
+## Ejercicios
+
+1. Para $X$ con soporte $\{0,1,2,3\}$ y probabilidades $(0.1,0.3,0.4,0.2)$, calcula $E[X]$, $E[X^2]$, $\operatorname{Var}(X)$ y $\sigma_X$.
+2. Sea $f(x)=2x$ para $0\le x\le1$. Calcula $E[X]$ y $E[X^2]$.
+3. Para la variable del ejercicio anterior, obtén $\operatorname{Var}(X)$.
+4. Si $Y=5X-3$, expresa $E[Y]$ y $\operatorname{Var}(Y)$ en términos de $E[X]$ y $\operatorname{Var}(X)$.
+5. Un sistema tiene 20 sensores y cada uno falla con probabilidad 0.03. Sin asumir independencia, calcula el número esperado de sensores que fallan.
+6. Si una variable no negativa tiene $E[X]=12$, utiliza Markov para acotar $P(X\ge60)$.
+7. Una variable tiene media 50 y desviación estándar 4. Utiliza Chebyshev para dar una cota inferior de $P(42<X<58)$.
+8. Repite el ejercicio anterior para el intervalo $(38,62)$.
+9. Simula en R la distribución del ejercicio 1 y compara media y varianza empíricas con las teóricas.
+10. **Reto ★.** Demuestra Chebyshev aplicando Markov a la variable no negativa $(X-\mu)^2$.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/10-esperanza-varianza-chebyshev-colab.ipynb) | Ejecutar, modificar y experimentar con los ejemplos computacionales del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/10-esperanza-varianza-chebyshev.Rmd) | Reproducir y ampliar los ejemplos en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap10-esperanza-varianza.html) | Explorar visualmente media, dispersión y la cota de Chebyshev. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de conceptos y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
+## Referencias del capítulo
+
+El tratamiento de esperanza, momentos, varianza y desigualdades probabilísticas sigue el desarrollo estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, ejercicios, simulaciones e implementación en R son originales; el enfoque computacional general toma como referencia @kerns2010.
