@@ -1,0 +1,583 @@
+# Probabilidad condicional e independencia
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- interpretar una probabilidad condicional como una actualización del espacio de referencia;
+- calcular $P(A\mid B)$ y distinguirla de $P(B\mid A)$;
+- aplicar la regla del producto para eventos sucesivos;
+- construir y leer árboles de probabilidad;
+- reconocer cuándo dos eventos son independientes;
+- diferenciar independencia de exclusión mutua;
+- resolver problemas de confiabilidad, diagnóstico, comunicaciones y calidad;
+- comprobar resultados mediante R y simulación;
+- explorar interactivamente cómo cambia una probabilidad al incorporar información.
+
+## Cuando aparece nueva información
+
+Hasta ahora hemos calculado probabilidades utilizando todo el espacio muestral. En muchas aplicaciones, sin embargo, recibimos información adicional antes de responder una pregunta.
+
+Supongamos que elegimos al azar una pieza de una producción y queremos estudiar el evento
+
+$$
+A=\{\text{la pieza presenta defecto eléctrico}\}.
+$$
+
+Después nos informan que la pieza pertenece al turno nocturno. Si definimos
+
+$$
+B=\{\text{la pieza proviene del turno nocturno}\},
+$$
+
+ya no tiene sentido utilizar toda la producción como universo de referencia: ahora sabemos que el resultado pertenece a $B$.
+
+La probabilidad de $A$ **dada** la información $B$ se denota por
+
+$$
+P(A\mid B).
+$$
+
+El símbolo $\mid$ se lee “dado que”.
+
+## Definición de probabilidad condicional
+
+Si $P(B)>0$, definimos
+
+$$
+\boxed{
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}
+}
+$$
+
+La fórmula tiene una interpretación geométrica muy sencilla:
+
+1. restringimos la atención al evento $B$;
+2. dentro de $B$, identificamos la parte que también pertenece a $A$;
+3. comparamos la probabilidad de $A\cap B$ con la probabilidad total disponible en $B$.
+
+### Ejemplo con datos de calidad
+
+En una planta, 30% de las piezas provienen del turno nocturno:
+
+$$
+P(B)=0.30.
+$$
+
+El 6% de todas las piezas proviene del turno nocturno **y** presenta defecto:
+
+$$
+P(A\cap B)=0.06.
+$$
+
+Entonces
+
+$$
+P(A\mid B)=\frac{0.06}{0.30}=0.20.
+$$
+
+La interpretación correcta es:
+
+> entre las piezas del turno nocturno, 20% presenta el defecto considerado.
+
+## El orden de la condición importa
+
+En general,
+
+$$
+P(A\mid B)\neq P(B\mid A).
+$$
+
+En el ejemplo anterior, $P(A\mid B)$ responde:
+
+> ¿qué proporción de las piezas nocturnas es defectuosa?
+
+Mientras que $P(B\mid A)$ responde:
+
+> entre las piezas defectuosas, ¿qué proporción proviene del turno nocturno?
+
+Son preguntas diferentes y pueden tener respuestas muy distintas.
+
+### Ejemplo numérico
+
+Supongamos además que
+
+$$
+P(A)=0.10.
+$$
+
+Como $P(A\cap B)=0.06$,
+
+$$
+P(B\mid A)=\frac{0.06}{0.10}=0.60.
+$$
+
+Por tanto,
+
+$$
+P(A\mid B)=0.20,
+\qquad
+P(B\mid A)=0.60.
+$$
+
+No hay contradicción: los denominadores son distintos.
+
+## Regla del producto
+
+A partir de la definición,
+
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)},
+$$
+
+obtenemos
+
+$$
+\boxed{
+P(A\cap B)=P(B)P(A\mid B)
+}
+$$
+
+También podemos invertir el orden:
+
+$$
+\boxed{
+P(A\cap B)=P(A)P(B\mid A)
+}
+$$
+
+Por tanto,
+
+$$
+P(A)P(B\mid A)=P(B)P(A\mid B).
+$$
+
+Esta identidad será la base del teorema de Bayes en el siguiente capítulo.
+
+## Experimentos por etapas
+
+La regla del producto resulta especialmente natural cuando un experimento ocurre secuencialmente.
+
+### Ejemplo: dos componentes sin reemplazo
+
+Una caja contiene 8 componentes, de los cuales 3 son defectuosos y 5 conformes. Se seleccionan dos componentes sin reemplazo.
+
+Sea
+
+- $D_1=$ “el primero es defectuoso”;
+- $D_2=$ “el segundo es defectuoso”.
+
+Entonces
+
+$$
+P(D_1)=\frac38.
+$$
+
+Si el primero fue defectuoso, quedan 2 defectuosos entre 7 componentes:
+
+$$
+P(D_2\mid D_1)=\frac27.
+$$
+
+Por tanto,
+
+$$
+P(D_1\cap D_2)
+=\frac38\cdot\frac27
+=\frac{3}{28}.
+$$
+
+Aquí las probabilidades cambian porque no hay reemplazo.
+
+## Regla de la cadena
+
+Para tres eventos,
+
+$$
+P(A\cap B\cap C)
+=P(A)P(B\mid A)P(C\mid A\cap B),
+$$
+
+si las probabilidades condicionales están definidas.
+
+En general,
+
+$$
+P\left(\bigcap_{i=1}^{n}A_i\right)
+=P(A_1)
+P(A_2\mid A_1)
+P(A_3\mid A_1\cap A_2)\cdots
+P\left(A_n\mid\bigcap_{i=1}^{n-1}A_i\right).
+$$
+
+Esta forma es muy útil en confiabilidad, procesos secuenciales y árboles de probabilidad.
+
+## Árboles de probabilidad
+
+Un árbol organiza visualmente un experimento por etapas. Cada rama lleva una probabilidad condicional y la probabilidad de una trayectoria completa se obtiene multiplicando sus ramas.
+
+Supongamos:
+
+$$
+P(A)=0.40,
+$$
+
+$$
+P(B\mid A)=0.70,
+\qquad
+P(B\mid A^c)=0.20.
+$$
+
+Entonces las cuatro hojas del árbol tienen probabilidades
+
+$$
+P(A\cap B)=0.40(0.70)=0.28,
+$$
+
+$$
+P(A\cap B^c)=0.40(0.30)=0.12,
+$$
+
+$$
+P(A^c\cap B)=0.60(0.20)=0.12,
+$$
+
+$$
+P(A^c\cap B^c)=0.60(0.80)=0.48.
+$$
+
+La suma de las cuatro hojas es 1.
+
+## Independencia de dos eventos
+
+Dos eventos $A$ y $B$ son **independientes** cuando conocer la ocurrencia de uno no modifica la probabilidad del otro.
+
+Si $P(B)>0$, una forma intuitiva de expresarlo es
+
+$$
+P(A\mid B)=P(A).
+$$
+
+La definición algebraica, válida sin exigir probabilidades positivas, es
+
+$$
+\boxed{
+P(A\cap B)=P(A)P(B)
+}
+$$
+
+### Ejemplo: dos lanzamientos de una moneda
+
+Sea
+
+- $A=$ “el primer lanzamiento es cara”;
+- $B=$ “el segundo lanzamiento es cara”.
+
+Para una moneda equilibrada,
+
+$$
+P(A)=\frac12,
+\qquad
+P(B)=\frac12,
+$$
+
+y
+
+$$
+P(A\cap B)=\frac14.
+$$
+
+Como
+
+$$
+\frac14=\frac12\cdot\frac12,
+$$
+
+los eventos son independientes.
+
+## Independencia no significa exclusión mutua
+
+Este punto es esencial.
+
+Si $A$ y $B$ son mutuamente excluyentes,
+
+$$
+P(A\cap B)=0.
+$$
+
+Si además $P(A)>0$ y $P(B)>0$, entonces
+
+$$
+P(A)P(B)>0,
+$$
+
+por lo que no pueden ser independientes.
+
+Así, dos eventos positivos que no pueden ocurrir simultáneamente son **dependientes**, no independientes.
+
+### Ejemplo
+
+En un lanzamiento de dado,
+
+- $A=$ “sale 2”;
+- $B=$ “sale 5”.
+
+Son mutuamente excluyentes, pero conocer que ocurrió $A$ hace que la probabilidad de $B$ sea cero. Por tanto, no son independientes.
+
+## Independencia y complementos
+
+Si $A$ y $B$ son independientes, también son independientes:
+
+$$
+A^c\text{ y }B,
+$$
+
+$$
+A\text{ y }B^c,
+$$
+
+y
+
+$$
+A^c\text{ y }B^c.
+$$
+
+Por ejemplo,
+
+$$
+P(A^c\cap B)
+=P(B)-P(A\cap B)
+=P(B)-P(A)P(B)
+=P(A^c)P(B).
+$$
+
+## Con reemplazo y sin reemplazo
+
+La diferencia entre ambos esquemas aparece con frecuencia.
+
+### Con reemplazo
+
+Si extraemos una pieza, registramos su estado y la devolvemos antes de la siguiente extracción, la composición original se conserva. Bajo las condiciones usuales de muestreo aleatorio, las extracciones sucesivas pueden modelarse como independientes.
+
+### Sin reemplazo
+
+Si no devolvemos la pieza, la composición cambia y las probabilidades de las siguientes extracciones dependen de lo ocurrido antes.
+
+Este contraste explica por qué el muestreo con y sin reemplazo produce modelos probabilísticos diferentes.
+
+## Aplicación: confiabilidad de dos módulos
+
+Dos módulos electrónicos trabajan en paralelo. Sea
+
+- $A=$ “falla el módulo 1 durante la misión”;
+- $B=$ “falla el módulo 2 durante la misión”.
+
+Supongamos
+
+$$
+P(A)=0.02,
+\qquad
+P(B)=0.03.
+$$
+
+Si las fallas pueden considerarse independientes,
+
+$$
+P(A\cap B)=0.02(0.03)=0.0006.
+$$
+
+Por tanto, la probabilidad de que falle al menos uno es
+
+$$
+P(A\cup B)
+=0.02+0.03-0.0006
+=0.0494.
+$$
+
+Pero la independencia debe justificarse. Si ambos módulos comparten fuente de alimentación, temperatura o vibración, una causa común puede volver dependientes sus fallas.
+
+## Aplicación: comunicaciones
+
+Un paquete atraviesa dos enlaces. El primer enlace transmite correctamente con probabilidad 0.98. Si el primero transmite correctamente, el segundo lo hace con probabilidad 0.97.
+
+La probabilidad de que el paquete supere ambos enlaces es
+
+$$
+0.98(0.97)=0.9506.
+$$
+
+Obsérvese que no necesitamos asumir independencia para utilizar esta multiplicación: estamos usando explícitamente una probabilidad condicional.
+
+## Cálculos con R
+
+### Probabilidad condicional
+
+```{r}
+p_A <- 0.10
+p_B <- 0.30
+p_AB <- 0.06
+
+p_A_dado_B <- p_AB / p_B
+p_B_dado_A <- p_AB / p_A
+
+c(P_A_dado_B = p_A_dado_B,
+  P_B_dado_A = p_B_dado_A)
+```
+
+### Verificar independencia
+
+```{r}
+es_independiente <- function(pA, pB, pAB, tol = 1e-10) {
+  abs(pAB - pA * pB) < tol
+}
+
+es_independiente(0.5, 0.5, 0.25)
+es_independiente(0.4, 0.3, 0.18)
+```
+
+## Simulación: dependencia por muestreo sin reemplazo
+
+```{r}
+set.seed(2026)
+B <- 50000
+
+resultado <- replicate(B, {
+  caja <- c(rep("D", 3), rep("C", 5))
+  muestra <- sample(caja, 2, replace = FALSE)
+  c(D1 = muestra[1] == "D",
+    D2 = muestra[2] == "D")
+})
+
+D1 <- resultado["D1", ]
+D2 <- resultado["D2", ]
+
+c(
+  P_D1 = mean(D1),
+  P_D2 = mean(D2),
+  P_D2_dado_D1 = mean(D2[D1]),
+  P_D1_inter_D2 = mean(D1 & D2),
+  producto_marginales = mean(D1) * mean(D2)
+)
+```
+
+Si hubiera independencia, esperaríamos que
+
+$$
+P(D_2\mid D_1)\approx P(D_2).
+$$
+
+La simulación muestra que no ocurre: conocer el primer resultado cambia la composición de la caja.
+
+## Interactivo del capítulo
+
+La edición web incluye un árbol dinámico con tres controles:
+
+- $P(A)$;
+- $P(B\mid A)$;
+- $P(B\mid A^c)$.
+
+El recurso calcula automáticamente las probabilidades de las cuatro hojas, obtiene $P(B)$ y compara
+
+$$
+P(B\mid A)
+\quad\text{con}\quad
+P(B).
+$$
+
+Cuando ambas cantidades coinciden, $A$ y $B$ son independientes. Así puede observarse visualmente que independencia significa que las ramas hacia $B$ mantienen la misma probabilidad independientemente de que haya ocurrido $A$ o $A^c$.
+
+## Actividad GeoGebra: árbol condicional
+
+Construye un árbol con un deslizador $p$ para $P(A)$ y dos deslizadores $q_1$ y $q_0$ para
+
+$$
+P(B\mid A)=q_1,
+\qquad
+P(B\mid A^c)=q_0.
+$$
+
+Muestra en las hojas:
+
+$$
+pq_1,
+\qquad
+p(1-q_1),
+\qquad
+(1-p)q_0,
+\qquad
+(1-p)(1-q_0).
+$$
+
+Después calcula
+
+$$
+P(B)=pq_1+(1-p)q_0.
+$$
+
+Explora qué ocurre cuando $q_1=q_0$. Esa configuración representa independencia entre $A$ y $B$.
+
+## Estrategia de solución
+
+Ante un problema condicional:
+
+1. Define los eventos antes de sustituir números.
+2. Identifica claramente cuál evento aparece después de la barra $\mid$.
+3. Pregunta si la información reduce el universo de referencia.
+4. Si el problema es secuencial, considera un árbol.
+5. Para una trayectoria, multiplica las probabilidades de sus ramas.
+6. No supongas independencia sólo porque el problema no menciona dependencia.
+7. Si se afirma independencia, aprovecha
+
+$$
+P(A\cap B)=P(A)P(B).
+$$
+
+8. Interpreta el resultado con palabras.
+
+## Errores frecuentes
+
+- Intercambiar $P(A\mid B)$ y $P(B\mid A)$.
+- Multiplicar $P(A)P(B)$ sin haber establecido independencia.
+- Sumar probabilidades a lo largo de una misma trayectoria del árbol; en una trayectoria se multiplican.
+- Confundir independencia con eventos mutuamente excluyentes.
+- Usar una probabilidad condicional cuyo evento condicionante tiene probabilidad cero.
+- Ignorar que el muestreo sin reemplazo modifica las probabilidades posteriores.
+
+## Resumen
+
+Si $P(B)>0$,
+
+$$
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
+$$
+
+La regla del producto es
+
+$$
+P(A\cap B)=P(B)P(A\mid B)=P(A)P(B\mid A).
+$$
+
+Dos eventos son independientes si
+
+$$
+P(A\cap B)=P(A)P(B).
+$$
+
+Cuando las probabilidades condicionales están definidas, la independencia equivale a que conocer uno de los eventos no altere la probabilidad del otro.
+
+## Ejercicios
+
+1. Si $P(A)=0.45$, $P(B)=0.50$ y $P(A\cap B)=0.20$, calcula $P(A\mid B)$ y $P(B\mid A)$.
+2. Una empresa recibe 40% de sus componentes del proveedor 1. El 3% de todos los componentes son simultáneamente del proveedor 1 y defectuosos. Calcula la probabilidad de defecto dado que el componente proviene del proveedor 1.
+3. De una caja con 6 piezas conformes y 4 defectuosas se extraen dos sin reemplazo. Calcula la probabilidad de que ambas sean defectuosas.
+4. Repite el ejercicio anterior suponiendo reemplazo y compara los resultados.
+5. Sean $P(A)=0.60$, $P(B)=0.25$ y $P(A\cap B)=0.15$. ¿Son independientes? Justifica.
+6. Sean $A$ y $B$ mutuamente excluyentes con $P(A)=0.20$ y $P(B)=0.30$. ¿Son independientes? Explica.
+7. Un sistema tiene tres etapas con probabilidades condicionales de éxito 0.98, 0.95 y 0.99 a lo largo de una trayectoria de operación normal. Calcula la probabilidad de completar las tres etapas.
+8. Construye en R un árbol de dos etapas para $P(A)=0.35$, $P(B\mid A)=0.80$ y $P(B\mid A^c)=0.25$. Obtén las cuatro hojas y verifica que sumen 1.
+9. Simula 100 000 extracciones dobles sin reemplazo de una urna con 5 bolas blancas y 3 negras. Estima $P(N_2\mid N_1)$ y compárala con $P(N_2)$.
+10. **Reto ★.** Si $A$ y $B$ son independientes, demuestra utilizando reglas de probabilidad que $A^c$ y $B^c$ también son independientes.
+
+## Referencias del capítulo
+
+El tratamiento de probabilidad condicional, regla del producto, árboles e independencia sigue el desarrollo estándar de probabilidad para ingeniería y ciencias de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, simulaciones y código R de este capítulo son originales; para el enfoque computacional se toma como referencia general @kerns2010.
