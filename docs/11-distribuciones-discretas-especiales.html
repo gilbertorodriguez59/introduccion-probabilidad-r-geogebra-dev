@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa – Introducción a la Probabilidad con R y GeoGebra</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./10-esperanza-varianza-chebyshev.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-41479178cf16c74431ccbac30d902985.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11-distribuciones-discretas-especiales.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Contenido del libro</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./Introduccion-a-la-Probabilidad-con-R-y-GeoGebra.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bienvenida.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notación general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Técnicas de conteo y enumeración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-axiomas-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Axiomas y propiedades de la probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-condicional-independencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-variable-aleatoria-cdf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-variables-discretas-pmf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-variables-continuas-densidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variables aleatorias continuas y función de densidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-esperanza-varianza-chebyshev.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Esperanza matemática, momentos, varianza y desigualdad de Chebyshev</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-distribuciones-discretas-especiales.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En este capítulo</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">11.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#por-qué-estudiar-familias-de-distribuciones" id="toc-por-qué-estudiar-familias-de-distribuciones" class="nav-link" data-scroll-target="#por-qué-estudiar-familias-de-distribuciones"><span class="header-section-number">11.2</span> ¿Por qué estudiar familias de distribuciones?</a></li>
+  <li><a href="#distribución-de-bernoulli" id="toc-distribución-de-bernoulli" class="nav-link" data-scroll-target="#distribución-de-bernoulli"><span class="header-section-number">11.3</span> Distribución de Bernoulli</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-ingeniería" id="toc-ejemplo-de-ingeniería" class="nav-link" data-scroll-target="#ejemplo-de-ingeniería">Ejemplo de ingeniería</a></li>
+  </ul></li>
+  <li><a href="#distribución-binomial" id="toc-distribución-binomial" class="nav-link" data-scroll-target="#distribución-binomial"><span class="header-section-number">11.4</span> Distribución binomial</a></li>
+  <li><a href="#de-dónde-aparece-el-coeficiente-binomial" id="toc-de-dónde-aparece-el-coeficiente-binomial" class="nav-link" data-scroll-target="#de-dónde-aparece-el-coeficiente-binomial"><span class="header-section-number">11.5</span> ¿De dónde aparece el coeficiente binomial?</a></li>
+  <li><a href="#ejemplo-defectos-en-una-muestra" id="toc-ejemplo-defectos-en-una-muestra" class="nav-link" data-scroll-target="#ejemplo-defectos-en-una-muestra"><span class="header-section-number">11.6</span> Ejemplo: defectos en una muestra</a></li>
+  <li><a href="#probabilidades-acumuladas-binomiales" id="toc-probabilidades-acumuladas-binomiales" class="nav-link" data-scroll-target="#probabilidades-acumuladas-binomiales"><span class="header-section-number">11.7</span> Probabilidades acumuladas binomiales</a></li>
+  <li><a href="#ejemplo-de-confiabilidad" id="toc-ejemplo-de-confiabilidad" class="nav-link" data-scroll-target="#ejemplo-de-confiabilidad"><span class="header-section-number">11.8</span> Ejemplo de confiabilidad</a></li>
+  <li><a href="#bernoulli-como-caso-particular-de-la-binomial" id="toc-bernoulli-como-caso-particular-de-la-binomial" class="nav-link" data-scroll-target="#bernoulli-como-caso-particular-de-la-binomial"><span class="header-section-number">11.9</span> Bernoulli como caso particular de la binomial</a></li>
+  <li><a href="#distribución-geométrica" id="toc-distribución-geométrica" class="nav-link" data-scroll-target="#distribución-geométrica"><span class="header-section-number">11.10</span> Distribución geométrica</a></li>
+  <li><a href="#ejemplo-intentos-de-conexión" id="toc-ejemplo-intentos-de-conexión" class="nav-link" data-scroll-target="#ejemplo-intentos-de-conexión"><span class="header-section-number">11.11</span> Ejemplo: intentos de conexión</a></li>
+  <li><a href="#atención-parametrización-de-dgeom-en-r" id="toc-atención-parametrización-de-dgeom-en-r" class="nav-link" data-scroll-target="#atención-parametrización-de-dgeom-en-r"><span class="header-section-number">11.12</span> Atención: parametrización de <code>dgeom()</code> en R</a></li>
+  <li><a href="#propiedad-sin-memoria" id="toc-propiedad-sin-memoria" class="nav-link" data-scroll-target="#propiedad-sin-memoria"><span class="header-section-number">11.13</span> Propiedad sin memoria</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo">Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#distribución-binomial-negativa" id="toc-distribución-binomial-negativa" class="nav-link" data-scroll-target="#distribución-binomial-negativa"><span class="header-section-number">11.14</span> Distribución binomial negativa</a></li>
+  <li><a href="#por-qué-aparece-binomx-1r-1" id="toc-por-qué-aparece-binomx-1r-1" class="nav-link" data-scroll-target="#por-qué-aparece-binomx-1r-1"><span class="header-section-number">11.15</span> ¿Por qué aparece <span class="math inline">\(\binom{x-1}{r-1}\)</span>?</a></li>
+  <li><a href="#ejemplo-paquetes-correctamente-recibidos" id="toc-ejemplo-paquetes-correctamente-recibidos" class="nav-link" data-scroll-target="#ejemplo-paquetes-correctamente-recibidos"><span class="header-section-number">11.16</span> Ejemplo: paquetes correctamente recibidos</a></li>
+  <li><a href="#parametrización-de-dnbinom-en-r" id="toc-parametrización-de-dnbinom-en-r" class="nav-link" data-scroll-target="#parametrización-de-dnbinom-en-r"><span class="header-section-number">11.17</span> Parametrización de <code>dnbinom()</code> en R</a></li>
+  <li><a href="#relación-entre-geométrica-y-binomial-negativa" id="toc-relación-entre-geométrica-y-binomial-negativa" class="nav-link" data-scroll-target="#relación-entre-geométrica-y-binomial-negativa"><span class="header-section-number">11.18</span> Relación entre geométrica y binomial negativa</a></li>
+  <li><a href="#comparación-conceptual" id="toc-comparación-conceptual" class="nav-link" data-scroll-target="#comparación-conceptual"><span class="header-section-number">11.19</span> Comparación conceptual</a></li>
+  <li><a href="#funciones-principales-en-r" id="toc-funciones-principales-en-r" class="nav-link" data-scroll-target="#funciones-principales-en-r"><span class="header-section-number">11.20</span> Funciones principales en R</a></li>
+  <li><a href="#simulación-binomial" id="toc-simulación-binomial" class="nav-link" data-scroll-target="#simulación-binomial"><span class="header-section-number">11.21</span> Simulación binomial</a></li>
+  <li><a href="#comparar-pmf-teórica-y-simulación" id="toc-comparar-pmf-teórica-y-simulación" class="nav-link" data-scroll-target="#comparar-pmf-teórica-y-simulación"><span class="header-section-number">11.22</span> Comparar PMF teórica y simulación</a></li>
+  <li><a href="#simulación-geométrica-con-la-convención-del-libro" id="toc-simulación-geométrica-con-la-convención-del-libro" class="nav-link" data-scroll-target="#simulación-geométrica-con-la-convención-del-libro"><span class="header-section-number">11.23</span> Simulación geométrica con la convención del libro</a></li>
+  <li><a href="#simulación-binomial-negativa-con-la-convención-del-libro" id="toc-simulación-binomial-negativa-con-la-convención-del-libro" class="nav-link" data-scroll-target="#simulación-binomial-negativa-con-la-convención-del-libro"><span class="header-section-number">11.24</span> Simulación binomial negativa con la convención del libro</a></li>
+  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">11.25</span> Interactivo del capítulo</a></li>
+  <li><a href="#actividad-con-geogebra" id="toc-actividad-con-geogebra" class="nav-link" data-scroll-target="#actividad-con-geogebra"><span class="header-section-number">11.26</span> Actividad con GeoGebra</a></li>
+  <li><a href="#selección-del-modelo" id="toc-selección-del-modelo" class="nav-link" data-scroll-target="#selección-del-modelo"><span class="header-section-number">11.27</span> Selección del modelo</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">11.28</span> Errores frecuentes</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">11.29</span> Resumen</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">11.30</span> Ejercicios</a></li>
+  <li><a href="#materiales-complementarios-del-capítulo" id="toc-materiales-complementarios-del-capítulo" class="nav-link" data-scroll-target="#materiales-complementarios-del-capítulo"><span class="header-section-number">11.31</span> Materiales complementarios del capítulo</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">11.32</span> Referencias del capítulo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-de-aprendizaje" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">11.1</span> Objetivos de aprendizaje</h2>
+<p>Al finalizar este capítulo, el estudiante será capaz de:</p>
+<ul>
+<li>reconocer experimentos de Bernoulli;</li>
+<li>modelar el número de éxitos en ensayos independientes mediante una distribución binomial;</li>
+<li>modelar tiempos de espera discretos con las distribuciones geométrica y binomial negativa;</li>
+<li>distinguir entre contar éxitos, contar ensayos y contar fallas;</li>
+<li>calcular probabilidades puntuales y acumuladas;</li>
+<li>identificar la media y la varianza de cada distribución;</li>
+<li>utilizar correctamente las funciones de R para estas distribuciones;</li>
+<li>simular observaciones y comparar resultados empíricos con probabilidades teóricas;</li>
+<li>interpretar aplicaciones en confiabilidad, comunicaciones, control de calidad y ciencias.</li>
+</ul>
+</section>
+<section id="por-qué-estudiar-familias-de-distribuciones" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="por-qué-estudiar-familias-de-distribuciones"><span class="header-section-number">11.2</span> ¿Por qué estudiar familias de distribuciones?</h2>
+<p>En capítulos anteriores construimos funciones de masa caso por caso. Sin embargo, muchos experimentos reales comparten estructuras matemáticas comunes. Cuando esa estructura se reconoce, podemos utilizar una distribución conocida en lugar de reconstruir el modelo desde cero.</p>
+<p>En este capítulo estudiaremos cuatro familias estrechamente relacionadas:</p>
+<ol type="1">
+<li>Bernoulli: un ensayo con dos resultados;</li>
+<li>binomial: número de éxitos en <span class="math inline">\(n\)</span> ensayos de Bernoulli;</li>
+<li>geométrica: número de ensayos hasta el primer éxito;</li>
+<li>binomial negativa: número de ensayos hasta alcanzar <span class="math inline">\(r\)</span> éxitos.</li>
+</ol>
+<p>La clave será identificar <strong>qué está contando la variable aleatoria</strong>.</p>
+</section>
+<section id="distribución-de-bernoulli" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="distribución-de-bernoulli"><span class="header-section-number">11.3</span> Distribución de Bernoulli</h2>
+<p>Un ensayo de Bernoulli tiene sólo dos resultados relevantes:</p>
+<ul>
+<li>éxito, con probabilidad <span class="math inline">\(p\)</span>;</li>
+<li>fracaso, con probabilidad <span class="math inline">\(q=1-p\)</span>.</li>
+</ul>
+<p>Definimos</p>
+<p><span class="math display">\[
+X=
+\begin{cases}
+1, &amp; \text{si ocurre éxito},\\
+0, &amp; \text{si ocurre fracaso}.
+\end{cases}
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+X\sim\operatorname{Bernoulli}(p)
+\]</span></p>
+<p>y su función de masa es</p>
+<p><span class="math display">\[
+\boxed{p_X(x)=p^x(1-p)^{1-x}},\qquad x\in\{0,1\}.
+\]</span></p>
+<p>Su media y varianza son</p>
+<p><span class="math display">\[
+\boxed{E[X]=p}
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Var}(X)=p(1-p)}.
+\]</span></p>
+<section id="ejemplo-de-ingeniería" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-de-ingeniería">Ejemplo de ingeniería</h3>
+<p>Un paquete se transmite correctamente con probabilidad <span class="math inline">\(0.98\)</span>. Definimos</p>
+<p><span class="math display">\[
+X=1
+\]</span></p>
+<p>si la transmisión es correcta y <span class="math inline">\(X=0\)</span> si falla. Entonces</p>
+<p><span class="math display">\[
+X\sim\operatorname{Bernoulli}(0.98).
+\]</span></p>
+<p>La probabilidad de error es</p>
+<p><span class="math display">\[
+P(X=0)=0.02.
+\]</span></p>
+</section>
+</section>
+<section id="distribución-binomial" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="distribución-binomial"><span class="header-section-number">11.4</span> Distribución binomial</h2>
+<p>Supongamos que realizamos <span class="math inline">\(n\)</span> ensayos de Bernoulli que cumplen:</p>
+<ol type="1">
+<li>cada ensayo tiene dos resultados: éxito o fracaso;</li>
+<li>los ensayos son independientes;</li>
+<li>la probabilidad de éxito <span class="math inline">\(p\)</span> permanece constante;</li>
+<li>el número de ensayos <span class="math inline">\(n\)</span> está fijado de antemano.</li>
+</ol>
+<p>Sea</p>
+<p><span class="math display">\[
+X=\text{número de éxitos en los }n\text{ ensayos}.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\boxed{X\sim\operatorname{Binomial}(n,p)}.
+\]</span></p>
+<p>La PMF es</p>
+<p><span class="math display">\[
+\boxed{
+P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}
+},
+\]</span></p>
+<p>para</p>
+<p><span class="math display">\[
+x=0,1,\ldots,n.
+\]</span></p>
+<p>La media y la varianza son</p>
+<p><span class="math display">\[
+\boxed{E[X]=np}
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Var}(X)=np(1-p)}.
+\]</span></p>
+</section>
+<section id="de-dónde-aparece-el-coeficiente-binomial" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="de-dónde-aparece-el-coeficiente-binomial"><span class="header-section-number">11.5</span> ¿De dónde aparece el coeficiente binomial?</h2>
+<p>Para obtener exactamente <span class="math inline">\(x\)</span> éxitos y <span class="math inline">\(n-x\)</span> fracasos, una secuencia particular tiene probabilidad</p>
+<p><span class="math display">\[
+p^x(1-p)^{n-x}.
+\]</span></p>
+<p>Pero los <span class="math inline">\(x\)</span> éxitos pueden ocupar</p>
+<p><span class="math display">\[
+\binom{n}{x}
+\]</span></p>
+<p>posiciones diferentes. Por ello multiplicamos por ese número de arreglos.</p>
+</section>
+<section id="ejemplo-defectos-en-una-muestra" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="ejemplo-defectos-en-una-muestra"><span class="header-section-number">11.6</span> Ejemplo: defectos en una muestra</h2>
+<p>Una línea produce piezas defectuosas con probabilidad <span class="math inline">\(p=0.04\)</span>. Si tomamos 20 piezas y suponemos independencia, el número de defectuosas <span class="math inline">\(X\)</span> satisface</p>
+<p><span class="math display">\[
+X\sim\operatorname{Binomial}(20,0.04).
+\]</span></p>
+<p>La probabilidad de observar exactamente dos defectuosas es</p>
+<p><span class="math display">\[
+P(X=2)=\binom{20}{2}(0.04)^2(0.96)^{18}.
+\]</span></p>
+<p>En R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">2</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.04</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1457994</code></pre>
+</div>
+</div>
+</section>
+<section id="probabilidades-acumuladas-binomiales" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="probabilidades-acumuladas-binomiales"><span class="header-section-number">11.7</span> Probabilidades acumuladas binomiales</h2>
+<p>Para calcular</p>
+<p><span class="math display">\[
+P(X\le x)
+\]</span></p>
+<p>utilizamos <code>pbinom()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">2</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.04</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9561372</code></pre>
+</div>
+</div>
+<p>Para</p>
+<p><span class="math display">\[
+P(X\ge2),
+\]</span></p>
+<p>podemos usar el complemento:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">1</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.04</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1896622</code></pre>
+</div>
+</div>
+</section>
+<section id="ejemplo-de-confiabilidad" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="ejemplo-de-confiabilidad"><span class="header-section-number">11.8</span> Ejemplo de confiabilidad</h2>
+<p>Cada uno de 8 sensores responde correctamente con probabilidad 0.95, de manera independiente. Si <span class="math inline">\(X\)</span> es el número de sensores que responden correctamente,</p>
+<p><span class="math display">\[
+X\sim\operatorname{Binomial}(8,0.95).
+\]</span></p>
+<p>La probabilidad de que respondan al menos 7 es</p>
+<p><span class="math display">\[
+P(X\ge7)=P(X=7)+P(X=8).
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">prob =</span> <span class="fl">0.95</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9427553</code></pre>
+</div>
+</div>
+</section>
+<section id="bernoulli-como-caso-particular-de-la-binomial" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="bernoulli-como-caso-particular-de-la-binomial"><span class="header-section-number">11.9</span> Bernoulli como caso particular de la binomial</h2>
+<p>Si <span class="math inline">\(n=1\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Binomial}(1,p)=\operatorname{Bernoulli}(p).
+\]</span></p>
+<p>Esta relación será útil para entender que una binomial puede escribirse como suma de variables indicadoras independientes:</p>
+<p><span class="math display">\[
+X=X_1+\cdots+X_n,
+\]</span></p>
+<p>con</p>
+<p><span class="math display">\[
+X_i\sim\operatorname{Bernoulli}(p).
+\]</span></p>
+</section>
+<section id="distribución-geométrica" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="distribución-geométrica"><span class="header-section-number">11.10</span> Distribución geométrica</h2>
+<p>Ahora cambia la pregunta. Ya no fijamos el número de ensayos y contamos éxitos. Repetimos ensayos independientes hasta obtener el primer éxito.</p>
+<p>Sea</p>
+<p><span class="math display">\[
+X=\text{número de ensayos necesarios hasta el primer éxito}.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\boxed{X\sim\operatorname{Geométrica}(p)}
+\]</span></p>
+<p>con soporte</p>
+<p><span class="math display">\[
+1,2,3,\ldots
+\]</span></p>
+<p>y PMF</p>
+<p><span class="math display">\[
+\boxed{
+P(X=x)=(1-p)^{x-1}p
+}.
+\]</span></p>
+<p>La media y la varianza son</p>
+<p><span class="math display">\[
+\boxed{E[X]=\frac1p}
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Var}(X)=\frac{1-p}{p^2}}.
+\]</span></p>
+</section>
+<section id="ejemplo-intentos-de-conexión" class="level2" data-number="11.11">
+<h2 data-number="11.11" class="anchored" data-anchor-id="ejemplo-intentos-de-conexión"><span class="header-section-number">11.11</span> Ejemplo: intentos de conexión</h2>
+<p>Un enlace logra conectarse en cada intento con probabilidad <span class="math inline">\(p=0.30\)</span>. Si los intentos son independientes y <span class="math inline">\(X\)</span> es el número de intentos hasta la primera conexión,</p>
+<p><span class="math display">\[
+X\sim\operatorname{Geométrica}(0.30).
+\]</span></p>
+<p>La probabilidad de conectarse exactamente en el cuarto intento es</p>
+<p><span class="math display">\[
+P(X=4)=(0.70)^3(0.30).
+\]</span></p>
+</section>
+<section id="atención-parametrización-de-dgeom-en-r" class="level2" data-number="11.12">
+<h2 data-number="11.12" class="anchored" data-anchor-id="atención-parametrización-de-dgeom-en-r"><span class="header-section-number">11.12</span> Atención: parametrización de <code>dgeom()</code> en R</h2>
+<p>R define la variable geométrica como el <strong>número de fracasos antes del primer éxito</strong>.</p>
+<p>Si nuestro libro utiliza</p>
+<p><span class="math display">\[
+X=\text{número de ensayos hasta el primer éxito},
+\]</span></p>
+<p>entonces la variable de R es</p>
+<p><span class="math display">\[
+Y=X-1.
+\]</span></p>
+<p>Por ejemplo,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X = 4): tres fracasos antes del primer éxito</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dgeom</span>(<span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.30</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1029</code></pre>
+</div>
+</div>
+<p>Y</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(X &lt;= 4) equivale a P(Y &lt;= 3)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pgeom</span>(<span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.30</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7599</code></pre>
+</div>
+</div>
+<p>Esta diferencia de parametrización es una fuente frecuente de errores.</p>
+</section>
+<section id="propiedad-sin-memoria" class="level2" data-number="11.13">
+<h2 data-number="11.13" class="anchored" data-anchor-id="propiedad-sin-memoria"><span class="header-section-number">11.13</span> Propiedad sin memoria</h2>
+<p>La distribución geométrica tiene una propiedad especial:</p>
+<p><span class="math display">\[
+\boxed{
+P(X&gt;s+t\mid X&gt;s)=P(X&gt;t)
+}.
+\]</span></p>
+<p>En palabras: si ya hemos esperado <span class="math inline">\(s\)</span> intentos sin éxito, el tiempo adicional de espera se comporta como si comenzáramos de nuevo.</p>
+<section id="ejemplo" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo">Ejemplo</h3>
+<p>Si <span class="math inline">\(p=0.30\)</span>, saber que los primeros cinco intentos fallaron no cambia la probabilidad de que hagan falta más de tres intentos adicionales.</p>
+<p>La razón es que cada ensayo conserva la misma probabilidad de éxito y es independiente de los anteriores.</p>
+</section>
+</section>
+<section id="distribución-binomial-negativa" class="level2" data-number="11.14">
+<h2 data-number="11.14" class="anchored" data-anchor-id="distribución-binomial-negativa"><span class="header-section-number">11.14</span> Distribución binomial negativa</h2>
+<p>Generalicemos la geométrica. Ahora repetimos ensayos independientes hasta conseguir <span class="math inline">\(r\)</span> éxitos.</p>
+<p>Sea</p>
+<p><span class="math display">\[
+X=\text{número total de ensayos necesarios para obtener }r\text{ éxitos}.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\boxed{X\sim\operatorname{BinomialNegativa}(r,p)}.
+\]</span></p>
+<p>Para</p>
+<p><span class="math display">\[
+x=r,r+1,r+2,\ldots,
+\]</span></p>
+<p>la PMF es</p>
+<p><span class="math display">\[
+\boxed{
+P(X=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}
+}.
+\]</span></p>
+<p>La media y la varianza son</p>
+<p><span class="math display">\[
+\boxed{E[X]=\frac{r}{p}}
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Var}(X)=\frac{r(1-p)}{p^2}}.
+\]</span></p>
+</section>
+<section id="por-qué-aparece-binomx-1r-1" class="level2" data-number="11.15">
+<h2 data-number="11.15" class="anchored" data-anchor-id="por-qué-aparece-binomx-1r-1"><span class="header-section-number">11.15</span> ¿Por qué aparece <span class="math inline">\(\binom{x-1}{r-1}\)</span>?</h2>
+<p>Para que el <span class="math inline">\(r\)</span>-ésimo éxito ocurra exactamente en el ensayo <span class="math inline">\(x\)</span>:</p>
+<ul>
+<li>el ensayo <span class="math inline">\(x\)</span> debe ser éxito;</li>
+<li>en los primeros <span class="math inline">\(x-1\)</span> ensayos deben aparecer exactamente <span class="math inline">\(r-1\)</span> éxitos.</li>
+</ul>
+<p>Esos <span class="math inline">\(r-1\)</span> éxitos pueden ubicarse de</p>
+<p><span class="math display">\[
+\binom{x-1}{r-1}
+\]</span></p>
+<p>maneras.</p>
+</section>
+<section id="ejemplo-paquetes-correctamente-recibidos" class="level2" data-number="11.16">
+<h2 data-number="11.16" class="anchored" data-anchor-id="ejemplo-paquetes-correctamente-recibidos"><span class="header-section-number">11.16</span> Ejemplo: paquetes correctamente recibidos</h2>
+<p>Cada transmisión llega correctamente con probabilidad <span class="math inline">\(p=0.8\)</span>. Sea <span class="math inline">\(X\)</span> el número total de transmisiones necesarias para conseguir 5 recepciones correctas.</p>
+<p>Entonces</p>
+<p><span class="math display">\[
+X\sim\operatorname{BinomialNegativa}(5,0.8).
+\]</span></p>
+<p>La probabilidad de necesitar exactamente 7 transmisiones es</p>
+<p><span class="math display">\[
+P(X=7)=\binom{6}{4}(0.8)^5(0.2)^2.
+\]</span></p>
+</section>
+<section id="parametrización-de-dnbinom-en-r" class="level2" data-number="11.17">
+<h2 data-number="11.17" class="anchored" data-anchor-id="parametrización-de-dnbinom-en-r"><span class="header-section-number">11.17</span> Parametrización de <code>dnbinom()</code> en R</h2>
+<p>R cuenta el <strong>número de fracasos antes de alcanzar <span class="math inline">\(r\)</span> éxitos</strong>.</p>
+<p>Si</p>
+<p><span class="math display">\[
+X=\text{número total de ensayos hasta el }r\text{-ésimo éxito},
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+Y=X-r,
+\]</span></p>
+<p>entonces</p>
+<p><span class="math display">\[
+Y\sim\text{la parametrización usada por R}.
+\]</span></p>
+<p>Por ejemplo, para <span class="math inline">\(X=7\)</span> y <span class="math inline">\(r=5\)</span> hay dos fracasos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnbinom</span>(<span class="dv">2</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.196608</code></pre>
+</div>
+</div>
+</section>
+<section id="relación-entre-geométrica-y-binomial-negativa" class="level2" data-number="11.18">
+<h2 data-number="11.18" class="anchored" data-anchor-id="relación-entre-geométrica-y-binomial-negativa"><span class="header-section-number">11.18</span> Relación entre geométrica y binomial negativa</h2>
+<p>La geométrica es el caso particular <span class="math inline">\(r=1\)</span> de la binomial negativa.</p>
+<p>Además, si</p>
+<p><span class="math display">\[
+G_1,\ldots,G_r
+\]</span></p>
+<p>son variables geométricas independientes con el mismo parámetro <span class="math inline">\(p\)</span>, entonces</p>
+<p><span class="math display">\[
+X=G_1+\cdots+G_r
+\]</span></p>
+<p>tiene distribución binomial negativa bajo la parametrización de número total de ensayos.</p>
+</section>
+<section id="comparación-conceptual" class="level2" data-number="11.19">
+<h2 data-number="11.19" class="anchored" data-anchor-id="comparación-conceptual"><span class="header-section-number">11.19</span> Comparación conceptual</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribución</th>
+<th>¿Qué se fija?</th>
+<th>¿Qué cuenta <span class="math inline">\(X\)</span>?</th>
+<th>Soporte</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bernoulli</td>
+<td>un ensayo</td>
+<td>éxito o fracaso</td>
+<td><span class="math inline">\(0,1\)</span></td>
+</tr>
+<tr class="even">
+<td>Binomial</td>
+<td><span class="math inline">\(n\)</span> ensayos</td>
+<td>número de éxitos</td>
+<td><span class="math inline">\(0,\ldots,n\)</span></td>
+</tr>
+<tr class="odd">
+<td>Geométrica</td>
+<td>1 éxito</td>
+<td>ensayos hasta el primer éxito</td>
+<td><span class="math inline">\(1,2,\ldots\)</span></td>
+</tr>
+<tr class="even">
+<td>Binomial negativa</td>
+<td><span class="math inline">\(r\)</span> éxitos</td>
+<td>ensayos hasta el <span class="math inline">\(r\)</span>-ésimo éxito</td>
+<td><span class="math inline">\(r,r+1,\ldots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Esta tabla suele resolver buena parte de la selección del modelo.</p>
+</section>
+<section id="funciones-principales-en-r" class="level2" data-number="11.20">
+<h2 data-number="11.20" class="anchored" data-anchor-id="funciones-principales-en-r"><span class="header-section-number">11.20</span> Funciones principales en R</h2>
+<p>Para la binomial:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)  <span class="co"># P(X=3)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2149908</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)  <span class="co"># P(X&lt;=3)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3822806</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>) <span class="co"># simulación</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2 0 4 4 3 1 5 4 5 3</code></pre>
+</div>
+</div>
+<p>Para la geométrica, recordando que R cuenta fracasos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dgeom</span>(<span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)   <span class="co"># 2 fracasos antes del éxito =&gt; X=3 ensayos</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.144</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pgeom</span>(<span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.784</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgeom</span>(<span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 1 0 0 2 5 4 0 0 2</code></pre>
+</div>
+</div>
+<p>Para la binomial negativa, R también cuenta fracasos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.110592</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.289792</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnbinom</span>(<span class="dv">10</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 15  1  8  6  2  8  8  6  6 10</code></pre>
+</div>
+</div>
+</section>
+<section id="simulación-binomial" class="level2" data-number="11.21">
+<h2 data-number="11.21" class="anchored" data-anchor-id="simulación-binomial"><span class="header-section-number">11.21</span> Simulación binomial</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>n_sim <span class="ot">&lt;-</span> <span class="dv">50000</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>muestra <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n_sim, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.04</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(muestra)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.80544</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(muestra)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.777562</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">media_teorica =</span> <span class="dv">20</span> <span class="sc">*</span> <span class="fl">0.04</span>,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_teorica =</span> <span class="dv">20</span> <span class="sc">*</span> <span class="fl">0.04</span> <span class="sc">*</span> <span class="fl">0.96</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>media_teorica   var_teorica 
+        0.800         0.768 </code></pre>
+</div>
+</div>
+</section>
+<section id="comparar-pmf-teórica-y-simulación" class="level2" data-number="11.22">
+<h2 data-number="11.22" class="anchored" data-anchor-id="comparar-pmf-teórica-y-simulación"><span class="header-section-number">11.22</span> Comparar PMF teórica y simulación</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">6</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>p_teorica <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.04</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>empirica <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(<span class="fu">factor</span>(muestra, <span class="at">levels =</span> x)))</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">teorica =</span> p_teorica,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">empirica =</span> <span class="fu">as.numeric</span>(empirica)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x      teorica     empirica
+1 0 4.420024e-01 0.4408288166
+2 1 3.683354e-01 0.3663473269
+3 2 1.457994e-01 0.1486629733
+4 3 3.644985e-02 0.0362407248
+5 4 6.454662e-03 0.0068201364
+6 5 8.606215e-04 0.0009600192
+7 6 8.964808e-05 0.0001400028</code></pre>
+</div>
+</div>
+</section>
+<section id="simulación-geométrica-con-la-convención-del-libro" class="level2" data-number="11.23">
+<h2 data-number="11.23" class="anchored" data-anchor-id="simulación-geométrica-con-la-convención-del-libro"><span class="header-section-number">11.23</span> Simulación geométrica con la convención del libro</h2>
+<p>Como <code>rgeom()</code> devuelve el número de fracasos antes del éxito, sumamos 1:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rgeom</span>(<span class="dv">50000</span>, <span class="at">prob =</span> <span class="fl">0.30</span>) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(X)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.34562</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(X)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.910805</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">media_teorica =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fl">0.30</span>,</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_teorica =</span> <span class="fl">0.70</span> <span class="sc">/</span> <span class="fl">0.30</span><span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>media_teorica   var_teorica 
+     3.333333      7.777778 </code></pre>
+</div>
+</div>
+</section>
+<section id="simulación-binomial-negativa-con-la-convención-del-libro" class="level2" data-number="11.24">
+<h2 data-number="11.24" class="anchored" data-anchor-id="simulación-binomial-negativa-con-la-convención-del-libro"><span class="header-section-number">11.24</span> Simulación binomial negativa con la convención del libro</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co"># R devuelve número de fracasos; sumamos r para obtener ensayos totales</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnbinom</span>(<span class="dv">50000</span>, <span class="at">size =</span> r, <span class="at">prob =</span> p) <span class="sc">+</span> r</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(X)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.25212</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(X)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.577667</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">media_teorica =</span> r <span class="sc">/</span> p,</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">var_teorica =</span> r <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">/</span> p<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>media_teorica   var_teorica 
+       6.2500        1.5625 </code></pre>
+</div>
+</div>
+</section>
+<section id="interactivo-del-capítulo" class="level2" data-number="11.25">
+<h2 data-number="11.25" class="anchored" data-anchor-id="interactivo-del-capítulo"><span class="header-section-number">11.25</span> Interactivo del capítulo</h2>
+<p>La versión web incluye un comparador de distribuciones discretas. El estudiante puede elegir:</p>
+<ul>
+<li>Bernoulli;</li>
+<li>binomial;</li>
+<li>geométrica;</li>
+<li>binomial negativa.</li>
+</ul>
+<p>Después puede modificar <span class="math inline">\(p\)</span> y, cuando corresponda, <span class="math inline">\(n\)</span> o <span class="math inline">\(r\)</span>. El interactivo actualiza:</p>
+<ul>
+<li>la PMF;</li>
+<li>la media;</li>
+<li>la varianza;</li>
+<li>el soporte visible;</li>
+<li>una probabilidad puntual seleccionada.</li>
+</ul>
+<p>El objetivo es observar cómo cambia la forma de la distribución al modificar sus parámetros y, sobre todo, distinguir qué variable está contando cada modelo.</p>
+</section>
+<section id="actividad-con-geogebra" class="level2" data-number="11.26">
+<h2 data-number="11.26" class="anchored" data-anchor-id="actividad-con-geogebra"><span class="header-section-number">11.26</span> Actividad con GeoGebra</h2>
+<p>Para una distribución binomial fija <span class="math inline">\(n\)</span>, crea deslizadores para <span class="math inline">\(p\)</span> y <span class="math inline">\(x\)</span>. Define</p>
+<p><span class="math display">\[
+P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}.
+\]</span></p>
+<p>Construye una lista de puntos</p>
+<p><span class="math display">\[
+(k,P(X=k)),\qquad k=0,1,\ldots,n.
+\]</span></p>
+<p>Después modifica <span class="math inline">\(p\)</span> desde valores cercanos a 0 hasta valores cercanos a 1 y observa:</p>
+<ul>
+<li>cómo se desplaza el centro;</li>
+<li>cómo cambia la simetría;</li>
+<li>cómo se modifica la dispersión.</li>
+</ul>
+<p>Como extensión, construye una geométrica y observa cómo la cola se hace más larga cuando <span class="math inline">\(p\)</span> disminuye.</p>
+</section>
+<section id="selección-del-modelo" class="level2" data-number="11.27">
+<h2 data-number="11.27" class="anchored" data-anchor-id="selección-del-modelo"><span class="header-section-number">11.27</span> Selección del modelo</h2>
+<p>Antes de utilizar una fórmula, responde:</p>
+<ol type="1">
+<li>¿cada ensayo tiene dos resultados relevantes?</li>
+<li>¿la probabilidad de éxito permanece constante?</li>
+<li>¿los ensayos pueden considerarse independientes?</li>
+<li>¿está fijado el número de ensayos o esperamos hasta alcanzar éxitos?</li>
+<li>si esperamos, ¿hasta el primer éxito o hasta el <span class="math inline">\(r\)</span>-ésimo?</li>
+</ol>
+<p>Estas preguntas permiten distinguir los cuatro modelos de este capítulo.</p>
+</section>
+<section id="errores-frecuentes" class="level2" data-number="11.28">
+<h2 data-number="11.28" class="anchored" data-anchor-id="errores-frecuentes"><span class="header-section-number">11.28</span> Errores frecuentes</h2>
+<ul>
+<li>Aplicar una binomial cuando la probabilidad <span class="math inline">\(p\)</span> cambia entre ensayos.</li>
+<li>Confundir “al menos” con “exactamente”.</li>
+<li>Usar <code>pbinom(x,...)</code> como si fuera <span class="math inline">\(P(X=x)\)</span>.</li>
+<li>Olvidar que <code>dgeom()</code> de R cuenta fracasos, no ensayos totales.</li>
+<li>Olvidar que <code>dnbinom()</code> de R también cuenta fracasos antes del <span class="math inline">\(r\)</span>-ésimo éxito.</li>
+<li>Confundir una binomial negativa con una binomial ordinaria.</li>
+<li>Suponer independencia sin justificarla en una aplicación real.</li>
+</ul>
+</section>
+<section id="resumen" class="level2" data-number="11.29">
+<h2 data-number="11.29" class="anchored" data-anchor-id="resumen"><span class="header-section-number">11.29</span> Resumen</h2>
+<p>Bernoulli:</p>
+<p><span class="math display">\[
+P(X=x)=p^x(1-p)^{1-x},\qquad x=0,1.
+\]</span></p>
+<p>Binomial:</p>
+<p><span class="math display">\[
+P(X=x)=\binom nxp^x(1-p)^{n-x}.
+\]</span></p>
+<p>Geométrica, contando ensayos hasta el primer éxito:</p>
+<p><span class="math display">\[
+P(X=x)=(1-p)^{x-1}p.
+\]</span></p>
+<p>Binomial negativa, contando ensayos hasta el <span class="math inline">\(r\)</span>-ésimo éxito:</p>
+<p><span class="math display">\[
+P(X=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}.
+\]</span></p>
+<p>Las cuatro distribuciones surgen de secuencias de ensayos de Bernoulli, pero responden preguntas diferentes.</p>
+</section>
+<section id="ejercicios" class="level2" data-number="11.30">
+<h2 data-number="11.30" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">11.30</span> Ejercicios</h2>
+<ol type="1">
+<li>Un componente pasa una prueba con probabilidad 0.92. Define una variable Bernoulli y calcula su media y varianza.</li>
+<li>En 12 transmisiones independientes, cada una tiene probabilidad 0.85 de éxito. Calcula la probabilidad de exactamente 10 éxitos.</li>
+<li>Para el ejercicio anterior, calcula <span class="math inline">\(P(X\ge10)\)</span>.</li>
+<li>Una pieza es defectuosa con probabilidad 0.03. En una muestra independiente de 30 piezas, calcula la probabilidad de ninguna defectuosa.</li>
+<li>Un enlace conecta con probabilidad 0.25 en cada intento. Calcula la probabilidad de que la primera conexión ocurra en el quinto intento.</li>
+<li>Para el ejercicio anterior, calcula la probabilidad de requerir más de 6 intentos.</li>
+<li>Demuestra numéricamente en R la propiedad sin memoria de la geométrica para <span class="math inline">\(p=0.25\)</span>, <span class="math inline">\(s=4\)</span> y <span class="math inline">\(t=3\)</span>.</li>
+<li>Cada transmisión tiene probabilidad 0.70 de éxito. Calcula la probabilidad de que el cuarto éxito ocurra exactamente en el sexto intento.</li>
+<li>Reproduce el ejercicio 8 mediante <code>dnbinom()</code> explicando por qué el argumento corresponde a dos fracasos.</li>
+<li>Simula 100 000 observaciones de una binomial <span class="math inline">\(B(15,0.4)\)</span> y compara la media y varianza empíricas con las teóricas.</li>
+<li>Simula una geométrica con la convención del libro a partir de <code>rgeom()</code> y verifica su media teórica.</li>
+<li><strong>Reto ★.</strong> Si <span class="math inline">\(X_1,\ldots,X_n\)</span> son Bernoulli independientes con probabilidad común <span class="math inline">\(p\)</span>, explica por qué <span class="math inline">\(X_1+\cdots+X_n\)</span> es binomial y utiliza esa representación para obtener su esperanza y varianza.</li>
+</ol>
+</section>
+<section id="materiales-complementarios-del-capítulo" class="level2" data-number="11.31">
+<h2 data-number="11.31" class="anchored" data-anchor-id="materiales-complementarios-del-capítulo"><span class="header-section-number">11.31</span> Materiales complementarios del capítulo</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Material</th>
+<th>Formato</th>
+<th>Acceso</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cuaderno de Google Colab</td>
+<td>Notebook interactivo (R)</td>
+<td><a href="https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/11-distribuciones-discretas-especiales-colab.ipynb">Abrir en Colab</a></td>
+<td>Ejecutar, modificar y comparar las distribuciones discretas del capítulo.</td>
+</tr>
+<tr class="even">
+<td>Cuaderno de R</td>
+<td>R Markdown</td>
+<td><a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/11-distribuciones-discretas-especiales.Rmd">Abrir cuaderno R</a></td>
+<td>Reproducir cálculos, gráficas y simulaciones en R/RStudio.</td>
+</tr>
+<tr class="odd">
+<td>Interactivo</td>
+<td>HTML / GeoGebra</td>
+<td><a href="interactivos/cap11-distribuciones-discretas.html">Abrir recurso</a></td>
+<td>Comparar PMF, media y varianza al modificar los parámetros.</td>
+</tr>
+<tr class="even">
+<td>Presentación</td>
+<td>PDF / PPT</td>
+<td>Próximamente</td>
+<td>Se incorporará cuando se proporcionen los enlaces.</td>
+</tr>
+<tr class="odd">
+<td>Video</td>
+<td>Video</td>
+<td>Próximamente</td>
+<td>Explicación audiovisual complementaria.</td>
+</tr>
+<tr class="even">
+<td>Infografía</td>
+<td>Imagen / PDF</td>
+<td>Próximamente</td>
+<td>Síntesis visual de distribuciones, parámetros y fórmulas clave.</td>
+</tr>
+</tbody>
+</table>
+<p>Los <strong>cuadernos de R</strong> acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.</p>
+</section>
+<section id="referencias-del-capítulo" class="level2" data-number="11.32">
+<h2 data-number="11.32" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">11.32</span> Referencias del capítulo</h2>
+<p>El tratamiento de las distribuciones Bernoulli, binomial, geométrica y binomial negativa sigue la presentación estándar de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. Los ejemplos de ingeniería, ejercicios, código y simulaciones en R son originales; para el enfoque computacional se toma como referencia general <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-devore2016" class="csl-entry" role="listitem">
+Devore, Jay L. 2016. <em>Probability and Statistics for Engineering and the Sciences</em>. 9.ª ed. Cengage Learning.
+</div>
+<div id="ref-johnson2018" class="csl-entry" role="listitem">
+Johnson, Richard A. 2018. <em>Miller &amp; Freund’s Probability and Statistics for Engineers</em>. 9.ª ed. Pearson.
+</div>
+<div id="ref-kerns2010" class="csl-entry" role="listitem">
+Kerns, G. Jay. 2010. <em>Introduction to Probability and Statistics Using R</em>. 1.ª ed.
+</div>
+<div id="ref-montgomery2018" class="csl-entry" role="listitem">
+Montgomery, Douglas C., y George C. Runger. 2018. <em>Applied Statistics and Probability for Engineers</em>. 7.ª ed. Wiley.
+</div>
+<div id="ref-walpole2012" class="csl-entry" role="listitem">
+Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Probabilidad y estadística para ingeniería y ciencias</em>. 9.ª ed. Pearson.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const path = window.location.pathname.split('/').pop();
+  const mapa = {
+    '01-incertidumbre-probabilidad.html': {titulo:'Interactivo del capítulo: frecuencia relativa',archivo:'interactivos/cap01-frecuencia-relativa.html',texto:'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'},
+    '02-espacios-eventos.html': {titulo:'Interactivo del capítulo: operaciones con eventos',archivo:'interactivos/cap02-eventos-venn.html',texto:'Explora visualmente unión, intersección, complementos y diferencia de eventos.'},
+    '03-conteo-probabilidad.html': {titulo:'Interactivo del capítulo: conteo, arreglos y combinaciones',archivo:'interactivos/cap03-conteo.html',texto:'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'},
+    '04-axiomas-probabilidad.html': {titulo:'Interactivo del capítulo: axiomas y regiones de probabilidad',archivo:'interactivos/cap04-axiomas.html',texto:'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'},
+    '05-condicional-independencia.html': {titulo:'Interactivo del capítulo: probabilidad condicional e independencia',archivo:'interactivos/cap05-condicional-independencia.html',texto:'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'},
+    '06-probabilidad-total-bayes.html': {titulo:'Interactivo del capítulo: teorema de Bayes y tasa base',archivo:'interactivos/cap06-bayes.html',texto:'Modifica la probabilidad previa, la sensibilidad y la tasa de falso positivo; observa cómo cambia la probabilidad posterior y las frecuencias esperadas.'},
+    '07-variable-aleatoria-cdf.html': {titulo:'Interactivo del capítulo: variable aleatoria y CDF',archivo:'interactivos/cap07-variable-aleatoria-cdf.html',texto:'Transforma resultados elementales en valores numéricos y observa cómo se construyen la distribución de X y F_X(x).' },
+    '08-variables-discretas-pmf.html': {titulo:'Interactivo del capítulo: PMF y CDF discreta',archivo:'interactivos/cap08-pmf-cdf.html',texto:'Modifica las masas de probabilidad y observa simultáneamente la PMF, la CDF y el tamaño de sus saltos.'},
+    '09-variables-continuas-densidad.html': {titulo:'Interactivo del capítulo: densidad y área de probabilidad',archivo:'interactivos/cap09-densidad-area.html',texto:'Mueve los límites del intervalo y el modo de una densidad triangular para observar cómo cambia el área de probabilidad.'},
+    '10-esperanza-varianza-chebyshev.html': {titulo:'Interactivo del capítulo: esperanza, varianza y Chebyshev',archivo:'interactivos/cap10-esperanza-varianza.html',texto:'Modifica una distribución discreta y observa en tiempo real cómo cambian la media, la varianza, la desviación estándar y la garantía de Chebyshev.'},
+    '11-distribuciones-discretas-especiales.html': {titulo:'Interactivo del capítulo: distribuciones discretas especiales',archivo:'interactivos/cap11-distribuciones-discretas.html',texto:'Compara Bernoulli, binomial, geométrica y binomial negativa, modificando sus parámetros y observando PMF, media y varianza.'}
+  };
+  const cfg = mapa[path];
+  if (!cfg) return;
+  const main = document.querySelector('main.content') || document.querySelector('main') || document.querySelector('#quarto-document-content');
+  if (!main || document.getElementById('interactivo-capitulo')) return;
+  const section = document.createElement('section');
+  section.id = 'interactivo-capitulo';
+  section.innerHTML = `<h2>${cfg.titulo}</h2><p>${cfg.texto}</p><div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;"><iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe></div><p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  main.appendChild(section);
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-esperanza-varianza-chebyshev.html" class="pagination-link" aria-label="Esperanza matemática, momentos, varianza y desigualdad de Chebyshev">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Esperanza matemática, momentos, varianza y desigualdad de Chebyshev</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Licencia CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

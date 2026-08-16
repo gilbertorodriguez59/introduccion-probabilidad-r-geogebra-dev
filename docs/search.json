@@ -2310,6 +2310,336 @@
     ]
   },
   {
+    "objectID": "11-distribuciones-discretas-especiales.html",
+    "href": "11-distribuciones-discretas-especiales.html",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "",
+    "text": "11.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#objetivos-de-aprendizaje",
+    "href": "11-distribuciones-discretas-especiales.html#objetivos-de-aprendizaje",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "",
+    "text": "reconocer experimentos de Bernoulli;\nmodelar el número de éxitos en ensayos independientes mediante una distribución binomial;\nmodelar tiempos de espera discretos con las distribuciones geométrica y binomial negativa;\ndistinguir entre contar éxitos, contar ensayos y contar fallas;\ncalcular probabilidades puntuales y acumuladas;\nidentificar la media y la varianza de cada distribución;\nutilizar correctamente las funciones de R para estas distribuciones;\nsimular observaciones y comparar resultados empíricos con probabilidades teóricas;\ninterpretar aplicaciones en confiabilidad, comunicaciones, control de calidad y ciencias.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#por-qué-estudiar-familias-de-distribuciones",
+    "href": "11-distribuciones-discretas-especiales.html#por-qué-estudiar-familias-de-distribuciones",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.2 ¿Por qué estudiar familias de distribuciones?",
+    "text": "11.2 ¿Por qué estudiar familias de distribuciones?\nEn capítulos anteriores construimos funciones de masa caso por caso. Sin embargo, muchos experimentos reales comparten estructuras matemáticas comunes. Cuando esa estructura se reconoce, podemos utilizar una distribución conocida en lugar de reconstruir el modelo desde cero.\nEn este capítulo estudiaremos cuatro familias estrechamente relacionadas:\n\nBernoulli: un ensayo con dos resultados;\nbinomial: número de éxitos en \\(n\\) ensayos de Bernoulli;\ngeométrica: número de ensayos hasta el primer éxito;\nbinomial negativa: número de ensayos hasta alcanzar \\(r\\) éxitos.\n\nLa clave será identificar qué está contando la variable aleatoria.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#distribución-de-bernoulli",
+    "href": "11-distribuciones-discretas-especiales.html#distribución-de-bernoulli",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.3 Distribución de Bernoulli",
+    "text": "11.3 Distribución de Bernoulli\nUn ensayo de Bernoulli tiene sólo dos resultados relevantes:\n\néxito, con probabilidad \\(p\\);\nfracaso, con probabilidad \\(q=1-p\\).\n\nDefinimos\n\\[\nX=\n\\begin{cases}\n1, & \\text{si ocurre éxito},\\\\\n0, & \\text{si ocurre fracaso}.\n\\end{cases}\n\\]\nEntonces\n\\[\nX\\sim\\operatorname{Bernoulli}(p)\n\\]\ny su función de masa es\n\\[\n\\boxed{p_X(x)=p^x(1-p)^{1-x}},\\qquad x\\in\\{0,1\\}.\n\\]\nSu media y varianza son\n\\[\n\\boxed{E[X]=p}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=p(1-p)}.\n\\]\n\nEjemplo de ingeniería\nUn paquete se transmite correctamente con probabilidad \\(0.98\\). Definimos\n\\[\nX=1\n\\]\nsi la transmisión es correcta y \\(X=0\\) si falla. Entonces\n\\[\nX\\sim\\operatorname{Bernoulli}(0.98).\n\\]\nLa probabilidad de error es\n\\[\nP(X=0)=0.02.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#distribución-binomial",
+    "href": "11-distribuciones-discretas-especiales.html#distribución-binomial",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.4 Distribución binomial",
+    "text": "11.4 Distribución binomial\nSupongamos que realizamos \\(n\\) ensayos de Bernoulli que cumplen:\n\ncada ensayo tiene dos resultados: éxito o fracaso;\nlos ensayos son independientes;\nla probabilidad de éxito \\(p\\) permanece constante;\nel número de ensayos \\(n\\) está fijado de antemano.\n\nSea\n\\[\nX=\\text{número de éxitos en los }n\\text{ ensayos}.\n\\]\nEntonces\n\\[\n\\boxed{X\\sim\\operatorname{Binomial}(n,p)}.\n\\]\nLa PMF es\n\\[\n\\boxed{\nP(X=x)=\\binom{n}{x}p^x(1-p)^{n-x}\n},\n\\]\npara\n\\[\nx=0,1,\\ldots,n.\n\\]\nLa media y la varianza son\n\\[\n\\boxed{E[X]=np}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=np(1-p)}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#de-dónde-aparece-el-coeficiente-binomial",
+    "href": "11-distribuciones-discretas-especiales.html#de-dónde-aparece-el-coeficiente-binomial",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.5 ¿De dónde aparece el coeficiente binomial?",
+    "text": "11.5 ¿De dónde aparece el coeficiente binomial?\nPara obtener exactamente \\(x\\) éxitos y \\(n-x\\) fracasos, una secuencia particular tiene probabilidad\n\\[\np^x(1-p)^{n-x}.\n\\]\nPero los \\(x\\) éxitos pueden ocupar\n\\[\n\\binom{n}{x}\n\\]\nposiciones diferentes. Por ello multiplicamos por ese número de arreglos.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#ejemplo-defectos-en-una-muestra",
+    "href": "11-distribuciones-discretas-especiales.html#ejemplo-defectos-en-una-muestra",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.6 Ejemplo: defectos en una muestra",
+    "text": "11.6 Ejemplo: defectos en una muestra\nUna línea produce piezas defectuosas con probabilidad \\(p=0.04\\). Si tomamos 20 piezas y suponemos independencia, el número de defectuosas \\(X\\) satisface\n\\[\nX\\sim\\operatorname{Binomial}(20,0.04).\n\\]\nLa probabilidad de observar exactamente dos defectuosas es\n\\[\nP(X=2)=\\binom{20}{2}(0.04)^2(0.96)^{18}.\n\\]\nEn R:\n\ndbinom(2, size = 20, prob = 0.04)\n\n[1] 0.1457994",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#probabilidades-acumuladas-binomiales",
+    "href": "11-distribuciones-discretas-especiales.html#probabilidades-acumuladas-binomiales",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.7 Probabilidades acumuladas binomiales",
+    "text": "11.7 Probabilidades acumuladas binomiales\nPara calcular\n\\[\nP(X\\le x)\n\\]\nutilizamos pbinom():\n\npbinom(2, size = 20, prob = 0.04)\n\n[1] 0.9561372\n\n\nPara\n\\[\nP(X\\ge2),\n\\]\npodemos usar el complemento:\n\n1 - pbinom(1, size = 20, prob = 0.04)\n\n[1] 0.1896622",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#ejemplo-de-confiabilidad",
+    "href": "11-distribuciones-discretas-especiales.html#ejemplo-de-confiabilidad",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.8 Ejemplo de confiabilidad",
+    "text": "11.8 Ejemplo de confiabilidad\nCada uno de 8 sensores responde correctamente con probabilidad 0.95, de manera independiente. Si \\(X\\) es el número de sensores que responden correctamente,\n\\[\nX\\sim\\operatorname{Binomial}(8,0.95).\n\\]\nLa probabilidad de que respondan al menos 7 es\n\\[\nP(X\\ge7)=P(X=7)+P(X=8).\n\\]\n\nsum(dbinom(7:8, size = 8, prob = 0.95))\n\n[1] 0.9427553",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#bernoulli-como-caso-particular-de-la-binomial",
+    "href": "11-distribuciones-discretas-especiales.html#bernoulli-como-caso-particular-de-la-binomial",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.9 Bernoulli como caso particular de la binomial",
+    "text": "11.9 Bernoulli como caso particular de la binomial\nSi \\(n=1\\),\n\\[\n\\operatorname{Binomial}(1,p)=\\operatorname{Bernoulli}(p).\n\\]\nEsta relación será útil para entender que una binomial puede escribirse como suma de variables indicadoras independientes:\n\\[\nX=X_1+\\cdots+X_n,\n\\]\ncon\n\\[\nX_i\\sim\\operatorname{Bernoulli}(p).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#distribución-geométrica",
+    "href": "11-distribuciones-discretas-especiales.html#distribución-geométrica",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.10 Distribución geométrica",
+    "text": "11.10 Distribución geométrica\nAhora cambia la pregunta. Ya no fijamos el número de ensayos y contamos éxitos. Repetimos ensayos independientes hasta obtener el primer éxito.\nSea\n\\[\nX=\\text{número de ensayos necesarios hasta el primer éxito}.\n\\]\nEntonces\n\\[\n\\boxed{X\\sim\\operatorname{Geométrica}(p)}\n\\]\ncon soporte\n\\[\n1,2,3,\\ldots\n\\]\ny PMF\n\\[\n\\boxed{\nP(X=x)=(1-p)^{x-1}p\n}.\n\\]\nLa media y la varianza son\n\\[\n\\boxed{E[X]=\\frac1p}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=\\frac{1-p}{p^2}}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#ejemplo-intentos-de-conexión",
+    "href": "11-distribuciones-discretas-especiales.html#ejemplo-intentos-de-conexión",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.11 Ejemplo: intentos de conexión",
+    "text": "11.11 Ejemplo: intentos de conexión\nUn enlace logra conectarse en cada intento con probabilidad \\(p=0.30\\). Si los intentos son independientes y \\(X\\) es el número de intentos hasta la primera conexión,\n\\[\nX\\sim\\operatorname{Geométrica}(0.30).\n\\]\nLa probabilidad de conectarse exactamente en el cuarto intento es\n\\[\nP(X=4)=(0.70)^3(0.30).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#atención-parametrización-de-dgeom-en-r",
+    "href": "11-distribuciones-discretas-especiales.html#atención-parametrización-de-dgeom-en-r",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.12 Atención: parametrización de dgeom() en R",
+    "text": "11.12 Atención: parametrización de dgeom() en R\nR define la variable geométrica como el número de fracasos antes del primer éxito.\nSi nuestro libro utiliza\n\\[\nX=\\text{número de ensayos hasta el primer éxito},\n\\]\nentonces la variable de R es\n\\[\nY=X-1.\n\\]\nPor ejemplo,\n\n# P(X = 4): tres fracasos antes del primer éxito\ndgeom(3, prob = 0.30)\n\n[1] 0.1029\n\n\nY\n\n# P(X &lt;= 4) equivale a P(Y &lt;= 3)\npgeom(3, prob = 0.30)\n\n[1] 0.7599\n\n\nEsta diferencia de parametrización es una fuente frecuente de errores.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#propiedad-sin-memoria",
+    "href": "11-distribuciones-discretas-especiales.html#propiedad-sin-memoria",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.13 Propiedad sin memoria",
+    "text": "11.13 Propiedad sin memoria\nLa distribución geométrica tiene una propiedad especial:\n\\[\n\\boxed{\nP(X&gt;s+t\\mid X&gt;s)=P(X&gt;t)\n}.\n\\]\nEn palabras: si ya hemos esperado \\(s\\) intentos sin éxito, el tiempo adicional de espera se comporta como si comenzáramos de nuevo.\n\nEjemplo\nSi \\(p=0.30\\), saber que los primeros cinco intentos fallaron no cambia la probabilidad de que hagan falta más de tres intentos adicionales.\nLa razón es que cada ensayo conserva la misma probabilidad de éxito y es independiente de los anteriores.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#distribución-binomial-negativa",
+    "href": "11-distribuciones-discretas-especiales.html#distribución-binomial-negativa",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.14 Distribución binomial negativa",
+    "text": "11.14 Distribución binomial negativa\nGeneralicemos la geométrica. Ahora repetimos ensayos independientes hasta conseguir \\(r\\) éxitos.\nSea\n\\[\nX=\\text{número total de ensayos necesarios para obtener }r\\text{ éxitos}.\n\\]\nEntonces\n\\[\n\\boxed{X\\sim\\operatorname{BinomialNegativa}(r,p)}.\n\\]\nPara\n\\[\nx=r,r+1,r+2,\\ldots,\n\\]\nla PMF es\n\\[\n\\boxed{\nP(X=x)=\\binom{x-1}{r-1}p^r(1-p)^{x-r}\n}.\n\\]\nLa media y la varianza son\n\\[\n\\boxed{E[X]=\\frac{r}{p}}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=\\frac{r(1-p)}{p^2}}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#por-qué-aparece-binomx-1r-1",
+    "href": "11-distribuciones-discretas-especiales.html#por-qué-aparece-binomx-1r-1",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.15 ¿Por qué aparece \\(\\binom{x-1}{r-1}\\)?",
+    "text": "11.15 ¿Por qué aparece \\(\\binom{x-1}{r-1}\\)?\nPara que el \\(r\\)-ésimo éxito ocurra exactamente en el ensayo \\(x\\):\n\nel ensayo \\(x\\) debe ser éxito;\nen los primeros \\(x-1\\) ensayos deben aparecer exactamente \\(r-1\\) éxitos.\n\nEsos \\(r-1\\) éxitos pueden ubicarse de\n\\[\n\\binom{x-1}{r-1}\n\\]\nmaneras.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#ejemplo-paquetes-correctamente-recibidos",
+    "href": "11-distribuciones-discretas-especiales.html#ejemplo-paquetes-correctamente-recibidos",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.16 Ejemplo: paquetes correctamente recibidos",
+    "text": "11.16 Ejemplo: paquetes correctamente recibidos\nCada transmisión llega correctamente con probabilidad \\(p=0.8\\). Sea \\(X\\) el número total de transmisiones necesarias para conseguir 5 recepciones correctas.\nEntonces\n\\[\nX\\sim\\operatorname{BinomialNegativa}(5,0.8).\n\\]\nLa probabilidad de necesitar exactamente 7 transmisiones es\n\\[\nP(X=7)=\\binom{6}{4}(0.8)^5(0.2)^2.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#parametrización-de-dnbinom-en-r",
+    "href": "11-distribuciones-discretas-especiales.html#parametrización-de-dnbinom-en-r",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.17 Parametrización de dnbinom() en R",
+    "text": "11.17 Parametrización de dnbinom() en R\nR cuenta el número de fracasos antes de alcanzar \\(r\\) éxitos.\nSi\n\\[\nX=\\text{número total de ensayos hasta el }r\\text{-ésimo éxito},\n\\]\ny\n\\[\nY=X-r,\n\\]\nentonces\n\\[\nY\\sim\\text{la parametrización usada por R}.\n\\]\nPor ejemplo, para \\(X=7\\) y \\(r=5\\) hay dos fracasos:\n\ndnbinom(2, size = 5, prob = 0.8)\n\n[1] 0.196608",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#relación-entre-geométrica-y-binomial-negativa",
+    "href": "11-distribuciones-discretas-especiales.html#relación-entre-geométrica-y-binomial-negativa",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.18 Relación entre geométrica y binomial negativa",
+    "text": "11.18 Relación entre geométrica y binomial negativa\nLa geométrica es el caso particular \\(r=1\\) de la binomial negativa.\nAdemás, si\n\\[\nG_1,\\ldots,G_r\n\\]\nson variables geométricas independientes con el mismo parámetro \\(p\\), entonces\n\\[\nX=G_1+\\cdots+G_r\n\\]\ntiene distribución binomial negativa bajo la parametrización de número total de ensayos.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#comparación-conceptual",
+    "href": "11-distribuciones-discretas-especiales.html#comparación-conceptual",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.19 Comparación conceptual",
+    "text": "11.19 Comparación conceptual\n\n\n\n\n\n\n\n\n\nDistribución\n¿Qué se fija?\n¿Qué cuenta \\(X\\)?\nSoporte\n\n\n\n\nBernoulli\nun ensayo\néxito o fracaso\n\\(0,1\\)\n\n\nBinomial\n\\(n\\) ensayos\nnúmero de éxitos\n\\(0,\\ldots,n\\)\n\n\nGeométrica\n1 éxito\nensayos hasta el primer éxito\n\\(1,2,\\ldots\\)\n\n\nBinomial negativa\n\\(r\\) éxitos\nensayos hasta el \\(r\\)-ésimo éxito\n\\(r,r+1,\\ldots\\)\n\n\n\nEsta tabla suele resolver buena parte de la selección del modelo.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
+    "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.20 Funciones principales en R",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 2 0 4 4 3 1 5 4 5 3\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 1 0 0 2 5 4 0 0 2\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1] 15  1  8  6  2  8  8  6  6 10",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#simulación-binomial",
+    "href": "11-distribuciones-discretas-especiales.html#simulación-binomial",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.21 Simulación binomial",
+    "text": "11.21 Simulación binomial\n\nset.seed(2026)\nn_sim &lt;- 50000\nmuestra &lt;- rbinom(n_sim, size = 20, prob = 0.04)\n\nmean(muestra)\n\n[1] 0.80544\n\nvar(muestra)\n\n[1] 0.777562\n\nc(media_teorica = 20 * 0.04,\n  var_teorica = 20 * 0.04 * 0.96)\n\nmedia_teorica   var_teorica \n        0.800         0.768",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#comparar-pmf-teórica-y-simulación",
+    "href": "11-distribuciones-discretas-especiales.html#comparar-pmf-teórica-y-simulación",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.22 Comparar PMF teórica y simulación",
+    "text": "11.22 Comparar PMF teórica y simulación\n\nx &lt;- 0:6\np_teorica &lt;- dbinom(x, size = 20, prob = 0.04)\nempirica &lt;- prop.table(table(factor(muestra, levels = x)))\n\ndata.frame(\n  x = x,\n  teorica = p_teorica,\n  empirica = as.numeric(empirica)\n)\n\n  x      teorica     empirica\n1 0 4.420024e-01 0.4408288166\n2 1 3.683354e-01 0.3663473269\n3 2 1.457994e-01 0.1486629733\n4 3 3.644985e-02 0.0362407248\n5 4 6.454662e-03 0.0068201364\n6 5 8.606215e-04 0.0009600192\n7 6 8.964808e-05 0.0001400028",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#simulación-geométrica-con-la-convención-del-libro",
+    "href": "11-distribuciones-discretas-especiales.html#simulación-geométrica-con-la-convención-del-libro",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.23 Simulación geométrica con la convención del libro",
+    "text": "11.23 Simulación geométrica con la convención del libro\nComo rgeom() devuelve el número de fracasos antes del éxito, sumamos 1:\n\nset.seed(2026)\nX &lt;- rgeom(50000, prob = 0.30) + 1\n\nmean(X)\n\n[1] 3.34562\n\nvar(X)\n\n[1] 7.910805\n\nc(media_teorica = 1 / 0.30,\n  var_teorica = 0.70 / 0.30^2)\n\nmedia_teorica   var_teorica \n     3.333333      7.777778",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#simulación-binomial-negativa-con-la-convención-del-libro",
+    "href": "11-distribuciones-discretas-especiales.html#simulación-binomial-negativa-con-la-convención-del-libro",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.24 Simulación binomial negativa con la convención del libro",
+    "text": "11.24 Simulación binomial negativa con la convención del libro\n\nr &lt;- 5\np &lt;- 0.8\n\n# R devuelve número de fracasos; sumamos r para obtener ensayos totales\nX &lt;- rnbinom(50000, size = r, prob = p) + r\n\nmean(X)\n\n[1] 6.25212\n\nvar(X)\n\n[1] 1.577667\n\nc(media_teorica = r / p,\n  var_teorica = r * (1-p) / p^2)\n\nmedia_teorica   var_teorica \n       6.2500        1.5625",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#interactivo-del-capítulo",
+    "href": "11-distribuciones-discretas-especiales.html#interactivo-del-capítulo",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.25 Interactivo del capítulo",
+    "text": "11.25 Interactivo del capítulo\nLa versión web incluye un comparador de distribuciones discretas. El estudiante puede elegir:\n\nBernoulli;\nbinomial;\ngeométrica;\nbinomial negativa.\n\nDespués puede modificar \\(p\\) y, cuando corresponda, \\(n\\) o \\(r\\). El interactivo actualiza:\n\nla PMF;\nla media;\nla varianza;\nel soporte visible;\nuna probabilidad puntual seleccionada.\n\nEl objetivo es observar cómo cambia la forma de la distribución al modificar sus parámetros y, sobre todo, distinguir qué variable está contando cada modelo.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#actividad-con-geogebra",
+    "href": "11-distribuciones-discretas-especiales.html#actividad-con-geogebra",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.26 Actividad con GeoGebra",
+    "text": "11.26 Actividad con GeoGebra\nPara una distribución binomial fija \\(n\\), crea deslizadores para \\(p\\) y \\(x\\). Define\n\\[\nP(X=x)=\\binom{n}{x}p^x(1-p)^{n-x}.\n\\]\nConstruye una lista de puntos\n\\[\n(k,P(X=k)),\\qquad k=0,1,\\ldots,n.\n\\]\nDespués modifica \\(p\\) desde valores cercanos a 0 hasta valores cercanos a 1 y observa:\n\ncómo se desplaza el centro;\ncómo cambia la simetría;\ncómo se modifica la dispersión.\n\nComo extensión, construye una geométrica y observa cómo la cola se hace más larga cuando \\(p\\) disminuye.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#selección-del-modelo",
+    "href": "11-distribuciones-discretas-especiales.html#selección-del-modelo",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.27 Selección del modelo",
+    "text": "11.27 Selección del modelo\nAntes de utilizar una fórmula, responde:\n\n¿cada ensayo tiene dos resultados relevantes?\n¿la probabilidad de éxito permanece constante?\n¿los ensayos pueden considerarse independientes?\n¿está fijado el número de ensayos o esperamos hasta alcanzar éxitos?\nsi esperamos, ¿hasta el primer éxito o hasta el \\(r\\)-ésimo?\n\nEstas preguntas permiten distinguir los cuatro modelos de este capítulo.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#errores-frecuentes",
+    "href": "11-distribuciones-discretas-especiales.html#errores-frecuentes",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.28 Errores frecuentes",
+    "text": "11.28 Errores frecuentes\n\nAplicar una binomial cuando la probabilidad \\(p\\) cambia entre ensayos.\nConfundir “al menos” con “exactamente”.\nUsar pbinom(x,...) como si fuera \\(P(X=x)\\).\nOlvidar que dgeom() de R cuenta fracasos, no ensayos totales.\nOlvidar que dnbinom() de R también cuenta fracasos antes del \\(r\\)-ésimo éxito.\nConfundir una binomial negativa con una binomial ordinaria.\nSuponer independencia sin justificarla en una aplicación real.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#resumen",
+    "href": "11-distribuciones-discretas-especiales.html#resumen",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.29 Resumen",
+    "text": "11.29 Resumen\nBernoulli:\n\\[\nP(X=x)=p^x(1-p)^{1-x},\\qquad x=0,1.\n\\]\nBinomial:\n\\[\nP(X=x)=\\binom nxp^x(1-p)^{n-x}.\n\\]\nGeométrica, contando ensayos hasta el primer éxito:\n\\[\nP(X=x)=(1-p)^{x-1}p.\n\\]\nBinomial negativa, contando ensayos hasta el \\(r\\)-ésimo éxito:\n\\[\nP(X=x)=\\binom{x-1}{r-1}p^r(1-p)^{x-r}.\n\\]\nLas cuatro distribuciones surgen de secuencias de ensayos de Bernoulli, pero responden preguntas diferentes.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#ejercicios",
+    "href": "11-distribuciones-discretas-especiales.html#ejercicios",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.30 Ejercicios",
+    "text": "11.30 Ejercicios\n\nUn componente pasa una prueba con probabilidad 0.92. Define una variable Bernoulli y calcula su media y varianza.\nEn 12 transmisiones independientes, cada una tiene probabilidad 0.85 de éxito. Calcula la probabilidad de exactamente 10 éxitos.\nPara el ejercicio anterior, calcula \\(P(X\\ge10)\\).\nUna pieza es defectuosa con probabilidad 0.03. En una muestra independiente de 30 piezas, calcula la probabilidad de ninguna defectuosa.\nUn enlace conecta con probabilidad 0.25 en cada intento. Calcula la probabilidad de que la primera conexión ocurra en el quinto intento.\nPara el ejercicio anterior, calcula la probabilidad de requerir más de 6 intentos.\nDemuestra numéricamente en R la propiedad sin memoria de la geométrica para \\(p=0.25\\), \\(s=4\\) y \\(t=3\\).\nCada transmisión tiene probabilidad 0.70 de éxito. Calcula la probabilidad de que el cuarto éxito ocurra exactamente en el sexto intento.\nReproduce el ejercicio 8 mediante dnbinom() explicando por qué el argumento corresponde a dos fracasos.\nSimula 100 000 observaciones de una binomial \\(B(15,0.4)\\) y compara la media y varianza empíricas con las teóricas.\nSimula una geométrica con la convención del libro a partir de rgeom() y verifica su media teórica.\nReto ★. Si \\(X_1,\\ldots,X_n\\) son Bernoulli independientes con probabilidad común \\(p\\), explica por qué \\(X_1+\\cdots+X_n\\) es binomial y utiliza esa representación para obtener su esperanza y varianza.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#materiales-complementarios-del-capítulo",
+    "href": "11-distribuciones-discretas-especiales.html#materiales-complementarios-del-capítulo",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.31 Materiales complementarios del capítulo",
+    "text": "11.31 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nEjecutar, modificar y comparar las distribuciones discretas del capítulo.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir cálculos, gráficas y simulaciones en R/RStudio.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nComparar PMF, media y varianza al modificar los parámetros.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de distribuciones, parámetros y fórmulas clave.\n\n\n\nLos cuadernos de R acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "11-distribuciones-discretas-especiales.html#referencias-del-capítulo",
+    "href": "11-distribuciones-discretas-especiales.html#referencias-del-capítulo",
+    "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
+    "section": "11.32 Referencias del capítulo",
+    "text": "11.32 Referencias del capítulo\nEl tratamiento de las distribuciones Bernoulli, binomial, geométrica y binomial negativa sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos de ingeniería, ejercicios, código y simulaciones en R son originales; para el enfoque computacional se toma como referencia general Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
     "objectID": "references.html",
     "href": "references.html",
     "title": "Referencias",

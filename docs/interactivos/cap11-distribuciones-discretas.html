@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Distribuciones discretas especiales</title>
+<style>
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f7f9fc;color:#1f2937}.wrap{max-width:980px;margin:auto;padding:20px}.panel{background:white;border:1px solid #dbe3ec;border-radius:14px;padding:18px;margin-bottom:16px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}.control label{display:block;font-weight:600;margin-bottom:6px}.control input,.control select{width:100%}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f3f6fa;border-radius:10px;padding:12px;text-align:center}.big{font-size:1.25rem;font-weight:700}canvas{width:100%;height:320px}.note{font-size:.9rem;color:#4b5563}.value{font-variant-numeric:tabular-nums}</style>
+</head>
+<body><div class="wrap">
+<div class="panel"><h2>Comparador de distribuciones discretas</h2><p>Selecciona una distribución y modifica sus parámetros. La gráfica muestra la PMF y se actualizan su media y varianza.</p>
+<div class="controls">
+<div class="control"><label>Distribución</label><select id="dist"><option value="bern">Bernoulli</option><option value="bin" selected>Binomial</option><option value="geo">Geométrica</option><option value="nb">Binomial negativa</option></select></div>
+<div class="control"><label>p = <span id="pval">0.40</span></label><input id="p" type="range" min="0.05" max="0.95" step="0.05" value="0.40"></div>
+<div class="control" id="nbox"><label>n = <span id="nval">12</span></label><input id="n" type="range" min="1" max="30" step="1" value="12"></div>
+<div class="control" id="rbox" style="display:none"><label>r = <span id="rval">5</span></label><input id="r" type="range" min="1" max="12" step="1" value="5"></div>
+<div class="control"><label>x seleccionado = <span id="xval">3</span></label><input id="xsel" type="range" min="0" max="12" step="1" value="3"></div>
+</div></div>
+<div class="panel stats"><div class="stat"><div>Media</div><div class="big value" id="mu"></div></div><div class="stat"><div>Varianza</div><div class="big value" id="va"></div></div><div class="stat"><div>P(X=x)</div><div class="big value" id="px"></div></div></div>
+<div class="panel"><canvas id="plot" width="900" height="320"></canvas><p class="note" id="nota"></p></div>
+</div>
+<script>
+const $=id=>document.getElementById(id); const dist=$('dist'), p=$('p'), n=$('n'), r=$('r'), xs=$('xsel');
+function choose(n,k){if(k<0||k>n)return 0;k=Math.min(k,n-k);let z=1;for(let i=1;i<=k;i++)z=z*(n-k+i)/i;return z}
+function pmfBin(x,n,p){return choose(n,x)*p**x*(1-p)**(n-x)}
+function pmfGeo(x,p){return x>=1?(1-p)**(x-1)*p:0}
+function pmfNB(x,r,p){return x>=r?choose(x-1,r-1)*p**r*(1-p)**(x-r):0}
+function update(){let d=dist.value,pp=+p.value,nn=+n.value,rr=+r.value;$('pval').textContent=pp.toFixed(2);$('nval').textContent=nn;$('rval').textContent=rr;
+$('nbox').style.display=d==='bin'?'block':'none';$('rbox').style.display=d==='nb'?'block':'none';
+let xmin=0,xmax=12,mu=0,v=0,fn=()=>0,note='';
+if(d==='bern'){xmin=0;xmax=1;mu=pp;v=pp*(1-pp);fn=x=>pmfBin(x,1,pp);note='Bernoulli: un solo ensayo, X=0 o 1.'}
+if(d==='bin'){xmin=0;xmax=nn;mu=nn*pp;v=nn*pp*(1-pp);fn=x=>pmfBin(x,nn,pp);note='Binomial: número de éxitos en n ensayos independientes.'}
+if(d==='geo'){xmin=1;xmax=Math.min(40,Math.max(12,Math.ceil(8/pp)));mu=1/pp;v=(1-pp)/(pp*pp);fn=x=>pmfGeo(x,pp);note='Geométrica: X cuenta ensayos totales hasta el primer éxito.'}
+if(d==='nb'){xmin=rr;xmax=Math.min(50,Math.max(rr+12,Math.ceil(rr/pp+5*Math.sqrt(rr*(1-pp)/(pp*pp)))));mu=rr/pp;v=rr*(1-pp)/(pp*pp);fn=x=>pmfNB(x,rr,pp);note='Binomial negativa: X cuenta ensayos totales hasta el r-ésimo éxito.'}
+xs.min=xmin;xs.max=xmax;if(+xs.value<xmin||+xs.value>xmax)xs.value=Math.min(xmax,Math.max(xmin,Math.round(mu)));$('xval').textContent=xs.value;$('mu').textContent=mu.toFixed(3);$('va').textContent=v.toFixed(3);$('px').textContent=fn(+xs.value).toFixed(4);$('nota').textContent=note;draw(xmin,xmax,fn,+xs.value)}
+function draw(xmin,xmax,fn,sel){let c=$('plot'),ctx=c.getContext('2d'),W=c.width,H=c.height,vals=[];for(let x=xmin;x<=xmax;x++)vals.push([x,fn(x)]);let maxp=Math.max(...vals.map(z=>z[1]),.01);ctx.clearRect(0,0,W,H);ctx.strokeStyle='#9ca3af';ctx.beginPath();ctx.moveTo(45,H-35);ctx.lineTo(W-15,H-35);ctx.stroke();let step=(W-70)/Math.max(1,vals.length);vals.forEach((z,i)=>{let h=(H-65)*z[1]/maxp,x=50+i*step,y=H-35-h;ctx.lineWidth=Math.max(2,step*.55);ctx.strokeStyle=z[0]===sel?'#111827':'#4b5563';ctx.beginPath();ctx.moveTo(x,H-35);ctx.lineTo(x,y);ctx.stroke();ctx.fillStyle='#111827';ctx.font='12px sans-serif';if(vals.length<=22||i%2===0)ctx.fillText(z[0],x-4,H-15)});}
+[dist,p,n,r,xs].forEach(el=>el.addEventListener('input',update));update();
+</script></body></html>
