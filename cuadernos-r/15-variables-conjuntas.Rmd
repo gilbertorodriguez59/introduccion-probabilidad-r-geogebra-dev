@@ -1,0 +1,128 @@
+---
+title: "Capítulo 15. Variables aleatorias conjuntas"
+author: "Jesús Gilberto Rodríguez Escobedo"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# 1. Tabla conjunta discreta
+
+```{r}
+P <- matrix(c(
+  0.20, 0.10, 0.05,
+  0.15, 0.20, 0.10,
+  0.05, 0.10, 0.05
+), nrow = 3, byrow = TRUE)
+rownames(P) <- paste0("X=", 0:2)
+colnames(P) <- paste0("Y=", 0:2)
+P
+sum(P)
+```
+
+# 2. Marginales
+
+```{r}
+px <- rowSums(P)
+py <- colSums(P)
+px
+py
+```
+
+# 3. Probabilidad sobre una región
+
+```{r}
+# P(X >= 1, Y <= 1)
+sum(P[2:3, 1:2])
+```
+
+# 4. Condicionales
+
+```{r}
+# Distribución de X dado Y=1
+P[, 2] / py[2]
+
+# Distribución de Y dado X=1
+P[2, ] / px[2]
+```
+
+# 5. Independencia
+
+```{r}
+P_ind <- outer(px, py)
+P_ind
+P - P_ind
+max(abs(P - P_ind))
+```
+
+# 6. Mapa de calor
+
+```{r}
+image(x = 0:2, y = 0:2, z = t(P),
+      xlab = "X", ylab = "Y",
+      main = "PMF conjunta")
+```
+
+# 7. Ejemplo continuo triangular
+
+La densidad es
+
+$$
+f(x,y)=2,\qquad 0<y<x<1.
+$$
+
+Marginales:
+
+$$
+f_X(x)=2x,\qquad f_Y(y)=2(1-y).
+$$
+
+```{r}
+fx <- function(x) ifelse(x > 0 & x < 1, 2*x, 0)
+fy <- function(y) ifelse(y > 0 & y < 1, 2*(1-y), 0)
+
+integrate(fx, 0, 1)$value
+integrate(fy, 0, 1)$value
+```
+
+# 8. Probabilidad en una subregión
+
+```{r}
+p1 <- integrate(function(x) 2*x, 0, 0.3)$value
+p2 <- integrate(function(x) 0.6, 0.3, 0.8)$value
+p1 + p2
+```
+
+# 9. Simulación triangular
+
+```{r}
+set.seed(2026)
+n <- 20000
+u1 <- runif(n)
+u2 <- runif(n)
+X <- sqrt(u1)
+Y <- X*u2
+
+plot(X, Y, pch = 16, cex = 0.3,
+     xlab = "X", ylab = "Y",
+     main = "Simulación conjunta triangular")
+abline(0, 1, lty = 2)
+```
+
+# 10. Verificación de marginales por simulación
+
+```{r}
+hist(X, probability = TRUE, breaks = 35,
+     main = "Marginal simulada de X", xlab = "X")
+curve(2*x, from = 0, to = 1, add = TRUE, lwd = 2)
+
+hist(Y, probability = TRUE, breaks = 35,
+     main = "Marginal simulada de Y", xlab = "Y")
+curve(2*(1-x), from = 0, to = 1, add = TRUE, lwd = 2)
+```
+
+# 11. Ejercicio
+
+Construya una tabla conjunta independiente usando marginales elegidas por usted y verifique que cada condicional coincide con la marginal correspondiente.
