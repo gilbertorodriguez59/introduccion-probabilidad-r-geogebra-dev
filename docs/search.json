@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 3 5 2 3 5 7 4 6 3 2\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 0 0 5 0 1 3 0 5\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  5 13  9 14  3  4  7  4  2  5",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 6 4 3 4 4 4 3 6 5 4\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 3 0 3 0 0 1 1 2 3\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  3  5  8  8 13 13  2  9  5 10",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2894,7 +2894,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "14.4 Funciones de R para la uniforme",
-    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.3789546 0.1489107 0.1193892 0.4791506 0.3964928",
+    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.7240456 0.4583968 0.8649299 0.6441672 0.3707912",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -2954,7 +2954,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "15.6 Funciones de R para la exponencial",
-    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  0.3241642  0.8665960 13.4868593  6.7161623 15.5436491",
+    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  7.882237  4.175420  1.102797 14.096820  3.931042",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3024,7 +3024,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "16.7 Funciones de R para la normal",
-    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1] 13.176456  9.092480  7.678782 10.872255 11.557839",
+    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1] 10.200849  9.641475  8.518064 10.331896 10.105812",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3214,7 +3214,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-gamma-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "15.5 Funciones Gamma en R",
-    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 1.1203515 0.7282757 1.1421950 0.6916906 1.7870140",
+    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 2.6951786 0.4708420 2.2644650 0.7167810 0.4223825",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3284,7 +3284,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-weibull-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "16.6 Funciones Weibull en R",
-    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1] 1231.0864  648.6997  500.0028 1053.5023  633.4982",
+    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1] 1180.6759  525.4997  890.9558  632.0144  998.2420",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3334,7 +3334,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-beta-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "17.5 Funciones Beta en R",
-    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.8051895 0.7534896 0.4432365 0.7965615 0.7638568",
+    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.7060695 0.6030771 0.7319683 0.7380758 0.7468985",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3807,6 +3807,116 @@
     "text": "15.34 Referencias del capítulo\nEl tratamiento de distribuciones conjuntas, marginales, condicionales e independencia sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html",
+    "href": "16-esperanza-covarianza-correlacion.html",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "",
+    "text": "16.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#objetivos-de-aprendizaje",
+    "href": "16-esperanza-covarianza-correlacion.html#objetivos-de-aprendizaje",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "",
+    "text": "calcular esperanzas de funciones de dos variables aleatorias;\nobtener \\(E[XY]\\) a partir de una distribución conjunta;\ndefinir e interpretar covarianza y correlación;\ncalcular la varianza de una suma o combinación lineal;\ndistinguir entre independencia, covarianza cero y correlación cero;\nreconocer que correlación mide asociación lineal y no dependencia general;\nutilizar R para calcular momentos conjuntos y explorar relaciones lineales y no lineales;\ninterpretar gráficamente cómo cambia la nube de puntos al variar la correlación.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#de-la-distribución-conjunta-a-los-momentos-conjuntos",
+    "href": "16-esperanza-covarianza-correlacion.html#de-la-distribución-conjunta-a-los-momentos-conjuntos",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "16.2 De la distribución conjunta a los momentos conjuntos",
+    "text": "16.2 De la distribución conjunta a los momentos conjuntos\nUna distribución conjunta no sólo permite calcular probabilidades. También permite resumir cómo se comportan simultáneamente \\(X\\) y \\(Y\\) mediante cantidades como\n\\[\nE[X],\\qquad E[Y],\\qquad E[XY],\\qquad \\operatorname{Cov}(X,Y),\\qquad \\rho_{X,Y}.\n\\]\nEstas cantidades serán fundamentales más adelante en inferencia estadística, regresión, análisis multivariado y ciencia de datos.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#ejemplo-discreto",
+    "href": "16-esperanza-covarianza-correlacion.html#ejemplo-discreto",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "17.1 Ejemplo discreto",
+    "text": "17.1 Ejemplo discreto\nConsidere la tabla conjunta\n\n\n\n\\(X\\backslash Y\\)\n0\n1\n2\n\n\n\n\n0\n0.20\n0.10\n0.05\n\n\n1\n0.15\n0.20\n0.10\n\n\n2\n0.05\n0.10\n0.05\n\n\n\nPara calcular \\(E[XY]\\) usamos\n\\[\nE[XY]=\\sum_x\\sum_y xy\\,p_{X,Y}(x,y).\n\\]\nEn R:\n\nP &lt;- matrix(c(\n  0.20, 0.10, 0.05,\n  0.15, 0.20, 0.10,\n  0.05, 0.10, 0.05\n), nrow = 3, byrow = TRUE)\n\nx &lt;- 0:2\ny &lt;- 0:2\n\nEX &lt;- sum(x * rowSums(P))\nEY &lt;- sum(y * colSums(P))\nEXY &lt;- sum(outer(x, y, \"*\") * P)\n\nc(EX = EX, EY = EY, EXY = EXY)\n\n  EX   EY  EXY \n0.85 0.80 0.80",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#interpretación-del-signo",
+    "href": "16-esperanza-covarianza-correlacion.html#interpretación-del-signo",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "19.1 Interpretación del signo",
+    "text": "19.1 Interpretación del signo\n\n\\(\\operatorname{Cov}(X,Y)&gt;0\\): valores altos de \\(X\\) tienden a asociarse con valores altos de \\(Y\\).\n\\(\\operatorname{Cov}(X,Y)&lt;0\\): valores altos de \\(X\\) tienden a asociarse con valores bajos de \\(Y\\).\n\\(\\operatorname{Cov}(X,Y)=0\\): no hay asociación lineal detectada por la covarianza, pero puede existir dependencia no lineal.\n\nLa magnitud de la covarianza depende de las unidades de medición, por lo que no es adecuada para comparar directamente relaciones expresadas en escalas distintas.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#cálculo-en-el-ejemplo-discreto",
+    "href": "16-esperanza-covarianza-correlacion.html#cálculo-en-el-ejemplo-discreto",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "19.2 Cálculo en el ejemplo discreto",
+    "text": "19.2 Cálculo en el ejemplo discreto\n\ncovXY &lt;- EXY - EX * EY\ncovXY\n\n[1] 0.12\n\n\nTambién podemos obtener las varianzas marginales:\n\nEX2 &lt;- sum((x^2) * rowSums(P))\nEY2 &lt;- sum((y^2) * colSums(P))\n\nvarX &lt;- EX2 - EX^2\nvarY &lt;- EY2 - EY^2\n\nc(varX = varX, varY = varY, covXY = covXY)\n\n  varX   varY  covXY \n0.5275 0.5600 0.1200",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#ejemplo-de-error-combinado",
+    "href": "16-esperanza-covarianza-correlacion.html#ejemplo-de-error-combinado",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "21.1 Ejemplo de error combinado",
+    "text": "21.1 Ejemplo de error combinado\nSuponga que dos errores de medición tienen\n\\[\n\\operatorname{Var}(X)=4,\\qquad\n\\operatorname{Var}(Y)=9,\n\\]\ny\n\\[\n\\operatorname{Cov}(X,Y)=2.\n\\]\nEntonces\n\\[\n\\operatorname{Var}(X+Y)=4+9+2(2)=17.\n\\]\nSi se ignorara la covarianza se obtendría incorrectamente 13.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#interpretación",
+    "href": "16-esperanza-covarianza-correlacion.html#interpretación",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "22.1 Interpretación",
+    "text": "22.1 Interpretación\n\n\\(\\rho\\) cercano a 1: asociación lineal positiva fuerte.\n\\(\\rho\\) cercano a \\(-1\\): asociación lineal negativa fuerte.\n\\(\\rho\\) cercano a 0: asociación lineal débil o inexistente.\n\nImportante: \\(\\rho=0\\) no implica independencia en general.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#correlación-en-el-ejemplo-discreto",
+    "href": "16-esperanza-covarianza-correlacion.html#correlación-en-el-ejemplo-discreto",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "22.2 Correlación en el ejemplo discreto",
+    "text": "22.2 Correlación en el ejemplo discreto\n\nrho &lt;- covXY / sqrt(varX * varY)\nrho\n\n[1] 0.2207883",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#materiales-complementarios-del-capítulo",
+    "href": "16-esperanza-covarianza-correlacion.html#materiales-complementarios-del-capítulo",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "36.1 Materiales complementarios del capítulo",
+    "text": "36.1 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nExplorar momentos conjuntos, covarianza, correlación y simulaciones.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir cálculos y gráficas en R/RStudio.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nComparar asociación lineal, correlación y dependencia no lineal.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de covarianza, correlación y varianza de sumas.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "16-esperanza-covarianza-correlacion.html#referencias-del-capítulo",
+    "href": "16-esperanza-covarianza-correlacion.html#referencias-del-capítulo",
+    "title": "16  Esperanza conjunta, covarianza y correlación",
+    "section": "36.2 Referencias del capítulo",
+    "text": "36.2 Referencias del capítulo\nEl tratamiento de esperanza conjunta, covarianza y correlación sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
     ]
   },
   {

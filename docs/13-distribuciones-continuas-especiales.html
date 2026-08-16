@@ -322,6 +322,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./16-esperanza-covarianza-correlacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Esperanza conjunta, covarianza y correlación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Referencias</span></a>
   </div>
@@ -512,7 +518,7 @@ P(|X|&lt;0.2)=P(-0.2&lt;X&lt;0.2)=\frac{0.4}{1}=0.4.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)    <span class="co"># simulación</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3789546 0.1489107 0.1193892 0.4791506 0.3964928</code></pre>
+<pre><code>[1] 0.7240456 0.4583968 0.8649299 0.6441672 0.3707912</code></pre>
 </div>
 </div>
 </section>
@@ -631,7 +637,7 @@ P(X&gt;15\mid X&gt;10)=P(X&gt;5)=e^{-0.5}.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rexp</span>(<span class="dv">5</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.3241642  0.8665960 13.4868593  6.7161623 15.5436491</code></pre>
+<pre><code>[1]  7.882237  4.175420  1.102797 14.096820  3.931042</code></pre>
 </div>
 </div>
 </section>
@@ -794,7 +800,7 @@ P(|X-\mu|&lt;3\sigma)\approx0.9973.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 13.176456  9.092480  7.678782 10.872255 11.557839</code></pre>
+<pre><code>[1] 10.200849  9.641475  8.518064 10.331896 10.105812</code></pre>
 </div>
 </div>
 </section>
@@ -1054,7 +1060,8 @@ document.addEventListener('DOMContentLoaded', function () {
     '12-hipergeometrica-poisson.html': {titulo:'Interactivo del capítulo: hipergeométrica, binomial y Poisson',archivo:'interactivos/cap12-hipergeometrica-poisson.html',texto:'Compara el muestreo sin reemplazo con el modelo binomial y observa la aproximación binomial–Poisson.'},
     '13-distribuciones-continuas-especiales.html': {titulo:'Interactivo del capítulo: uniforme, exponencial y normal',archivo:'interactivos/cap13-distribuciones-continuas.html',texto:'Modifica los parámetros y el intervalo de interés para observar densidades, áreas de probabilidad, media y varianza.'},
     '14-gamma-weibull-beta.html': {titulo:'Interactivo del capítulo: Gamma, Weibull y Beta',archivo:'interactivos/cap14-gamma-weibull-beta.html',texto:'Explora parámetros, densidades y áreas de probabilidad; en Weibull observa además el comportamiento de la tasa de falla.'},
-    '15-variables-conjuntas-marginales-condicionales.html': {titulo:'Interactivo del capítulo: distribuciones conjuntas, marginales y condicionales',archivo:'interactivos/cap15-distribuciones-conjuntas.html',texto:'Modifica la asociación entre X y Y conservando las marginales y observa cómo cambian la PMF conjunta, las condicionales y la separación respecto de independencia.'}
+    '15-variables-conjuntas-marginales-condicionales.html': {titulo:'Interactivo del capítulo: distribuciones conjuntas, marginales y condicionales',archivo:'interactivos/cap15-distribuciones-conjuntas.html',texto:'Modifica la asociación entre X y Y conservando las marginales y observa cómo cambian la PMF conjunta, las condicionales y la separación respecto de independencia.'},
+    '16-esperanza-covarianza-correlacion.html': {titulo:'Interactivo del capítulo: covarianza, correlación y dependencia',archivo:'interactivos/cap16-covarianza-correlacion.html',texto:'Modifica la correlación de una nube lineal y compárala con una relación no lineal que puede tener correlación cercana a cero.'}
   };
   const cfg = mapa[path];
   if (!cfg) return;

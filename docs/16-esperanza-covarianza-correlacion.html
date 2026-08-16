@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>16&nbsp; Esperanza conjunta, covarianza y correlación – Introducción a la Probabilidad con R y GeoGebra</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./15-variables-conjuntas-marginales-condicionales.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-41479178cf16c74431ccbac30d902985.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./16-esperanza-covarianza-correlacion.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Esperanza conjunta, covarianza y correlación</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Contenido del libro</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./Introduccion-a-la-Probabilidad-con-R-y-GeoGebra.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Portada</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bienvenida.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./presentacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduccion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notacion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notación general</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-incertidumbre-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Incertidumbre y probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-espacios-eventos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Conjuntos, espacios muestrales y eventos</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-conteo-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Técnicas de conteo y enumeración</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-axiomas-probabilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Axiomas y propiedades de la probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-condicional-independencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Probabilidad condicional e independencia</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-probabilidad-total-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Particiones, probabilidad total y teorema de Bayes</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-variable-aleatoria-cdf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Variable aleatoria y función de distribución acumulada</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-variables-discretas-pmf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables aleatorias discretas y función de masa de probabilidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-variables-continuas-densidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Variables aleatorias continuas y función de densidad</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-esperanza-varianza-chebyshev.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Esperanza matemática, momentos, varianza y desigualdad de Chebyshev</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-distribuciones-discretas-especiales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-hipergeometrica-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Distribuciones discretas especiales II: hipergeométrica y Poisson</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-distribuciones-continuas-especiales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Distribuciones continuas especiales I: uniforme, exponencial y normal</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-gamma-weibull-beta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Distribuciones continuas especiales II: Gamma, Weibull y Beta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-variables-conjuntas-marginales-condicionales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Variables aleatorias conjuntas, distribuciones marginales y condicionales</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-esperanza-covarianza-correlacion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Esperanza conjunta, covarianza y correlación</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Referencias</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En este capítulo</h2>
+   
+  <ul>
+  <li><a href="#objetivos-de-aprendizaje" id="toc-objetivos-de-aprendizaje" class="nav-link active" data-scroll-target="#objetivos-de-aprendizaje"><span class="header-section-number">16.1</span> Objetivos de aprendizaje</a></li>
+  <li><a href="#de-la-distribución-conjunta-a-los-momentos-conjuntos" id="toc-de-la-distribución-conjunta-a-los-momentos-conjuntos" class="nav-link" data-scroll-target="#de-la-distribución-conjunta-a-los-momentos-conjuntos"><span class="header-section-number">16.2</span> De la distribución conjunta a los momentos conjuntos</a></li>
+  <li><a href="#esperanza-de-una-función-de-dos-variables" id="toc-esperanza-de-una-función-de-dos-variables" class="nav-link" data-scroll-target="#esperanza-de-una-función-de-dos-variables"><span class="header-section-number">17</span> Esperanza de una función de dos variables</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-discreto" id="toc-ejemplo-discreto" class="nav-link" data-scroll-target="#ejemplo-discreto"><span class="header-section-number">17.1</span> Ejemplo discreto</a></li>
+  </ul></li>
+  <li><a href="#linealidad-de-la-esperanza" id="toc-linealidad-de-la-esperanza" class="nav-link" data-scroll-target="#linealidad-de-la-esperanza"><span class="header-section-number">18</span> Linealidad de la esperanza</a></li>
+  <li><a href="#covarianza" id="toc-covarianza" class="nav-link" data-scroll-target="#covarianza"><span class="header-section-number">19</span> Covarianza</a>
+  <ul class="collapse">
+  <li><a href="#interpretación-del-signo" id="toc-interpretación-del-signo" class="nav-link" data-scroll-target="#interpretación-del-signo"><span class="header-section-number">19.1</span> Interpretación del signo</a></li>
+  <li><a href="#cálculo-en-el-ejemplo-discreto" id="toc-cálculo-en-el-ejemplo-discreto" class="nav-link" data-scroll-target="#cálculo-en-el-ejemplo-discreto"><span class="header-section-number">19.2</span> Cálculo en el ejemplo discreto</a></li>
+  </ul></li>
+  <li><a href="#propiedades-básicas-de-la-covarianza" id="toc-propiedades-básicas-de-la-covarianza" class="nav-link" data-scroll-target="#propiedades-básicas-de-la-covarianza"><span class="header-section-number">20</span> Propiedades básicas de la covarianza</a></li>
+  <li><a href="#varianza-de-una-suma" id="toc-varianza-de-una-suma" class="nav-link" data-scroll-target="#varianza-de-una-suma"><span class="header-section-number">21</span> Varianza de una suma</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-de-error-combinado" id="toc-ejemplo-de-error-combinado" class="nav-link" data-scroll-target="#ejemplo-de-error-combinado"><span class="header-section-number">21.1</span> Ejemplo de error combinado</a></li>
+  </ul></li>
+  <li><a href="#coeficiente-de-correlación" id="toc-coeficiente-de-correlación" class="nav-link" data-scroll-target="#coeficiente-de-correlación"><span class="header-section-number">22</span> Coeficiente de correlación</a>
+  <ul class="collapse">
+  <li><a href="#interpretación" id="toc-interpretación" class="nav-link" data-scroll-target="#interpretación"><span class="header-section-number">22.1</span> Interpretación</a></li>
+  <li><a href="#correlación-en-el-ejemplo-discreto" id="toc-correlación-en-el-ejemplo-discreto" class="nav-link" data-scroll-target="#correlación-en-el-ejemplo-discreto"><span class="header-section-number">22.2</span> Correlación en el ejemplo discreto</a></li>
+  </ul></li>
+  <li><a href="#independencia-implica-covarianza-cero" id="toc-independencia-implica-covarianza-cero" class="nav-link" data-scroll-target="#independencia-implica-covarianza-cero"><span class="header-section-number">23</span> Independencia implica covarianza cero</a></li>
+  <li><a href="#covarianza-cero-no-implica-independencia" id="toc-covarianza-cero-no-implica-independencia" class="nav-link" data-scroll-target="#covarianza-cero-no-implica-independencia"><span class="header-section-number">24</span> Covarianza cero no implica independencia</a></li>
+  <li><a href="#correlación-perfecta" id="toc-correlación-perfecta" class="nav-link" data-scroll-target="#correlación-perfecta"><span class="header-section-number">25</span> Correlación perfecta</a></li>
+  <li><a href="#efecto-de-cambios-de-escala" id="toc-efecto-de-cambios-de-escala" class="nav-link" data-scroll-target="#efecto-de-cambios-de-escala"><span class="header-section-number">26</span> Efecto de cambios de escala</a></li>
+  <li><a href="#esperanza-y-covarianza-en-el-caso-continuo" id="toc-esperanza-y-covarianza-en-el-caso-continuo" class="nav-link" data-scroll-target="#esperanza-y-covarianza-en-el-caso-continuo"><span class="header-section-number">27</span> Esperanza y covarianza en el caso continuo</a></li>
+  <li><a href="#varianza-de-una-combinación-de-muchas-variables" id="toc-varianza-de-una-combinación-de-muchas-variables" class="nav-link" data-scroll-target="#varianza-de-una-combinación-de-muchas-variables"><span class="header-section-number">28</span> Varianza de una combinación de muchas variables</a></li>
+  <li><a href="#matriz-de-covarianzas" id="toc-matriz-de-covarianzas" class="nav-link" data-scroll-target="#matriz-de-covarianzas"><span class="header-section-number">29</span> Matriz de covarianzas</a></li>
+  <li><a href="#simulación-de-nubes-con-distinta-correlación" id="toc-simulación-de-nubes-con-distinta-correlación" class="nav-link" data-scroll-target="#simulación-de-nubes-con-distinta-correlación"><span class="header-section-number">30</span> Simulación de nubes con distinta correlación</a></li>
+  <li><a href="#interactivo-del-capítulo" id="toc-interactivo-del-capítulo" class="nav-link" data-scroll-target="#interactivo-del-capítulo"><span class="header-section-number">31</span> Interactivo del capítulo</a></li>
+  <li><a href="#actividad-con-geogebra" id="toc-actividad-con-geogebra" class="nav-link" data-scroll-target="#actividad-con-geogebra"><span class="header-section-number">32</span> Actividad con GeoGebra</a></li>
+  <li><a href="#estrategia-de-resolución" id="toc-estrategia-de-resolución" class="nav-link" data-scroll-target="#estrategia-de-resolución"><span class="header-section-number">33</span> Estrategia de resolución</a></li>
+  <li><a href="#errores-frecuentes" id="toc-errores-frecuentes" class="nav-link" data-scroll-target="#errores-frecuentes"><span class="header-section-number">34</span> Errores frecuentes</a></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">35</span> Resumen</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">36</span> Ejercicios</a>
+  <ul class="collapse">
+  <li><a href="#materiales-complementarios-del-capítulo" id="toc-materiales-complementarios-del-capítulo" class="nav-link" data-scroll-target="#materiales-complementarios-del-capítulo"><span class="header-section-number">36.1</span> Materiales complementarios del capítulo</a></li>
+  <li><a href="#referencias-del-capítulo" id="toc-referencias-del-capítulo" class="nav-link" data-scroll-target="#referencias-del-capítulo"><span class="header-section-number">36.2</span> Referencias del capítulo</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Esperanza conjunta, covarianza y correlación</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivos-de-aprendizaje" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="objetivos-de-aprendizaje"><span class="header-section-number">16.1</span> Objetivos de aprendizaje</h2>
+<p>Al finalizar este capítulo, el estudiante será capaz de:</p>
+<ul>
+<li>calcular esperanzas de funciones de dos variables aleatorias;</li>
+<li>obtener <span class="math inline">\(E[XY]\)</span> a partir de una distribución conjunta;</li>
+<li>definir e interpretar covarianza y correlación;</li>
+<li>calcular la varianza de una suma o combinación lineal;</li>
+<li>distinguir entre independencia, covarianza cero y correlación cero;</li>
+<li>reconocer que correlación mide asociación lineal y no dependencia general;</li>
+<li>utilizar R para calcular momentos conjuntos y explorar relaciones lineales y no lineales;</li>
+<li>interpretar gráficamente cómo cambia la nube de puntos al variar la correlación.</li>
+</ul>
+</section>
+<section id="de-la-distribución-conjunta-a-los-momentos-conjuntos" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="de-la-distribución-conjunta-a-los-momentos-conjuntos"><span class="header-section-number">16.2</span> De la distribución conjunta a los momentos conjuntos</h2>
+<p>Una distribución conjunta no sólo permite calcular probabilidades. También permite resumir cómo se comportan simultáneamente <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> mediante cantidades como</p>
+<p><span class="math display">\[
+E[X],\qquad E[Y],\qquad E[XY],\qquad \operatorname{Cov}(X,Y),\qquad \rho_{X,Y}.
+\]</span></p>
+<p>Estas cantidades serán fundamentales más adelante en inferencia estadística, regresión, análisis multivariado y ciencia de datos.</p>
+</section>
+<section id="esperanza-de-una-función-de-dos-variables" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Esperanza de una función de dos variables</h1>
+<p>Si <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son discretas y <span class="math inline">\(g\)</span> es una función, entonces</p>
+<p><span class="math display">\[
+\boxed{
+E[g(X,Y)]
+=\sum_x\sum_y g(x,y)p_{X,Y}(x,y)
+}
+\]</span></p>
+<p>si la suma existe.</p>
+<p>Si <span class="math inline">\((X,Y)\)</span> tiene densidad conjunta,</p>
+<p><span class="math display">\[
+\boxed{
+E[g(X,Y)]
+=\iint g(x,y)f_{X,Y}(x,y)\,dx\,dy
+}.
+\]</span></p>
+<p>Esta fórmula permite calcular directamente momentos conjuntos sin obtener primero la distribución de <span class="math inline">\(g(X,Y)\)</span>.</p>
+<section id="ejemplo-discreto" class="level2" data-number="17.1">
+<h2 data-number="17.1" class="anchored" data-anchor-id="ejemplo-discreto"><span class="header-section-number">17.1</span> Ejemplo discreto</h2>
+<p>Considere la tabla conjunta</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(X\backslash Y\)</span></th>
+<th style="text-align: right;">0</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Para calcular <span class="math inline">\(E[XY]\)</span> usamos</p>
+<p><span class="math display">\[
+E[XY]=\sum_x\sum_y xy\,p_{X,Y}(x,y).
+\]</span></p>
+<p>En R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.15</span>, <span class="fl">0.20</span>, <span class="fl">0.10</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.05</span>, <span class="fl">0.10</span>, <span class="fl">0.05</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">2</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>EX <span class="ot">&lt;-</span> <span class="fu">sum</span>(x <span class="sc">*</span> <span class="fu">rowSums</span>(P))</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>EY <span class="ot">&lt;-</span> <span class="fu">sum</span>(y <span class="sc">*</span> <span class="fu">colSums</span>(P))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>EXY <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">outer</span>(x, y, <span class="st">"*"</span>) <span class="sc">*</span> P)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">EX =</span> EX, <span class="at">EY =</span> EY, <span class="at">EXY =</span> EXY)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  EX   EY  EXY 
+0.85 0.80 0.80 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="linealidad-de-la-esperanza" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Linealidad de la esperanza</h1>
+<p>Para constantes <span class="math inline">\(a,b,c\)</span>,</p>
+<p><span class="math display">\[
+\boxed{E[aX+bY+c]=aE[X]+bE[Y]+c}.
+\]</span></p>
+<p>Esta propiedad <strong>no requiere independencia</strong>.</p>
+<p>Por ejemplo, si el costo total de dos subsistemas es</p>
+<p><span class="math display">\[
+C=120X+80Y+500,
+\]</span></p>
+<p>entonces</p>
+<p><span class="math display">\[
+E[C]=120E[X]+80E[Y]+500.
+\]</span></p>
+</section>
+<section id="covarianza" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Covarianza</h1>
+<p>La covarianza mide la tendencia de dos variables a desviarse de sus medias en la misma dirección.</p>
+<p>Se define como</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Cov}(X,Y)
+=E[(X-E[X])(Y-E[Y])]
+}.
+\]</span></p>
+<p>Una fórmula equivalente y muy útil es</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y]
+}.
+\]</span></p>
+<section id="interpretación-del-signo" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="interpretación-del-signo"><span class="header-section-number">19.1</span> Interpretación del signo</h2>
+<ul>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)&gt;0\)</span>: valores altos de <span class="math inline">\(X\)</span> tienden a asociarse con valores altos de <span class="math inline">\(Y\)</span>.</li>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)&lt;0\)</span>: valores altos de <span class="math inline">\(X\)</span> tienden a asociarse con valores bajos de <span class="math inline">\(Y\)</span>.</li>
+<li><span class="math inline">\(\operatorname{Cov}(X,Y)=0\)</span>: no hay asociación lineal detectada por la covarianza, pero puede existir dependencia no lineal.</li>
+</ul>
+<p>La magnitud de la covarianza depende de las unidades de medición, por lo que no es adecuada para comparar directamente relaciones expresadas en escalas distintas.</p>
+</section>
+<section id="cálculo-en-el-ejemplo-discreto" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="cálculo-en-el-ejemplo-discreto"><span class="header-section-number">19.2</span> Cálculo en el ejemplo discreto</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>covXY <span class="ot">&lt;-</span> EXY <span class="sc">-</span> EX <span class="sc">*</span> EY</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>covXY</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.12</code></pre>
+</div>
+</div>
+<p>También podemos obtener las varianzas marginales:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EX2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">rowSums</span>(P))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>EY2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((y<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">colSums</span>(P))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>varX <span class="ot">&lt;-</span> EX2 <span class="sc">-</span> EX<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>varY <span class="ot">&lt;-</span> EY2 <span class="sc">-</span> EY<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">varX =</span> varX, <span class="at">varY =</span> varY, <span class="at">covXY =</span> covXY)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  varX   varY  covXY 
+0.5275 0.5600 0.1200 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="propiedades-básicas-de-la-covarianza" class="level1" data-number="20">
+<h1 data-number="20"><span class="header-section-number">20</span> Propiedades básicas de la covarianza</h1>
+<p>Para constantes <span class="math inline">\(a,b,c,d\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)=\operatorname{Cov}(Y,X),
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,X)=\operatorname{Var}(X),
+\]</span></p>
+<p><span class="math display">\[
+\operatorname{Cov}(aX+b,cY+d)=ac\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>Además,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,c)=0.
+\]</span></p>
+</section>
+<section id="varianza-de-una-suma" class="level1" data-number="21">
+<h1 data-number="21"><span class="header-section-number">21</span> Varianza de una suma</h1>
+<p>Un resultado central es</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Var}(X+Y)
+=\operatorname{Var}(X)+\operatorname{Var}(Y)
++2\operatorname{Cov}(X,Y)
+}.
+\]</span></p>
+<p>Más generalmente,</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Var}(aX+bY)
+=a^2\operatorname{Var}(X)
++b^2\operatorname{Var}(Y)
++2ab\operatorname{Cov}(X,Y)
+}.
+\]</span></p>
+<p>Si <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son independientes, entonces su covarianza es cero y</p>
+<p><span class="math display">\[
+\operatorname{Var}(X+Y)
+=\operatorname{Var}(X)+\operatorname{Var}(Y).
+\]</span></p>
+<section id="ejemplo-de-error-combinado" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="ejemplo-de-error-combinado"><span class="header-section-number">21.1</span> Ejemplo de error combinado</h2>
+<p>Suponga que dos errores de medición tienen</p>
+<p><span class="math display">\[
+\operatorname{Var}(X)=4,\qquad
+\operatorname{Var}(Y)=9,
+\]</span></p>
+<p>y</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)=2.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\operatorname{Var}(X+Y)=4+9+2(2)=17.
+\]</span></p>
+<p>Si se ignorara la covarianza se obtendría incorrectamente 13.</p>
+</section>
+</section>
+<section id="coeficiente-de-correlación" class="level1" data-number="22">
+<h1 data-number="22"><span class="header-section-number">22</span> Coeficiente de correlación</h1>
+<p>La correlación estandariza la covarianza:</p>
+<p><span class="math display">\[
+\boxed{
+\rho_{X,Y}
+=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}
+}
+\]</span></p>
+<p>si <span class="math inline">\(\sigma_X&gt;0\)</span> y <span class="math inline">\(\sigma_Y&gt;0\)</span>.</p>
+<p>Siempre se cumple</p>
+<p><span class="math display">\[
+\boxed{-1\le\rho_{X,Y}\le1}.
+\]</span></p>
+<p>A diferencia de la covarianza, la correlación no tiene unidades.</p>
+<section id="interpretación" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="interpretación"><span class="header-section-number">22.1</span> Interpretación</h2>
+<ul>
+<li><span class="math inline">\(\rho\)</span> cercano a 1: asociación lineal positiva fuerte.</li>
+<li><span class="math inline">\(\rho\)</span> cercano a <span class="math inline">\(-1\)</span>: asociación lineal negativa fuerte.</li>
+<li><span class="math inline">\(\rho\)</span> cercano a 0: asociación lineal débil o inexistente.</li>
+</ul>
+<p><strong>Importante:</strong> <span class="math inline">\(\rho=0\)</span> no implica independencia en general.</p>
+</section>
+<section id="correlación-en-el-ejemplo-discreto" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="correlación-en-el-ejemplo-discreto"><span class="header-section-number">22.2</span> Correlación en el ejemplo discreto</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> covXY <span class="sc">/</span> <span class="fu">sqrt</span>(varX <span class="sc">*</span> varY)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rho</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2207883</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="independencia-implica-covarianza-cero" class="level1" data-number="23">
+<h1 data-number="23"><span class="header-section-number">23</span> Independencia implica covarianza cero</h1>
+<p>Si <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son independientes y tienen segundos momentos finitos,</p>
+<p><span class="math display">\[
+E[XY]=E[X]E[Y].
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+\boxed{
+X\perp Y\quad\Longrightarrow\quad \operatorname{Cov}(X,Y)=0
+}.
+\]</span></p>
+<p>El recíproco es falso.</p>
+</section>
+<section id="covarianza-cero-no-implica-independencia" class="level1" data-number="24">
+<h1 data-number="24"><span class="header-section-number">24</span> Covarianza cero no implica independencia</h1>
+<p>Considere</p>
+<p><span class="math display">\[
+X\sim U(-1,1)
+\]</span></p>
+<p>y defina</p>
+<p><span class="math display">\[
+Y=X^2.
+\]</span></p>
+<p>Claramente <span class="math inline">\(Y\)</span> depende completamente de <span class="math inline">\(X\)</span>. Sin embargo,</p>
+<p><span class="math display">\[
+E[X]=0
+\]</span></p>
+<p>por simetría y</p>
+<p><span class="math display">\[
+E[XY]=E[X^3]=0.
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=E[X^3]-E[X]E[X^2]
+=0.
+\]</span></p>
+<p>Así,</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Cov}(X,Y)=0}
+\]</span></p>
+<p>pero <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son dependientes.</p>
+<p>En R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">50000</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> X<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(X, Y)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.008037202</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.35</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Dependencia no lineal con correlación cercana a cero"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="16-esperanza-covarianza-correlacion_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>La nube tiene una estructura parabólica evidente aunque la correlación sea cercana a cero.</p>
+</section>
+<section id="correlación-perfecta" class="level1" data-number="25">
+<h1 data-number="25"><span class="header-section-number">25</span> Correlación perfecta</h1>
+<p>Si existen constantes <span class="math inline">\(a\ne0\)</span> y <span class="math inline">\(b\)</span> tales que</p>
+<p><span class="math display">\[
+Y=aX+b
+\]</span></p>
+<p>casi seguramente, entonces</p>
+<p><span class="math display">\[
+|\rho_{X,Y}|=1.
+\]</span></p>
+<p>Más precisamente:</p>
+<ul>
+<li>si <span class="math inline">\(a&gt;0\)</span>, <span class="math inline">\(\rho=1\)</span>;</li>
+<li>si <span class="math inline">\(a&lt;0\)</span>, <span class="math inline">\(\rho=-1\)</span>.</li>
+</ul>
+<p>Esto explica geométricamente los extremos de la escala de correlación.</p>
+</section>
+<section id="efecto-de-cambios-de-escala" class="level1" data-number="26">
+<h1 data-number="26"><span class="header-section-number">26</span> Efecto de cambios de escala</h1>
+<p>Si</p>
+<p><span class="math display">\[
+U=aX+b,\qquad V=cY+d,
+\]</span></p>
+<p>con <span class="math inline">\(a,c\ne0\)</span>, entonces</p>
+<p><span class="math display">\[
+\rho_{U,V}=\operatorname{sign}(ac)\rho_{X,Y}.
+\]</span></p>
+<p>Por tanto, cambiar unidades de metros a centímetros no altera la magnitud de la correlación; sólo invertir el sentido de una escala puede cambiar su signo.</p>
+</section>
+<section id="esperanza-y-covarianza-en-el-caso-continuo" class="level1" data-number="27">
+<h1 data-number="27"><span class="header-section-number">27</span> Esperanza y covarianza en el caso continuo</h1>
+<p>Si <span class="math inline">\((X,Y)\)</span> tiene densidad conjunta,</p>
+<p><span class="math display">\[
+E[XY]
+=\iint xyf_{X,Y}(x,y)\,dx\,dy.
+\]</span></p>
+<p>Retomemos</p>
+<p><span class="math display">\[
+f_{X,Y}(x,y)=2,
+\qquad 0&lt;y&lt;x&lt;1.
+\]</span></p>
+<p>Sabemos que</p>
+<p><span class="math display">\[
+f_X(x)=2x,
+\qquad
+f_Y(y)=2(1-y).
+\]</span></p>
+<p>Entonces</p>
+<p><span class="math display">\[
+E[X]=\int_0^1x(2x)\,dx=\frac23,
+\]</span></p>
+<p><span class="math display">\[
+E[Y]=\int_0^1y\,2(1-y)\,dy=\frac13.
+\]</span></p>
+<p>Además,</p>
+<p><span class="math display">\[
+E[XY]
+=\int_0^1\int_0^x2xy\,dy\,dx
+=\frac14.
+\]</span></p>
+<p>Por tanto,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+=\frac14-\frac23\frac13
+=\frac1{36}&gt;0.
+\]</span></p>
+<p>Aunque la dependencia es clara por el soporte triangular, la covarianza resume sólo su componente lineal.</p>
+</section>
+<section id="varianza-de-una-combinación-de-muchas-variables" class="level1" data-number="28">
+<h1 data-number="28"><span class="header-section-number">28</span> Varianza de una combinación de muchas variables</h1>
+<p>Para variables <span class="math inline">\(X_1,\ldots,X_n\)</span>,</p>
+<p><span class="math display">\[
+\boxed{
+\operatorname{Var}\left(\sum_{i=1}^nX_i\right)
+=\sum_{i=1}^n\operatorname{Var}(X_i)
++2\sum_{i&lt;j}\operatorname{Cov}(X_i,X_j)
+}.
+\]</span></p>
+<p>Si son independientes, todos los términos cruzados desaparecen.</p>
+<p>Este resultado aparece en propagación de incertidumbre, portafolios, procesamiento de señales y sumas de mediciones.</p>
+</section>
+<section id="matriz-de-covarianzas" class="level1" data-number="29">
+<h1 data-number="29"><span class="header-section-number">29</span> Matriz de covarianzas</h1>
+<p>Para dos variables definimos</p>
+<p><span class="math display">\[
+\boxed{
+\Sigma=
+\begin{pmatrix}
+\operatorname{Var}(X) &amp; \operatorname{Cov}(X,Y)\\
+\operatorname{Cov}(X,Y) &amp; \operatorname{Var}(Y)
+\end{pmatrix}
+}.
+\]</span></p>
+<p>En R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(varX, covXY,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                  covXY, varY), <span class="at">nrow =</span> <span class="dv">2</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Sigma</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       [,1] [,2]
+[1,] 0.5275 0.12
+[2,] 0.1200 0.56</code></pre>
+</div>
+</div>
+<p>La matriz de covarianzas será fundamental en capítulos posteriores y en técnicas como análisis de componentes principales.</p>
+</section>
+<section id="simulación-de-nubes-con-distinta-correlación" class="level1" data-number="30">
+<h1 data-number="30"><span class="header-section-number">30</span> Simulación de nubes con distinta correlación</h1>
+<p>Una forma sencilla de producir pares aproximadamente correlacionados es</p>
+<p><span class="math display">\[
+X=Z_1,
+\]</span></p>
+<p><span class="math display">\[
+Y=\rho Z_1+\sqrt{1-\rho^2}Z_2,
+\]</span></p>
+<p>con <span class="math inline">\(Z_1,Z_2\)</span> normales estándar independientes.</p>
+<p>Entonces</p>
+<p><span class="math display">\[
+\operatorname{Corr}(X,Y)=\rho.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">3000</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.75</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>z1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>z2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> z1</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> rho<span class="sc">*</span>z1 <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>z2</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(X, Y)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7476573</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Correlación aproximada:"</span>, <span class="fu">round</span>(<span class="fu">cor</span>(X,Y), <span class="dv">3</span>)))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="16-esperanza-covarianza-correlacion_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interactivo-del-capítulo" class="level1" data-number="31">
+<h1 data-number="31"><span class="header-section-number">31</span> Interactivo del capítulo</h1>
+<p>El interactivo tiene dos modos.</p>
+<p><strong>Modo lineal.</strong> Un deslizador controla <span class="math inline">\(\rho\)</span> entre <span class="math inline">\(-0.95\)</span> y <span class="math inline">\(0.95\)</span>. La nube de puntos cambia desde una relación negativa fuerte hasta una positiva fuerte, mostrando simultáneamente covarianza y correlación empíricas.</p>
+<p><strong>Modo no lineal.</strong> Se muestra el ejemplo <span class="math inline">\(Y=X^2\)</span> con <span class="math inline">\(X\)</span> simétrico alrededor de cero. La correlación permanece cercana a cero aunque la dependencia sea visualmente evidente.</p>
+<p>El objetivo es evitar una interpretación mecánica de la correlación y reforzar la diferencia entre:</p>
+<p><span class="math display">\[
+\text{independencia},\qquad
+\text{incorrelación},\qquad
+\text{dependencia no lineal}.
+\]</span></p>
+</section>
+<section id="actividad-con-geogebra" class="level1" data-number="32">
+<h1 data-number="32"><span class="header-section-number">32</span> Actividad con GeoGebra</h1>
+<p>Construye una nube de puntos cercana a una recta y modifica su dispersión vertical mediante un deslizador. Observa cómo la correlación disminuye al aumentar la dispersión.</p>
+<p>Después genera puntos de una parábola simétrica</p>
+<p><span class="math display">\[
+y=x^2
+\]</span></p>
+<p>con valores positivos y negativos de <span class="math inline">\(x\)</span>. Discute por qué una medida exclusivamente lineal puede ser cercana a cero aun cuando exista una relación funcional exacta.</p>
+</section>
+<section id="estrategia-de-resolución" class="level1" data-number="33">
+<h1 data-number="33"><span class="header-section-number">33</span> Estrategia de resolución</h1>
+<p>Ante un problema de covarianza o correlación:</p>
+<ol type="1">
+<li>calcula <span class="math inline">\(E[X]\)</span> y <span class="math inline">\(E[Y]\)</span>;</li>
+<li>calcula <span class="math inline">\(E[XY]\)</span> a partir de la distribución conjunta;</li>
+<li>usa <span class="math display">\[
+\operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y];
+\]</span></li>
+<li>calcula las varianzas marginales;</li>
+<li>estandariza para obtener <span class="math inline">\(\rho\)</span>;</li>
+<li>interpreta el signo y la magnitud sólo como asociación lineal;</li>
+<li>si necesitas la varianza de una suma, incluye los términos de covarianza;</li>
+<li>no concluyas independencia únicamente porque <span class="math inline">\(\rho=0\)</span>.</li>
+</ol>
+</section>
+<section id="errores-frecuentes" class="level1" data-number="34">
+<h1 data-number="34"><span class="header-section-number">34</span> Errores frecuentes</h1>
+<ul>
+<li>Confundir <span class="math inline">\(E[XY]\)</span> con <span class="math inline">\(E[X]E[Y]\)</span> sin haber establecido independencia.</li>
+<li>Omitir el término <span class="math inline">\(2\operatorname{Cov}(X,Y)\)</span> en la varianza de una suma.</li>
+<li>Interpretar una covarianza grande como una relación necesariamente fuerte sin considerar unidades.</li>
+<li>Concluir independencia a partir de correlación cero.</li>
+<li>Interpretar correlación como causalidad.</li>
+<li>Confundir correlación poblacional <span class="math inline">\(\rho\)</span> con correlación muestral calculada a partir de datos.</li>
+<li>Usar correlación para describir una relación claramente no lineal sin inspeccionar una gráfica.</li>
+</ul>
+</section>
+<section id="resumen" class="level1" data-number="35">
+<h1 data-number="35"><span class="header-section-number">35</span> Resumen</h1>
+<p><span class="math display">\[
+E[g(X,Y)]
+=\sum_x\sum_y g(x,y)p_{X,Y}(x,y)
+\]</span></p>
+<p>o</p>
+<p><span class="math display">\[
+E[g(X,Y)]
+=\iint g(x,y)f_{X,Y}(x,y)\,dx\,dy.
+\]</span></p>
+<p>La covarianza es</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y]}.
+\]</span></p>
+<p>La correlación es</p>
+<p><span class="math display">\[
+\boxed{\rho_{X,Y}=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}}.
+\]</span></p>
+<p>La varianza de una suma es</p>
+<p><span class="math display">\[
+\boxed{\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)+2\operatorname{Cov}(X,Y)}.
+\]</span></p>
+<p>La independencia implica covarianza cero, pero el recíproco no es cierto en general.</p>
+</section>
+<section id="ejercicios" class="level1" data-number="36">
+<h1 data-number="36"><span class="header-section-number">36</span> Ejercicios</h1>
+<ol type="1">
+<li>Para la tabla conjunta del capítulo 15, calcula <span class="math inline">\(E[X]\)</span>, <span class="math inline">\(E[Y]\)</span> y <span class="math inline">\(E[XY]\)</span>.</li>
+<li>Obtén la covarianza y la correlación de la misma tabla.</li>
+<li>Calcula <span class="math inline">\(\operatorname{Var}(2X-3Y)\)</span> utilizando las varianzas y la covarianza.</li>
+<li>Sean <span class="math inline">\(\operatorname{Var}(X)=4\)</span>, <span class="math inline">\(\operatorname{Var}(Y)=9\)</span> y <span class="math inline">\(\operatorname{Cov}(X,Y)=-1.5\)</span>. Calcula <span class="math inline">\(\operatorname{Var}(X+Y)\)</span> y <span class="math inline">\(\operatorname{Var}(2X-Y)\)</span>.</li>
+<li>Para la densidad <span class="math inline">\(f(x,y)=2\)</span> sobre <span class="math inline">\(0&lt;y&lt;x&lt;1\)</span>, verifica que <span class="math inline">\(E[XY]=1/4\)</span>.</li>
+<li>Obtén <span class="math inline">\(\operatorname{Var}(X)\)</span>, <span class="math inline">\(\operatorname{Var}(Y)\)</span> y <span class="math inline">\(\rho_{X,Y}\)</span> para esa densidad.</li>
+<li>Simula 50 000 pares normales con <span class="math inline">\(\rho=0.8\)</span> y compara la correlación empírica con el valor teórico.</li>
+<li>Repite con <span class="math inline">\(\rho=-0.6\)</span> y <span class="math inline">\(\rho=0\)</span>.</li>
+<li>Simula <span class="math inline">\(X\sim U(-1,1)\)</span> y <span class="math inline">\(Y=X^2\)</span>. Calcula la correlación y describe la gráfica.</li>
+<li>Propón un ejemplo real donde una covarianza positiva tenga sentido físico.</li>
+<li><strong>Reto ★.</strong> Demuestra que <span class="math inline">\(|\rho_{X,Y}|\le1\)</span> usando la desigualdad de Cauchy–Schwarz.</li>
+<li><strong>Reto ★.</strong> Demuestra que si <span class="math inline">\(X\)</span> y <span class="math inline">\(Y\)</span> son independientes y tienen segundos momentos finitos, entonces <span class="math inline">\(\operatorname{Cov}(X,Y)=0\)</span>.</li>
+</ol>
+<section id="materiales-complementarios-del-capítulo" class="level2" data-number="36.1">
+<h2 data-number="36.1" class="anchored" data-anchor-id="materiales-complementarios-del-capítulo"><span class="header-section-number">36.1</span> Materiales complementarios del capítulo</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Material</th>
+<th>Formato</th>
+<th>Acceso</th>
+<th>Propósito</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cuaderno de Google Colab</td>
+<td>Notebook interactivo (R)</td>
+<td><a href="https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/16-esperanza-covarianza-correlacion-colab.ipynb">Abrir en Colab</a></td>
+<td>Explorar momentos conjuntos, covarianza, correlación y simulaciones.</td>
+</tr>
+<tr class="even">
+<td>Cuaderno de R</td>
+<td>R Markdown</td>
+<td><a href="https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/16-esperanza-covarianza-correlacion.Rmd">Abrir cuaderno R</a></td>
+<td>Reproducir cálculos y gráficas en R/RStudio.</td>
+</tr>
+<tr class="odd">
+<td>Interactivo</td>
+<td>HTML / GeoGebra</td>
+<td><a href="interactivos/cap16-covarianza-correlacion.html">Abrir recurso</a></td>
+<td>Comparar asociación lineal, correlación y dependencia no lineal.</td>
+</tr>
+<tr class="even">
+<td>Presentación</td>
+<td>PDF / PPT</td>
+<td>Próximamente</td>
+<td>Se incorporará cuando se proporcionen los enlaces.</td>
+</tr>
+<tr class="odd">
+<td>Video</td>
+<td>Video</td>
+<td>Próximamente</td>
+<td>Explicación audiovisual complementaria.</td>
+</tr>
+<tr class="even">
+<td>Infografía</td>
+<td>Imagen / PDF</td>
+<td>Próximamente</td>
+<td>Síntesis visual de covarianza, correlación y varianza de sumas.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="referencias-del-capítulo" class="level2" data-number="36.2">
+<h2 data-number="36.2" class="anchored" data-anchor-id="referencias-del-capítulo"><span class="header-section-number">36.2</span> Referencias del capítulo</h2>
+<p>El tratamiento de esperanza conjunta, covarianza y correlación sigue la presentación estándar de <span class="citation" data-cites="walpole2012">Walpole et&nbsp;al. (<a href="references.html#ref-walpole2012" role="doc-biblioref">2012</a>)</span>, <span class="citation" data-cites="devore2016">Devore (<a href="references.html#ref-devore2016" role="doc-biblioref">2016</a>)</span>, <span class="citation" data-cites="montgomery2018">Montgomery y Runger (<a href="references.html#ref-montgomery2018" role="doc-biblioref">2018</a>)</span> y <span class="citation" data-cites="johnson2018">Johnson (<a href="references.html#ref-johnson2018" role="doc-biblioref">2018</a>)</span>. Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia <span class="citation" data-cites="kerns2010">Kerns (<a href="references.html#ref-kerns2010" role="doc-biblioref">2010</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-devore2016" class="csl-entry" role="listitem">
+Devore, Jay L. 2016. <em>Probability and Statistics for Engineering and the Sciences</em>. 9.ª ed. Cengage Learning.
+</div>
+<div id="ref-johnson2018" class="csl-entry" role="listitem">
+Johnson, Richard A. 2018. <em>Miller &amp; Freund’s Probability and Statistics for Engineers</em>. 9.ª ed. Pearson.
+</div>
+<div id="ref-kerns2010" class="csl-entry" role="listitem">
+Kerns, G. Jay. 2010. <em>Introduction to Probability and Statistics Using R</em>. 1.ª ed.
+</div>
+<div id="ref-montgomery2018" class="csl-entry" role="listitem">
+Montgomery, Douglas C., y George C. Runger. 2018. <em>Applied Statistics and Probability for Engineers</em>. 7.ª ed. Wiley.
+</div>
+<div id="ref-walpole2012" class="csl-entry" role="listitem">
+Walpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. <em>Probabilidad y estadística para ingeniería y ciencias</em>. 9.ª ed. Pearson.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const path = window.location.pathname.split('/').pop();
+  const mapa = {
+    '01-incertidumbre-probabilidad.html': {titulo:'Interactivo del capítulo: frecuencia relativa',archivo:'interactivos/cap01-frecuencia-relativa.html',texto:'Experimenta con distintos números de lanzamientos y observa la estabilización de la frecuencia relativa.'},
+    '02-espacios-eventos.html': {titulo:'Interactivo del capítulo: operaciones con eventos',archivo:'interactivos/cap02-eventos-venn.html',texto:'Explora visualmente unión, intersección, complementos y diferencia de eventos.'},
+    '03-conteo-probabilidad.html': {titulo:'Interactivo del capítulo: conteo, arreglos y combinaciones',archivo:'interactivos/cap03-conteo.html',texto:'Compara cuándo importa el orden y cómo cambian permutaciones, arreglos y combinaciones.'},
+    '04-axiomas-probabilidad.html': {titulo:'Interactivo del capítulo: axiomas y regiones de probabilidad',archivo:'interactivos/cap04-axiomas.html',texto:'Modifica P(A), P(B) y P(A∩B), verifica las cotas de coherencia y observa cómo cambian unión, complemento y diferencia simétrica.'},
+    '05-condicional-independencia.html': {titulo:'Interactivo del capítulo: probabilidad condicional e independencia',archivo:'interactivos/cap05-condicional-independencia.html',texto:'Explora un árbol de probabilidad dinámico y observa cuándo conocer A modifica —o no— la probabilidad de B.'},
+    '06-probabilidad-total-bayes.html': {titulo:'Interactivo del capítulo: teorema de Bayes y tasa base',archivo:'interactivos/cap06-bayes.html',texto:'Modifica la probabilidad previa, la sensibilidad y la tasa de falso positivo; observa cómo cambia la probabilidad posterior y las frecuencias esperadas.'},
+    '07-variable-aleatoria-cdf.html': {titulo:'Interactivo del capítulo: variable aleatoria y CDF',archivo:'interactivos/cap07-variable-aleatoria-cdf.html',texto:'Transforma resultados elementales en valores numéricos y observa cómo se construyen la distribución de X y F_X(x).'},
+    '08-variables-discretas-pmf.html': {titulo:'Interactivo del capítulo: PMF y CDF discreta',archivo:'interactivos/cap08-pmf-cdf.html',texto:'Modifica las masas de probabilidad y observa simultáneamente la PMF, la CDF y el tamaño de sus saltos.'},
+    '09-variables-continuas-densidad.html': {titulo:'Interactivo del capítulo: densidad y área de probabilidad',archivo:'interactivos/cap09-densidad-area.html',texto:'Mueve los límites del intervalo y el modo de una densidad triangular para observar cómo cambia el área de probabilidad.'},
+    '10-esperanza-varianza-chebyshev.html': {titulo:'Interactivo del capítulo: esperanza, varianza y Chebyshev',archivo:'interactivos/cap10-esperanza-varianza.html',texto:'Modifica una distribución discreta y observa en tiempo real cómo cambian la media, la varianza, la desviación estándar y la garantía de Chebyshev.'},
+    '11-distribuciones-discretas-especiales.html': {titulo:'Interactivo del capítulo: distribuciones discretas especiales',archivo:'interactivos/cap11-distribuciones-discretas.html',texto:'Compara Bernoulli, binomial, geométrica y binomial negativa, modificando sus parámetros y observando PMF, media y varianza.'},
+    '12-hipergeometrica-poisson.html': {titulo:'Interactivo del capítulo: hipergeométrica, binomial y Poisson',archivo:'interactivos/cap12-hipergeometrica-poisson.html',texto:'Compara el muestreo sin reemplazo con el modelo binomial y observa la aproximación binomial–Poisson.'},
+    '13-distribuciones-continuas-especiales.html': {titulo:'Interactivo del capítulo: uniforme, exponencial y normal',archivo:'interactivos/cap13-distribuciones-continuas.html',texto:'Modifica los parámetros y el intervalo de interés para observar densidades, áreas de probabilidad, media y varianza.'},
+    '14-gamma-weibull-beta.html': {titulo:'Interactivo del capítulo: Gamma, Weibull y Beta',archivo:'interactivos/cap14-gamma-weibull-beta.html',texto:'Explora parámetros, densidades y áreas de probabilidad; en Weibull observa además el comportamiento de la tasa de falla.'},
+    '15-variables-conjuntas-marginales-condicionales.html': {titulo:'Interactivo del capítulo: distribuciones conjuntas, marginales y condicionales',archivo:'interactivos/cap15-distribuciones-conjuntas.html',texto:'Modifica la asociación entre X y Y conservando las marginales y observa cómo cambian la PMF conjunta, las condicionales y la separación respecto de independencia.'},
+    '16-esperanza-covarianza-correlacion.html': {titulo:'Interactivo del capítulo: covarianza, correlación y dependencia',archivo:'interactivos/cap16-covarianza-correlacion.html',texto:'Modifica la correlación de una nube lineal y compárala con una relación no lineal que puede tener correlación cercana a cero.'}
+  };
+  const cfg = mapa[path];
+  if (!cfg) return;
+  const main = document.querySelector('main.content') || document.querySelector('main') || document.querySelector('#quarto-document-content');
+  if (!main || document.getElementById('interactivo-capitulo')) return;
+  const section = document.createElement('section');
+  section.id = 'interactivo-capitulo';
+  section.innerHTML = `<h2>${cfg.titulo}</h2><p>${cfg.texto}</p><div style="border:1px solid #dbe3ec;border-radius:12px;overflow:hidden;background:white;margin:1rem 0 1.5rem 0;"><iframe src="${cfg.archivo}" title="${cfg.titulo}" loading="lazy" style="display:block;width:100%;height:540px;border:0;"></iframe></div><p class="small text-muted">Recurso interactivo de la edición web. En el PDF se conserva la explicación matemática y computacional del capítulo.</p>`;
+  main.appendChild(section);
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./15-variables-conjuntas-marginales-condicionales.html" class="pagination-link" aria-label="Variables aleatorias conjuntas, distribuciones marginales y condicionales">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Variables aleatorias conjuntas, distribuciones marginales y condicionales</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Referencias">
+        <span class="nav-page-text">Referencias</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Licencia CC BY-NC-SA 4.0</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
