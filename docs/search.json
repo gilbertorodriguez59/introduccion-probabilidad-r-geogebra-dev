@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 2 2 1 3 4 2 4 3 7 6\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 2 0 1 1 0 2 0 1 6 0\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  0  2  5  4  8  5  1  8 17  5",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 4 2 5 2 4 3 3 2 5 1\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 4 0 0 0 0 2 0 3 1 4\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1] 14  2 13 12  6 10  4  4  8  3",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2894,7 +2894,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "14.4 Funciones de R para la uniforme",
-    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.75624320 0.97390676 0.02924144 0.36528637 0.32578650",
+    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.65429926 0.03493996 0.42149799 0.65047157 0.81491787",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -2954,7 +2954,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "15.6 Funciones de R para la exponencial",
-    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  4.5161222  4.0291775 11.9547269  5.0717436  0.4325145",
+    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  2.776181  1.851308  5.067631 16.551459  9.165559",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3024,7 +3024,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "16.7 Funciones de R para la normal",
-    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1]  7.104547 10.613844 13.466421 11.443383  7.905333",
+    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1]  7.676707 10.215482 12.156043 10.278823  7.338568",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3214,7 +3214,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-gamma-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "15.5 Funciones Gamma en R",
-    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 0.7438087 1.9652583 2.6232195 1.8917754 1.6669822",
+    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 0.9983878 0.5941590 1.1738367 1.1742766 2.0169333",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3284,7 +3284,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-weibull-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "16.6 Funciones Weibull en R",
-    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1]  958.8906  551.8296  524.9584 1039.3850  250.4113",
+    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1] 1812.3097  907.4659  571.2435 1307.8089  497.0750",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3334,7 +3334,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-beta-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "17.5 Funciones Beta en R",
-    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.4650493 0.7244260 0.8363529 0.7545579 0.7370308",
+    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.7001087 0.6615536 0.6253706 0.8488255 0.9454472",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3917,6 +3917,276 @@
     "text": "36.2 Referencias del capítulo\nEl tratamiento de esperanza conjunta, covarianza y correlación sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Esperanza conjunta, covarianza y correlación</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html",
+    "href": "17-transformaciones-variables.html",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "",
+    "text": "17.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#objetivos-de-aprendizaje",
+    "href": "17-transformaciones-variables.html#objetivos-de-aprendizaje",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "",
+    "text": "obtener la distribución de \\(Y=g(X)\\) en casos discretos y continuos;\naplicar el método de la función de distribución acumulada;\nutilizar cambio de variable para transformaciones monótonas;\ntratar transformaciones no monótonas separando ramas inversas;\nobtener distribuciones de sumas mediante convolución;\naplicar transformaciones bidimensionales mediante el Jacobiano;\ncomprobar resultados mediante simulación en R;\ninterpretar geométricamente transformaciones con apoyo de GeoGebra.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#por-qué-transformar-una-variable-aleatoria",
+    "href": "17-transformaciones-variables.html#por-qué-transformar-una-variable-aleatoria",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.2 ¿Por qué transformar una variable aleatoria?",
+    "text": "17.2 ¿Por qué transformar una variable aleatoria?\nEn aplicaciones rara vez interesa únicamente la variable medida originalmente. Si \\(X\\) representa longitud, tiempo, voltaje o concentración, pueden interesar cantidades derivadas como\n\\[\nY=X^2,\\qquad Y=aX+b,\\qquad Y=\\log X,\n\\]\no combinaciones de varias variables como\n\\[\nS=X+Y.\n\\]\nEl problema consiste en determinar la distribución de la nueva variable.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#caso-discreto",
+    "href": "17-transformaciones-variables.html#caso-discreto",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.3 Caso discreto",
+    "text": "17.3 Caso discreto\nSi \\(X\\) es discreta y \\(Y=g(X)\\), entonces\n\\[\nP(Y=y)=\\sum_{x:g(x)=y}P(X=x).\n\\]\nLa suma es importante cuando diferentes valores de \\(X\\) producen el mismo valor de \\(Y\\).\n\nEjemplo\nSea \\(X\\) con valores \\(-2,-1,0,1,2\\) y probabilidades \\(0.1,0.2,0.4,0.2,0.1\\). Si\n\\[\nY=X^2,\n\\]\nentonces \\(Y\\) toma valores \\(0,1,4\\) y\n\\[\nP(Y=0)=0.4,\n\\]\n\\[\nP(Y=1)=P(X=-1)+P(X=1)=0.4,\n\\]\n\\[\nP(Y=4)=P(X=-2)+P(X=2)=0.2.\n\\]\n\nx &lt;- -2:2\npx &lt;- c(.1,.2,.4,.2,.1)\ny &lt;- x^2\naggregate(px, by = list(Y = y), FUN = sum)\n\n  Y   x\n1 0 0.4\n2 1 0.4\n3 4 0.2",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#método-de-la-cdf",
+    "href": "17-transformaciones-variables.html#método-de-la-cdf",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.4 Método de la CDF",
+    "text": "17.4 Método de la CDF\nPara una variable continua, un método general consiste en calcular\n\\[\nF_Y(y)=P(Y\\le y)=P(g(X)\\le y)\n\\]\ny después derivar:\n\\[\nf_Y(y)=\\frac{d}{dy}F_Y(y).\n\\]\nEste procedimiento es especialmente útil cuando la transformación no es uno a uno.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#transformación-monótona",
+    "href": "17-transformaciones-variables.html#transformación-monótona",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.5 Transformación monótona",
+    "text": "17.5 Transformación monótona\nSi \\(Y=g(X)\\) y \\(g\\) es estrictamente monótona y diferenciable, con inversa\n\\[\nx=g^{-1}(y),\n\\]\nentonces\n\\[\n\\boxed{f_Y(y)=f_X(g^{-1}(y))\\left|\\frac{d}{dy}g^{-1}(y)\\right|}.\n\\]\nEl valor absoluto garantiza una densidad no negativa.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejemplo-transformación-lineal",
+    "href": "17-transformaciones-variables.html#ejemplo-transformación-lineal",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.6 Ejemplo: transformación lineal",
+    "text": "17.6 Ejemplo: transformación lineal\nSea\n\\[\nY=aX+b,\\qquad a\\ne0.\n\\]\nEntonces\n\\[\nx=\\frac{y-b}{a},\n\\]\ny\n\\[\n\\boxed{f_Y(y)=\\frac1{|a|}f_X\\left(\\frac{y-b}{a}\\right)}.\n\\]\nAdemás,\n\\[\nE[Y]=aE[X]+b,\n\\]\n\\[\n\\operatorname{Var}(Y)=a^2\\operatorname{Var}(X).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejemplo-de-uniforme-a-otra-escala",
+    "href": "17-transformaciones-variables.html#ejemplo-de-uniforme-a-otra-escala",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.7 Ejemplo: de uniforme a otra escala",
+    "text": "17.7 Ejemplo: de uniforme a otra escala\nSi\n\\[\nX\\sim U(0,1),\\qquad Y=10+5X,\n\\]\nentonces\n\\[\nY\\sim U(10,15).\n\\]\n\nset.seed(2026)\nx &lt;- runif(50000)\ny &lt;- 10 + 5*x\nhist(y, probability = TRUE, breaks = 40)\ncurve(dunif(x, 10, 15), add = TRUE, lwd = 2)",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#transformación-exponencial",
+    "href": "17-transformaciones-variables.html#transformación-exponencial",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.8 Transformación exponencial",
+    "text": "17.8 Transformación exponencial\nSea\n\\[\nX\\sim U(0,1),\\qquad Y=-\\frac1\\lambda\\log X.\n\\]\nEntonces \\(Y\\) tiene distribución exponencial con tasa \\(\\lambda\\).\nEste resultado constituye la base del método de transformada inversa para simulación.\n\nset.seed(2026)\nlambda &lt;- 2\nu &lt;- runif(50000)\ny &lt;- -log(u)/lambda\nhist(y, probability = TRUE, breaks = 60, xlim = c(0,4))\ncurve(dexp(x, rate = lambda), add = TRUE, lwd = 2)",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#transformaciones-no-monótonas",
+    "href": "17-transformaciones-variables.html#transformaciones-no-monótonas",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.9 Transformaciones no monótonas",
+    "text": "17.9 Transformaciones no monótonas\nSi una transformación posee varias ramas inversas, deben sumarse las contribuciones correspondientes.\nSi las soluciones de\n\\[\ny=g(x)\n\\]\nson \\(x_1(y),\\ldots,x_k(y)\\), entonces, bajo condiciones regulares,\n\\[\n\\boxed{f_Y(y)=\\sum_{j=1}^k f_X(x_j(y))\\left|\\frac{dx_j}{dy}\\right|}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejemplo-fundamental-yx2",
+    "href": "17-transformaciones-variables.html#ejemplo-fundamental-yx2",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.10 Ejemplo fundamental: \\(Y=X^2\\)",
+    "text": "17.10 Ejemplo fundamental: \\(Y=X^2\\)\nSea\n\\[\nX\\sim U(-1,1),\\qquad Y=X^2.\n\\]\nPara \\(0&lt;y&lt;1\\) existen dos ramas:\n\\[\nx_1=\\sqrt y,\\qquad x_2=-\\sqrt y.\n\\]\nComo \\(f_X(x)=1/2\\),\n\\[\nf_Y(y)=\\frac12\\frac1{2\\sqrt y}+\\frac12\\frac1{2\\sqrt y}\n=\\boxed{\\frac1{2\\sqrt y}},\\qquad0&lt;y&lt;1.\n\\]\nLa misma conclusión se obtiene mediante la CDF:\n\\[\nF_Y(y)=P(X^2\\le y)=P(-\\sqrt y\\le X\\le\\sqrt y)=\\sqrt y.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#transformación-de-una-variable-normal",
+    "href": "17-transformaciones-variables.html#transformación-de-una-variable-normal",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.11 Transformación de una variable normal",
+    "text": "17.11 Transformación de una variable normal\nSi\n\\[\nX\\sim N(\\mu,\\sigma^2),\n\\]\ny\n\\[\nZ=\\frac{X-\\mu}{\\sigma},\n\\]\nentonces\n\\[\n\\boxed{Z\\sim N(0,1)}.\n\\]\nEsta estandarización es uno de los ejemplos más importantes de transformación lineal.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#suma-de-variables-aleatorias-convolución-discreta",
+    "href": "17-transformaciones-variables.html#suma-de-variables-aleatorias-convolución-discreta",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.12 Suma de variables aleatorias: convolución discreta",
+    "text": "17.12 Suma de variables aleatorias: convolución discreta\nSi \\(X\\) y \\(Y\\) son discretas e independientes y\n\\[\nS=X+Y,\n\\]\nentonces\n\\[\n\\boxed{p_S(s)=\\sum_x p_X(x)p_Y(s-x)}.\n\\]\n\nEjemplo: suma de dos dados\n\np &lt;- rep(1/6, 6)\nps &lt;- convolve(p, rev(p), type = \"open\")\ns &lt;- 2:12\ndata.frame(Suma = s, Probabilidad = ps)\n\n   Suma Probabilidad\n1     2   0.02777778\n2     3   0.05555556\n3     4   0.08333333\n4     5   0.11111111\n5     6   0.13888889\n6     7   0.16666667\n7     8   0.13888889\n8     9   0.11111111\n9    10   0.08333333\n10   11   0.05555556\n11   12   0.02777778\n\n\nLa distribución no es uniforme: el valor 7 posee mayor probabilidad porque puede producirse de más maneras.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#convolución-continua",
+    "href": "17-transformaciones-variables.html#convolución-continua",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.13 Convolución continua",
+    "text": "17.13 Convolución continua\nSi \\(X\\) y \\(Y\\) son continuas e independientes,\n\\[\nS=X+Y\n\\]\ntiene densidad\n\\[\n\\boxed{f_S(s)=\\int_{-\\infty}^{\\infty}f_X(x)f_Y(s-x)\\,dx}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejemplo-suma-de-dos-uniformes",
+    "href": "17-transformaciones-variables.html#ejemplo-suma-de-dos-uniformes",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.14 Ejemplo: suma de dos uniformes",
+    "text": "17.14 Ejemplo: suma de dos uniformes\nSean\n\\[\nX,Y\\stackrel{ind}{\\sim}U(0,1).\n\\]\nEntonces \\(S=X+Y\\) tiene densidad triangular:\n\\[\nf_S(s)=\n\\begin{cases}\ns,&0&lt;s&lt;1,\\\\\n2-s,&1\\le s&lt;2,\\\\\n0,&\\text{en otro caso}.\n\\end{cases}\n\\]\n\nset.seed(2026)\ns &lt;- runif(50000) + runif(50000)\nhist(s, probability = TRUE, breaks = 50)\ncurve(ifelse(x &lt; 0 | x &gt; 2, 0,\n             ifelse(x &lt; 1, x, 2-x)),\n      from = 0, to = 2, add = TRUE, lwd = 2)",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#transformaciones-de-dos-variables",
+    "href": "17-transformaciones-variables.html#transformaciones-de-dos-variables",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.15 Transformaciones de dos variables",
+    "text": "17.15 Transformaciones de dos variables\nSean\n\\[\nU=g_1(X,Y),\\qquad V=g_2(X,Y).\n\\]\nSi la transformación es uno a uno y suficientemente regular, se obtiene la inversa\n\\[\nX=x(u,v),\\qquad Y=y(u,v).\n\\]\nLa densidad conjunta transformada es\n\\[\n\\boxed{\nf_{U,V}(u,v)=f_{X,Y}(x(u,v),y(u,v))\n\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|.\n}\n\\]\nEl determinante es el Jacobiano de la transformación inversa.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#interpretación-geométrica-del-jacobiano",
+    "href": "17-transformaciones-variables.html#interpretación-geométrica-del-jacobiano",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.16 Interpretación geométrica del Jacobiano",
+    "text": "17.16 Interpretación geométrica del Jacobiano\nUna transformación cambia áreas. Localmente,\n\\[\ndx\\,dy\n\\approx\n\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv.\n\\]\nEl Jacobiano corrige precisamente esa deformación para conservar probabilidad.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejemplo-suma-y-una-componente",
+    "href": "17-transformaciones-variables.html#ejemplo-suma-y-una-componente",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.17 Ejemplo: suma y una componente",
+    "text": "17.17 Ejemplo: suma y una componente\nSean\n\\[\nU=X+Y,\\qquad V=X.\n\\]\nLa transformación inversa es\n\\[\nX=V,\\qquad Y=U-V.\n\\]\nEl Jacobiano inverso tiene valor absoluto 1, por lo que\n\\[\nf_{U,V}(u,v)=f_{X,Y}(v,u-v).\n\\]\nIntegrando respecto de \\(v\\) se recupera la fórmula de convolución para \\(U=X+Y\\).",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#simulación-como-herramienta-de-verificación",
+    "href": "17-transformaciones-variables.html#simulación-como-herramienta-de-verificación",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.18 Simulación como herramienta de verificación",
+    "text": "17.18 Simulación como herramienta de verificación\nLa simulación no sustituye la demostración analítica, pero permite comprobar resultados y detectar errores de soporte o parametrización.\nUna estrategia recomendable es:\n\ngenerar \\(X\\) según su distribución conocida;\ncalcular \\(Y=g(X)\\);\nrepresentar histograma o densidad empírica;\nsuperponer la densidad teórica derivada;\ncomparar probabilidades y momentos.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#interactivo-del-capítulo",
+    "href": "17-transformaciones-variables.html#interactivo-del-capítulo",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.19 Interactivo del capítulo",
+    "text": "17.19 Interactivo del capítulo\nEl recurso interactivo permite elegir entre varias transformaciones:\n\n\\(Y=aX+b\\);\n\\(Y=X^2\\);\n\\(Y=-\\log(X)/\\lambda\\);\n\\(S=X_1+X_2\\) para dos uniformes.\n\nLos deslizadores modifican parámetros y muestran simultáneamente la distribución original, la transformación geométrica y la distribución resultante.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#actividad-con-geogebra",
+    "href": "17-transformaciones-variables.html#actividad-con-geogebra",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.20 Actividad con GeoGebra",
+    "text": "17.20 Actividad con GeoGebra\n\nTransformación lineal\nConstruye puntos \\((x,f_X(x))\\) para una uniforme y utiliza deslizadores \\(a\\) y \\(b\\) en\n\\[\ny=ax+b.\n\\]\nObserva cómo cambia el soporte y cómo el factor \\(1/|a|\\) conserva el área total bajo la densidad.\n\n\nTransformación cuadrática\nRepresenta\n\\[\ny=x^2\n\\]\npara \\(-1&lt;x&lt;1\\). Elige un valor \\(y_0\\) y muestra sus dos preimágenes\n\\[\n-\\sqrt{y_0},\\qquad\\sqrt{y_0}.\n\\]\nEsto permite visualizar por qué deben sumarse dos contribuciones a la densidad transformada.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#estrategia-de-resolución",
+    "href": "17-transformaciones-variables.html#estrategia-de-resolución",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.21 Estrategia de resolución",
+    "text": "17.21 Estrategia de resolución\n\ndetermina el soporte original;\nidentifica el rango de la transformación;\ndecide si \\(g\\) es uno a uno;\nsi es monótona, encuentra \\(g^{-1}\\) y su derivada;\nsi no es monótona, identifica todas las ramas inversas o usa la CDF;\npara sumas independientes, considera convolución;\nen dos dimensiones, calcula el Jacobiano y transforma también el soporte;\nverifica que la densidad resultante sea no negativa e integre 1;\nutiliza simulación como comprobación adicional.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#errores-frecuentes",
+    "href": "17-transformaciones-variables.html#errores-frecuentes",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.22 Errores frecuentes",
+    "text": "17.22 Errores frecuentes\n\ntransformar sólo los valores y olvidar transformar la densidad;\nomitir el valor absoluto de la derivada;\nolvidar una rama inversa en transformaciones como \\(X^2\\);\nmantener el soporte original después de transformar;\naplicar convolución sin independencia cuando se usan sólo las marginales;\nusar el Jacobiano directo cuando la fórmula requiere el de la transformación inversa;\nconfiar únicamente en una simulación sin justificar la distribución analíticamente.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#resumen",
+    "href": "17-transformaciones-variables.html#resumen",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.23 Resumen",
+    "text": "17.23 Resumen\nPara una transformación monótona,\n\\[\nf_Y(y)=f_X(g^{-1}(y))\n\\left|\\frac{d}{dy}g^{-1}(y)\\right|.\n\\]\nPara varias ramas inversas,\n\\[\nf_Y(y)=\\sum_jf_X(x_j(y))\n\\left|\\frac{dx_j}{dy}\\right|.\n\\]\nPara la suma de variables independientes,\n\\[\nf_{X+Y}(s)=\\int f_X(x)f_Y(s-x)\\,dx.\n\\]\nPara transformaciones bidimensionales,\n\\[\nf_{U,V}(u,v)=f_{X,Y}(x(u,v),y(u,v))\n\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#ejercicios",
+    "href": "17-transformaciones-variables.html#ejercicios",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.24 Ejercicios",
+    "text": "17.24 Ejercicios\n\nSea \\(X\\sim U(0,2)\\) y \\(Y=3X+1\\). Obtén la densidad de \\(Y\\).\nSea \\(X\\sim U(-2,2)\\) y \\(Y=X^2\\). Obtén la CDF y la densidad de \\(Y\\).\nSi \\(X\\sim\\operatorname{Exp}(\\lambda)\\) y \\(Y=2X\\), determina la distribución de \\(Y\\).\nDemuestra mediante transformación que si \\(X\\sim N(\\mu,\\sigma^2)\\), entonces \\((X-\\mu)/\\sigma\\sim N(0,1)\\).\nObtén la PMF de la suma de dos dados mediante convolución.\nDeriva la densidad triangular de \\(X+Y\\) para dos uniformes estándar independientes.\nSimula los ejercicios 2 y 6 en R y compara con las densidades teóricas.\nSea \\(X\\sim U(0,1)\\) y \\(Y=-\\log X/3\\). Identifica la distribución de \\(Y\\).\nPara \\(U=X+Y\\) y \\(V=X\\), calcula explícitamente el Jacobiano inverso.\nReto ★. Deriva la distribución de \\(Y=|X|\\) cuando \\(X\\sim N(0,1)\\).\nReto ★. Explica por qué la convolución de dos densidades integra 1.\nReto ★. Investiga mediante simulación cómo cambia la suma de 2, 5, 10 y 30 variables uniformes estandarizadas.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#materiales-complementarios-del-capítulo",
+    "href": "17-transformaciones-variables.html#materiales-complementarios-del-capítulo",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.25 Materiales complementarios del capítulo",
+    "text": "17.25 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nEjecutar transformaciones, convoluciones y simulaciones.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir cálculos y gráficas en R/RStudio.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nExplorar visualmente transformaciones y distribuciones resultantes.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual del cambio de variable y la convolución.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
+    ]
+  },
+  {
+    "objectID": "17-transformaciones-variables.html#referencias-del-capítulo",
+    "href": "17-transformaciones-variables.html#referencias-del-capítulo",
+    "title": "17  Transformaciones de variables aleatorias",
+    "section": "17.26 Referencias del capítulo",
+    "text": "17.26 Referencias del capítulo\nEl tratamiento de transformaciones y distribuciones derivadas sigue la presentación de los textos principales citados en la bibliografía general, especialmente Walpole, Devore, Montgomery y Runger, Miller y Freund, y Kerns para el enfoque computacional en R. Los ejemplos, ejercicios y código son de elaboración original.",
+    "crumbs": [
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Transformaciones de variables aleatorias</span>"
     ]
   },
   {

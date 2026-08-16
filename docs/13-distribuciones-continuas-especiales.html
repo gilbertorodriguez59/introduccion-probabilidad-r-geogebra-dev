@@ -328,6 +328,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./17-transformaciones-variables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Transformaciones de variables aleatorias</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Referencias</span></a>
   </div>
@@ -518,7 +524,7 @@ P(|X|&lt;0.2)=P(-0.2&lt;X&lt;0.2)=\frac{0.4}{1}=0.4.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)    <span class="co"># simulación</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.75624320 0.97390676 0.02924144 0.36528637 0.32578650</code></pre>
+<pre><code>[1] 0.65429926 0.03493996 0.42149799 0.65047157 0.81491787</code></pre>
 </div>
 </div>
 </section>
@@ -637,7 +643,7 @@ P(X&gt;15\mid X&gt;10)=P(X&gt;5)=e^{-0.5}.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rexp</span>(<span class="dv">5</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  4.5161222  4.0291775 11.9547269  5.0717436  0.4325145</code></pre>
+<pre><code>[1]  2.776181  1.851308  5.067631 16.551459  9.165559</code></pre>
 </div>
 </div>
 </section>
@@ -800,7 +806,7 @@ P(|X-\mu|&lt;3\sigma)\approx0.9973.
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">5</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  7.104547 10.613844 13.466421 11.443383  7.905333</code></pre>
+<pre><code>[1]  7.676707 10.215482 12.156043 10.278823  7.338568</code></pre>
 </div>
 </div>
 </section>
