@@ -1,0 +1,564 @@
+# Distribuciones continuas especiales II: Gamma, Weibull y Beta
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- reconocer situaciones que pueden modelarse mediante distribuciones Gamma, Weibull y Beta;
+- interpretar correctamente sus parámetros;
+- calcular densidades, probabilidades acumuladas, cuantiles, medias y varianzas;
+- relacionar la distribución Gamma con la exponencial y con tiempos de espera acumulados;
+- interpretar la distribución Weibull mediante confiabilidad, supervivencia y tasa de falla;
+- utilizar la distribución Beta para modelar proporciones y cantidades restringidas a $[0,1]$;
+- utilizar las funciones correspondientes de R sin confundir parametrizaciones;
+- simular las tres familias y explorar el efecto de sus parámetros.
+
+## Tres familias muy flexibles
+
+Las distribuciones estudiadas en este capítulo amplían considerablemente el repertorio de modelos continuos.
+
+- La **Gamma** modela cantidades positivas y tiempos acumulados de espera.
+- La **Weibull** es una de las distribuciones más importantes en confiabilidad y análisis de vida útil.
+- La **Beta** modela variables continuas acotadas entre 0 y 1, como proporciones, fracciones o índices normalizados.
+
+A diferencia de la exponencial, estas familias permiten una gran variedad de formas.
+
+# Distribución Gamma
+
+Utilizaremos la parametrización
+
+$$
+X\sim\operatorname{Gamma}(\alpha,\lambda),
+$$
+
+donde $\alpha>0$ es el parámetro de forma y $\lambda>0$ es la tasa.
+
+Su densidad es
+
+$$
+\boxed{
+f_X(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x},\qquad x>0.
+}
+$$
+
+Aquí
+
+$$
+\Gamma(\alpha)=\int_0^\infty t^{\alpha-1}e^{-t}\,dt
+$$
+
+es la función Gamma.
+
+## Media y varianza
+
+Para esta parametrización,
+
+$$
+\boxed{E[X]=\frac{\alpha}{\lambda}}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=\frac{\alpha}{\lambda^2}}.
+$$
+
+La desviación estándar es
+
+$$
+\sigma=\frac{\sqrt{\alpha}}{\lambda}.
+$$
+
+## Relación con la exponencial
+
+Si
+
+$$
+\alpha=1,
+$$
+
+entonces
+
+$$
+\Gamma(1)=1
+$$
+
+y la densidad Gamma se reduce a
+
+$$
+f_X(x)=\lambda e^{-\lambda x},
+$$
+
+por lo que
+
+$$
+\boxed{\operatorname{Gamma}(1,\lambda)=\operatorname{Exp}(\lambda)}.
+$$
+
+La exponencial es, por tanto, un caso particular de la Gamma.
+
+## Tiempos de espera acumulados
+
+Si los eventos de un proceso ocurren con tasa $\lambda$ y los tiempos entre eventos son exponenciales independientes, el tiempo total hasta el evento número $r$ tiene una distribución Gamma con forma $r$ y tasa $\lambda$.
+
+Cuando $r$ es entero positivo, esta distribución también se conoce como **Erlang**.
+
+### Ejemplo: tiempo hasta la cuarta llegada
+
+Supongamos que llegan en promedio 3 solicitudes por minuto. Si $T$ es el tiempo hasta la cuarta solicitud,
+
+$$
+T\sim\operatorname{Gamma}(4,3).
+$$
+
+La media es
+
+$$
+E[T]=\frac43\text{ minutos}.
+$$
+
+La probabilidad de que la cuarta solicitud ocurra antes de 2 minutos se obtiene con
+
+```{r}
+pgamma(2, shape = 4, rate = 3)
+```
+
+## `rate` y `scale` en R
+
+R permite parametrizar Gamma de dos formas equivalentes:
+
+$$
+\text{scale}=\theta=\frac1\lambda.
+$$
+
+Por tanto,
+
+```{r}
+dgamma(2, shape = 4, rate = 3)
+dgamma(2, shape = 4, scale = 1/3)
+```
+
+producen el mismo resultado.
+
+No debemos utilizar simultáneamente `rate` y `scale` sin comprender esta relación.
+
+## Funciones Gamma en R
+
+```{r}
+dgamma(2, shape = 4, rate = 3)
+pgamma(2, shape = 4, rate = 3)
+qgamma(0.95, shape = 4, rate = 3)
+rgamma(5, shape = 4, rate = 3)
+```
+
+## Efecto del parámetro de forma
+
+Para valores pequeños de $\alpha$, la distribución puede ser fuertemente asimétrica hacia la derecha. Al aumentar $\alpha$, la densidad se vuelve más concentrada y visualmente más simétrica.
+
+```{r}
+x <- seq(0, 8, length.out = 500)
+plot(x, dgamma(x, 0.7, rate = 1), type = "l",
+     ylim = c(0, 0.8), xlab = "x", ylab = "densidad")
+lines(x, dgamma(x, 2, rate = 1), lty = 2)
+lines(x, dgamma(x, 5, rate = 1), lty = 3)
+legend("topright", legend = c("alpha=0.7", "alpha=2", "alpha=5"),
+       lty = 1:3)
+```
+
+# Distribución Weibull
+
+La distribución Weibull es especialmente útil en confiabilidad.
+
+Escribiremos
+
+$$
+X\sim\operatorname{Weibull}(k,\eta),
+$$
+
+donde
+
+- $k>0$ es el parámetro de **forma**;
+- $\eta>0$ es el parámetro de **escala**.
+
+Su densidad es
+
+$$
+\boxed{
+f_X(x)=\frac{k}{\eta}\left(\frac{x}{\eta}\right)^{k-1}
+\exp\left[-\left(\frac{x}{\eta}\right)^k\right],\qquad x\ge0.
+}
+$$
+
+## CDF y función de supervivencia
+
+La función de distribución es
+
+$$
+\boxed{F_X(x)=1-\exp\left[-\left(\frac{x}{\eta}\right)^k\right]}.
+$$
+
+La función de supervivencia es
+
+$$
+\boxed{S(x)=P(X>x)=\exp\left[-\left(\frac{x}{\eta}\right)^k\right]}.
+$$
+
+## Tasa de falla
+
+La tasa instantánea de falla es
+
+$$
+\boxed{h(x)=\frac{k}{\eta}\left(\frac{x}{\eta}\right)^{k-1}}.
+$$
+
+Esta fórmula explica gran parte de la utilidad de Weibull:
+
+- si $k<1$, la tasa de falla disminuye con el tiempo;
+- si $k=1$, la tasa es constante;
+- si $k>1$, la tasa de falla aumenta con el tiempo.
+
+Así, $k$ ayuda a distinguir fallas tempranas, fallas aleatorias y desgaste.
+
+## Relación con la exponencial
+
+Si
+
+$$
+k=1,
+$$
+
+entonces
+
+$$
+f_X(x)=\frac1\eta e^{-x/\eta}.
+$$
+
+Por tanto, Weibull con $k=1$ es exponencial con tasa
+
+$$
+\lambda=\frac1\eta.
+$$
+
+## Media y varianza de Weibull
+
+La media es
+
+$$
+\boxed{E[X]=\eta\Gamma\left(1+\frac1k\right)}
+$$
+
+y la varianza
+
+$$
+\boxed{
+\operatorname{Var}(X)=\eta^2\left[
+\Gamma\left(1+\frac{2}{k}\right)
+-\Gamma^2\left(1+\frac1k\right)
+\right].
+}
+$$
+
+## Ejemplo de confiabilidad
+
+El tiempo de vida de un componente se modela como
+
+$$
+X\sim\operatorname{Weibull}(2,1000),
+$$
+
+en horas.
+
+La probabilidad de que sobreviva más de 1200 horas es
+
+$$
+P(X>1200)=\exp[-(1.2)^2].
+$$
+
+En R:
+
+```{r}
+pweibull(1200, shape = 2, scale = 1000,
+         lower.tail = FALSE)
+```
+
+Como $k=2>1$, el modelo representa una tasa de falla creciente, coherente con un mecanismo de desgaste.
+
+## Funciones Weibull en R
+
+```{r}
+dweibull(800, shape = 2, scale = 1000)
+pweibull(800, shape = 2, scale = 1000)
+qweibull(0.90, shape = 2, scale = 1000)
+rweibull(5, shape = 2, scale = 1000)
+```
+
+# Distribución Beta
+
+La distribución Beta se define en el intervalo
+
+$$
+0<x<1.
+$$
+
+Si
+
+$$
+X\sim\operatorname{Beta}(\alpha,\beta),
+$$
+
+con $\alpha>0$ y $\beta>0$, su densidad es
+
+$$
+\boxed{
+f_X(x)=\frac{1}{B(\alpha,\beta)}
+ x^{\alpha-1}(1-x)^{\beta-1},\qquad 0<x<1,
+}
+$$
+
+donde
+
+$$
+B(\alpha,\beta)=
+\frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)}.
+$$
+
+## Media y varianza de Beta
+
+Para
+
+$$
+X\sim\operatorname{Beta}(\alpha,\beta),
+$$
+
+$$
+\boxed{E[X]=\frac{\alpha}{\alpha+\beta}}
+$$
+
+y
+
+$$
+\boxed{
+\operatorname{Var}(X)=
+\frac{\alpha\beta}
+{(\alpha+\beta)^2(\alpha+\beta+1)}.
+}
+$$
+
+## Formas de la distribución Beta
+
+La familia Beta es muy flexible:
+
+- $\alpha=\beta=1$: uniforme en $[0,1]$;
+- $\alpha>1,\beta>1$: densidad concentrada en el interior;
+- $\alpha>\beta$: mayor concentración hacia 1;
+- $\alpha<\beta$: mayor concentración hacia 0;
+- $\alpha<1,\beta<1$: densidad elevada cerca de ambos extremos.
+
+## Ejemplo: fracción de utilización
+
+Supongamos que la proporción diaria de capacidad utilizada de un sistema se modela mediante
+
+$$
+X\sim\operatorname{Beta}(5,2).
+$$
+
+La media es
+
+$$
+E[X]=\frac57\approx0.7143.
+$$
+
+La probabilidad de utilizar más del 80% de la capacidad es
+
+```{r}
+pbeta(0.80, shape1 = 5, shape2 = 2,
+      lower.tail = FALSE)
+```
+
+## Uniforme como caso particular de Beta
+
+Para
+
+$$
+\alpha=\beta=1,
+$$
+
+la densidad Beta es
+
+$$
+f_X(x)=1,\qquad0<x<1,
+$$
+
+por lo que
+
+$$
+\boxed{\operatorname{Beta}(1,1)=U(0,1)}.
+$$
+
+## Funciones Beta en R
+
+```{r}
+dbeta(0.7, shape1 = 5, shape2 = 2)
+pbeta(0.7, shape1 = 5, shape2 = 2)
+qbeta(0.95, shape1 = 5, shape2 = 2)
+rbeta(5, shape1 = 5, shape2 = 2)
+```
+
+## Simulación Gamma
+
+```{r}
+set.seed(2026)
+xg <- rgamma(50000, shape = 4, rate = 3)
+mean(xg)
+var(xg)
+c(media_teorica = 4/3,
+  varianza_teorica = 4/9)
+```
+
+## Simulación Weibull
+
+```{r}
+set.seed(2026)
+k <- 2
+eta <- 1000
+xw <- rweibull(50000, shape = k, scale = eta)
+
+media_w <- eta * gamma(1 + 1/k)
+var_w <- eta^2 * (gamma(1 + 2/k) - gamma(1 + 1/k)^2)
+
+c(media_empirica = mean(xw), media_teorica = media_w)
+c(var_empirica = var(xw), var_teorica = var_w)
+```
+
+## Simulación Beta
+
+```{r}
+set.seed(2026)
+a <- 5
+b <- 2
+xb <- rbeta(50000, a, b)
+
+c(media_empirica = mean(xb),
+  media_teorica = a/(a+b))
+```
+
+## Comparación conceptual
+
+| Distribución | Soporte | Parámetros | Uso típico |
+|---|---|---|---|
+| Gamma | $(0,\infty)$ | forma $\alpha$, tasa $\lambda$ | tiempos acumulados, cantidades positivas |
+| Weibull | $[0,\infty)$ | forma $k$, escala $\eta$ | vida útil y confiabilidad |
+| Beta | $(0,1)$ | $\alpha,\beta$ | proporciones y fracciones |
+
+## Interactivo del capítulo
+
+El interactivo permite elegir Gamma, Weibull o Beta y modificar sus parámetros mediante deslizadores.
+
+Para cada distribución se muestran:
+
+- la densidad;
+- la media;
+- la varianza;
+- un intervalo de interés;
+- el área de probabilidad dentro del intervalo.
+
+En Weibull se muestra además el comportamiento cualitativo de la tasa de falla: decreciente, constante o creciente según el valor de $k$.
+
+## Actividad con GeoGebra
+
+Construye una familia Weibull para distintos valores de $k$ manteniendo fija la escala $\eta$. Representa simultáneamente la densidad y la función
+
+$$
+h(x)=\frac{k}{\eta}\left(\frac{x}{\eta}\right)^{k-1}.
+$$
+
+Compara $k=0.6$, $k=1$ y $k=2$.
+
+Después construye varias densidades Beta en $[0,1]$ y observa cómo cambia la forma para:
+
+$$
+(\alpha,\beta)=(1,1),(2,5),(5,2),(0.5,0.5),(5,5).
+$$
+
+## Estrategia de selección del modelo
+
+- Si la variable es positiva y representa un tiempo acumulado hasta varios eventos, considere Gamma.
+- Si estudia tiempo de vida y necesita una tasa de falla flexible, considere Weibull.
+- Si la variable es una proporción continua restringida a $[0,1]$, considere Beta.
+
+La decisión debe fundamentarse también en conocimiento del proceso, no sólo en ajuste gráfico.
+
+## Errores frecuentes
+
+- Confundir `rate` y `scale` en la distribución Gamma.
+- Suponer que Gamma y exponencial son distribuciones no relacionadas.
+- Interpretar $k$ de Weibull como escala en lugar de forma.
+- Concluir que Weibull siempre tiene tasa de falla creciente.
+- Utilizar Beta para una variable no restringida a $[0,1]$ sin transformarla.
+- Confundir los parámetros `shape1` y `shape2` de R.
+- Interpretar valores de densidad como probabilidades puntuales.
+
+## Resumen
+
+Gamma:
+
+$$
+f(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}.
+$$
+
+Weibull:
+
+$$
+f(x)=\frac{k}{\eta}\left(\frac{x}{\eta}\right)^{k-1}
+ e^{-(x/\eta)^k}.
+$$
+
+Beta:
+
+$$
+f(x)=\frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}.
+$$
+
+Casos particulares importantes:
+
+$$
+\operatorname{Gamma}(1,\lambda)=\operatorname{Exp}(\lambda),
+$$
+
+$$
+\operatorname{Weibull}(1,\eta)=\operatorname{Exp}(1/\eta),
+$$
+
+$$
+\operatorname{Beta}(1,1)=U(0,1).
+$$
+
+## Ejercicios
+
+1. Sea $X\sim\operatorname{Gamma}(3,2)$. Calcula media y varianza.
+2. Para la variable anterior, calcula $P(X<2)$ y $P(X>3)$ en R.
+3. Una corriente de eventos tiene tasa 4 por hora. Modela el tiempo hasta el quinto evento y calcula su media.
+4. Sea $X\sim\operatorname{Weibull}(1.5,800)$. Calcula la probabilidad de sobrevivir más de 1000 horas.
+5. Para Weibull, explica el comportamiento de la tasa de falla cuando $k=0.7$, $k=1$ y $k=2$.
+6. Calcula media y varianza de una Beta$(4,3)$.
+7. Para $X\sim\operatorname{Beta}(4,3)$, calcula $P(X>0.75)$.
+8. Compara gráficamente Beta$(2,5)$ y Beta$(5,2)$ y explica la simetría entre ambas.
+9. Simula 50 000 observaciones Gamma$(4,3)$ y compara media y varianza empíricas con las teóricas.
+10. Simula una Weibull$(2,1000)$ y estima por frecuencia relativa $P(X>1200)$.
+11. **Reto ★.** Verifica numéricamente que Gamma$(1,\lambda)$ y Exp$(\lambda)$ producen la misma densidad.
+12. **Reto ★.** Comprueba que Beta$(1,1)$ coincide con la uniforme estándar.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/14-gamma-weibull-beta-colab.ipynb) | Ejecutar ejemplos y simulaciones de Gamma, Weibull y Beta. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/14-gamma-weibull-beta.Rmd) | Reproducir probabilidades, cuantiles, confiabilidad y simulaciones. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap14-gamma-weibull-beta.html) | Explorar parámetros, densidades, áreas y tasa de falla Weibull. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de las tres familias. |
+
+## Referencias del capítulo
+
+El tratamiento de las distribuciones Gamma, Weibull y Beta sigue la presentación estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia @kerns2010.
