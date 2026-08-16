@@ -15,6 +15,7 @@ CAPITULOS = {
     "12-hipergeometrica-poisson.qmd": ("12-hipergeometrica-poisson-colab.ipynb", "12-hipergeometrica-poisson.Rmd", "cap12-hipergeometrica-poisson.html"),
     "13-distribuciones-continuas-especiales.qmd": ("13-distribuciones-continuas-especiales-colab.ipynb", "13-distribuciones-continuas-especiales.Rmd", "cap13-distribuciones-continuas.html"),
     "14-gamma-weibull-beta.qmd": ("14-gamma-weibull-beta-colab.ipynb", "14-gamma-weibull-beta.Rmd", "cap14-gamma-weibull-beta.html"),
+    "15-variables-conjuntas-marginales-condicionales.qmd": ("15-variables-conjuntas-colab.ipynb", "15-variables-conjuntas.Rmd", "cap15-distribuciones-conjuntas.html"),
 }
 
 BASE = "https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev"
