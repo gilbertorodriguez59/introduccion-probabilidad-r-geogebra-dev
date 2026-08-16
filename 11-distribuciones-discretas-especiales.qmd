@@ -1,0 +1,680 @@
+# Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- reconocer experimentos de Bernoulli;
+- modelar el número de éxitos en ensayos independientes mediante una distribución binomial;
+- modelar tiempos de espera discretos con las distribuciones geométrica y binomial negativa;
+- distinguir entre contar éxitos, contar ensayos y contar fallas;
+- calcular probabilidades puntuales y acumuladas;
+- identificar la media y la varianza de cada distribución;
+- utilizar correctamente las funciones de R para estas distribuciones;
+- simular observaciones y comparar resultados empíricos con probabilidades teóricas;
+- interpretar aplicaciones en confiabilidad, comunicaciones, control de calidad y ciencias.
+
+## ¿Por qué estudiar familias de distribuciones?
+
+En capítulos anteriores construimos funciones de masa caso por caso. Sin embargo, muchos experimentos reales comparten estructuras matemáticas comunes. Cuando esa estructura se reconoce, podemos utilizar una distribución conocida en lugar de reconstruir el modelo desde cero.
+
+En este capítulo estudiaremos cuatro familias estrechamente relacionadas:
+
+1. Bernoulli: un ensayo con dos resultados;
+2. binomial: número de éxitos en $n$ ensayos de Bernoulli;
+3. geométrica: número de ensayos hasta el primer éxito;
+4. binomial negativa: número de ensayos hasta alcanzar $r$ éxitos.
+
+La clave será identificar **qué está contando la variable aleatoria**.
+
+## Distribución de Bernoulli
+
+Un ensayo de Bernoulli tiene sólo dos resultados relevantes:
+
+- éxito, con probabilidad $p$;
+- fracaso, con probabilidad $q=1-p$.
+
+Definimos
+
+$$
+X=
+\begin{cases}
+1, & \text{si ocurre éxito},\\
+0, & \text{si ocurre fracaso}.
+\end{cases}
+$$
+
+Entonces
+
+$$
+X\sim\operatorname{Bernoulli}(p)
+$$
+
+y su función de masa es
+
+$$
+\boxed{p_X(x)=p^x(1-p)^{1-x}},\qquad x\in\{0,1\}.
+$$
+
+Su media y varianza son
+
+$$
+\boxed{E[X]=p}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=p(1-p)}.
+$$
+
+### Ejemplo de ingeniería
+
+Un paquete se transmite correctamente con probabilidad $0.98$. Definimos
+
+$$
+X=1
+$$
+
+si la transmisión es correcta y $X=0$ si falla. Entonces
+
+$$
+X\sim\operatorname{Bernoulli}(0.98).
+$$
+
+La probabilidad de error es
+
+$$
+P(X=0)=0.02.
+$$
+
+## Distribución binomial
+
+Supongamos que realizamos $n$ ensayos de Bernoulli que cumplen:
+
+1. cada ensayo tiene dos resultados: éxito o fracaso;
+2. los ensayos son independientes;
+3. la probabilidad de éxito $p$ permanece constante;
+4. el número de ensayos $n$ está fijado de antemano.
+
+Sea
+
+$$
+X=\text{número de éxitos en los }n\text{ ensayos}.
+$$
+
+Entonces
+
+$$
+\boxed{X\sim\operatorname{Binomial}(n,p)}.
+$$
+
+La PMF es
+
+$$
+\boxed{
+P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}
+},
+$$
+
+para
+
+$$
+x=0,1,\ldots,n.
+$$
+
+La media y la varianza son
+
+$$
+\boxed{E[X]=np}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=np(1-p)}.
+$$
+
+## ¿De dónde aparece el coeficiente binomial?
+
+Para obtener exactamente $x$ éxitos y $n-x$ fracasos, una secuencia particular tiene probabilidad
+
+$$
+p^x(1-p)^{n-x}.
+$$
+
+Pero los $x$ éxitos pueden ocupar
+
+$$
+\binom{n}{x}
+$$
+
+posiciones diferentes. Por ello multiplicamos por ese número de arreglos.
+
+## Ejemplo: defectos en una muestra
+
+Una línea produce piezas defectuosas con probabilidad $p=0.04$. Si tomamos 20 piezas y suponemos independencia, el número de defectuosas $X$ satisface
+
+$$
+X\sim\operatorname{Binomial}(20,0.04).
+$$
+
+La probabilidad de observar exactamente dos defectuosas es
+
+$$
+P(X=2)=\binom{20}{2}(0.04)^2(0.96)^{18}.
+$$
+
+En R:
+
+```{r}
+dbinom(2, size = 20, prob = 0.04)
+```
+
+## Probabilidades acumuladas binomiales
+
+Para calcular
+
+$$
+P(X\le x)
+$$
+
+utilizamos `pbinom()`:
+
+```{r}
+pbinom(2, size = 20, prob = 0.04)
+```
+
+Para
+
+$$
+P(X\ge2),
+$$
+
+podemos usar el complemento:
+
+```{r}
+1 - pbinom(1, size = 20, prob = 0.04)
+```
+
+## Ejemplo de confiabilidad
+
+Cada uno de 8 sensores responde correctamente con probabilidad 0.95, de manera independiente. Si $X$ es el número de sensores que responden correctamente,
+
+$$
+X\sim\operatorname{Binomial}(8,0.95).
+$$
+
+La probabilidad de que respondan al menos 7 es
+
+$$
+P(X\ge7)=P(X=7)+P(X=8).
+$$
+
+```{r}
+sum(dbinom(7:8, size = 8, prob = 0.95))
+```
+
+## Bernoulli como caso particular de la binomial
+
+Si $n=1$,
+
+$$
+\operatorname{Binomial}(1,p)=\operatorname{Bernoulli}(p).
+$$
+
+Esta relación será útil para entender que una binomial puede escribirse como suma de variables indicadoras independientes:
+
+$$
+X=X_1+\cdots+X_n,
+$$
+
+con
+
+$$
+X_i\sim\operatorname{Bernoulli}(p).
+$$
+
+## Distribución geométrica
+
+Ahora cambia la pregunta. Ya no fijamos el número de ensayos y contamos éxitos. Repetimos ensayos independientes hasta obtener el primer éxito.
+
+Sea
+
+$$
+X=\text{número de ensayos necesarios hasta el primer éxito}.
+$$
+
+Entonces
+
+$$
+\boxed{X\sim\operatorname{Geométrica}(p)}
+$$
+
+con soporte
+
+$$
+1,2,3,\ldots
+$$
+
+y PMF
+
+$$
+\boxed{
+P(X=x)=(1-p)^{x-1}p
+}.
+$$
+
+La media y la varianza son
+
+$$
+\boxed{E[X]=\frac1p}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=\frac{1-p}{p^2}}.
+$$
+
+## Ejemplo: intentos de conexión
+
+Un enlace logra conectarse en cada intento con probabilidad $p=0.30$. Si los intentos son independientes y $X$ es el número de intentos hasta la primera conexión,
+
+$$
+X\sim\operatorname{Geométrica}(0.30).
+$$
+
+La probabilidad de conectarse exactamente en el cuarto intento es
+
+$$
+P(X=4)=(0.70)^3(0.30).
+$$
+
+## Atención: parametrización de `dgeom()` en R
+
+R define la variable geométrica como el **número de fracasos antes del primer éxito**.
+
+Si nuestro libro utiliza
+
+$$
+X=\text{número de ensayos hasta el primer éxito},
+$$
+
+entonces la variable de R es
+
+$$
+Y=X-1.
+$$
+
+Por ejemplo,
+
+```{r}
+# P(X = 4): tres fracasos antes del primer éxito
+dgeom(3, prob = 0.30)
+```
+
+Y
+
+```{r}
+# P(X <= 4) equivale a P(Y <= 3)
+pgeom(3, prob = 0.30)
+```
+
+Esta diferencia de parametrización es una fuente frecuente de errores.
+
+## Propiedad sin memoria
+
+La distribución geométrica tiene una propiedad especial:
+
+$$
+\boxed{
+P(X>s+t\mid X>s)=P(X>t)
+}.
+$$
+
+En palabras: si ya hemos esperado $s$ intentos sin éxito, el tiempo adicional de espera se comporta como si comenzáramos de nuevo.
+
+### Ejemplo
+
+Si $p=0.30$, saber que los primeros cinco intentos fallaron no cambia la probabilidad de que hagan falta más de tres intentos adicionales.
+
+La razón es que cada ensayo conserva la misma probabilidad de éxito y es independiente de los anteriores.
+
+## Distribución binomial negativa
+
+Generalicemos la geométrica. Ahora repetimos ensayos independientes hasta conseguir $r$ éxitos.
+
+Sea
+
+$$
+X=\text{número total de ensayos necesarios para obtener }r\text{ éxitos}.
+$$
+
+Entonces
+
+$$
+\boxed{X\sim\operatorname{BinomialNegativa}(r,p)}.
+$$
+
+Para
+
+$$
+x=r,r+1,r+2,\ldots,
+$$
+
+la PMF es
+
+$$
+\boxed{
+P(X=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}
+}.
+$$
+
+La media y la varianza son
+
+$$
+\boxed{E[X]=\frac{r}{p}}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=\frac{r(1-p)}{p^2}}.
+$$
+
+## ¿Por qué aparece $\binom{x-1}{r-1}$?
+
+Para que el $r$-ésimo éxito ocurra exactamente en el ensayo $x$:
+
+- el ensayo $x$ debe ser éxito;
+- en los primeros $x-1$ ensayos deben aparecer exactamente $r-1$ éxitos.
+
+Esos $r-1$ éxitos pueden ubicarse de
+
+$$
+\binom{x-1}{r-1}
+$$
+
+maneras.
+
+## Ejemplo: paquetes correctamente recibidos
+
+Cada transmisión llega correctamente con probabilidad $p=0.8$. Sea $X$ el número total de transmisiones necesarias para conseguir 5 recepciones correctas.
+
+Entonces
+
+$$
+X\sim\operatorname{BinomialNegativa}(5,0.8).
+$$
+
+La probabilidad de necesitar exactamente 7 transmisiones es
+
+$$
+P(X=7)=\binom{6}{4}(0.8)^5(0.2)^2.
+$$
+
+## Parametrización de `dnbinom()` en R
+
+R cuenta el **número de fracasos antes de alcanzar $r$ éxitos**.
+
+Si
+
+$$
+X=\text{número total de ensayos hasta el }r\text{-ésimo éxito},
+$$
+
+y
+
+$$
+Y=X-r,
+$$
+
+entonces
+
+$$
+Y\sim\text{la parametrización usada por R}.
+$$
+
+Por ejemplo, para $X=7$ y $r=5$ hay dos fracasos:
+
+```{r}
+dnbinom(2, size = 5, prob = 0.8)
+```
+
+## Relación entre geométrica y binomial negativa
+
+La geométrica es el caso particular $r=1$ de la binomial negativa.
+
+Además, si
+
+$$
+G_1,\ldots,G_r
+$$
+
+son variables geométricas independientes con el mismo parámetro $p$, entonces
+
+$$
+X=G_1+\cdots+G_r
+$$
+
+tiene distribución binomial negativa bajo la parametrización de número total de ensayos.
+
+## Comparación conceptual
+
+| Distribución | ¿Qué se fija? | ¿Qué cuenta $X$? | Soporte |
+|---|---|---|---|
+| Bernoulli | un ensayo | éxito o fracaso | $0,1$ |
+| Binomial | $n$ ensayos | número de éxitos | $0,\ldots,n$ |
+| Geométrica | 1 éxito | ensayos hasta el primer éxito | $1,2,\ldots$ |
+| Binomial negativa | $r$ éxitos | ensayos hasta el $r$-ésimo éxito | $r,r+1,\ldots$ |
+
+Esta tabla suele resolver buena parte de la selección del modelo.
+
+## Funciones principales en R
+
+Para la binomial:
+
+```{r}
+dbinom(3, size = 10, prob = 0.4)  # P(X=3)
+pbinom(3, size = 10, prob = 0.4)  # P(X<=3)
+rbinom(10, size = 10, prob = 0.4) # simulación
+```
+
+Para la geométrica, recordando que R cuenta fracasos:
+
+```{r}
+dgeom(2, prob = 0.4)   # 2 fracasos antes del éxito => X=3 ensayos
+pgeom(2, prob = 0.4)
+rgeom(10, prob = 0.4)
+```
+
+Para la binomial negativa, R también cuenta fracasos:
+
+```{r}
+dnbinom(3, size = 4, prob = 0.4)
+pnbinom(3, size = 4, prob = 0.4)
+rnbinom(10, size = 4, prob = 0.4)
+```
+
+## Simulación binomial
+
+```{r}
+set.seed(2026)
+n_sim <- 50000
+muestra <- rbinom(n_sim, size = 20, prob = 0.04)
+
+mean(muestra)
+var(muestra)
+
+c(media_teorica = 20 * 0.04,
+  var_teorica = 20 * 0.04 * 0.96)
+```
+
+## Comparar PMF teórica y simulación
+
+```{r}
+x <- 0:6
+p_teorica <- dbinom(x, size = 20, prob = 0.04)
+empirica <- prop.table(table(factor(muestra, levels = x)))
+
+data.frame(
+  x = x,
+  teorica = p_teorica,
+  empirica = as.numeric(empirica)
+)
+```
+
+## Simulación geométrica con la convención del libro
+
+Como `rgeom()` devuelve el número de fracasos antes del éxito, sumamos 1:
+
+```{r}
+set.seed(2026)
+X <- rgeom(50000, prob = 0.30) + 1
+
+mean(X)
+var(X)
+
+c(media_teorica = 1 / 0.30,
+  var_teorica = 0.70 / 0.30^2)
+```
+
+## Simulación binomial negativa con la convención del libro
+
+```{r}
+r <- 5
+p <- 0.8
+
+# R devuelve número de fracasos; sumamos r para obtener ensayos totales
+X <- rnbinom(50000, size = r, prob = p) + r
+
+mean(X)
+var(X)
+
+c(media_teorica = r / p,
+  var_teorica = r * (1-p) / p^2)
+```
+
+## Interactivo del capítulo
+
+La versión web incluye un comparador de distribuciones discretas. El estudiante puede elegir:
+
+- Bernoulli;
+- binomial;
+- geométrica;
+- binomial negativa.
+
+Después puede modificar $p$ y, cuando corresponda, $n$ o $r$. El interactivo actualiza:
+
+- la PMF;
+- la media;
+- la varianza;
+- el soporte visible;
+- una probabilidad puntual seleccionada.
+
+El objetivo es observar cómo cambia la forma de la distribución al modificar sus parámetros y, sobre todo, distinguir qué variable está contando cada modelo.
+
+## Actividad con GeoGebra
+
+Para una distribución binomial fija $n$, crea deslizadores para $p$ y $x$. Define
+
+$$
+P(X=x)=\binom{n}{x}p^x(1-p)^{n-x}.
+$$
+
+Construye una lista de puntos
+
+$$
+(k,P(X=k)),\qquad k=0,1,\ldots,n.
+$$
+
+Después modifica $p$ desde valores cercanos a 0 hasta valores cercanos a 1 y observa:
+
+- cómo se desplaza el centro;
+- cómo cambia la simetría;
+- cómo se modifica la dispersión.
+
+Como extensión, construye una geométrica y observa cómo la cola se hace más larga cuando $p$ disminuye.
+
+## Selección del modelo
+
+Antes de utilizar una fórmula, responde:
+
+1. ¿cada ensayo tiene dos resultados relevantes?
+2. ¿la probabilidad de éxito permanece constante?
+3. ¿los ensayos pueden considerarse independientes?
+4. ¿está fijado el número de ensayos o esperamos hasta alcanzar éxitos?
+5. si esperamos, ¿hasta el primer éxito o hasta el $r$-ésimo?
+
+Estas preguntas permiten distinguir los cuatro modelos de este capítulo.
+
+## Errores frecuentes
+
+- Aplicar una binomial cuando la probabilidad $p$ cambia entre ensayos.
+- Confundir “al menos” con “exactamente”.
+- Usar `pbinom(x,...)` como si fuera $P(X=x)$.
+- Olvidar que `dgeom()` de R cuenta fracasos, no ensayos totales.
+- Olvidar que `dnbinom()` de R también cuenta fracasos antes del $r$-ésimo éxito.
+- Confundir una binomial negativa con una binomial ordinaria.
+- Suponer independencia sin justificarla en una aplicación real.
+
+## Resumen
+
+Bernoulli:
+
+$$
+P(X=x)=p^x(1-p)^{1-x},\qquad x=0,1.
+$$
+
+Binomial:
+
+$$
+P(X=x)=\binom nxp^x(1-p)^{n-x}.
+$$
+
+Geométrica, contando ensayos hasta el primer éxito:
+
+$$
+P(X=x)=(1-p)^{x-1}p.
+$$
+
+Binomial negativa, contando ensayos hasta el $r$-ésimo éxito:
+
+$$
+P(X=x)=\binom{x-1}{r-1}p^r(1-p)^{x-r}.
+$$
+
+Las cuatro distribuciones surgen de secuencias de ensayos de Bernoulli, pero responden preguntas diferentes.
+
+## Ejercicios
+
+1. Un componente pasa una prueba con probabilidad 0.92. Define una variable Bernoulli y calcula su media y varianza.
+2. En 12 transmisiones independientes, cada una tiene probabilidad 0.85 de éxito. Calcula la probabilidad de exactamente 10 éxitos.
+3. Para el ejercicio anterior, calcula $P(X\ge10)$.
+4. Una pieza es defectuosa con probabilidad 0.03. En una muestra independiente de 30 piezas, calcula la probabilidad de ninguna defectuosa.
+5. Un enlace conecta con probabilidad 0.25 en cada intento. Calcula la probabilidad de que la primera conexión ocurra en el quinto intento.
+6. Para el ejercicio anterior, calcula la probabilidad de requerir más de 6 intentos.
+7. Demuestra numéricamente en R la propiedad sin memoria de la geométrica para $p=0.25$, $s=4$ y $t=3$.
+8. Cada transmisión tiene probabilidad 0.70 de éxito. Calcula la probabilidad de que el cuarto éxito ocurra exactamente en el sexto intento.
+9. Reproduce el ejercicio 8 mediante `dnbinom()` explicando por qué el argumento corresponde a dos fracasos.
+10. Simula 100 000 observaciones de una binomial $B(15,0.4)$ y compara la media y varianza empíricas con las teóricas.
+11. Simula una geométrica con la convención del libro a partir de `rgeom()` y verifica su media teórica.
+12. **Reto ★.** Si $X_1,\ldots,X_n$ son Bernoulli independientes con probabilidad común $p$, explica por qué $X_1+\cdots+X_n$ es binomial y utiliza esa representación para obtener su esperanza y varianza.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/11-distribuciones-discretas-especiales-colab.ipynb) | Ejecutar, modificar y comparar las distribuciones discretas del capítulo. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/11-distribuciones-discretas-especiales.Rmd) | Reproducir cálculos, gráficas y simulaciones en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap11-distribuciones-discretas.html) | Comparar PMF, media y varianza al modificar los parámetros. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de distribuciones, parámetros y fórmulas clave. |
+
+Los **cuadernos de R** acompañan este capítulo para reproducir, modificar y extender los ejemplos. El cuaderno de Google Colab permite trabajar desde el navegador. Las presentaciones, videos e infografías se enlazarán en esta misma tabla cuando estén disponibles.
+
+## Referencias del capítulo
+
+El tratamiento de las distribuciones Bernoulli, binomial, geométrica y binomial negativa sigue la presentación estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos de ingeniería, ejercicios, código y simulaciones en R son originales; para el enfoque computacional se toma como referencia general @kerns2010.
