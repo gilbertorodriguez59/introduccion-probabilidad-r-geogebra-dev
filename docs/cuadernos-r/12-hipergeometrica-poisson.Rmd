@@ -1,0 +1,60 @@
+---
+title: "Capítulo 12. Hipergeométrica y Poisson"
+output: html_document
+---
+
+## Hipergeométrica
+
+```{r}
+N <- 50; K <- 6; n <- 8
+x <- 0:n
+p_h <- dhyper(x, m = K, n = N-K, k = n)
+data.frame(x, p_h)
+sum(p_h)
+```
+
+## Media y varianza teóricas
+
+```{r}
+mu_h <- n*K/N
+var_h <- n*(K/N)*(1-K/N)*(N-n)/(N-1)
+c(media = mu_h, varianza = var_h)
+```
+
+## Comparación con binomial
+
+```{r}
+p <- K/N
+p_b <- dbinom(x, size = n, prob = p)
+data.frame(x, hipergeometrica = p_h, binomial = p_b)
+```
+
+## Poisson
+
+```{r}
+lambda <- 4
+x <- 0:12
+p_pois <- dpois(x, lambda)
+data.frame(x, p_pois)
+sum(p_pois)
+```
+
+## Aproximación binomial por Poisson
+
+```{r}
+n <- 1000; p <- 0.002; lambda <- n*p
+x <- 0:8
+data.frame(x,
+  binomial = dbinom(x, n, p),
+  poisson = dpois(x, lambda))
+```
+
+## Simulación
+
+```{r}
+set.seed(2026)
+xh <- rhyper(50000, 6, 44, 8)
+xp <- rpois(50000, 4)
+c(media_h = mean(xh), var_h = var(xh),
+  media_p = mean(xp), var_p = var(xp))
+```

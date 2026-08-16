@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 2 0 4 4 3 1 5 4 5 3\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 1 0 0 2 5 4 0 0 2\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1] 15  1  8  6  2  8  8  6  6 10",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 2 5 3 4 4 3 5 3 4 7\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1]  2  5  2  0  2  2  1  0 10  3\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  2  6  6  6  7  6  8  5  3 15",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2637,6 +2637,196 @@
     "text": "11.32 Referencias del capítulo\nEl tratamiento de las distribuciones Bernoulli, binomial, geométrica y binomial negativa sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos de ingeniería, ejercicios, código y simulaciones en R son originales; para el enfoque computacional se toma como referencia general Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html",
+    "href": "12-hipergeometrica-poisson.html",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "",
+    "text": "12.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante podrá reconocer modelos hipergeométricos y Poisson, distinguir muestreo con y sin reemplazo, calcular probabilidades con R, interpretar medias y varianzas, simular ambos modelos y estudiar aproximaciones binomial–hipergeométrica y binomial–Poisson.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#dos-estructuras-nuevas",
+    "href": "12-hipergeometrica-poisson.html#dos-estructuras-nuevas",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.2 Dos estructuras nuevas",
+    "text": "12.2 Dos estructuras nuevas\nLa distribución hipergeométrica aparece al contar éxitos en una muestra tomada sin reemplazo de una población finita. La distribución de Poisson aparece al contar eventos en un intervalo de tiempo, longitud, área o volumen cuando existe una tasa media aproximadamente estable.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#distribución-hipergeométrica",
+    "href": "12-hipergeometrica-poisson.html#distribución-hipergeométrica",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.3 Distribución hipergeométrica",
+    "text": "12.3 Distribución hipergeométrica\nUna población de tamaño \\(N\\) contiene \\(K\\) elementos de interés y \\(N-K\\) elementos restantes. Se selecciona una muestra de tamaño \\(n\\) sin reemplazo y se define\n\\[\nX=\\text{número de éxitos en la muestra}.\n\\]\nEntonces\n\\[\nX\\sim\\operatorname{Hipergeométrica}(N,K,n)\n\\]\ny\n\\[\n\\boxed{P(X=x)=\\frac{\\binom{K}{x}\\binom{N-K}{n-x}}{\\binom{N}{n}}}.\n\\]\nEl soporte satisface\n\\[\n\\max(0,n-(N-K))\\le x\\le\\min(n,K).\n\\]\nLa media y la varianza son\n\\[\n\\boxed{E[X]=n\\frac KN}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=n\\frac KN\\left(1-\\frac KN\\right)\\frac{N-n}{N-1}}.\n\\]\nEl último factor es la corrección por población finita.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#ejemplo-de-control-de-calidad",
+    "href": "12-hipergeometrica-poisson.html#ejemplo-de-control-de-calidad",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.4 Ejemplo de control de calidad",
+    "text": "12.4 Ejemplo de control de calidad\nUn lote contiene 50 componentes, 6 defectuosos. Se eligen 8 sin reemplazo. Si \\(X\\) es el número de defectuosos,\n\\[\nX\\sim\\operatorname{Hipergeométrica}(50,6,8).\n\\]\nLa probabilidad de exactamente dos defectuosos es\n\\[\nP(X=2)=\\frac{\\binom62\\binom{44}{6}}{\\binom{50}{8}}.\n\\]\nEn R:\n\ndhyper(2, m = 6, n = 44, k = 8)\n\n[1] 0.1972248\n\nphyper(2, m = 6, n = 44, k = 8)       # P(X &lt;= 2)\n\n[1] 0.9556011\n\n1 - phyper(1, m = 6, n = 44, k = 8)   # P(X &gt;= 2)\n\n[1] 0.2416237\n\n\nEn dhyper(), m es el número de éxitos de la población, n el número de fracasos y k el tamaño de muestra.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#binomial-frente-a-hipergeométrica",
+    "href": "12-hipergeometrica-poisson.html#binomial-frente-a-hipergeométrica",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.5 Binomial frente a hipergeométrica",
+    "text": "12.5 Binomial frente a hipergeométrica\n\n\n\nCaracterística\nBinomial\nHipergeométrica\n\n\n\n\nExtracciones\nindependientes\ndependientes\n\n\nReemplazo\nsí o equivalente\nno\n\n\nProbabilidad de éxito\nconstante\ncambia tras cada extracción\n\n\nPoblación\nconceptual ilimitada\nfinita\n\n\n\nSi \\(n/N\\) es pequeño, una hipergeométrica puede aproximarse por una binomial con\n\\[\np=K/N.\n\\]\n\nN &lt;- 500; K &lt;- 50; n &lt;- 10; p &lt;- K/N\nx &lt;- 0:n\ndata.frame(x,\n  hipergeometrica = dhyper(x, K, N-K, n),\n  binomial = dbinom(x, n, p))\n\n    x hipergeometrica     binomial\n1   0    3.451622e-01 0.3486784401\n2   1    3.913403e-01 0.3874204890\n3   2    1.952275e-01 0.1937102445\n4   3    5.640884e-02 0.0573956280\n5   4    1.044961e-02 0.0111602610\n6   5    1.296221e-03 0.0014880348\n7   6    1.089872e-04 0.0001377810\n8   7    6.130314e-06 0.0000087480\n9   8    2.206502e-07 0.0000003645\n10  9    4.586642e-09 0.0000000090\n11 10    4.178940e-11 0.0000000001",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#distribución-de-poisson",
+    "href": "12-hipergeometrica-poisson.html#distribución-de-poisson",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.6 Distribución de Poisson",
+    "text": "12.6 Distribución de Poisson\nSi \\(X\\) cuenta eventos en un intervalo y la tasa media esperada es \\(\\lambda&gt;0\\), escribimos\n\\[\nX\\sim\\operatorname{Poisson}(\\lambda).\n\\]\nSu PMF es\n\\[\n\\boxed{P(X=x)=e^{-\\lambda}\\frac{\\lambda^x}{x!}},\\qquad x=0,1,2,\\ldots\n\\]\ny satisface\n\\[\n\\boxed{E[X]=\\lambda,\\qquad \\operatorname{Var}(X)=\\lambda}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#ejemplo-solicitudes-a-un-servidor",
+    "href": "12-hipergeometrica-poisson.html#ejemplo-solicitudes-a-un-servidor",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.7 Ejemplo: solicitudes a un servidor",
+    "text": "12.7 Ejemplo: solicitudes a un servidor\nUn servidor recibe en promedio 4 solicitudes por segundo. Bajo un modelo Poisson,\n\\[\nX\\sim\\operatorname{Poisson}(4).\n\\]\n\ndpois(6, lambda = 4)      # P(X = 6)\n\n[1] 0.1041956\n\nppois(6, lambda = 4)      # P(X &lt;= 6)\n\n[1] 0.889326\n\n1 - ppois(6, lambda = 4)  # P(X &gt; 6)\n\n[1] 0.110674\n\n\nSi la tasa es \\(r\\) eventos por unidad y observamos una longitud \\(t\\),\n\\[\n\\boxed{\\lambda=rt}.\n\\]\nPor ejemplo, una tasa de 4 eventos por segundo corresponde a \\(\\lambda=2\\) en medio segundo y a \\(\\lambda=12\\) en tres segundos.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#ejemplo-ambiental",
+    "href": "12-hipergeometrica-poisson.html#ejemplo-ambiental",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.8 Ejemplo ambiental",
+    "text": "12.8 Ejemplo ambiental\nSi se observan en promedio 1.8 excedencias de un umbral por mes,\n\\[\nX\\sim\\operatorname{Poisson}(1.8).\n\\]\nLa probabilidad de al menos una excedencia es\n\n1 - dpois(0, lambda = 1.8)\n\n[1] 0.8347011\n\n\nEl modelo Poisson debe justificarse: no basta con que la variable sea un conteo. Conviene revisar estabilidad de la tasa, intervalo definido y ausencia de dependencia fuerte entre eventos.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#suma-de-variables-poisson",
+    "href": "12-hipergeometrica-poisson.html#suma-de-variables-poisson",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.9 Suma de variables Poisson",
+    "text": "12.9 Suma de variables Poisson\nSi\n\\[\nX\\sim\\operatorname{Poisson}(\\lambda_1),\\qquad\nY\\sim\\operatorname{Poisson}(\\lambda_2)\n\\]\nson independientes, entonces\n\\[\n\\boxed{X+Y\\sim\\operatorname{Poisson}(\\lambda_1+\\lambda_2)}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#aproximación-binomial-por-poisson",
+    "href": "12-hipergeometrica-poisson.html#aproximación-binomial-por-poisson",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.10 Aproximación binomial por Poisson",
+    "text": "12.10 Aproximación binomial por Poisson\nSi\n\\[\nX\\sim\\operatorname{Binomial}(n,p)\n\\]\ncon \\(n\\) grande y \\(p\\) pequeño, manteniendo\n\\[\n\\lambda=np,\n\\]\nentonces\n\\[\n\\boxed{X\\approx\\operatorname{Poisson}(np)}.\n\\]\nEjemplo:\n\\[\nX\\sim\\operatorname{Binomial}(1000,0.002),\\qquad\\lambda=2.\n\\]\n\nexacta &lt;- dbinom(3, 1000, 0.002)\naprox &lt;- dpois(3, 2)\nc(exacta = exacta, poisson = aprox,\n  error_relativo = abs(aprox-exacta)/exacta)\n\n        exacta        poisson error_relativo \n   0.180627732    0.180447044    0.001000334",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#simulación-en-r",
+    "href": "12-hipergeometrica-poisson.html#simulación-en-r",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.11 Simulación en R",
+    "text": "12.11 Simulación en R\nHipergeométrica:\n\nset.seed(2026)\nN &lt;- 50; K &lt;- 6; n &lt;- 8\nxh &lt;- rhyper(50000, m = K, n = N-K, k = n)\nmean(xh); var(xh)\n\n[1] 0.96446\n\n\n[1] 0.7296915\n\nn*K/N\n\n[1] 0.96\n\nn*(K/N)*(1-K/N)*(N-n)/(N-1)\n\n[1] 0.7241143\n\n\nPoisson:\n\nset.seed(2026)\nxp &lt;- rpois(50000, lambda = 4)\nmean(xp); var(xp)\n\n[1] 4.01138\n\n\n[1] 4.038451\n\n\nEn Poisson, ambas cantidades empíricas deben aproximarse a \\(4\\).",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#interactivo-del-capítulo",
+    "href": "12-hipergeometrica-poisson.html#interactivo-del-capítulo",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.12 Interactivo del capítulo",
+    "text": "12.12 Interactivo del capítulo\nEl recurso web tiene dos comparaciones. En la primera se modifican \\(N\\), \\(K\\) y \\(n\\) para contrastar la PMF hipergeométrica con una binomial de parámetro \\(p=K/N\\). En la segunda se modifican \\(n\\) y \\(p\\) y se contrasta una binomial con una Poisson de parámetro \\(\\lambda=np\\).\nEsto permite observar visualmente cuándo las aproximaciones son buenas y cuándo la falta de reemplazo produce diferencias importantes.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#actividad-con-geogebra",
+    "href": "12-hipergeometrica-poisson.html#actividad-con-geogebra",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.13 Actividad con GeoGebra",
+    "text": "12.13 Actividad con GeoGebra\nConstruye una binomial con parámetros \\(n,p\\) y una Poisson con \\(\\lambda=np\\). Representa ambas PMF mediante listas de puntos. Prueba:\n\n\\(n=20\\), \\(p=0.30\\);\n\\(n=100\\), \\(p=0.05\\);\n\\(n=1000\\), \\(p=0.002\\).\n\nDescribe en qué caso se parecen más y explica la razón.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#selección-del-modelo",
+    "href": "12-hipergeometrica-poisson.html#selección-del-modelo",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.14 Selección del modelo",
+    "text": "12.14 Selección del modelo\n\nMuestra de población finita sin reemplazo: hipergeométrica.\nConteo de eventos en un intervalo con tasa media: Poisson.\nÉxitos en \\(n\\) ensayos independientes: binomial.\nBinomial con \\(n\\) grande y \\(p\\) pequeño: considerar aproximación Poisson.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#errores-frecuentes",
+    "href": "12-hipergeometrica-poisson.html#errores-frecuentes",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.15 Errores frecuentes",
+    "text": "12.15 Errores frecuentes\n\nUsar binomial cuando el muestreo sin reemplazo representa una parte importante de la población.\nConfundir \\(K\\) con el tamaño de muestra.\nOlvidar que dhyper() pide éxitos y fracasos por separado.\nUsar Poisson sólo porque la variable sea un conteo.\nConfundir tasa por unidad con \\(\\lambda\\) del intervalo observado.\nUsar \\(\\lambda=p\\) en lugar de \\(\\lambda=np\\) para aproximar una binomial.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#resumen",
+    "href": "12-hipergeometrica-poisson.html#resumen",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.16 Resumen",
+    "text": "12.16 Resumen\nHipergeométrica:\n\\[\nP(X=x)=\\frac{\\binom Kx\\binom{N-K}{n-x}}{\\binom Nn}.\n\\]\nPoisson:\n\\[\nP(X=x)=e^{-\\lambda}\\frac{\\lambda^x}{x!}.\n\\]\nCuando \\(n\\) es grande y \\(p\\) pequeño,\n\\[\n\\operatorname{Binomial}(n,p)\\approx\\operatorname{Poisson}(np).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#ejercicios",
+    "href": "12-hipergeometrica-poisson.html#ejercicios",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.17 Ejercicios",
+    "text": "12.17 Ejercicios\n\nUn lote de 40 piezas contiene 5 defectuosas. Se seleccionan 6 sin reemplazo. Calcula \\(P(X=1)\\) y \\(P(X\\ge2)\\).\nObtén media y varianza para la variable del ejercicio anterior.\nCompara el ejercicio 1 con una binomial de parámetro \\(p=5/40\\).\nUna central recibe en promedio 3.2 llamadas por minuto. Calcula \\(P(X=5)\\) y \\(P(X\\le5)\\).\nCalcula la probabilidad de ninguna llamada durante 30 segundos para la tasa anterior.\nUna carretera registra en promedio 1.5 incidentes por día. Calcula la probabilidad de al menos dos incidentes en dos días.\nCompara \\(P(X=2)\\) para \\(B(200,0.01)\\) y una Poisson con \\(\\lambda=2\\).\nSimula una hipergeométrica con \\(N=100,K=10,n=20\\) y verifica media y varianza.\nSimula una Poisson con \\(\\lambda=6\\) y compara media y varianza muestrales.\nReto ★. Explica por qué la corrección por población finita reduce la varianza respecto de la binomial correspondiente.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#materiales-complementarios-del-capítulo",
+    "href": "12-hipergeometrica-poisson.html#materiales-complementarios-del-capítulo",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.18 Materiales complementarios del capítulo",
+    "text": "12.18 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nEjecutar y comparar modelos hipergeométrico, binomial y Poisson.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir cálculos, aproximaciones y simulaciones.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nExplorar muestreo sin reemplazo y aproximaciones.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de modelos y criterios de selección.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "12-hipergeometrica-poisson.html#referencias-del-capítulo",
+    "href": "12-hipergeometrica-poisson.html#referencias-del-capítulo",
+    "title": "12  Distribuciones discretas especiales II: hipergeométrica y Poisson",
+    "section": "12.19 Referencias del capítulo",
+    "text": "12.19 Referencias del capítulo\nEl tratamiento sigue Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios y simulaciones son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
     ]
   },
   {
