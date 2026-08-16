@@ -1,0 +1,93 @@
+---
+title: "Capítulo 11. Distribuciones discretas especiales"
+output: html_notebook
+---
+
+## Bernoulli
+
+```{r}
+p <- 0.7
+x <- 0:1
+cbind(x, prob = dbinom(x, size = 1, prob = p))
+```
+
+## Binomial
+
+```{r}
+n <- 12
+p <- 0.4
+x <- 0:n
+pmf <- dbinom(x, size = n, prob = p)
+plot(x, pmf, type = "h", lwd = 4, xlab = "x", ylab = "P(X=x)")
+points(x, pmf, pch = 19)
+```
+
+```{r}
+c(media = n*p, varianza = n*p*(1-p))
+pbinom(4, size = n, prob = p)
+1 - pbinom(7, size = n, prob = p)
+```
+
+## Geométrica
+
+En el libro, X cuenta ensayos hasta el primer éxito. R cuenta fracasos, por lo que usamos X = Y + 1.
+
+```{r}
+p <- 0.3
+x <- 1:15
+pmf_g <- dgeom(x - 1, prob = p)
+plot(x, pmf_g, type = "h", lwd = 4, xlab = "ensayos", ylab = "P(X=x)")
+```
+
+```{r}
+c(media = 1/p, varianza = (1-p)/p^2)
+```
+
+## Propiedad sin memoria
+
+```{r}
+p <- 0.3
+s <- 5
+t <- 3
+condicional <- (1-p)^(s+t) / (1-p)^s
+directa <- (1-p)^t
+c(condicional = condicional, directa = directa)
+```
+
+## Binomial negativa
+
+En el libro, X cuenta ensayos totales hasta el r-ésimo éxito. R cuenta fracasos, por lo que X = Y + r.
+
+```{r}
+r <- 5
+p <- 0.8
+x <- r:15
+pmf_nb <- dnbinom(x-r, size = r, prob = p)
+plot(x, pmf_nb, type = "h", lwd = 4, xlab = "ensayos totales", ylab = "P(X=x)")
+```
+
+```{r}
+c(media = r/p, varianza = r*(1-p)/p^2)
+```
+
+## Simulación comparativa
+
+```{r}
+set.seed(2026)
+b <- rbinom(50000, size = 12, prob = 0.4)
+g <- rgeom(50000, prob = 0.3) + 1
+nb <- rnbinom(50000, size = 5, prob = 0.8) + 5
+
+rbind(
+  binomial = c(media = mean(b), varianza = var(b)),
+  geometrica = c(media = mean(g), varianza = var(g)),
+  binomial_negativa = c(media = mean(nb), varianza = var(nb))
+)
+```
+
+## Actividades
+
+1. Cambia p en la binomial y observa cómo se desplaza la PMF.
+2. Compara una geométrica con p=0.2 y p=0.8.
+3. Modifica r en la binomial negativa y explica el cambio de la media.
+4. Verifica mediante simulación las fórmulas teóricas de media y varianza.
