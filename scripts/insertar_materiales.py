@@ -12,6 +12,8 @@ CAPITULOS = {
     "09-variables-continuas-densidad.qmd": ("09-variables-continuas-densidad-colab.ipynb", "09-variables-continuas-densidad.Rmd", "cap09-densidad-area.html"),
     "10-esperanza-varianza-chebyshev.qmd": ("10-esperanza-varianza-chebyshev-colab.ipynb", "10-esperanza-varianza-chebyshev.Rmd", "cap10-esperanza-varianza.html"),
     "11-distribuciones-discretas-especiales.qmd": ("11-distribuciones-discretas-especiales-colab.ipynb", "11-distribuciones-discretas-especiales.Rmd", "cap11-distribuciones-discretas.html"),
+    "12-hipergeometrica-poisson.qmd": ("12-hipergeometrica-poisson-colab.ipynb", "12-hipergeometrica-poisson.Rmd", "cap12-hipergeometrica-poisson.html"),
+    "13-distribuciones-continuas-especiales.qmd": ("13-distribuciones-continuas-especiales-colab.ipynb", "13-distribuciones-continuas-especiales.Rmd", "cap13-distribuciones-continuas.html"),
 }
 
 BASE = "https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev"
