@@ -1,0 +1,305 @@
+# Distribuciones discretas especiales II: hipergeométrica y Poisson
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante podrá reconocer modelos hipergeométricos y Poisson, distinguir muestreo con y sin reemplazo, calcular probabilidades con R, interpretar medias y varianzas, simular ambos modelos y estudiar aproximaciones binomial–hipergeométrica y binomial–Poisson.
+
+## Dos estructuras nuevas
+
+La distribución hipergeométrica aparece al contar éxitos en una muestra tomada **sin reemplazo** de una población finita. La distribución de Poisson aparece al contar eventos en un intervalo de tiempo, longitud, área o volumen cuando existe una tasa media aproximadamente estable.
+
+## Distribución hipergeométrica
+
+Una población de tamaño $N$ contiene $K$ elementos de interés y $N-K$ elementos restantes. Se selecciona una muestra de tamaño $n$ sin reemplazo y se define
+
+$$
+X=\text{número de éxitos en la muestra}.
+$$
+
+Entonces
+
+$$
+X\sim\operatorname{Hipergeométrica}(N,K,n)
+$$
+
+y
+
+$$
+\boxed{P(X=x)=\frac{\binom{K}{x}\binom{N-K}{n-x}}{\binom{N}{n}}}.
+$$
+
+El soporte satisface
+
+$$
+\max(0,n-(N-K))\le x\le\min(n,K).
+$$
+
+La media y la varianza son
+
+$$
+\boxed{E[X]=n\frac KN}
+$$
+
+y
+
+$$
+\boxed{\operatorname{Var}(X)=n\frac KN\left(1-\frac KN\right)\frac{N-n}{N-1}}.
+$$
+
+El último factor es la **corrección por población finita**.
+
+## Ejemplo de control de calidad
+
+Un lote contiene 50 componentes, 6 defectuosos. Se eligen 8 sin reemplazo. Si $X$ es el número de defectuosos,
+
+$$
+X\sim\operatorname{Hipergeométrica}(50,6,8).
+$$
+
+La probabilidad de exactamente dos defectuosos es
+
+$$
+P(X=2)=\frac{\binom62\binom{44}{6}}{\binom{50}{8}}.
+$$
+
+En R:
+
+```{r}
+dhyper(2, m = 6, n = 44, k = 8)
+phyper(2, m = 6, n = 44, k = 8)       # P(X <= 2)
+1 - phyper(1, m = 6, n = 44, k = 8)   # P(X >= 2)
+```
+
+En `dhyper()`, `m` es el número de éxitos de la población, `n` el número de fracasos y `k` el tamaño de muestra.
+
+## Binomial frente a hipergeométrica
+
+| Característica | Binomial | Hipergeométrica |
+|---|---|---|
+| Extracciones | independientes | dependientes |
+| Reemplazo | sí o equivalente | no |
+| Probabilidad de éxito | constante | cambia tras cada extracción |
+| Población | conceptual ilimitada | finita |
+
+Si $n/N$ es pequeño, una hipergeométrica puede aproximarse por una binomial con
+
+$$
+p=K/N.
+$$
+
+```{r}
+N <- 500; K <- 50; n <- 10; p <- K/N
+x <- 0:n
+data.frame(x,
+  hipergeometrica = dhyper(x, K, N-K, n),
+  binomial = dbinom(x, n, p))
+```
+
+## Distribución de Poisson
+
+Si $X$ cuenta eventos en un intervalo y la tasa media esperada es $\lambda>0$, escribimos
+
+$$
+X\sim\operatorname{Poisson}(\lambda).
+$$
+
+Su PMF es
+
+$$
+\boxed{P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}},\qquad x=0,1,2,\ldots
+$$
+
+y satisface
+
+$$
+\boxed{E[X]=\lambda,\qquad \operatorname{Var}(X)=\lambda}.
+$$
+
+## Ejemplo: solicitudes a un servidor
+
+Un servidor recibe en promedio 4 solicitudes por segundo. Bajo un modelo Poisson,
+
+$$
+X\sim\operatorname{Poisson}(4).
+$$
+
+```{r}
+dpois(6, lambda = 4)      # P(X = 6)
+ppois(6, lambda = 4)      # P(X <= 6)
+1 - ppois(6, lambda = 4)  # P(X > 6)
+```
+
+Si la tasa es $r$ eventos por unidad y observamos una longitud $t$,
+
+$$
+\boxed{\lambda=rt}.
+$$
+
+Por ejemplo, una tasa de 4 eventos por segundo corresponde a $\lambda=2$ en medio segundo y a $\lambda=12$ en tres segundos.
+
+## Ejemplo ambiental
+
+Si se observan en promedio 1.8 excedencias de un umbral por mes,
+
+$$
+X\sim\operatorname{Poisson}(1.8).
+$$
+
+La probabilidad de al menos una excedencia es
+
+```{r}
+1 - dpois(0, lambda = 1.8)
+```
+
+El modelo Poisson debe justificarse: no basta con que la variable sea un conteo. Conviene revisar estabilidad de la tasa, intervalo definido y ausencia de dependencia fuerte entre eventos.
+
+## Suma de variables Poisson
+
+Si
+
+$$
+X\sim\operatorname{Poisson}(\lambda_1),\qquad
+Y\sim\operatorname{Poisson}(\lambda_2)
+$$
+
+son independientes, entonces
+
+$$
+\boxed{X+Y\sim\operatorname{Poisson}(\lambda_1+\lambda_2)}.
+$$
+
+## Aproximación binomial por Poisson
+
+Si
+
+$$
+X\sim\operatorname{Binomial}(n,p)
+$$
+
+con $n$ grande y $p$ pequeño, manteniendo
+
+$$
+\lambda=np,
+$$
+
+entonces
+
+$$
+\boxed{X\approx\operatorname{Poisson}(np)}.
+$$
+
+Ejemplo:
+
+$$
+X\sim\operatorname{Binomial}(1000,0.002),\qquad\lambda=2.
+$$
+
+```{r}
+exacta <- dbinom(3, 1000, 0.002)
+aprox <- dpois(3, 2)
+c(exacta = exacta, poisson = aprox,
+  error_relativo = abs(aprox-exacta)/exacta)
+```
+
+## Simulación en R
+
+Hipergeométrica:
+
+```{r}
+set.seed(2026)
+N <- 50; K <- 6; n <- 8
+xh <- rhyper(50000, m = K, n = N-K, k = n)
+mean(xh); var(xh)
+n*K/N
+n*(K/N)*(1-K/N)*(N-n)/(N-1)
+```
+
+Poisson:
+
+```{r}
+set.seed(2026)
+xp <- rpois(50000, lambda = 4)
+mean(xp); var(xp)
+```
+
+En Poisson, ambas cantidades empíricas deben aproximarse a $4$.
+
+## Interactivo del capítulo
+
+El recurso web tiene dos comparaciones. En la primera se modifican $N$, $K$ y $n$ para contrastar la PMF hipergeométrica con una binomial de parámetro $p=K/N$. En la segunda se modifican $n$ y $p$ y se contrasta una binomial con una Poisson de parámetro $\lambda=np$.
+
+Esto permite observar visualmente cuándo las aproximaciones son buenas y cuándo la falta de reemplazo produce diferencias importantes.
+
+## Actividad con GeoGebra
+
+Construye una binomial con parámetros $n,p$ y una Poisson con $\lambda=np$. Representa ambas PMF mediante listas de puntos. Prueba:
+
+- $n=20$, $p=0.30$;
+- $n=100$, $p=0.05$;
+- $n=1000$, $p=0.002$.
+
+Describe en qué caso se parecen más y explica la razón.
+
+## Selección del modelo
+
+- Muestra de población finita **sin reemplazo**: hipergeométrica.
+- Conteo de eventos en un intervalo con tasa media: Poisson.
+- Éxitos en $n$ ensayos independientes: binomial.
+- Binomial con $n$ grande y $p$ pequeño: considerar aproximación Poisson.
+
+## Errores frecuentes
+
+- Usar binomial cuando el muestreo sin reemplazo representa una parte importante de la población.
+- Confundir $K$ con el tamaño de muestra.
+- Olvidar que `dhyper()` pide éxitos y fracasos por separado.
+- Usar Poisson sólo porque la variable sea un conteo.
+- Confundir tasa por unidad con $\lambda$ del intervalo observado.
+- Usar $\lambda=p$ en lugar de $\lambda=np$ para aproximar una binomial.
+
+## Resumen
+
+Hipergeométrica:
+
+$$
+P(X=x)=\frac{\binom Kx\binom{N-K}{n-x}}{\binom Nn}.
+$$
+
+Poisson:
+
+$$
+P(X=x)=e^{-\lambda}\frac{\lambda^x}{x!}.
+$$
+
+Cuando $n$ es grande y $p$ pequeño,
+
+$$
+\operatorname{Binomial}(n,p)\approx\operatorname{Poisson}(np).
+$$
+
+## Ejercicios
+
+1. Un lote de 40 piezas contiene 5 defectuosas. Se seleccionan 6 sin reemplazo. Calcula $P(X=1)$ y $P(X\ge2)$.
+2. Obtén media y varianza para la variable del ejercicio anterior.
+3. Compara el ejercicio 1 con una binomial de parámetro $p=5/40$.
+4. Una central recibe en promedio 3.2 llamadas por minuto. Calcula $P(X=5)$ y $P(X\le5)$.
+5. Calcula la probabilidad de ninguna llamada durante 30 segundos para la tasa anterior.
+6. Una carretera registra en promedio 1.5 incidentes por día. Calcula la probabilidad de al menos dos incidentes en dos días.
+7. Compara $P(X=2)$ para $B(200,0.01)$ y una Poisson con $\lambda=2$.
+8. Simula una hipergeométrica con $N=100,K=10,n=20$ y verifica media y varianza.
+9. Simula una Poisson con $\lambda=6$ y compara media y varianza muestrales.
+10. **Reto ★.** Explica por qué la corrección por población finita reduce la varianza respecto de la binomial correspondiente.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/12-hipergeometrica-poisson-colab.ipynb) | Ejecutar y comparar modelos hipergeométrico, binomial y Poisson. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/12-hipergeometrica-poisson.Rmd) | Reproducir cálculos, aproximaciones y simulaciones. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap12-hipergeometrica-poisson.html) | Explorar muestreo sin reemplazo y aproximaciones. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de modelos y criterios de selección. |
+
+## Referencias del capítulo
+
+El tratamiento sigue @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, ejercicios y simulaciones son originales; el enfoque computacional general toma como referencia @kerns2010.
