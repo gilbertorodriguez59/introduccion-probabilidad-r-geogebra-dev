@@ -1,0 +1,618 @@
+# Esperanza conjunta, covarianza y correlación
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- calcular esperanzas de funciones de dos variables aleatorias;
+- obtener $E[XY]$ a partir de una distribución conjunta;
+- definir e interpretar covarianza y correlación;
+- calcular la varianza de una suma o combinación lineal;
+- distinguir entre independencia, covarianza cero y correlación cero;
+- reconocer que correlación mide asociación lineal y no dependencia general;
+- utilizar R para calcular momentos conjuntos y explorar relaciones lineales y no lineales;
+- interpretar gráficamente cómo cambia la nube de puntos al variar la correlación.
+
+## De la distribución conjunta a los momentos conjuntos
+
+Una distribución conjunta no sólo permite calcular probabilidades. También permite resumir cómo se comportan simultáneamente $X$ y $Y$ mediante cantidades como
+
+$$
+E[X],\qquad E[Y],\qquad E[XY],\qquad \operatorname{Cov}(X,Y),\qquad \rho_{X,Y}.
+$$
+
+Estas cantidades serán fundamentales más adelante en inferencia estadística, regresión, análisis multivariado y ciencia de datos.
+
+# Esperanza de una función de dos variables
+
+Si $X$ y $Y$ son discretas y $g$ es una función, entonces
+
+$$
+\boxed{
+E[g(X,Y)]
+=\sum_x\sum_y g(x,y)p_{X,Y}(x,y)
+}
+$$
+
+si la suma existe.
+
+Si $(X,Y)$ tiene densidad conjunta,
+
+$$
+\boxed{
+E[g(X,Y)]
+=\iint g(x,y)f_{X,Y}(x,y)\,dx\,dy
+}.
+$$
+
+Esta fórmula permite calcular directamente momentos conjuntos sin obtener primero la distribución de $g(X,Y)$.
+
+## Ejemplo discreto
+
+Considere la tabla conjunta
+
+| $X\backslash Y$ | 0 | 1 | 2 |
+|---:|---:|---:|---:|
+| 0 | 0.20 | 0.10 | 0.05 |
+| 1 | 0.15 | 0.20 | 0.10 |
+| 2 | 0.05 | 0.10 | 0.05 |
+
+Para calcular $E[XY]$ usamos
+
+$$
+E[XY]=\sum_x\sum_y xy\,p_{X,Y}(x,y).
+$$
+
+En R:
+
+```{r}
+P <- matrix(c(
+  0.20, 0.10, 0.05,
+  0.15, 0.20, 0.10,
+  0.05, 0.10, 0.05
+), nrow = 3, byrow = TRUE)
+
+x <- 0:2
+y <- 0:2
+
+EX <- sum(x * rowSums(P))
+EY <- sum(y * colSums(P))
+EXY <- sum(outer(x, y, "*") * P)
+
+c(EX = EX, EY = EY, EXY = EXY)
+```
+
+# Linealidad de la esperanza
+
+Para constantes $a,b,c$,
+
+$$
+\boxed{E[aX+bY+c]=aE[X]+bE[Y]+c}.
+$$
+
+Esta propiedad **no requiere independencia**.
+
+Por ejemplo, si el costo total de dos subsistemas es
+
+$$
+C=120X+80Y+500,
+$$
+
+entonces
+
+$$
+E[C]=120E[X]+80E[Y]+500.
+$$
+
+# Covarianza
+
+La covarianza mide la tendencia de dos variables a desviarse de sus medias en la misma dirección.
+
+Se define como
+
+$$
+\boxed{
+\operatorname{Cov}(X,Y)
+=E[(X-E[X])(Y-E[Y])]
+}.
+$$
+
+Una fórmula equivalente y muy útil es
+
+$$
+\boxed{
+\operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y]
+}.
+$$
+
+## Interpretación del signo
+
+- $\operatorname{Cov}(X,Y)>0$: valores altos de $X$ tienden a asociarse con valores altos de $Y$.
+- $\operatorname{Cov}(X,Y)<0$: valores altos de $X$ tienden a asociarse con valores bajos de $Y$.
+- $\operatorname{Cov}(X,Y)=0$: no hay asociación lineal detectada por la covarianza, pero puede existir dependencia no lineal.
+
+La magnitud de la covarianza depende de las unidades de medición, por lo que no es adecuada para comparar directamente relaciones expresadas en escalas distintas.
+
+## Cálculo en el ejemplo discreto
+
+```{r}
+covXY <- EXY - EX * EY
+covXY
+```
+
+También podemos obtener las varianzas marginales:
+
+```{r}
+EX2 <- sum((x^2) * rowSums(P))
+EY2 <- sum((y^2) * colSums(P))
+
+varX <- EX2 - EX^2
+varY <- EY2 - EY^2
+
+c(varX = varX, varY = varY, covXY = covXY)
+```
+
+# Propiedades básicas de la covarianza
+
+Para constantes $a,b,c,d$,
+
+$$
+\operatorname{Cov}(X,Y)=\operatorname{Cov}(Y,X),
+$$
+
+$$
+\operatorname{Cov}(X,X)=\operatorname{Var}(X),
+$$
+
+$$
+\operatorname{Cov}(aX+b,cY+d)=ac\operatorname{Cov}(X,Y).
+$$
+
+Además,
+
+$$
+\operatorname{Cov}(X,c)=0.
+$$
+
+# Varianza de una suma
+
+Un resultado central es
+
+$$
+\boxed{
+\operatorname{Var}(X+Y)
+=\operatorname{Var}(X)+\operatorname{Var}(Y)
++2\operatorname{Cov}(X,Y)
+}.
+$$
+
+Más generalmente,
+
+$$
+\boxed{
+\operatorname{Var}(aX+bY)
+=a^2\operatorname{Var}(X)
++b^2\operatorname{Var}(Y)
++2ab\operatorname{Cov}(X,Y)
+}.
+$$
+
+Si $X$ y $Y$ son independientes, entonces su covarianza es cero y
+
+$$
+\operatorname{Var}(X+Y)
+=\operatorname{Var}(X)+\operatorname{Var}(Y).
+$$
+
+## Ejemplo de error combinado
+
+Suponga que dos errores de medición tienen
+
+$$
+\operatorname{Var}(X)=4,\qquad
+\operatorname{Var}(Y)=9,
+$$
+
+y
+
+$$
+\operatorname{Cov}(X,Y)=2.
+$$
+
+Entonces
+
+$$
+\operatorname{Var}(X+Y)=4+9+2(2)=17.
+$$
+
+Si se ignorara la covarianza se obtendría incorrectamente 13.
+
+# Coeficiente de correlación
+
+La correlación estandariza la covarianza:
+
+$$
+\boxed{
+\rho_{X,Y}
+=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}
+}
+$$
+
+si $\sigma_X>0$ y $\sigma_Y>0$.
+
+Siempre se cumple
+
+$$
+\boxed{-1\le\rho_{X,Y}\le1}.
+$$
+
+A diferencia de la covarianza, la correlación no tiene unidades.
+
+## Interpretación
+
+- $\rho$ cercano a 1: asociación lineal positiva fuerte.
+- $\rho$ cercano a $-1$: asociación lineal negativa fuerte.
+- $\rho$ cercano a 0: asociación lineal débil o inexistente.
+
+**Importante:** $\rho=0$ no implica independencia en general.
+
+## Correlación en el ejemplo discreto
+
+```{r}
+rho <- covXY / sqrt(varX * varY)
+rho
+```
+
+# Independencia implica covarianza cero
+
+Si $X$ y $Y$ son independientes y tienen segundos momentos finitos,
+
+$$
+E[XY]=E[X]E[Y].
+$$
+
+Por tanto,
+
+$$
+\boxed{
+X\perp Y\quad\Longrightarrow\quad \operatorname{Cov}(X,Y)=0
+}.
+$$
+
+El recíproco es falso.
+
+# Covarianza cero no implica independencia
+
+Considere
+
+$$
+X\sim U(-1,1)
+$$
+
+y defina
+
+$$
+Y=X^2.
+$$
+
+Claramente $Y$ depende completamente de $X$. Sin embargo,
+
+$$
+E[X]=0
+$$
+
+por simetría y
+
+$$
+E[XY]=E[X^3]=0.
+$$
+
+Entonces
+
+$$
+\operatorname{Cov}(X,Y)
+=E[X^3]-E[X]E[X^2]
+=0.
+$$
+
+Así,
+
+$$
+\boxed{\operatorname{Cov}(X,Y)=0}
+$$
+
+pero $X$ y $Y$ son dependientes.
+
+En R:
+
+```{r}
+set.seed(2026)
+X <- runif(50000, -1, 1)
+Y <- X^2
+cor(X, Y)
+plot(X, Y, pch = 16, cex = 0.35,
+     main = "Dependencia no lineal con correlación cercana a cero")
+```
+
+La nube tiene una estructura parabólica evidente aunque la correlación sea cercana a cero.
+
+# Correlación perfecta
+
+Si existen constantes $a\ne0$ y $b$ tales que
+
+$$
+Y=aX+b
+$$
+
+casi seguramente, entonces
+
+$$
+|\rho_{X,Y}|=1.
+$$
+
+Más precisamente:
+
+- si $a>0$, $\rho=1$;
+- si $a<0$, $\rho=-1$.
+
+Esto explica geométricamente los extremos de la escala de correlación.
+
+# Efecto de cambios de escala
+
+Si
+
+$$
+U=aX+b,\qquad V=cY+d,
+$$
+
+con $a,c\ne0$, entonces
+
+$$
+\rho_{U,V}=\operatorname{sign}(ac)\rho_{X,Y}.
+$$
+
+Por tanto, cambiar unidades de metros a centímetros no altera la magnitud de la correlación; sólo invertir el sentido de una escala puede cambiar su signo.
+
+# Esperanza y covarianza en el caso continuo
+
+Si $(X,Y)$ tiene densidad conjunta,
+
+$$
+E[XY]
+=\iint xyf_{X,Y}(x,y)\,dx\,dy.
+$$
+
+Retomemos
+
+$$
+f_{X,Y}(x,y)=2,
+\qquad 0<y<x<1.
+$$
+
+Sabemos que
+
+$$
+f_X(x)=2x,
+\qquad
+f_Y(y)=2(1-y).
+$$
+
+Entonces
+
+$$
+E[X]=\int_0^1x(2x)\,dx=\frac23,
+$$
+
+$$
+E[Y]=\int_0^1y\,2(1-y)\,dy=\frac13.
+$$
+
+Además,
+
+$$
+E[XY]
+=\int_0^1\int_0^x2xy\,dy\,dx
+=\frac14.
+$$
+
+Por tanto,
+
+$$
+\operatorname{Cov}(X,Y)
+=\frac14-\frac23\frac13
+=\frac1{36}>0.
+$$
+
+Aunque la dependencia es clara por el soporte triangular, la covarianza resume sólo su componente lineal.
+
+# Varianza de una combinación de muchas variables
+
+Para variables $X_1,\ldots,X_n$,
+
+$$
+\boxed{
+\operatorname{Var}\left(\sum_{i=1}^nX_i\right)
+=\sum_{i=1}^n\operatorname{Var}(X_i)
++2\sum_{i<j}\operatorname{Cov}(X_i,X_j)
+}.
+$$
+
+Si son independientes, todos los términos cruzados desaparecen.
+
+Este resultado aparece en propagación de incertidumbre, portafolios, procesamiento de señales y sumas de mediciones.
+
+# Matriz de covarianzas
+
+Para dos variables definimos
+
+$$
+\boxed{
+\Sigma=
+\begin{pmatrix}
+\operatorname{Var}(X) & \operatorname{Cov}(X,Y)\\
+\operatorname{Cov}(X,Y) & \operatorname{Var}(Y)
+\end{pmatrix}
+}.
+$$
+
+En R:
+
+```{r}
+Sigma <- matrix(c(varX, covXY,
+                  covXY, varY), nrow = 2)
+Sigma
+```
+
+La matriz de covarianzas será fundamental en capítulos posteriores y en técnicas como análisis de componentes principales.
+
+# Simulación de nubes con distinta correlación
+
+Una forma sencilla de producir pares aproximadamente correlacionados es
+
+$$
+X=Z_1,
+$$
+
+$$
+Y=\rho Z_1+\sqrt{1-\rho^2}Z_2,
+$$
+
+con $Z_1,Z_2$ normales estándar independientes.
+
+Entonces
+
+$$
+\operatorname{Corr}(X,Y)=\rho.
+$$
+
+```{r}
+set.seed(2026)
+n <- 3000
+rho <- 0.75
+z1 <- rnorm(n)
+z2 <- rnorm(n)
+X <- z1
+Y <- rho*z1 + sqrt(1-rho^2)*z2
+
+cor(X, Y)
+plot(X, Y, pch = 16, cex = 0.5,
+     main = paste("Correlación aproximada:", round(cor(X,Y), 3)))
+```
+
+# Interactivo del capítulo
+
+El interactivo tiene dos modos.
+
+**Modo lineal.** Un deslizador controla $\rho$ entre $-0.95$ y $0.95$. La nube de puntos cambia desde una relación negativa fuerte hasta una positiva fuerte, mostrando simultáneamente covarianza y correlación empíricas.
+
+**Modo no lineal.** Se muestra el ejemplo $Y=X^2$ con $X$ simétrico alrededor de cero. La correlación permanece cercana a cero aunque la dependencia sea visualmente evidente.
+
+El objetivo es evitar una interpretación mecánica de la correlación y reforzar la diferencia entre:
+
+$$
+\text{independencia},\qquad
+\text{incorrelación},\qquad
+\text{dependencia no lineal}.
+$$
+
+# Actividad con GeoGebra
+
+Construye una nube de puntos cercana a una recta y modifica su dispersión vertical mediante un deslizador. Observa cómo la correlación disminuye al aumentar la dispersión.
+
+Después genera puntos de una parábola simétrica
+
+$$
+y=x^2
+$$
+
+con valores positivos y negativos de $x$. Discute por qué una medida exclusivamente lineal puede ser cercana a cero aun cuando exista una relación funcional exacta.
+
+# Estrategia de resolución
+
+Ante un problema de covarianza o correlación:
+
+1. calcula $E[X]$ y $E[Y]$;
+2. calcula $E[XY]$ a partir de la distribución conjunta;
+3. usa
+   $$
+   \operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y];
+   $$
+4. calcula las varianzas marginales;
+5. estandariza para obtener $\rho$;
+6. interpreta el signo y la magnitud sólo como asociación lineal;
+7. si necesitas la varianza de una suma, incluye los términos de covarianza;
+8. no concluyas independencia únicamente porque $\rho=0$.
+
+# Errores frecuentes
+
+- Confundir $E[XY]$ con $E[X]E[Y]$ sin haber establecido independencia.
+- Omitir el término $2\operatorname{Cov}(X,Y)$ en la varianza de una suma.
+- Interpretar una covarianza grande como una relación necesariamente fuerte sin considerar unidades.
+- Concluir independencia a partir de correlación cero.
+- Interpretar correlación como causalidad.
+- Confundir correlación poblacional $\rho$ con correlación muestral calculada a partir de datos.
+- Usar correlación para describir una relación claramente no lineal sin inspeccionar una gráfica.
+
+# Resumen
+
+$$
+E[g(X,Y)]
+=\sum_x\sum_y g(x,y)p_{X,Y}(x,y)
+$$
+
+o
+
+$$
+E[g(X,Y)]
+=\iint g(x,y)f_{X,Y}(x,y)\,dx\,dy.
+$$
+
+La covarianza es
+
+$$
+\boxed{\operatorname{Cov}(X,Y)=E[XY]-E[X]E[Y]}.
+$$
+
+La correlación es
+
+$$
+\boxed{\rho_{X,Y}=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}}.
+$$
+
+La varianza de una suma es
+
+$$
+\boxed{\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)+2\operatorname{Cov}(X,Y)}.
+$$
+
+La independencia implica covarianza cero, pero el recíproco no es cierto en general.
+
+# Ejercicios
+
+1. Para la tabla conjunta del capítulo 15, calcula $E[X]$, $E[Y]$ y $E[XY]$.
+2. Obtén la covarianza y la correlación de la misma tabla.
+3. Calcula $\operatorname{Var}(2X-3Y)$ utilizando las varianzas y la covarianza.
+4. Sean $\operatorname{Var}(X)=4$, $\operatorname{Var}(Y)=9$ y $\operatorname{Cov}(X,Y)=-1.5$. Calcula $\operatorname{Var}(X+Y)$ y $\operatorname{Var}(2X-Y)$.
+5. Para la densidad $f(x,y)=2$ sobre $0<y<x<1$, verifica que $E[XY]=1/4$.
+6. Obtén $\operatorname{Var}(X)$, $\operatorname{Var}(Y)$ y $\rho_{X,Y}$ para esa densidad.
+7. Simula 50 000 pares normales con $\rho=0.8$ y compara la correlación empírica con el valor teórico.
+8. Repite con $\rho=-0.6$ y $\rho=0$.
+9. Simula $X\sim U(-1,1)$ y $Y=X^2$. Calcula la correlación y describe la gráfica.
+10. Propón un ejemplo real donde una covarianza positiva tenga sentido físico.
+11. **Reto ★.** Demuestra que $|\rho_{X,Y}|\le1$ usando la desigualdad de Cauchy–Schwarz.
+12. **Reto ★.** Demuestra que si $X$ y $Y$ son independientes y tienen segundos momentos finitos, entonces $\operatorname{Cov}(X,Y)=0$.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/16-esperanza-covarianza-correlacion-colab.ipynb) | Explorar momentos conjuntos, covarianza, correlación y simulaciones. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/16-esperanza-covarianza-correlacion.Rmd) | Reproducir cálculos y gráficas en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap16-covarianza-correlacion.html) | Comparar asociación lineal, correlación y dependencia no lineal. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de covarianza, correlación y varianza de sumas. |
+
+## Referencias del capítulo
+
+El tratamiento de esperanza conjunta, covarianza y correlación sigue la presentación estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia @kerns2010.
