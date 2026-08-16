@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 2 5 3 4 4 3 5 3 4 7\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1]  2  5  2  0  2  2  1  0 10  3\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  2  6  6  6  7  6  8  5  3 15",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 3 3 2 6 7 3 3 7 4 8\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 5 0 1 1 2 0 0 1\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1] 1 3 5 6 4 7 8 3 5 9",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2827,6 +2827,316 @@
     "text": "12.19 Referencias del capítulo\nEl tratamiento sigue Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios y simulaciones son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Distribuciones discretas especiales II: hipergeométrica y Poisson</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html",
+    "href": "13-distribuciones-continuas-especiales.html",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "",
+    "text": "13.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#objetivos-de-aprendizaje",
+    "href": "13-distribuciones-continuas-especiales.html#objetivos-de-aprendizaje",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "",
+    "text": "reconocer cuándo una variable continua puede modelarse mediante una distribución uniforme, exponencial o normal;\nidentificar sus parámetros, soporte, densidad, función de distribución, media y varianza;\ncalcular probabilidades mediante integración y mediante funciones de R;\nestandarizar variables normales;\nobtener cuantiles y percentiles;\ninterpretar la propiedad sin memoria de la distribución exponencial;\nsimular variables continuas y comparar resultados empíricos con modelos teóricos;\ndistinguir claramente qué tipo de fenómeno representa cada distribución.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#tres-modelos-fundamentales",
+    "href": "13-distribuciones-continuas-especiales.html#tres-modelos-fundamentales",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "13.2 Tres modelos fundamentales",
+    "text": "13.2 Tres modelos fundamentales\nLas distribuciones uniforme, exponencial y normal aparecen constantemente en ingeniería y ciencias, pero representan situaciones muy diferentes.\n\nUniforme: todos los valores de un intervalo tienen la misma densidad.\nExponencial: modela tiempos de espera continuos cuando la tasa instantánea de ocurrencia es constante.\nNormal: describe fenómenos que se concentran alrededor de un valor central y cuya variabilidad resulta de la combinación de múltiples pequeñas fuentes de perturbación.\n\nReconocer la estructura del fenómeno es más importante que memorizar una fórmula.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#función-de-distribución-acumulada",
+    "href": "13-distribuciones-continuas-especiales.html#función-de-distribución-acumulada",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "14.1 Función de distribución acumulada",
+    "text": "14.1 Función de distribución acumulada\nLa CDF es\n\\[\nF_X(x)=\n\\begin{cases}\n0, & x&lt;a,\\\\\n\\dfrac{x-a}{b-a}, & a\\le x\\le b,\\\\\n1, & x&gt;b.\n\\end{cases}\n\\]\nPor ello, si\n\\[\na\\le c&lt;d\\le b,\n\\]\nentonces\n\\[\n\\boxed{P(c&lt;X&lt;d)=\\frac{d-c}{b-a}}.\n\\]\nLa probabilidad depende únicamente de la longitud relativa del subintervalo.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#media-y-varianza-de-la-uniforme",
+    "href": "13-distribuciones-continuas-especiales.html#media-y-varianza-de-la-uniforme",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "14.2 Media y varianza de la uniforme",
+    "text": "14.2 Media y varianza de la uniforme\nPara\n\\[\nX\\sim U(a,b),\n\\]\nse tiene\n\\[\n\\boxed{E[X]=\\frac{a+b}{2}}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=\\frac{(b-a)^2}{12}}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#ejemplo-error-de-redondeo",
+    "href": "13-distribuciones-continuas-especiales.html#ejemplo-error-de-redondeo",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "14.3 Ejemplo: error de redondeo",
+    "text": "14.3 Ejemplo: error de redondeo\nSupongamos que un error de redondeo puede considerarse uniformemente distribuido entre \\(-0.5\\) y \\(0.5\\) unidades:\n\\[\nX\\sim U(-0.5,0.5).\n\\]\nLa probabilidad de que el error absoluto sea menor que \\(0.2\\) es\n\\[\nP(|X|&lt;0.2)=P(-0.2&lt;X&lt;0.2)=\\frac{0.4}{1}=0.4.\n\\]\nEn R:\n\npunif(0.2, min = -0.5, max = 0.5) -\n  punif(-0.2, min = -0.5, max = 0.5)\n\n[1] 0.4",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
+    "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "14.4 Funciones de R para la uniforme",
+    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.620904035 0.272849213 0.070425029 0.578336561 0.004769106",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#cdf-y-función-de-supervivencia",
+    "href": "13-distribuciones-continuas-especiales.html#cdf-y-función-de-supervivencia",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.1 CDF y función de supervivencia",
+    "text": "15.1 CDF y función de supervivencia\nPara \\(x\\ge0\\),\n\\[\n\\boxed{F_X(x)=1-e^{-\\lambda x}}.\n\\]\nPor tanto,\n\\[\n\\boxed{P(X&gt;x)=e^{-\\lambda x}}.\n\\]\nEsta última expresión suele llamarse función de supervivencia.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#media-y-varianza-de-la-exponencial",
+    "href": "13-distribuciones-continuas-especiales.html#media-y-varianza-de-la-exponencial",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.2 Media y varianza de la exponencial",
+    "text": "15.2 Media y varianza de la exponencial\nSi\n\\[\nX\\sim\\operatorname{Exp}(\\lambda),\n\\]\nentonces\n\\[\n\\boxed{E[X]=\\frac{1}{\\lambda}}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=\\frac{1}{\\lambda^2}}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#ejemplo-tiempo-entre-fallas",
+    "href": "13-distribuciones-continuas-especiales.html#ejemplo-tiempo-entre-fallas",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.3 Ejemplo: tiempo entre fallas",
+    "text": "15.3 Ejemplo: tiempo entre fallas\nSi un componente presenta una tasa de falla de\n\\[\n\\lambda=0.02\\text{ fallas por hora},\n\\]\ny el tiempo hasta la siguiente falla se modela exponencialmente, entonces\n\\[\nE[X]=\\frac{1}{0.02}=50\\text{ horas}.\n\\]\nLa probabilidad de que funcione más de 80 horas es\n\\[\nP(X&gt;80)=e^{-0.02(80)}.\n\\]\nEn R:\n\npexp(80, rate = 0.02, lower.tail = FALSE)\n\n[1] 0.2018965",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#propiedad-sin-memoria",
+    "href": "13-distribuciones-continuas-especiales.html#propiedad-sin-memoria",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.4 Propiedad sin memoria",
+    "text": "15.4 Propiedad sin memoria\nLa distribución exponencial satisface\n\\[\n\\boxed{P(X&gt;s+t\\mid X&gt;s)=P(X&gt;t)}.\n\\]\nSi un componente ha sobrevivido \\(s\\) horas y el modelo exponencial es apropiado, el tiempo adicional de espera tiene la misma distribución que al inicio.\nEsta propiedad es análoga a la propiedad sin memoria de la distribución geométrica, pero ahora en tiempo continuo.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#ejemplo-numérico-de-la-propiedad-sin-memoria",
+    "href": "13-distribuciones-continuas-especiales.html#ejemplo-numérico-de-la-propiedad-sin-memoria",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.5 Ejemplo numérico de la propiedad sin memoria",
+    "text": "15.5 Ejemplo numérico de la propiedad sin memoria\nSea\n\\[\nX\\sim\\operatorname{Exp}(0.1).\n\\]\nEntonces\n\\[\nP(X&gt;15\\mid X&gt;10)=P(X&gt;5)=e^{-0.5}.\n\\]\nEn R:\n\ncondicional &lt;- pexp(15, rate = 0.1, lower.tail = FALSE) /\n               pexp(10, rate = 0.1, lower.tail = FALSE)\ndirecta &lt;- pexp(5, rate = 0.1, lower.tail = FALSE)\nc(condicional = condicional, directa = directa)\n\ncondicional     directa \n  0.6065307   0.6065307",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
+    "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "15.6 Funciones de R para la exponencial",
+    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  0.6070387 23.1056488  3.0084020  2.0056976  1.3960362",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#propiedades-geométricas",
+    "href": "13-distribuciones-continuas-especiales.html#propiedades-geométricas",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.1 Propiedades geométricas",
+    "text": "16.1 Propiedades geométricas\nLa densidad normal:\n\nes simétrica respecto de \\(\\mu\\);\ntiene máximo en \\(x=\\mu\\);\nes positiva para todo número real;\nse aproxima a cero en ambas colas;\ntiene área total igual a 1.\n\nAdemás,\n\\[\nE[X]=\\mu,\n\\]\n\\[\n\\operatorname{Var}(X)=\\sigma^2.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#normal-estándar",
+    "href": "13-distribuciones-continuas-especiales.html#normal-estándar",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.2 Normal estándar",
+    "text": "16.2 Normal estándar\nLa normal estándar es\n\\[\n\\boxed{Z\\sim N(0,1)}.\n\\]\nSi\n\\[\nX\\sim N(\\mu,\\sigma^2),\n\\]\nentonces la transformación\n\\[\n\\boxed{Z=\\frac{X-\\mu}{\\sigma}}\n\\]\nproduce una variable normal estándar.\nEste proceso se llama estandarización.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#ejemplo-de-estandarización",
+    "href": "13-distribuciones-continuas-especiales.html#ejemplo-de-estandarización",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.3 Ejemplo de estandarización",
+    "text": "16.3 Ejemplo de estandarización\nEl diámetro de cierta pieza se modela como\n\\[\nX\\sim N(20,0.4^2).\n\\]\nPara calcular\n\\[\nP(X\\le20.5),\n\\]\nestandarizamos:\n\\[\nz=\\frac{20.5-20}{0.4}=1.25.\n\\]\nPor tanto,\n\\[\nP(X\\le20.5)=P(Z\\le1.25).\n\\]\nEn R podemos calcular directamente:\n\npnorm(20.5, mean = 20, sd = 0.4)\n\n[1] 0.8943502\n\n\nO mediante la normal estándar:\n\npnorm((20.5 - 20) / 0.4)\n\n[1] 0.8943502",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#probabilidad-entre-dos-valores",
+    "href": "13-distribuciones-continuas-especiales.html#probabilidad-entre-dos-valores",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.4 Probabilidad entre dos valores",
+    "text": "16.4 Probabilidad entre dos valores\nPara\n\\[\nX\\sim N(\\mu,\\sigma^2),\n\\]\n\\[\nP(a&lt;X&lt;b)=F_X(b)-F_X(a).\n\\]\nEn R:\n\npnorm(20.5, 20, 0.4) - pnorm(19.6, 20, 0.4)\n\n[1] 0.735695",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#cuantiles-de-la-normal",
+    "href": "13-distribuciones-continuas-especiales.html#cuantiles-de-la-normal",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.5 Cuantiles de la normal",
+    "text": "16.5 Cuantiles de la normal\nA veces conocemos la probabilidad y buscamos el valor \\(x\\).\nSi queremos \\(x\\) tal que\n\\[\nP(X\\le x)=0.95,\n\\]\nusamos\n\nqnorm(0.95, mean = 20, sd = 0.4)\n\n[1] 20.65794\n\n\nLos cuantiles son fundamentales en tolerancias, control de calidad e inferencia estadística.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#regla-empírica-689599.7",
+    "href": "13-distribuciones-continuas-especiales.html#regla-empírica-689599.7",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.6 Regla empírica 68–95–99.7",
+    "text": "16.6 Regla empírica 68–95–99.7\nPara una distribución normal aproximadamente:\n\\[\nP(|X-\\mu|&lt;\\sigma)\\approx0.6827,\n\\]\n\\[\nP(|X-\\mu|&lt;2\\sigma)\\approx0.9545,\n\\]\n\\[\nP(|X-\\mu|&lt;3\\sigma)\\approx0.9973.\n\\]\nEn R:\n\nfor (k in 1:3) {\n  print(pnorm(k) - pnorm(-k))\n}\n\n[1] 0.6826895\n[1] 0.9544997\n[1] 0.9973002\n\n\nEsta regla es específica de la normal y no debe confundirse con la desigualdad general de Chebyshev.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
+    "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.7 Funciones de R para la normal",
+    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1] 10.34090 11.46818 10.04444 12.26177 10.10798",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#transformaciones-lineales-de-variables-normales",
+    "href": "13-distribuciones-continuas-especiales.html#transformaciones-lineales-de-variables-normales",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.8 Transformaciones lineales de variables normales",
+    "text": "16.8 Transformaciones lineales de variables normales\nSi\n\\[\nX\\sim N(\\mu,\\sigma^2)\n\\]\ny\n\\[\nY=aX+b,\n\\]\nentonces\n\\[\n\\boxed{Y\\sim N(a\\mu+b,a^2\\sigma^2)}.\n\\]\nLa familia normal permanece dentro de la misma familia bajo transformaciones lineales.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#simulación-y-comparación-gráfica",
+    "href": "13-distribuciones-continuas-especiales.html#simulación-y-comparación-gráfica",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.9 Simulación y comparación gráfica",
+    "text": "16.9 Simulación y comparación gráfica\n\nset.seed(2026)\nn &lt;- 20000\nx &lt;- rnorm(n, mean = 20, sd = 0.4)\n\nhist(x, probability = TRUE, breaks = 35,\n     main = \"Simulación normal y densidad teórica\",\n     xlab = \"x\")\ncurve(dnorm(x, mean = 20, sd = 0.4),\n      add = TRUE, lwd = 2)",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#comparación-de-las-tres-distribuciones",
+    "href": "13-distribuciones-continuas-especiales.html#comparación-de-las-tres-distribuciones",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.10 Comparación de las tres distribuciones",
+    "text": "16.10 Comparación de las tres distribuciones\n\n\n\n\n\n\n\n\n\n\n\nDistribución\nSoporte\nParámetros\nMedia\nVarianza\nAplicación típica\n\n\n\n\nUniforme\n\\([a,b]\\)\n\\(a,b\\)\n\\((a+b)/2\\)\n\\((b-a)^2/12\\)\nvalor igualmente plausible dentro de un intervalo\n\n\nExponencial\n\\([0,\\infty)\\)\n\\(\\lambda\\)\n\\(1/\\lambda\\)\n\\(1/\\lambda^2\\)\ntiempo de espera con tasa constante\n\n\nNormal\n\\((-\\infty,\\infty)\\)\n\\(\\mu,\\sigma\\)\n\\(\\mu\\)\n\\(\\sigma^2\\)\nmediciones y variación alrededor de un centro",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#interactivo-del-capítulo",
+    "href": "13-distribuciones-continuas-especiales.html#interactivo-del-capítulo",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.11 Interactivo del capítulo",
+    "text": "16.11 Interactivo del capítulo\nEl interactivo permite seleccionar uniforme, exponencial o normal y modificar sus parámetros. También permite elegir un intervalo \\([a,b]\\) para visualizar el área de probabilidad.\nEn la normal se muestran además la media, la desviación estándar y la versión estandarizada del intervalo. En la exponencial se muestra la función de supervivencia y en la uniforme se observa que la probabilidad depende directamente de la longitud del intervalo.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#actividad-con-geogebra",
+    "href": "13-distribuciones-continuas-especiales.html#actividad-con-geogebra",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.12 Actividad con GeoGebra",
+    "text": "16.12 Actividad con GeoGebra\nConstruye tres densidades controladas por deslizadores:\n\nuna uniforme \\(U(a,b)\\);\nuna exponencial con parámetro \\(\\lambda\\);\nuna normal con parámetros \\(\\mu\\) y \\(\\sigma\\).\n\nPara cada una crea dos deslizadores \\(c&lt;d\\) y sombrea el área bajo la curva entre ambos límites. Observa cómo cambia la probabilidad al modificar los parámetros.\nEn la normal, mueve \\(\\mu\\) manteniendo \\(\\sigma\\) fija y observa el desplazamiento horizontal. Después fija \\(\\mu\\) y modifica \\(\\sigma\\) para observar el cambio de dispersión.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#estrategia-de-selección-del-modelo",
+    "href": "13-distribuciones-continuas-especiales.html#estrategia-de-selección-del-modelo",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.13 Estrategia de selección del modelo",
+    "text": "16.13 Estrategia de selección del modelo\nAntes de elegir una distribución, pregúntate:\n\n¿la variable está restringida a un intervalo finito y no hay razón para favorecer una zona? Considere uniforme.\n¿la variable mide un tiempo de espera positivo con tasa aproximadamente constante? Considere exponencial.\n¿la variable fluctúa alrededor de un centro debido a muchas pequeñas fuentes de variación? Considere normal.\n\nLa elección debe justificarse por el mecanismo del fenómeno, no sólo por la forma de un histograma.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#errores-frecuentes",
+    "href": "13-distribuciones-continuas-especiales.html#errores-frecuentes",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.14 Errores frecuentes",
+    "text": "16.14 Errores frecuentes\n\nConfundir densidad con probabilidad puntual.\nUsar sd = sigma^2 en R en lugar de sd = sigma.\nConfundir rate = lambda con la media en la exponencial.\nAplicar la propiedad sin memoria a cualquier distribución de tiempos.\nOlvidar estandarizar restando la media antes de dividir entre la desviación estándar.\nUsar la regla 68–95–99.7 para distribuciones no normales.\nInterpretar una densidad uniforme como probabilidades positivas en puntos individuales.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#resumen",
+    "href": "13-distribuciones-continuas-especiales.html#resumen",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.15 Resumen",
+    "text": "16.15 Resumen\nUniforme:\n\\[\nf(x)=\\frac{1}{b-a},\\qquad a\\le x\\le b.\n\\]\nExponencial:\n\\[\nf(x)=\\lambda e^{-\\lambda x},\\qquad x\\ge0.\n\\]\nNormal:\n\\[\nf(x)=\\frac{1}{\\sigma\\sqrt{2\\pi}}\n\\exp\\left[-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right].\n\\]\nPara una normal,\n\\[\nZ=\\frac{X-\\mu}{\\sigma}\\sim N(0,1).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#ejercicios",
+    "href": "13-distribuciones-continuas-especiales.html#ejercicios",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.16 Ejercicios",
+    "text": "16.16 Ejercicios\n\nSea \\(X\\sim U(2,8)\\). Calcula \\(P(3&lt;X&lt;6)\\), \\(E[X]\\) y \\(\\operatorname{Var}(X)\\).\nCalcula el percentil 90 de \\(U(2,8)\\) utilizando R.\nSea \\(X\\sim\\operatorname{Exp}(0.25)\\). Calcula \\(P(X&gt;6)\\) y \\(P(2&lt;X&lt;5)\\).\nPara la variable anterior, calcula la media y la desviación estándar.\nVerifica numéricamente la propiedad sin memoria para \\(s=4\\) y \\(t=3\\).\nSea \\(X\\sim N(100,15^2)\\). Calcula \\(P(X&lt;120)\\).\nPara la misma variable, calcula \\(P(85&lt;X&lt;115)\\).\nEncuentra el valor \\(x\\) tal que \\(P(X\\le x)=0.95\\).\nSimula 50 000 observaciones de cada una de las tres distribuciones y compara medias y varianzas empíricas con las teóricas.\nReto ★. Demuestra que si \\(X\\sim U(a,b)\\) entonces \\(Y=(X-a)/(b-a)\\sim U(0,1)\\).\nReto ★. Comprueba mediante R que \\(P(|Z|&lt;2)\\approx0.9545\\) para \\(Z\\sim N(0,1)\\).\nPropón un ejemplo de ingeniería para cada distribución y justifica por qué el modelo podría ser razonable.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#materiales-complementarios-del-capítulo",
+    "href": "13-distribuciones-continuas-especiales.html#materiales-complementarios-del-capítulo",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.17 Materiales complementarios del capítulo",
+    "text": "16.17 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nEjecutar y modificar ejemplos de uniforme, exponencial y normal.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir probabilidades, cuantiles, gráficas y simulaciones.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nExplorar parámetros, densidades y áreas de probabilidad.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de distribuciones y fórmulas clave.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "13-distribuciones-continuas-especiales.html#referencias-del-capítulo",
+    "href": "13-distribuciones-continuas-especiales.html#referencias-del-capítulo",
+    "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
+    "section": "16.18 Referencias del capítulo",
+    "text": "16.18 Referencias del capítulo\nEl tratamiento de las distribuciones uniforme, exponencial y normal sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
   },
   {
