@@ -1,0 +1,81 @@
+---
+title: "Capítulo 16 — Esperanza conjunta, covarianza y correlación"
+output: html_document
+---
+
+## 1. Tabla conjunta
+
+```{r}
+P <- matrix(c(
+  0.20,0.10,0.05,
+  0.15,0.20,0.10,
+  0.05,0.10,0.05
+), nrow=3, byrow=TRUE)
+x <- 0:2; y <- 0:2
+px <- rowSums(P); py <- colSums(P)
+EX <- sum(x*px); EY <- sum(y*py)
+EXY <- sum(outer(x,y,"*")*P)
+EX; EY; EXY
+```
+
+## 2. Covarianza y correlación
+
+```{r}
+EX2 <- sum(x^2*px); EY2 <- sum(y^2*py)
+VX <- EX2-EX^2; VY <- EY2-EY^2
+CXY <- EXY-EX*EY
+RHO <- CXY/sqrt(VX*VY)
+c(varX=VX,varY=VY,cov=CXY,rho=RHO)
+```
+
+## 3. Varianza de combinaciones lineales
+
+```{r}
+var_comb <- function(a,b,VX,VY,CXY)
+  a^2*VX+b^2*VY+2*a*b*CXY
+var_comb(2,-3,VX,VY,CXY)
+```
+
+## 4. Simulación con correlación controlada
+
+```{r}
+set.seed(2026)
+n <- 5000
+rho <- 0.75
+z1 <- rnorm(n); z2 <- rnorm(n)
+X <- z1
+Y <- rho*z1 + sqrt(1-rho^2)*z2
+cor(X,Y)
+plot(X,Y,pch=16,cex=.35,
+     main=paste("Correlación empírica =",round(cor(X,Y),3)))
+```
+
+## 5. Correlación cero no implica independencia
+
+```{r}
+set.seed(2026)
+X <- runif(50000,-1,1)
+Y <- X^2
+cor(X,Y)
+plot(X,Y,pch=16,cex=.25,
+     main="Dependencia no lineal con correlación cercana a cero")
+```
+
+## 6. Matriz de covarianzas
+
+```{r}
+set.seed(2026)
+z1 <- rnorm(10000); z2 <- rnorm(10000)
+X <- z1
+Y <- .6*z1 + sqrt(1-.6^2)*z2
+cov(cbind(X,Y))
+cor(cbind(X,Y))
+```
+
+## Actividades
+
+1. Cambia `rho` por -0.8, -0.3, 0, 0.3 y 0.8.
+2. Compara las nubes de puntos.
+3. Verifica numéricamente la fórmula de la varianza de $2X-3Y$.
+4. Sustituye $Y=X^2$ por $Y=X^3$ y analiza la correlación.
+5. Explica por qué una gráfica debe acompañar la interpretación de la correlación.
