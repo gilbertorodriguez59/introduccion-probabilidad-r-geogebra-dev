@@ -30,7 +30,7 @@ Ejemplos:
 
 Si $X$ y $Y$ se observan en el mismo experimento, la distribución conjunta permite estudiar no sólo cada variable por separado, sino también la forma en que se relacionan.
 
-# Variables aleatorias conjuntas discretas
+## Variables aleatorias conjuntas discretas
 
 Si $X$ y $Y$ son discretas, definimos la función de masa conjunta por
 
@@ -89,7 +89,7 @@ $$
 \boxed{P((X,Y)\in A)=\sum_{(x,y)\in A}p_{X,Y}(x,y)}.
 $$
 
-# Distribuciones marginales discretas
+## Distribuciones marginales discretas
 
 La distribución marginal de $X$ se obtiene sumando sobre todos los valores de $Y$:
 
@@ -135,7 +135,7 @@ colSums(P)   # marginal de Y
 sum(P)       # debe ser 1
 ```
 
-# Distribuciones condicionales discretas
+## Distribuciones condicionales discretas
 
 Si $P(Y=y)>0$, definimos
 
@@ -188,7 +188,7 @@ py <- colSums(P)
 P[, "Y=1"] / py["Y=1"]
 ```
 
-# Independencia de variables aleatorias discretas
+## Independencia de variables aleatorias discretas
 
 $X$ y $Y$ son independientes si para todo par $(x,y)$,
 
@@ -227,7 +227,7 @@ Es decir, conocer $Y$ no cambia la distribución de $X$.
 
 Esta es una de las interpretaciones más importantes de independencia.
 
-# Función de distribución conjunta
+## Función de distribución conjunta
 
 Para dos variables aleatorias cualesquiera definimos
 
@@ -252,7 +252,7 @@ $$
 F_Y(y)=\lim_{x\to\infty}F_{X,Y}(x,y).
 $$
 
-# Variables aleatorias conjuntas continuas
+## Variables aleatorias conjuntas continuas
 
 Si $(X,Y)$ es un vector aleatorio continuo, una densidad conjunta $f_{X,Y}(x,y)$ debe satisfacer
 
@@ -274,7 +274,7 @@ $$
 
 En dos dimensiones, comprender la **región de integración** es tan importante como conocer la fórmula de la densidad.
 
-# Ejemplo continuo sobre una región triangular
+## Ejemplo continuo sobre una región triangular
 
 Considere
 
@@ -318,7 +318,7 @@ $$
 
 La geometría del soporte evita integrar sobre zonas donde la densidad es cero.
 
-# Densidades marginales
+## Densidades marginales
 
 Para obtener la marginal de $X$, integramos respecto de $y$:
 
@@ -354,7 +354,7 @@ $$
 \int_0^1 2(1-y)\,dy=1.
 $$
 
-# Densidades condicionales
+## Densidades condicionales
 
 Si $f_X(x)>0$, la densidad condicional de $Y$ dado $X=x$ es
 
@@ -395,7 +395,7 @@ $$
 y<x<1.
 $$
 
-# Independencia en el caso continuo
+## Independencia en el caso continuo
 
 Si $X$ y $Y$ tienen densidades, son independientes cuando
 
@@ -415,7 +415,7 @@ $$
 
 que no coincide con la densidad conjunta constante $2$. Además, el soporte triangular no es un rectángulo producto. Por tanto, las variables son dependientes.
 
-# Ejemplo continuo independiente
+## Ejemplo continuo independiente
 
 Sea
 
@@ -447,7 +447,7 @@ $$
 
 La región de soporte sí es producto de los soportes marginales.
 
-# Cálculos bidimensionales en R
+## Cálculos bidimensionales en R
 
 Para el ejemplo triangular podemos definir
 
@@ -464,11 +464,11 @@ La probabilidad de la subregión anterior puede calcularse mediante integración
 
 ```{r}
 p1 <- integrate(function(x) 2*x, 0, 0.3)$value
-p2 <- integrate(function(x) 2*0.3, 0.3, 0.8)$value
+p2 <- integrate(function(x) rep(2*0.3, length(x)), 0.3, 0.8)$value
 p1 + p2
 ```
 
-# Simulación de una distribución conjunta discreta
+## Simulación de una distribución conjunta discreta
 
 Podemos simular directamente una tabla conjunta convirtiendo las celdas en categorías.
 
@@ -492,7 +492,7 @@ prop.table(table(sim$Y))
 
 Las frecuencias empíricas deben acercarse a la distribución conjunta y a sus marginales.
 
-# Simulación del ejemplo triangular
+## Simulación del ejemplo triangular
 
 Una manera eficiente de simular la densidad
 
@@ -542,7 +542,7 @@ plot(X, Y, pch = 16, cex = 0.35,
 abline(0, 1, lty = 2)
 ```
 
-# Visualización mediante mapa de calor
+## Visualización mediante mapa de calor
 
 Para una distribución discreta conjunta, un mapa de calor permite identificar rápidamente dónde se concentra la probabilidad.
 
@@ -554,7 +554,7 @@ image(x = 0:2, y = 0:2, z = P,
 
 Un patrón concentrado cerca de una diagonal puede indicar asociación, mientras que una tabla que factoriza como producto de marginales representa independencia.
 
-# Interactivo del capítulo
+## Interactivo del capítulo
 
 El interactivo del capítulo utiliza una tabla conjunta $3\times3$ con marginales fijas. Un deslizador modifica un parámetro de asociación sin cambiar dichas marginales.
 
@@ -569,7 +569,7 @@ El estudiante puede observar simultáneamente:
 
 Esto permite ver una idea crucial: **dos distribuciones pueden tener exactamente las mismas marginales y, sin embargo, estructuras conjuntas muy distintas**.
 
-# Actividad con GeoGebra
+## Actividad con GeoGebra
 
 ## Parte A: soporte continuo
 
@@ -607,7 +607,7 @@ $$
 f_{Y\mid X}(y\mid c)=\frac1c.
 $$
 
-# Estrategia de resolución
+## Estrategia de resolución
 
 Ante un problema con dos variables:
 
@@ -620,7 +620,7 @@ Ante un problema con dos variables:
 7. en el caso continuo, dibuja primero la región de integración;
 8. interpreta el resultado: marginalizar elimina información sobre una variable; condicionar incorpora información sobre ella.
 
-# Errores frecuentes
+## Errores frecuentes
 
 - Confundir una probabilidad conjunta con una probabilidad condicional.
 - Obtener marginales dividiendo en lugar de sumar o integrar.
@@ -630,7 +630,7 @@ Ante un problema con dos variables:
 - Creer que conocer las dos marginales determina la distribución conjunta.
 - En variables continuas, interpretar $f_{X,Y}(x,y)$ como una probabilidad puntual.
 
-# Resumen
+## Resumen
 
 Para variables discretas:
 
@@ -664,7 +664,7 @@ $$
 f_{X,Y}(x,y)=f_X(x)f_Y(y).
 $$
 
-# Ejercicios
+## Ejercicios
 
 1. Para la tabla conjunta del capítulo, calcula $P(X=2,Y\ge1)$.
 2. Obtén todas las distribuciones condicionales $p_{X\mid Y}(x\mid y)$.

@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 4 3 2 2 5 3 5 4 1 6\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 0 2 3 0 5 0 1 1\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  3  2  3 17  5  7  7  3 13  4",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 3 5 2 3 5 7 4 6 3 2\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 0 0 5 0 1 3 0 5\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  5 13  9 14  3  4  7  4  2  5",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2894,7 +2894,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "14.4 Funciones de R para la uniforme",
-    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.7881949 0.7710865 0.7722219 0.5773832 0.8151271",
+    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.3789546 0.1489107 0.1193892 0.4791506 0.3964928",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -2954,7 +2954,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "15.6 Funciones de R para la exponencial",
-    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1] 1.684541 1.834491 1.748111 3.540039 7.190565",
+    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  0.3241642  0.8665960 13.4868593  6.7161623 15.5436491",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3024,7 +3024,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "16.7 Funciones de R para la normal",
-    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1]  7.413549 12.630665 10.923171 11.266708 11.779842",
+    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1] 13.176456  9.092480  7.678782 10.872255 11.557839",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3214,7 +3214,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-gamma-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "15.5 Funciones Gamma en R",
-    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 1.4906264 1.2448100 1.5719097 0.9069536 0.6113782",
+    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 1.1203515 0.7282757 1.1421950 0.6916906 1.7870140",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3284,7 +3284,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-weibull-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "16.6 Funciones Weibull en R",
-    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1]  965.9944 1410.7661 1035.1301 1546.0415  556.7421",
+    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1] 1231.0864  648.6997  500.0028 1053.5023  633.4982",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3334,7 +3334,7 @@
     "href": "14-gamma-weibull-beta.html#funciones-beta-en-r",
     "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
     "section": "17.5 Funciones Beta en R",
-    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.9561171 0.7033864 0.7425706 0.7084581 0.5239187",
+    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.8051895 0.7534896 0.4432365 0.7965615 0.7638568",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
@@ -3457,6 +3457,356 @@
     "text": "17.17 Referencias del capítulo\nEl tratamiento de las distribuciones Gamma, Weibull y Beta sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html",
+    "href": "15-variables-conjuntas-marginales-condicionales.html",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "",
+    "text": "15.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#objetivos-de-aprendizaje",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#objetivos-de-aprendizaje",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "",
+    "text": "describir simultáneamente dos variables aleatorias mediante una distribución conjunta;\nconstruir e interpretar tablas de probabilidad conjunta para variables discretas;\nobtener distribuciones marginales a partir de una distribución conjunta;\ncalcular distribuciones condicionales;\ntrabajar con densidades conjuntas continuas mediante integrales dobles;\nidentificar correctamente la región de soporte de una densidad bidimensional;\nobtener densidades marginales y condicionales;\nverificar independencia mediante la factorización de la distribución conjunta;\nutilizar R para organizar tablas conjuntas, calcular probabilidades y realizar simulaciones;\ninterpretar visualmente dependencia e independencia mediante mapas de calor y regiones en el plano.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#de-una-variable-a-dos-variables",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#de-una-variable-a-dos-variables",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.2 De una variable a dos variables",
+    "text": "15.2 De una variable a dos variables\nHasta ahora hemos estudiado una variable aleatoria a la vez. Sin embargo, muchos problemas de ingeniería y ciencias requieren observar dos magnitudes simultáneamente.\nEjemplos:\n\ntemperatura y humedad;\ntiempo de respuesta y número de solicitudes;\ndiámetro y longitud de una pieza;\nconcentración de dos contaminantes;\nnúmero de fallas de dos subsistemas;\nvoltaje de entrada y voltaje de salida.\n\nSi \\(X\\) y \\(Y\\) se observan en el mismo experimento, la distribución conjunta permite estudiar no sólo cada variable por separado, sino también la forma en que se relacionan.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#variables-aleatorias-conjuntas-discretas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#variables-aleatorias-conjuntas-discretas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.3 Variables aleatorias conjuntas discretas",
+    "text": "15.3 Variables aleatorias conjuntas discretas\nSi \\(X\\) y \\(Y\\) son discretas, definimos la función de masa conjunta por\n\\[\n\\boxed{p_{X,Y}(x,y)=P(X=x,Y=y)}.\n\\]\nDebe satisfacer\n\\[\np_{X,Y}(x,y)\\ge0\n\\]\ny\n\\[\n\\boxed{\\sum_x\\sum_y p_{X,Y}(x,y)=1}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-dos-subsistemas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-dos-subsistemas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.4 Ejemplo: dos subsistemas",
+    "text": "15.4 Ejemplo: dos subsistemas\nSupongamos que \\(X\\) es el número de fallas observadas en un subsistema A y \\(Y\\) el número de fallas de un subsistema B durante un intervalo. La distribución conjunta es\n\n\n\n\\(X\\backslash Y\\)\n0\n1\n2\nTotal\n\n\n\n\n0\n0.20\n0.10\n0.05\n0.35\n\n\n1\n0.15\n0.20\n0.10\n0.45\n\n\n2\n0.05\n0.10\n0.05\n0.20\n\n\nTotal\n0.40\n0.40\n0.20\n1.00\n\n\n\nCada celda representa una probabilidad conjunta. Por ejemplo,\n\\[\nP(X=1,Y=0)=0.15.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#probabilidad-de-una-región-discreta",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#probabilidad-de-una-región-discreta",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.5 Probabilidad de una región discreta",
+    "text": "15.5 Probabilidad de una región discreta\nPara calcular\n\\[\nP(X\\ge1,Y\\le1),\n\\]\nsumamos las celdas compatibles:\n\\[\nP(X\\ge1,Y\\le1)\n=0.15+0.20+0.05+0.10\n=0.50.\n\\]\nLa idea general es\n\\[\n\\boxed{P((X,Y)\\in A)=\\sum_{(x,y)\\in A}p_{X,Y}(x,y)}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#distribuciones-marginales-discretas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#distribuciones-marginales-discretas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.6 Distribuciones marginales discretas",
+    "text": "15.6 Distribuciones marginales discretas\nLa distribución marginal de \\(X\\) se obtiene sumando sobre todos los valores de \\(Y\\):\n\\[\n\\boxed{p_X(x)=\\sum_y p_{X,Y}(x,y)}.\n\\]\nAnálogamente,\n\\[\n\\boxed{p_Y(y)=\\sum_x p_{X,Y}(x,y)}.\n\\]\nEn una tabla conjunta, las marginales corresponden a los totales por fila y columna.\nPara el ejemplo:\n\\[\np_X(0)=0.35,\\qquad p_X(1)=0.45,\\qquad p_X(2)=0.20,\n\\]\ny\n\\[\np_Y(0)=0.40,\\qquad p_Y(1)=0.40,\\qquad p_Y(2)=0.20.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#cálculo-de-marginales-en-r",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#cálculo-de-marginales-en-r",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.7 Cálculo de marginales en R",
+    "text": "15.7 Cálculo de marginales en R\n\nP &lt;- matrix(c(\n  0.20, 0.10, 0.05,\n  0.15, 0.20, 0.10,\n  0.05, 0.10, 0.05\n), nrow = 3, byrow = TRUE)\n\nrownames(P) &lt;- paste0(\"X=\", 0:2)\ncolnames(P) &lt;- paste0(\"Y=\", 0:2)\n\nP\n\n     Y=0 Y=1  Y=2\nX=0 0.20 0.1 0.05\nX=1 0.15 0.2 0.10\nX=2 0.05 0.1 0.05\n\nrowSums(P)   # marginal de X\n\n X=0  X=1  X=2 \n0.35 0.45 0.20 \n\ncolSums(P)   # marginal de Y\n\nY=0 Y=1 Y=2 \n0.4 0.4 0.2 \n\nsum(P)       # debe ser 1\n\n[1] 1",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#distribuciones-condicionales-discretas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#distribuciones-condicionales-discretas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.8 Distribuciones condicionales discretas",
+    "text": "15.8 Distribuciones condicionales discretas\nSi \\(P(Y=y)&gt;0\\), definimos\n\\[\n\\boxed{\np_{X\\mid Y}(x\\mid y)\n=\\frac{p_{X,Y}(x,y)}{p_Y(y)}.\n}\n\\]\nDe manera análoga,\n\\[\n\\boxed{\np_{Y\\mid X}(y\\mid x)\n=\\frac{p_{X,Y}(x,y)}{p_X(x)}.\n}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-condicional",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-condicional",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.9 Ejemplo condicional",
+    "text": "15.9 Ejemplo condicional\nQueremos obtener la distribución de \\(X\\) sabiendo que \\(Y=1\\).\nComo\n\\[\nP(Y=1)=0.40,\n\\]\nentonces\n\\[\nP(X=0\\mid Y=1)=\\frac{0.10}{0.40}=0.25,\n\\]\n\\[\nP(X=1\\mid Y=1)=\\frac{0.20}{0.40}=0.50,\n\\]\n\\[\nP(X=2\\mid Y=1)=\\frac{0.10}{0.40}=0.25.\n\\]\nLa distribución condicional vuelve a sumar 1.\nEn R:\n\npy &lt;- colSums(P)\nP[, \"Y=1\"] / py[\"Y=1\"]\n\n X=0  X=1  X=2 \n0.25 0.50 0.25",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#independencia-de-variables-aleatorias-discretas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#independencia-de-variables-aleatorias-discretas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.10 Independencia de variables aleatorias discretas",
+    "text": "15.10 Independencia de variables aleatorias discretas\n\\(X\\) y \\(Y\\) son independientes si para todo par \\((x,y)\\),\n\\[\n\\boxed{\np_{X,Y}(x,y)=p_X(x)p_Y(y).\n}\n\\]\nSi esta igualdad falla para siquiera un par con probabilidad relevante, las variables no son independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#verificación-en-r",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#verificación-en-r",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.11 Verificación en R",
+    "text": "15.11 Verificación en R\n\npx &lt;- rowSums(P)\npy &lt;- colSums(P)\nP_ind &lt;- outer(px, py)\n\nP\n\n     Y=0 Y=1  Y=2\nX=0 0.20 0.1 0.05\nX=1 0.15 0.2 0.10\nX=2 0.05 0.1 0.05\n\nP_ind\n\n     Y=0  Y=1  Y=2\nX=0 0.14 0.14 0.07\nX=1 0.18 0.18 0.09\nX=2 0.08 0.08 0.04\n\nP - P_ind\n\n      Y=0   Y=1   Y=2\nX=0  0.06 -0.04 -0.02\nX=1 -0.03  0.02  0.01\nX=2 -0.03  0.02  0.01\n\nmax(abs(P - P_ind))\n\n[1] 0.06\n\n\nSi el máximo es cero salvo error numérico, la tabla factoriza y las variables son independientes.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#independencia-y-condicionamiento",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#independencia-y-condicionamiento",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.12 Independencia y condicionamiento",
+    "text": "15.12 Independencia y condicionamiento\nSi \\(X\\) y \\(Y\\) son independientes y \\(p_Y(y)&gt;0\\), entonces\n\\[\np_{X\\mid Y}(x\\mid y)=p_X(x).\n\\]\nEs decir, conocer \\(Y\\) no cambia la distribución de \\(X\\).\nEsta es una de las interpretaciones más importantes de independencia.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#función-de-distribución-conjunta",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#función-de-distribución-conjunta",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.13 Función de distribución conjunta",
+    "text": "15.13 Función de distribución conjunta\nPara dos variables aleatorias cualesquiera definimos\n\\[\n\\boxed{F_{X,Y}(x,y)=P(X\\le x,Y\\le y)}.\n\\]\nEn el caso discreto,\n\\[\nF_{X,Y}(x,y)\n=\\sum_{u\\le x}\\sum_{v\\le y}p_{X,Y}(u,v).\n\\]\nLas CDF marginales pueden recuperarse mediante límites:\n\\[\nF_X(x)=\\lim_{y\\to\\infty}F_{X,Y}(x,y),\n\\]\n\\[\nF_Y(y)=\\lim_{x\\to\\infty}F_{X,Y}(x,y).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#variables-aleatorias-conjuntas-continuas",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#variables-aleatorias-conjuntas-continuas",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.14 Variables aleatorias conjuntas continuas",
+    "text": "15.14 Variables aleatorias conjuntas continuas\nSi \\((X,Y)\\) es un vector aleatorio continuo, una densidad conjunta \\(f_{X,Y}(x,y)\\) debe satisfacer\n\\[\nf_{X,Y}(x,y)\\ge0\n\\]\ny\n\\[\n\\boxed{\\iint_{\\mathbb R^2} f_{X,Y}(x,y)\\,dx\\,dy=1}.\n\\]\nPara una región \\(A\\) del plano,\n\\[\n\\boxed{P((X,Y)\\in A)=\\iint_A f_{X,Y}(x,y)\\,dx\\,dy}.\n\\]\nEn dos dimensiones, comprender la región de integración es tan importante como conocer la fórmula de la densidad.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-continuo-sobre-una-región-triangular",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-continuo-sobre-una-región-triangular",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.15 Ejemplo continuo sobre una región triangular",
+    "text": "15.15 Ejemplo continuo sobre una región triangular\nConsidere\n\\[\nf_{X,Y}(x,y)=2,\n\\]\nsobre la región\n\\[\n0&lt;y&lt;x&lt;1,\n\\]\ny cero fuera de ella.\nLa región es el triángulo debajo de la recta \\(y=x\\) y encima del eje \\(x\\) dentro del cuadrado unitario.\nVerificamos la normalización:\n\\[\n\\int_0^1\\int_0^x2\\,dy\\,dx\n=\\int_0^1 2x\\,dx\n=1.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#probabilidad-sobre-una-subregión",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#probabilidad-sobre-una-subregión",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.16 Probabilidad sobre una subregión",
+    "text": "15.16 Probabilidad sobre una subregión\nCalculemos\n\\[\nP(X&lt;0.8,Y&lt;0.3).\n\\]\nDebido al soporte triangular, debemos dividir la integración según la relación entre \\(x\\) y \\(0.3\\):\n\\[\nP(X&lt;0.8,Y&lt;0.3)\n=\\int_0^{0.3}\\int_0^x2\\,dy\\,dx\n+\\int_{0.3}^{0.8}\\int_0^{0.3}2\\,dy\\,dx.\n\\]\nLa geometría del soporte evita integrar sobre zonas donde la densidad es cero.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#densidades-marginales",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#densidades-marginales",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.17 Densidades marginales",
+    "text": "15.17 Densidades marginales\nPara obtener la marginal de \\(X\\), integramos respecto de \\(y\\):\n\\[\n\\boxed{f_X(x)=\\int_{-\\infty}^{\\infty}f_{X,Y}(x,y)\\,dy}.\n\\]\nEn el ejemplo triangular, para \\(0&lt;x&lt;1\\),\n\\[\nf_X(x)=\\int_0^x2\\,dy=2x.\n\\]\nPara \\(Y\\),\n\\[\n\\boxed{f_Y(y)=\\int_{-\\infty}^{\\infty}f_{X,Y}(x,y)\\,dx}.\n\\]\nComo para un \\(y\\) fijo se tiene \\(y&lt;x&lt;1\\),\n\\[\nf_Y(y)=\\int_y^1 2\\,dx=2(1-y),\\qquad0&lt;y&lt;1.\n\\]\nObserve que ambas marginales están normalizadas:\n\\[\n\\int_0^1 2x\\,dx=1,\n\\]\n\\[\n\\int_0^1 2(1-y)\\,dy=1.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#densidades-condicionales",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#densidades-condicionales",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.18 Densidades condicionales",
+    "text": "15.18 Densidades condicionales\nSi \\(f_X(x)&gt;0\\), la densidad condicional de \\(Y\\) dado \\(X=x\\) es\n\\[\n\\boxed{\nf_{Y\\mid X}(y\\mid x)\n=\\frac{f_{X,Y}(x,y)}{f_X(x)}.\n}\n\\]\nPara nuestro ejemplo,\n\\[\nf_{Y\\mid X}(y\\mid x)\n=\\frac{2}{2x}\n=\\frac1x,\n\\]\npara\n\\[\n0&lt;y&lt;x.\n\\]\nPor tanto, dado \\(X=x\\), la variable \\(Y\\) se distribuye uniformemente en \\((0,x)\\).\nDe forma análoga,\n\\[\nf_{X\\mid Y}(x\\mid y)\n=\\frac{2}{2(1-y)}\n=\\frac{1}{1-y},\n\\]\npara\n\\[\ny&lt;x&lt;1.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#independencia-en-el-caso-continuo",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#independencia-en-el-caso-continuo",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.19 Independencia en el caso continuo",
+    "text": "15.19 Independencia en el caso continuo\nSi \\(X\\) y \\(Y\\) tienen densidades, son independientes cuando\n\\[\n\\boxed{\nf_{X,Y}(x,y)=f_X(x)f_Y(y)\n}\n\\]\npara todos los puntos relevantes, salvo posibles excepciones de área cero.\nEn el ejemplo triangular,\n\\[\nf_X(x)f_Y(y)=4x(1-y),\n\\]\nque no coincide con la densidad conjunta constante \\(2\\). Además, el soporte triangular no es un rectángulo producto. Por tanto, las variables son dependientes.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-continuo-independiente",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#ejemplo-continuo-independiente",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.20 Ejemplo continuo independiente",
+    "text": "15.20 Ejemplo continuo independiente\nSea\n\\[\nX\\sim U(0,1),\\qquad Y\\sim U(0,2),\n\\]\nindependientes. Entonces\n\\[\nf_X(x)=1,\\qquad0&lt;x&lt;1,\n\\]\n\\[\nf_Y(y)=\\frac12,\\qquad0&lt;y&lt;2,\n\\]\ny\n\\[\n\\boxed{f_{X,Y}(x,y)=\\frac12}\n\\]\nsobre el rectángulo\n\\[\n0&lt;x&lt;1,\\qquad0&lt;y&lt;2.\n\\]\nLa región de soporte sí es producto de los soportes marginales.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#cálculos-bidimensionales-en-r",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#cálculos-bidimensionales-en-r",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.21 Cálculos bidimensionales en R",
+    "text": "15.21 Cálculos bidimensionales en R\nPara el ejemplo triangular podemos definir\n\nfxy &lt;- function(x, y) {\n  ifelse(x &gt; 0 & x &lt; 1 & y &gt; 0 & y &lt; x, 2, 0)\n}\n\nfx &lt;- function(x) ifelse(x &gt; 0 & x &lt; 1, 2*x, 0)\nfy &lt;- function(y) ifelse(y &gt; 0 & y &lt; 1, 2*(1-y), 0)\n\nLa probabilidad de la subregión anterior puede calcularse mediante integración iterada:\n\np1 &lt;- integrate(function(x) 2*x, 0, 0.3)$value\np2 &lt;- integrate(function(x) rep(2*0.3, length(x)), 0.3, 0.8)$value\np1 + p2\n\n[1] 0.39",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#simulación-de-una-distribución-conjunta-discreta",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#simulación-de-una-distribución-conjunta-discreta",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.22 Simulación de una distribución conjunta discreta",
+    "text": "15.22 Simulación de una distribución conjunta discreta\nPodemos simular directamente una tabla conjunta convirtiendo las celdas en categorías.\n\nset.seed(2026)\n\ncoords &lt;- expand.grid(X = 0:2, Y = 0:2)\nprob &lt;- as.vector(t(P))\n\nidx &lt;- sample(seq_len(nrow(coords)),\n              size = 50000,\n              replace = TRUE,\n              prob = prob)\n\nsim &lt;- coords[idx, ]\n\nprop.table(table(sim$X, sim$Y))\n\n   \n          0       1       2\n  0 0.19920 0.14806 0.05204\n  1 0.09978 0.20070 0.09914\n  2 0.05140 0.09962 0.05006\n\nprop.table(table(sim$X))\n\n\n      0       1       2 \n0.39930 0.39962 0.20108 \n\nprop.table(table(sim$Y))\n\n\n      0       1       2 \n0.35038 0.44838 0.20124 \n\n\nLas frecuencias empíricas deben acercarse a la distribución conjunta y a sus marginales.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#simulación-del-ejemplo-triangular",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#simulación-del-ejemplo-triangular",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.23 Simulación del ejemplo triangular",
+    "text": "15.23 Simulación del ejemplo triangular\nUna manera eficiente de simular la densidad\n\\[\nf_{X,Y}(x,y)=2,\\qquad0&lt;y&lt;x&lt;1,\n\\]\nes aprovechar sus marginales y condicionales.\nComo\n\\[\nf_X(x)=2x,\n\\]\nla CDF marginal es\n\\[\nF_X(x)=x^2,\n\\]\ny por transformada inversa\n\\[\nX=\\sqrt{U_1},\\qquad U_1\\sim U(0,1).\n\\]\nDado \\(X=x\\), \\(Y\\mid X=x\\sim U(0,x)\\), así que\n\\[\nY=XU_2,\n\\]\ncon \\(U_2\\sim U(0,1)\\) independiente de \\(U_1\\).\n\nset.seed(2026)\nn &lt;- 20000\nu1 &lt;- runif(n)\nu2 &lt;- runif(n)\nX &lt;- sqrt(u1)\nY &lt;- X * u2\n\nplot(X, Y, pch = 16, cex = 0.35,\n     xlab = \"X\", ylab = \"Y\",\n     main = \"Simulación sobre soporte triangular\")\nabline(0, 1, lty = 2)",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#visualización-mediante-mapa-de-calor",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#visualización-mediante-mapa-de-calor",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.24 Visualización mediante mapa de calor",
+    "text": "15.24 Visualización mediante mapa de calor\nPara una distribución discreta conjunta, un mapa de calor permite identificar rápidamente dónde se concentra la probabilidad.\n\nimage(x = 0:2, y = 0:2, z = P,\n      xlab = \"Y\", ylab = \"X\",\n      main = \"Mapa de calor de la PMF conjunta\")\n\n\n\n\n\n\n\n\nUn patrón concentrado cerca de una diagonal puede indicar asociación, mientras que una tabla que factoriza como producto de marginales representa independencia.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#interactivo-del-capítulo",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#interactivo-del-capítulo",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.25 Interactivo del capítulo",
+    "text": "15.25 Interactivo del capítulo\nEl interactivo del capítulo utiliza una tabla conjunta \\(3\\times3\\) con marginales fijas. Un deslizador modifica un parámetro de asociación sin cambiar dichas marginales.\nEl estudiante puede observar simultáneamente:\n\nla PMF conjunta como mapa de calor;\nlas marginales de \\(X\\) y \\(Y\\);\nuna distribución condicional seleccionada;\nla tabla que correspondería a independencia, \\(p_X(x)p_Y(y)\\);\nla diferencia entre la distribución real y la independiente;\nun indicador numérico de separación respecto de la independencia.\n\nEsto permite ver una idea crucial: dos distribuciones pueden tener exactamente las mismas marginales y, sin embargo, estructuras conjuntas muy distintas.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#actividad-con-geogebra",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#actividad-con-geogebra",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.26 Actividad con GeoGebra",
+    "text": "15.26 Actividad con GeoGebra",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#parte-a-soporte-continuo",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#parte-a-soporte-continuo",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.27 Parte A: soporte continuo",
+    "text": "15.27 Parte A: soporte continuo\nDibuja el cuadrado unitario y la región\n\\[\n0&lt;y&lt;x&lt;1.\n\\]\nUtiliza un deslizador \\(c\\in(0,1)\\) y representa la recta vertical \\(x=c\\). La sección vertical de la región tiene longitud \\(c\\), por lo que\n\\[\nf_X(c)=2c.\n\\]\nDespués usa una recta horizontal \\(y=d\\). La sección horizontal tiene longitud \\(1-d\\), de modo que\n\\[\nf_Y(d)=2(1-d).\n\\]\nEsta construcción ofrece una interpretación geométrica directa de la marginalización.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#parte-b-condicionamiento",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#parte-b-condicionamiento",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.28 Parte B: condicionamiento",
+    "text": "15.28 Parte B: condicionamiento\nFija \\(X=c\\). El segmento posible para \\(Y\\) es\n\\[\n0&lt;Y&lt;c.\n\\]\nObserva que la densidad condicional sobre ese segmento es uniforme:\n\\[\nf_{Y\\mid X}(y\\mid c)=\\frac1c.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#estrategia-de-resolución",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#estrategia-de-resolución",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.29 Estrategia de resolución",
+    "text": "15.29 Estrategia de resolución\nAnte un problema con dos variables:\n\nidentifica si la distribución conjunta es discreta o continua;\ndetermina con cuidado el soporte conjunto;\nverifica normalización;\npara marginalizar, suma o integra sobre la otra variable;\npara condicionar, divide la conjunta entre la marginal correspondiente;\npara independencia, compara la conjunta con el producto de marginales;\nen el caso continuo, dibuja primero la región de integración;\ninterpreta el resultado: marginalizar elimina información sobre una variable; condicionar incorpora información sobre ella.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#errores-frecuentes",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#errores-frecuentes",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.30 Errores frecuentes",
+    "text": "15.30 Errores frecuentes\n\nConfundir una probabilidad conjunta con una probabilidad condicional.\nObtener marginales dividiendo en lugar de sumar o integrar.\nOlvidar normalizar una distribución condicional.\nIntegrar sobre un rectángulo cuando el soporte real es triangular u otra región.\nConcluir independencia sólo porque las marginales parecen sencillas.\nCreer que conocer las dos marginales determina la distribución conjunta.\nEn variables continuas, interpretar \\(f_{X,Y}(x,y)\\) como una probabilidad puntual.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#resumen",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#resumen",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.31 Resumen",
+    "text": "15.31 Resumen\nPara variables discretas:\n\\[\np_X(x)=\\sum_y p_{X,Y}(x,y),\n\\]\n\\[\np_{X\\mid Y}(x\\mid y)=\\frac{p_{X,Y}(x,y)}{p_Y(y)}.\n\\]\nPara variables continuas:\n\\[\nf_X(x)=\\int f_{X,Y}(x,y)\\,dy,\n\\]\n\\[\nf_{Y\\mid X}(y\\mid x)=\\frac{f_{X,Y}(x,y)}{f_X(x)}.\n\\]\nLa independencia se expresa mediante\n\\[\np_{X,Y}(x,y)=p_X(x)p_Y(y)\n\\]\no, en el caso continuo,\n\\[\nf_{X,Y}(x,y)=f_X(x)f_Y(y).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#ejercicios",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#ejercicios",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.32 Ejercicios",
+    "text": "15.32 Ejercicios\n\nPara la tabla conjunta del capítulo, calcula \\(P(X=2,Y\\ge1)\\).\nObtén todas las distribuciones condicionales \\(p_{X\\mid Y}(x\\mid y)\\).\nVerifica si \\(X\\) y \\(Y\\) son independientes en esa tabla.\nConstruye una tabla conjunta independiente utilizando \\(p_X=(0.2,0.5,0.3)\\) y \\(p_Y=(0.4,0.35,0.25)\\).\nPara \\(f(x,y)=2\\) sobre \\(0&lt;y&lt;x&lt;1\\), calcula \\(P(Y&lt;0.25)\\).\nPara la misma densidad, calcula \\(P(X&gt;0.6)\\) mediante la marginal de \\(X\\).\nObtén \\(f_{Y\\mid X}(y\\mid0.8)\\) y calcula \\(P(Y&lt;0.3\\mid X=0.8)\\).\nExplica por qué el soporte triangular prueba que \\(X\\) y \\(Y\\) no pueden ser independientes en el ejemplo continuo.\nSimula 100 000 pares del ejemplo triangular y compara histogramas marginales con \\(f_X(x)=2x\\) y \\(f_Y(y)=2(1-y)\\).\nConstruye en R una tabla conjunta con marginales prefijadas y modifica la dependencia sin alterar esas marginales.\nReto ★. Demuestra que si \\(X\\) y \\(Y\\) son independientes, entonces \\(F_{X,Y}(x,y)=F_X(x)F_Y(y)\\).\nReto ★. Propón dos distribuciones conjuntas diferentes que tengan las mismas marginales.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#materiales-complementarios-del-capítulo",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#materiales-complementarios-del-capítulo",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.33 Materiales complementarios del capítulo",
+    "text": "15.33 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nExplorar tablas conjuntas, marginales, condicionales, independencia y simulación.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir cálculos y visualizaciones bidimensionales en R/RStudio.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nVisualizar dependencia, marginales y distribuciones condicionales.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de distribución conjunta, marginalización y condicionamiento.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
+    ]
+  },
+  {
+    "objectID": "15-variables-conjuntas-marginales-condicionales.html#referencias-del-capítulo",
+    "href": "15-variables-conjuntas-marginales-condicionales.html#referencias-del-capítulo",
+    "title": "15  Variables aleatorias conjuntas, distribuciones marginales y condicionales",
+    "section": "15.34 Referencias del capítulo",
+    "text": "15.34 Referencias del capítulo\nEl tratamiento de distribuciones conjuntas, marginales, condicionales e independencia sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Variables aleatorias conjuntas, distribuciones marginales y condicionales</span>"
     ]
   },
   {
