@@ -310,6 +310,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./14-gamma-weibull-beta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Distribuciones continuas especiales II: Gamma, Weibull y Beta</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Referencias</span></a>
   </div>
@@ -820,7 +826,7 @@ X=G_1+\cdots+G_r
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbinom</span>(<span class="dv">10</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>) <span class="co"># simulación</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 3 3 2 6 7 3 3 7 4 8</code></pre>
+<pre><code> [1] 4 3 2 2 5 3 5 4 1 6</code></pre>
 </div>
 </div>
 <p>Para la geométrica, recordando que R cuenta fracasos:</p>
@@ -835,7 +841,7 @@ X=G_1+\cdots+G_r
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgeom</span>(<span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0 0 5 0 1 1 2 0 0 1</code></pre>
+<pre><code> [1] 0 0 0 2 3 0 5 0 1 1</code></pre>
 </div>
 </div>
 <p>Para la binomial negativa, R también cuenta fracasos:</p>
@@ -850,7 +856,7 @@ X=G_1+\cdots+G_r
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnbinom</span>(<span class="dv">10</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob =</span> <span class="fl">0.4</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1 3 5 6 4 7 8 3 5 9</code></pre>
+<pre><code> [1]  3  2  3 17  5  7  7  3 13  4</code></pre>
 </div>
 </div>
 </section>
@@ -1140,7 +1146,8 @@ document.addEventListener('DOMContentLoaded', function () {
     '10-esperanza-varianza-chebyshev.html': {titulo:'Interactivo del capítulo: esperanza, varianza y Chebyshev',archivo:'interactivos/cap10-esperanza-varianza.html',texto:'Modifica una distribución discreta y observa en tiempo real cómo cambian la media, la varianza, la desviación estándar y la garantía de Chebyshev.'},
     '11-distribuciones-discretas-especiales.html': {titulo:'Interactivo del capítulo: distribuciones discretas especiales',archivo:'interactivos/cap11-distribuciones-discretas.html',texto:'Compara Bernoulli, binomial, geométrica y binomial negativa, modificando sus parámetros y observando PMF, media y varianza.'},
     '12-hipergeometrica-poisson.html': {titulo:'Interactivo del capítulo: hipergeométrica, binomial y Poisson',archivo:'interactivos/cap12-hipergeometrica-poisson.html',texto:'Compara el muestreo sin reemplazo con el modelo binomial y observa la aproximación binomial–Poisson.'},
-    '13-distribuciones-continuas-especiales.html': {titulo:'Interactivo del capítulo: uniforme, exponencial y normal',archivo:'interactivos/cap13-distribuciones-continuas.html',texto:'Modifica los parámetros y el intervalo de interés para observar densidades, áreas de probabilidad, media y varianza.'}
+    '13-distribuciones-continuas-especiales.html': {titulo:'Interactivo del capítulo: uniforme, exponencial y normal',archivo:'interactivos/cap13-distribuciones-continuas.html',texto:'Modifica los parámetros y el intervalo de interés para observar densidades, áreas de probabilidad, media y varianza.'},
+    '14-gamma-weibull-beta.html': {titulo:'Interactivo del capítulo: Gamma, Weibull y Beta',archivo:'interactivos/cap14-gamma-weibull-beta.html',texto:'Explora parámetros, densidades y áreas de probabilidad; en Weibull observa además el comportamiento de la tasa de falla.'}
   };
   const cfg = mapa[path];
   if (!cfg) return;

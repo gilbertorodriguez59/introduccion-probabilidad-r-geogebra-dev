@@ -2514,7 +2514,7 @@
     "href": "11-distribuciones-discretas-especiales.html#funciones-principales-en-r",
     "title": "11  Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa",
     "section": "11.20 Funciones principales en R",
-    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 3 3 2 6 7 3 3 7 4 8\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 5 0 1 1 2 0 0 1\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1] 1 3 5 6 4 7 8 3 5 9",
+    "text": "11.20 Funciones principales en R\nPara la binomial:\n\ndbinom(3, size = 10, prob = 0.4)  # P(X=3)\n\n[1] 0.2149908\n\npbinom(3, size = 10, prob = 0.4)  # P(X&lt;=3)\n\n[1] 0.3822806\n\nrbinom(10, size = 10, prob = 0.4) # simulación\n\n [1] 4 3 2 2 5 3 5 4 1 6\n\n\nPara la geométrica, recordando que R cuenta fracasos:\n\ndgeom(2, prob = 0.4)   # 2 fracasos antes del éxito =&gt; X=3 ensayos\n\n[1] 0.144\n\npgeom(2, prob = 0.4)\n\n[1] 0.784\n\nrgeom(10, prob = 0.4)\n\n [1] 0 0 0 2 3 0 5 0 1 1\n\n\nPara la binomial negativa, R también cuenta fracasos:\n\ndnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.110592\n\npnbinom(3, size = 4, prob = 0.4)\n\n[1] 0.289792\n\nrnbinom(10, size = 4, prob = 0.4)\n\n [1]  3  2  3 17  5  7  7  3 13  4",
     "crumbs": [
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Distribuciones discretas especiales I: Bernoulli, binomial, geométrica y binomial negativa</span>"
     ]
@@ -2894,7 +2894,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-uniforme",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "14.4 Funciones de R para la uniforme",
-    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.620904035 0.272849213 0.070425029 0.578336561 0.004769106",
+    "text": "14.4 Funciones de R para la uniforme\n\ndunif(0.3, min = 0, max = 1)  # densidad\n\n[1] 1\n\npunif(0.3, min = 0, max = 1)  # P(X &lt;= 0.3)\n\n[1] 0.3\n\nqunif(0.9, min = 0, max = 1)  # percentil 90\n\n[1] 0.9\n\nrunif(5, min = 0, max = 1)    # simulación\n\n[1] 0.7881949 0.7710865 0.7722219 0.5773832 0.8151271",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -2954,7 +2954,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-exponencial",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "15.6 Funciones de R para la exponencial",
-    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1]  0.6070387 23.1056488  3.0084020  2.0056976  1.3960362",
+    "text": "15.6 Funciones de R para la exponencial\n\ndexp(4, rate = 0.2)\n\n[1] 0.08986579\n\npexp(4, rate = 0.2)\n\n[1] 0.550671\n\nqexp(0.95, rate = 0.2)\n\n[1] 14.97866\n\nrexp(5, rate = 0.2)\n\n[1] 1.684541 1.834491 1.748111 3.540039 7.190565",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3024,7 +3024,7 @@
     "href": "13-distribuciones-continuas-especiales.html#funciones-de-r-para-la-normal",
     "title": "13  Distribuciones continuas especiales I: uniforme, exponencial y normal",
     "section": "16.7 Funciones de R para la normal",
-    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1] 10.34090 11.46818 10.04444 12.26177 10.10798",
+    "text": "16.7 Funciones de R para la normal\n\ndnorm(0)                 # densidad estándar en 0\n\n[1] 0.3989423\n\npnorm(1.96)              # P(Z &lt;= 1.96)\n\n[1] 0.9750021\n\nqnorm(0.975)             # percentil 97.5\n\n[1] 1.959964\n\nrnorm(5, mean = 10, sd = 2)\n\n[1]  7.413549 12.630665 10.923171 11.266708 11.779842",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
     ]
@@ -3137,6 +3137,326 @@
     "text": "16.18 Referencias del capítulo\nEl tratamiento de las distribuciones uniforme, exponencial y normal sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
     "crumbs": [
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Distribuciones continuas especiales I: uniforme, exponencial y normal</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html",
+    "href": "14-gamma-weibull-beta.html",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "",
+    "text": "14.1 Objetivos de aprendizaje\nAl finalizar este capítulo, el estudiante será capaz de:",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#objetivos-de-aprendizaje",
+    "href": "14-gamma-weibull-beta.html#objetivos-de-aprendizaje",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "",
+    "text": "reconocer situaciones que pueden modelarse mediante distribuciones Gamma, Weibull y Beta;\ninterpretar correctamente sus parámetros;\ncalcular densidades, probabilidades acumuladas, cuantiles, medias y varianzas;\nrelacionar la distribución Gamma con la exponencial y con tiempos de espera acumulados;\ninterpretar la distribución Weibull mediante confiabilidad, supervivencia y tasa de falla;\nutilizar la distribución Beta para modelar proporciones y cantidades restringidas a \\([0,1]\\);\nutilizar las funciones correspondientes de R sin confundir parametrizaciones;\nsimular las tres familias y explorar el efecto de sus parámetros.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#tres-familias-muy-flexibles",
+    "href": "14-gamma-weibull-beta.html#tres-familias-muy-flexibles",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "14.2 Tres familias muy flexibles",
+    "text": "14.2 Tres familias muy flexibles\nLas distribuciones estudiadas en este capítulo amplían considerablemente el repertorio de modelos continuos.\n\nLa Gamma modela cantidades positivas y tiempos acumulados de espera.\nLa Weibull es una de las distribuciones más importantes en confiabilidad y análisis de vida útil.\nLa Beta modela variables continuas acotadas entre 0 y 1, como proporciones, fracciones o índices normalizados.\n\nA diferencia de la exponencial, estas familias permiten una gran variedad de formas.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#media-y-varianza",
+    "href": "14-gamma-weibull-beta.html#media-y-varianza",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.1 Media y varianza",
+    "text": "15.1 Media y varianza\nPara esta parametrización,\n\\[\n\\boxed{E[X]=\\frac{\\alpha}{\\lambda}}\n\\]\ny\n\\[\n\\boxed{\\operatorname{Var}(X)=\\frac{\\alpha}{\\lambda^2}}.\n\\]\nLa desviación estándar es\n\\[\n\\sigma=\\frac{\\sqrt{\\alpha}}{\\lambda}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#relación-con-la-exponencial",
+    "href": "14-gamma-weibull-beta.html#relación-con-la-exponencial",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.2 Relación con la exponencial",
+    "text": "15.2 Relación con la exponencial\nSi\n\\[\n\\alpha=1,\n\\]\nentonces\n\\[\n\\Gamma(1)=1\n\\]\ny la densidad Gamma se reduce a\n\\[\nf_X(x)=\\lambda e^{-\\lambda x},\n\\]\npor lo que\n\\[\n\\boxed{\\operatorname{Gamma}(1,\\lambda)=\\operatorname{Exp}(\\lambda)}.\n\\]\nLa exponencial es, por tanto, un caso particular de la Gamma.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#tiempos-de-espera-acumulados",
+    "href": "14-gamma-weibull-beta.html#tiempos-de-espera-acumulados",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.3 Tiempos de espera acumulados",
+    "text": "15.3 Tiempos de espera acumulados\nSi los eventos de un proceso ocurren con tasa \\(\\lambda\\) y los tiempos entre eventos son exponenciales independientes, el tiempo total hasta el evento número \\(r\\) tiene una distribución Gamma con forma \\(r\\) y tasa \\(\\lambda\\).\nCuando \\(r\\) es entero positivo, esta distribución también se conoce como Erlang.\n\nEjemplo: tiempo hasta la cuarta llegada\nSupongamos que llegan en promedio 3 solicitudes por minuto. Si \\(T\\) es el tiempo hasta la cuarta solicitud,\n\\[\nT\\sim\\operatorname{Gamma}(4,3).\n\\]\nLa media es\n\\[\nE[T]=\\frac43\\text{ minutos}.\n\\]\nLa probabilidad de que la cuarta solicitud ocurra antes de 2 minutos se obtiene con\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#rate-y-scale-en-r",
+    "href": "14-gamma-weibull-beta.html#rate-y-scale-en-r",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.4 rate y scale en R",
+    "text": "15.4 rate y scale en R\nR permite parametrizar Gamma de dos formas equivalentes:\n\\[\n\\text{scale}=\\theta=\\frac1\\lambda.\n\\]\nPor tanto,\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\ndgamma(2, shape = 4, scale = 1/3)\n\n[1] 0.2677052\n\n\nproducen el mismo resultado.\nNo debemos utilizar simultáneamente rate y scale sin comprender esta relación.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#funciones-gamma-en-r",
+    "href": "14-gamma-weibull-beta.html#funciones-gamma-en-r",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.5 Funciones Gamma en R",
+    "text": "15.5 Funciones Gamma en R\n\ndgamma(2, shape = 4, rate = 3)\n\n[1] 0.2677052\n\npgamma(2, shape = 4, rate = 3)\n\n[1] 0.8487961\n\nqgamma(0.95, shape = 4, rate = 3)\n\n[1] 2.584552\n\nrgamma(5, shape = 4, rate = 3)\n\n[1] 1.4906264 1.2448100 1.5719097 0.9069536 0.6113782",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#efecto-del-parámetro-de-forma",
+    "href": "14-gamma-weibull-beta.html#efecto-del-parámetro-de-forma",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "15.6 Efecto del parámetro de forma",
+    "text": "15.6 Efecto del parámetro de forma\nPara valores pequeños de \\(\\alpha\\), la distribución puede ser fuertemente asimétrica hacia la derecha. Al aumentar \\(\\alpha\\), la densidad se vuelve más concentrada y visualmente más simétrica.\n\nx &lt;- seq(0, 8, length.out = 500)\nplot(x, dgamma(x, 0.7, rate = 1), type = \"l\",\n     ylim = c(0, 0.8), xlab = \"x\", ylab = \"densidad\")\nlines(x, dgamma(x, 2, rate = 1), lty = 2)\nlines(x, dgamma(x, 5, rate = 1), lty = 3)\nlegend(\"topright\", legend = c(\"alpha=0.7\", \"alpha=2\", \"alpha=5\"),\n       lty = 1:3)",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#cdf-y-función-de-supervivencia",
+    "href": "14-gamma-weibull-beta.html#cdf-y-función-de-supervivencia",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.1 CDF y función de supervivencia",
+    "text": "16.1 CDF y función de supervivencia\nLa función de distribución es\n\\[\n\\boxed{F_X(x)=1-\\exp\\left[-\\left(\\frac{x}{\\eta}\\right)^k\\right]}.\n\\]\nLa función de supervivencia es\n\\[\n\\boxed{S(x)=P(X&gt;x)=\\exp\\left[-\\left(\\frac{x}{\\eta}\\right)^k\\right]}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#tasa-de-falla",
+    "href": "14-gamma-weibull-beta.html#tasa-de-falla",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.2 Tasa de falla",
+    "text": "16.2 Tasa de falla\nLa tasa instantánea de falla es\n\\[\n\\boxed{h(x)=\\frac{k}{\\eta}\\left(\\frac{x}{\\eta}\\right)^{k-1}}.\n\\]\nEsta fórmula explica gran parte de la utilidad de Weibull:\n\nsi \\(k&lt;1\\), la tasa de falla disminuye con el tiempo;\nsi \\(k=1\\), la tasa es constante;\nsi \\(k&gt;1\\), la tasa de falla aumenta con el tiempo.\n\nAsí, \\(k\\) ayuda a distinguir fallas tempranas, fallas aleatorias y desgaste.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#relación-con-la-exponencial-1",
+    "href": "14-gamma-weibull-beta.html#relación-con-la-exponencial-1",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.3 Relación con la exponencial",
+    "text": "16.3 Relación con la exponencial\nSi\n\\[\nk=1,\n\\]\nentonces\n\\[\nf_X(x)=\\frac1\\eta e^{-x/\\eta}.\n\\]\nPor tanto, Weibull con \\(k=1\\) es exponencial con tasa\n\\[\n\\lambda=\\frac1\\eta.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#media-y-varianza-de-weibull",
+    "href": "14-gamma-weibull-beta.html#media-y-varianza-de-weibull",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.4 Media y varianza de Weibull",
+    "text": "16.4 Media y varianza de Weibull\nLa media es\n\\[\n\\boxed{E[X]=\\eta\\Gamma\\left(1+\\frac1k\\right)}\n\\]\ny la varianza\n\\[\n\\boxed{\n\\operatorname{Var}(X)=\\eta^2\\left[\n\\Gamma\\left(1+\\frac{2}{k}\\right)\n-\\Gamma^2\\left(1+\\frac1k\\right)\n\\right].\n}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#ejemplo-de-confiabilidad",
+    "href": "14-gamma-weibull-beta.html#ejemplo-de-confiabilidad",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.5 Ejemplo de confiabilidad",
+    "text": "16.5 Ejemplo de confiabilidad\nEl tiempo de vida de un componente se modela como\n\\[\nX\\sim\\operatorname{Weibull}(2,1000),\n\\]\nen horas.\nLa probabilidad de que sobreviva más de 1200 horas es\n\\[\nP(X&gt;1200)=\\exp[-(1.2)^2].\n\\]\nEn R:\n\npweibull(1200, shape = 2, scale = 1000,\n         lower.tail = FALSE)\n\n[1] 0.2369278\n\n\nComo \\(k=2&gt;1\\), el modelo representa una tasa de falla creciente, coherente con un mecanismo de desgaste.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#funciones-weibull-en-r",
+    "href": "14-gamma-weibull-beta.html#funciones-weibull-en-r",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "16.6 Funciones Weibull en R",
+    "text": "16.6 Funciones Weibull en R\n\ndweibull(800, shape = 2, scale = 1000)\n\n[1] 0.0008436679\n\npweibull(800, shape = 2, scale = 1000)\n\n[1] 0.4727076\n\nqweibull(0.90, shape = 2, scale = 1000)\n\n[1] 1517.427\n\nrweibull(5, shape = 2, scale = 1000)\n\n[1]  965.9944 1410.7661 1035.1301 1546.0415  556.7421",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#media-y-varianza-de-beta",
+    "href": "14-gamma-weibull-beta.html#media-y-varianza-de-beta",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.1 Media y varianza de Beta",
+    "text": "17.1 Media y varianza de Beta\nPara\n\\[\nX\\sim\\operatorname{Beta}(\\alpha,\\beta),\n\\]\n\\[\n\\boxed{E[X]=\\frac{\\alpha}{\\alpha+\\beta}}\n\\]\ny\n\\[\n\\boxed{\n\\operatorname{Var}(X)=\n\\frac{\\alpha\\beta}\n{(\\alpha+\\beta)^2(\\alpha+\\beta+1)}.\n}\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#formas-de-la-distribución-beta",
+    "href": "14-gamma-weibull-beta.html#formas-de-la-distribución-beta",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.2 Formas de la distribución Beta",
+    "text": "17.2 Formas de la distribución Beta\nLa familia Beta es muy flexible:\n\n\\(\\alpha=\\beta=1\\): uniforme en \\([0,1]\\);\n\\(\\alpha&gt;1,\\beta&gt;1\\): densidad concentrada en el interior;\n\\(\\alpha&gt;\\beta\\): mayor concentración hacia 1;\n\\(\\alpha&lt;\\beta\\): mayor concentración hacia 0;\n\\(\\alpha&lt;1,\\beta&lt;1\\): densidad elevada cerca de ambos extremos.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#ejemplo-fracción-de-utilización",
+    "href": "14-gamma-weibull-beta.html#ejemplo-fracción-de-utilización",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.3 Ejemplo: fracción de utilización",
+    "text": "17.3 Ejemplo: fracción de utilización\nSupongamos que la proporción diaria de capacidad utilizada de un sistema se modela mediante\n\\[\nX\\sim\\operatorname{Beta}(5,2).\n\\]\nLa media es\n\\[\nE[X]=\\frac57\\approx0.7143.\n\\]\nLa probabilidad de utilizar más del 80% de la capacidad es\n\npbeta(0.80, shape1 = 5, shape2 = 2,\n      lower.tail = FALSE)\n\n[1] 0.34464",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#uniforme-como-caso-particular-de-beta",
+    "href": "14-gamma-weibull-beta.html#uniforme-como-caso-particular-de-beta",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.4 Uniforme como caso particular de Beta",
+    "text": "17.4 Uniforme como caso particular de Beta\nPara\n\\[\n\\alpha=\\beta=1,\n\\]\nla densidad Beta es\n\\[\nf_X(x)=1,\\qquad0&lt;x&lt;1,\n\\]\npor lo que\n\\[\n\\boxed{\\operatorname{Beta}(1,1)=U(0,1)}.\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#funciones-beta-en-r",
+    "href": "14-gamma-weibull-beta.html#funciones-beta-en-r",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.5 Funciones Beta en R",
+    "text": "17.5 Funciones Beta en R\n\ndbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 2.1609\n\npbeta(0.7, shape1 = 5, shape2 = 2)\n\n[1] 0.420175\n\nqbeta(0.95, shape1 = 5, shape2 = 2)\n\n[1] 0.9371501\n\nrbeta(5, shape1 = 5, shape2 = 2)\n\n[1] 0.9561171 0.7033864 0.7425706 0.7084581 0.5239187",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#simulación-gamma",
+    "href": "14-gamma-weibull-beta.html#simulación-gamma",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.6 Simulación Gamma",
+    "text": "17.6 Simulación Gamma\n\nset.seed(2026)\nxg &lt;- rgamma(50000, shape = 4, rate = 3)\nmean(xg)\n\n[1] 1.336002\n\nvar(xg)\n\n[1] 0.4405249\n\nc(media_teorica = 4/3,\n  varianza_teorica = 4/9)\n\n   media_teorica varianza_teorica \n       1.3333333        0.4444444",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#simulación-weibull",
+    "href": "14-gamma-weibull-beta.html#simulación-weibull",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.7 Simulación Weibull",
+    "text": "17.7 Simulación Weibull\n\nset.seed(2026)\nk &lt;- 2\neta &lt;- 1000\nxw &lt;- rweibull(50000, shape = k, scale = eta)\n\nmedia_w &lt;- eta * gamma(1 + 1/k)\nvar_w &lt;- eta^2 * (gamma(1 + 2/k) - gamma(1 + 1/k)^2)\n\nc(media_empirica = mean(xw), media_teorica = media_w)\n\nmedia_empirica  media_teorica \n      883.7981       886.2269 \n\nc(var_empirica = var(xw), var_teorica = var_w)\n\nvar_empirica  var_teorica \n    214478.8     214601.8",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#simulación-beta",
+    "href": "14-gamma-weibull-beta.html#simulación-beta",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.8 Simulación Beta",
+    "text": "17.8 Simulación Beta\n\nset.seed(2026)\na &lt;- 5\nb &lt;- 2\nxb &lt;- rbeta(50000, a, b)\n\nc(media_empirica = mean(xb),\n  media_teorica = a/(a+b))\n\nmedia_empirica  media_teorica \n     0.7145248      0.7142857",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#comparación-conceptual",
+    "href": "14-gamma-weibull-beta.html#comparación-conceptual",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.9 Comparación conceptual",
+    "text": "17.9 Comparación conceptual\n\n\n\n\n\n\n\n\n\nDistribución\nSoporte\nParámetros\nUso típico\n\n\n\n\nGamma\n\\((0,\\infty)\\)\nforma \\(\\alpha\\), tasa \\(\\lambda\\)\ntiempos acumulados, cantidades positivas\n\n\nWeibull\n\\([0,\\infty)\\)\nforma \\(k\\), escala \\(\\eta\\)\nvida útil y confiabilidad\n\n\nBeta\n\\((0,1)\\)\n\\(\\alpha,\\beta\\)\nproporciones y fracciones",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#interactivo-del-capítulo",
+    "href": "14-gamma-weibull-beta.html#interactivo-del-capítulo",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.10 Interactivo del capítulo",
+    "text": "17.10 Interactivo del capítulo\nEl interactivo permite elegir Gamma, Weibull o Beta y modificar sus parámetros mediante deslizadores.\nPara cada distribución se muestran:\n\nla densidad;\nla media;\nla varianza;\nun intervalo de interés;\nel área de probabilidad dentro del intervalo.\n\nEn Weibull se muestra además el comportamiento cualitativo de la tasa de falla: decreciente, constante o creciente según el valor de \\(k\\).",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#actividad-con-geogebra",
+    "href": "14-gamma-weibull-beta.html#actividad-con-geogebra",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.11 Actividad con GeoGebra",
+    "text": "17.11 Actividad con GeoGebra\nConstruye una familia Weibull para distintos valores de \\(k\\) manteniendo fija la escala \\(\\eta\\). Representa simultáneamente la densidad y la función\n\\[\nh(x)=\\frac{k}{\\eta}\\left(\\frac{x}{\\eta}\\right)^{k-1}.\n\\]\nCompara \\(k=0.6\\), \\(k=1\\) y \\(k=2\\).\nDespués construye varias densidades Beta en \\([0,1]\\) y observa cómo cambia la forma para:\n\\[\n(\\alpha,\\beta)=(1,1),(2,5),(5,2),(0.5,0.5),(5,5).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#estrategia-de-selección-del-modelo",
+    "href": "14-gamma-weibull-beta.html#estrategia-de-selección-del-modelo",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.12 Estrategia de selección del modelo",
+    "text": "17.12 Estrategia de selección del modelo\n\nSi la variable es positiva y representa un tiempo acumulado hasta varios eventos, considere Gamma.\nSi estudia tiempo de vida y necesita una tasa de falla flexible, considere Weibull.\nSi la variable es una proporción continua restringida a \\([0,1]\\), considere Beta.\n\nLa decisión debe fundamentarse también en conocimiento del proceso, no sólo en ajuste gráfico.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#errores-frecuentes",
+    "href": "14-gamma-weibull-beta.html#errores-frecuentes",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.13 Errores frecuentes",
+    "text": "17.13 Errores frecuentes\n\nConfundir rate y scale en la distribución Gamma.\nSuponer que Gamma y exponencial son distribuciones no relacionadas.\nInterpretar \\(k\\) de Weibull como escala en lugar de forma.\nConcluir que Weibull siempre tiene tasa de falla creciente.\nUtilizar Beta para una variable no restringida a \\([0,1]\\) sin transformarla.\nConfundir los parámetros shape1 y shape2 de R.\nInterpretar valores de densidad como probabilidades puntuales.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#resumen",
+    "href": "14-gamma-weibull-beta.html#resumen",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.14 Resumen",
+    "text": "17.14 Resumen\nGamma:\n\\[\nf(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1}e^{-\\lambda x}.\n\\]\nWeibull:\n\\[\nf(x)=\\frac{k}{\\eta}\\left(\\frac{x}{\\eta}\\right)^{k-1}\ne^{-(x/\\eta)^k}.\n\\]\nBeta:\n\\[\nf(x)=\\frac{x^{\\alpha-1}(1-x)^{\\beta-1}}{B(\\alpha,\\beta)}.\n\\]\nCasos particulares importantes:\n\\[\n\\operatorname{Gamma}(1,\\lambda)=\\operatorname{Exp}(\\lambda),\n\\]\n\\[\n\\operatorname{Weibull}(1,\\eta)=\\operatorname{Exp}(1/\\eta),\n\\]\n\\[\n\\operatorname{Beta}(1,1)=U(0,1).\n\\]",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#ejercicios",
+    "href": "14-gamma-weibull-beta.html#ejercicios",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.15 Ejercicios",
+    "text": "17.15 Ejercicios\n\nSea \\(X\\sim\\operatorname{Gamma}(3,2)\\). Calcula media y varianza.\nPara la variable anterior, calcula \\(P(X&lt;2)\\) y \\(P(X&gt;3)\\) en R.\nUna corriente de eventos tiene tasa 4 por hora. Modela el tiempo hasta el quinto evento y calcula su media.\nSea \\(X\\sim\\operatorname{Weibull}(1.5,800)\\). Calcula la probabilidad de sobrevivir más de 1000 horas.\nPara Weibull, explica el comportamiento de la tasa de falla cuando \\(k=0.7\\), \\(k=1\\) y \\(k=2\\).\nCalcula media y varianza de una Beta\\((4,3)\\).\nPara \\(X\\sim\\operatorname{Beta}(4,3)\\), calcula \\(P(X&gt;0.75)\\).\nCompara gráficamente Beta\\((2,5)\\) y Beta\\((5,2)\\) y explica la simetría entre ambas.\nSimula 50 000 observaciones Gamma\\((4,3)\\) y compara media y varianza empíricas con las teóricas.\nSimula una Weibull\\((2,1000)\\) y estima por frecuencia relativa \\(P(X&gt;1200)\\).\nReto ★. Verifica numéricamente que Gamma\\((1,\\lambda)\\) y Exp\\((\\lambda)\\) producen la misma densidad.\nReto ★. Comprueba que Beta\\((1,1)\\) coincide con la uniforme estándar.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#materiales-complementarios-del-capítulo",
+    "href": "14-gamma-weibull-beta.html#materiales-complementarios-del-capítulo",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.16 Materiales complementarios del capítulo",
+    "text": "17.16 Materiales complementarios del capítulo\n\n\n\nMaterial\nFormato\nAcceso\nPropósito\n\n\n\n\nCuaderno de Google Colab\nNotebook interactivo (R)\nAbrir en Colab\nEjecutar ejemplos y simulaciones de Gamma, Weibull y Beta.\n\n\nCuaderno de R\nR Markdown\nAbrir cuaderno R\nReproducir probabilidades, cuantiles, confiabilidad y simulaciones.\n\n\nInteractivo\nHTML / GeoGebra\nAbrir recurso\nExplorar parámetros, densidades, áreas y tasa de falla Weibull.\n\n\nPresentación\nPDF / PPT\nPróximamente\nSe incorporará cuando se proporcionen los enlaces.\n\n\nVideo\nVideo\nPróximamente\nExplicación audiovisual complementaria.\n\n\nInfografía\nImagen / PDF\nPróximamente\nSíntesis visual de las tres familias.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
+    ]
+  },
+  {
+    "objectID": "14-gamma-weibull-beta.html#referencias-del-capítulo",
+    "href": "14-gamma-weibull-beta.html#referencias-del-capítulo",
+    "title": "14  Distribuciones continuas especiales II: Gamma, Weibull y Beta",
+    "section": "17.17 Referencias del capítulo",
+    "text": "17.17 Referencias del capítulo\nEl tratamiento de las distribuciones Gamma, Weibull y Beta sigue la presentación estándar de Walpole et al. (2012), Devore (2016), Montgomery y Runger (2018) y Johnson (2018). Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia Kerns (2010).\n\n\n\n\nDevore, Jay L. 2016. Probability and Statistics for Engineering and the Sciences. 9.ª ed. Cengage Learning.\n\n\nJohnson, Richard A. 2018. Miller & Freund’s Probability and Statistics for Engineers. 9.ª ed. Pearson.\n\n\nKerns, G. Jay. 2010. Introduction to Probability and Statistics Using R. 1.ª ed.\n\n\nMontgomery, Douglas C., y George C. Runger. 2018. Applied Statistics and Probability for Engineers. 7.ª ed. Wiley.\n\n\nWalpole, Ronald E., Raymond H. Myers, Sharon L. Myers, y Keying Ye. 2012. Probabilidad y estadística para ingeniería y ciencias. 9.ª ed. Pearson.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Distribuciones continuas especiales II: Gamma, Weibull y Beta</span>"
     ]
   },
   {

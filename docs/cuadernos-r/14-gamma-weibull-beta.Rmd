@@ -1,0 +1,55 @@
+---
+title: "Capítulo 14. Gamma, Weibull y Beta"
+output: html_document
+---
+
+## Gamma
+
+```{r}
+alpha <- 4
+lambda <- 3
+x <- seq(0, 5, length.out = 500)
+plot(x, dgamma(x, shape = alpha, rate = lambda), type = "l",
+     xlab = "x", ylab = "densidad")
+pgamma(2, shape = alpha, rate = lambda)
+qgamma(0.95, shape = alpha, rate = lambda)
+```
+
+## Weibull y confiabilidad
+
+```{r}
+k <- 2
+eta <- 1000
+pweibull(1200, shape = k, scale = eta, lower.tail = FALSE)
+
+hazard <- function(x, k, eta) (k/eta) * (x/eta)^(k-1)
+curve(hazard(x, 2, 1000), from = 1, to = 2000,
+      xlab = "x", ylab = "h(x)")
+```
+
+## Beta
+
+```{r}
+a <- 5
+b <- 2
+pbeta(0.8, shape1 = a, shape2 = b, lower.tail = FALSE)
+curve(dbeta(x, a, b), from = 0, to = 1,
+      xlab = "x", ylab = "densidad")
+```
+
+## Simulación
+
+```{r}
+set.seed(2026)
+xg <- rgamma(50000, shape = 4, rate = 3)
+xw <- rweibull(50000, shape = 2, scale = 1000)
+xb <- rbeta(50000, 5, 2)
+
+c(mean(xg), var(xg))
+c(mean(xw), var(xw))
+c(mean(xb), var(xb))
+```
+
+## Actividad
+
+Modifica los parámetros de forma y escala y compara cómo cambian la asimetría, dispersión y concentración de cada distribución.
