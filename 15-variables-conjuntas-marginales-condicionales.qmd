@@ -1,0 +1,695 @@
+# Variables aleatorias conjuntas, distribuciones marginales y condicionales
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- describir simultáneamente dos variables aleatorias mediante una distribución conjunta;
+- construir e interpretar tablas de probabilidad conjunta para variables discretas;
+- obtener distribuciones marginales a partir de una distribución conjunta;
+- calcular distribuciones condicionales;
+- trabajar con densidades conjuntas continuas mediante integrales dobles;
+- identificar correctamente la región de soporte de una densidad bidimensional;
+- obtener densidades marginales y condicionales;
+- verificar independencia mediante la factorización de la distribución conjunta;
+- utilizar R para organizar tablas conjuntas, calcular probabilidades y realizar simulaciones;
+- interpretar visualmente dependencia e independencia mediante mapas de calor y regiones en el plano.
+
+## De una variable a dos variables
+
+Hasta ahora hemos estudiado una variable aleatoria a la vez. Sin embargo, muchos problemas de ingeniería y ciencias requieren observar **dos magnitudes simultáneamente**.
+
+Ejemplos:
+
+- temperatura y humedad;
+- tiempo de respuesta y número de solicitudes;
+- diámetro y longitud de una pieza;
+- concentración de dos contaminantes;
+- número de fallas de dos subsistemas;
+- voltaje de entrada y voltaje de salida.
+
+Si $X$ y $Y$ se observan en el mismo experimento, la distribución conjunta permite estudiar no sólo cada variable por separado, sino también la forma en que se relacionan.
+
+# Variables aleatorias conjuntas discretas
+
+Si $X$ y $Y$ son discretas, definimos la función de masa conjunta por
+
+$$
+\boxed{p_{X,Y}(x,y)=P(X=x,Y=y)}.
+$$
+
+Debe satisfacer
+
+$$
+p_{X,Y}(x,y)\ge0
+$$
+
+y
+
+$$
+\boxed{\sum_x\sum_y p_{X,Y}(x,y)=1}.
+$$
+
+## Ejemplo: dos subsistemas
+
+Supongamos que $X$ es el número de fallas observadas en un subsistema A y $Y$ el número de fallas de un subsistema B durante un intervalo. La distribución conjunta es
+
+| $X\backslash Y$ | 0 | 1 | 2 | Total |
+|---:|---:|---:|---:|---:|
+| 0 | 0.20 | 0.10 | 0.05 | 0.35 |
+| 1 | 0.15 | 0.20 | 0.10 | 0.45 |
+| 2 | 0.05 | 0.10 | 0.05 | 0.20 |
+| Total | 0.40 | 0.40 | 0.20 | 1.00 |
+
+Cada celda representa una probabilidad conjunta. Por ejemplo,
+
+$$
+P(X=1,Y=0)=0.15.
+$$
+
+## Probabilidad de una región discreta
+
+Para calcular
+
+$$
+P(X\ge1,Y\le1),
+$$
+
+sumamos las celdas compatibles:
+
+$$
+P(X\ge1,Y\le1)
+=0.15+0.20+0.05+0.10
+=0.50.
+$$
+
+La idea general es
+
+$$
+\boxed{P((X,Y)\in A)=\sum_{(x,y)\in A}p_{X,Y}(x,y)}.
+$$
+
+# Distribuciones marginales discretas
+
+La distribución marginal de $X$ se obtiene sumando sobre todos los valores de $Y$:
+
+$$
+\boxed{p_X(x)=\sum_y p_{X,Y}(x,y)}.
+$$
+
+Análogamente,
+
+$$
+\boxed{p_Y(y)=\sum_x p_{X,Y}(x,y)}.
+$$
+
+En una tabla conjunta, las marginales corresponden a los totales por fila y columna.
+
+Para el ejemplo:
+
+$$
+p_X(0)=0.35,\qquad p_X(1)=0.45,\qquad p_X(2)=0.20,
+$$
+
+y
+
+$$
+p_Y(0)=0.40,\qquad p_Y(1)=0.40,\qquad p_Y(2)=0.20.
+$$
+
+## Cálculo de marginales en R
+
+```{r}
+P <- matrix(c(
+  0.20, 0.10, 0.05,
+  0.15, 0.20, 0.10,
+  0.05, 0.10, 0.05
+), nrow = 3, byrow = TRUE)
+
+rownames(P) <- paste0("X=", 0:2)
+colnames(P) <- paste0("Y=", 0:2)
+
+P
+rowSums(P)   # marginal de X
+colSums(P)   # marginal de Y
+sum(P)       # debe ser 1
+```
+
+# Distribuciones condicionales discretas
+
+Si $P(Y=y)>0$, definimos
+
+$$
+\boxed{
+p_{X\mid Y}(x\mid y)
+=\frac{p_{X,Y}(x,y)}{p_Y(y)}.
+}
+$$
+
+De manera análoga,
+
+$$
+\boxed{
+p_{Y\mid X}(y\mid x)
+=\frac{p_{X,Y}(x,y)}{p_X(x)}.
+}
+$$
+
+## Ejemplo condicional
+
+Queremos obtener la distribución de $X$ sabiendo que $Y=1$.
+
+Como
+
+$$
+P(Y=1)=0.40,
+$$
+
+entonces
+
+$$
+P(X=0\mid Y=1)=\frac{0.10}{0.40}=0.25,
+$$
+
+$$
+P(X=1\mid Y=1)=\frac{0.20}{0.40}=0.50,
+$$
+
+$$
+P(X=2\mid Y=1)=\frac{0.10}{0.40}=0.25.
+$$
+
+La distribución condicional vuelve a sumar 1.
+
+En R:
+
+```{r}
+py <- colSums(P)
+P[, "Y=1"] / py["Y=1"]
+```
+
+# Independencia de variables aleatorias discretas
+
+$X$ y $Y$ son independientes si para todo par $(x,y)$,
+
+$$
+\boxed{
+p_{X,Y}(x,y)=p_X(x)p_Y(y).
+}
+$$
+
+Si esta igualdad falla para siquiera un par con probabilidad relevante, las variables no son independientes.
+
+## Verificación en R
+
+```{r}
+px <- rowSums(P)
+py <- colSums(P)
+P_ind <- outer(px, py)
+
+P
+P_ind
+P - P_ind
+max(abs(P - P_ind))
+```
+
+Si el máximo es cero salvo error numérico, la tabla factoriza y las variables son independientes.
+
+## Independencia y condicionamiento
+
+Si $X$ y $Y$ son independientes y $p_Y(y)>0$, entonces
+
+$$
+p_{X\mid Y}(x\mid y)=p_X(x).
+$$
+
+Es decir, conocer $Y$ no cambia la distribución de $X$.
+
+Esta es una de las interpretaciones más importantes de independencia.
+
+# Función de distribución conjunta
+
+Para dos variables aleatorias cualesquiera definimos
+
+$$
+\boxed{F_{X,Y}(x,y)=P(X\le x,Y\le y)}.
+$$
+
+En el caso discreto,
+
+$$
+F_{X,Y}(x,y)
+=\sum_{u\le x}\sum_{v\le y}p_{X,Y}(u,v).
+$$
+
+Las CDF marginales pueden recuperarse mediante límites:
+
+$$
+F_X(x)=\lim_{y\to\infty}F_{X,Y}(x,y),
+$$
+
+$$
+F_Y(y)=\lim_{x\to\infty}F_{X,Y}(x,y).
+$$
+
+# Variables aleatorias conjuntas continuas
+
+Si $(X,Y)$ es un vector aleatorio continuo, una densidad conjunta $f_{X,Y}(x,y)$ debe satisfacer
+
+$$
+f_{X,Y}(x,y)\ge0
+$$
+
+y
+
+$$
+\boxed{\iint_{\mathbb R^2} f_{X,Y}(x,y)\,dx\,dy=1}.
+$$
+
+Para una región $A$ del plano,
+
+$$
+\boxed{P((X,Y)\in A)=\iint_A f_{X,Y}(x,y)\,dx\,dy}.
+$$
+
+En dos dimensiones, comprender la **región de integración** es tan importante como conocer la fórmula de la densidad.
+
+# Ejemplo continuo sobre una región triangular
+
+Considere
+
+$$
+f_{X,Y}(x,y)=2,
+$$
+
+sobre la región
+
+$$
+0<y<x<1,
+$$
+
+y cero fuera de ella.
+
+La región es el triángulo debajo de la recta $y=x$ y encima del eje $x$ dentro del cuadrado unitario.
+
+Verificamos la normalización:
+
+$$
+\int_0^1\int_0^x2\,dy\,dx
+=\int_0^1 2x\,dx
+=1.
+$$
+
+## Probabilidad sobre una subregión
+
+Calculemos
+
+$$
+P(X<0.8,Y<0.3).
+$$
+
+Debido al soporte triangular, debemos dividir la integración según la relación entre $x$ y $0.3$:
+
+$$
+P(X<0.8,Y<0.3)
+=\int_0^{0.3}\int_0^x2\,dy\,dx
++\int_{0.3}^{0.8}\int_0^{0.3}2\,dy\,dx.
+$$
+
+La geometría del soporte evita integrar sobre zonas donde la densidad es cero.
+
+# Densidades marginales
+
+Para obtener la marginal de $X$, integramos respecto de $y$:
+
+$$
+\boxed{f_X(x)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)\,dy}.
+$$
+
+En el ejemplo triangular, para $0<x<1$,
+
+$$
+f_X(x)=\int_0^x2\,dy=2x.
+$$
+
+Para $Y$,
+
+$$
+\boxed{f_Y(y)=\int_{-\infty}^{\infty}f_{X,Y}(x,y)\,dx}.
+$$
+
+Como para un $y$ fijo se tiene $y<x<1$,
+
+$$
+f_Y(y)=\int_y^1 2\,dx=2(1-y),\qquad0<y<1.
+$$
+
+Observe que ambas marginales están normalizadas:
+
+$$
+\int_0^1 2x\,dx=1,
+$$
+
+$$
+\int_0^1 2(1-y)\,dy=1.
+$$
+
+# Densidades condicionales
+
+Si $f_X(x)>0$, la densidad condicional de $Y$ dado $X=x$ es
+
+$$
+\boxed{
+f_{Y\mid X}(y\mid x)
+=\frac{f_{X,Y}(x,y)}{f_X(x)}.
+}
+$$
+
+Para nuestro ejemplo,
+
+$$
+f_{Y\mid X}(y\mid x)
+=\frac{2}{2x}
+=\frac1x,
+$$
+
+para
+
+$$
+0<y<x.
+$$
+
+Por tanto, dado $X=x$, la variable $Y$ se distribuye uniformemente en $(0,x)$.
+
+De forma análoga,
+
+$$
+f_{X\mid Y}(x\mid y)
+=\frac{2}{2(1-y)}
+=\frac{1}{1-y},
+$$
+
+para
+
+$$
+y<x<1.
+$$
+
+# Independencia en el caso continuo
+
+Si $X$ y $Y$ tienen densidades, son independientes cuando
+
+$$
+\boxed{
+f_{X,Y}(x,y)=f_X(x)f_Y(y)
+}
+$$
+
+para todos los puntos relevantes, salvo posibles excepciones de área cero.
+
+En el ejemplo triangular,
+
+$$
+f_X(x)f_Y(y)=4x(1-y),
+$$
+
+que no coincide con la densidad conjunta constante $2$. Además, el soporte triangular no es un rectángulo producto. Por tanto, las variables son dependientes.
+
+# Ejemplo continuo independiente
+
+Sea
+
+$$
+X\sim U(0,1),\qquad Y\sim U(0,2),
+$$
+
+independientes. Entonces
+
+$$
+f_X(x)=1,\qquad0<x<1,
+$$
+
+$$
+f_Y(y)=\frac12,\qquad0<y<2,
+$$
+
+y
+
+$$
+\boxed{f_{X,Y}(x,y)=\frac12}
+$$
+
+sobre el rectángulo
+
+$$
+0<x<1,\qquad0<y<2.
+$$
+
+La región de soporte sí es producto de los soportes marginales.
+
+# Cálculos bidimensionales en R
+
+Para el ejemplo triangular podemos definir
+
+```{r}
+fxy <- function(x, y) {
+  ifelse(x > 0 & x < 1 & y > 0 & y < x, 2, 0)
+}
+
+fx <- function(x) ifelse(x > 0 & x < 1, 2*x, 0)
+fy <- function(y) ifelse(y > 0 & y < 1, 2*(1-y), 0)
+```
+
+La probabilidad de la subregión anterior puede calcularse mediante integración iterada:
+
+```{r}
+p1 <- integrate(function(x) 2*x, 0, 0.3)$value
+p2 <- integrate(function(x) 2*0.3, 0.3, 0.8)$value
+p1 + p2
+```
+
+# Simulación de una distribución conjunta discreta
+
+Podemos simular directamente una tabla conjunta convirtiendo las celdas en categorías.
+
+```{r}
+set.seed(2026)
+
+coords <- expand.grid(X = 0:2, Y = 0:2)
+prob <- as.vector(t(P))
+
+idx <- sample(seq_len(nrow(coords)),
+              size = 50000,
+              replace = TRUE,
+              prob = prob)
+
+sim <- coords[idx, ]
+
+prop.table(table(sim$X, sim$Y))
+prop.table(table(sim$X))
+prop.table(table(sim$Y))
+```
+
+Las frecuencias empíricas deben acercarse a la distribución conjunta y a sus marginales.
+
+# Simulación del ejemplo triangular
+
+Una manera eficiente de simular la densidad
+
+$$
+f_{X,Y}(x,y)=2,\qquad0<y<x<1,
+$$
+
+es aprovechar sus marginales y condicionales.
+
+Como
+
+$$
+f_X(x)=2x,
+$$
+
+la CDF marginal es
+
+$$
+F_X(x)=x^2,
+$$
+
+y por transformada inversa
+
+$$
+X=\sqrt{U_1},\qquad U_1\sim U(0,1).
+$$
+
+Dado $X=x$, $Y\mid X=x\sim U(0,x)$, así que
+
+$$
+Y=XU_2,
+$$
+
+con $U_2\sim U(0,1)$ independiente de $U_1$.
+
+```{r}
+set.seed(2026)
+n <- 20000
+u1 <- runif(n)
+u2 <- runif(n)
+X <- sqrt(u1)
+Y <- X * u2
+
+plot(X, Y, pch = 16, cex = 0.35,
+     xlab = "X", ylab = "Y",
+     main = "Simulación sobre soporte triangular")
+abline(0, 1, lty = 2)
+```
+
+# Visualización mediante mapa de calor
+
+Para una distribución discreta conjunta, un mapa de calor permite identificar rápidamente dónde se concentra la probabilidad.
+
+```{r}
+image(x = 0:2, y = 0:2, z = P,
+      xlab = "Y", ylab = "X",
+      main = "Mapa de calor de la PMF conjunta")
+```
+
+Un patrón concentrado cerca de una diagonal puede indicar asociación, mientras que una tabla que factoriza como producto de marginales representa independencia.
+
+# Interactivo del capítulo
+
+El interactivo del capítulo utiliza una tabla conjunta $3\times3$ con marginales fijas. Un deslizador modifica un parámetro de asociación sin cambiar dichas marginales.
+
+El estudiante puede observar simultáneamente:
+
+- la PMF conjunta como mapa de calor;
+- las marginales de $X$ y $Y$;
+- una distribución condicional seleccionada;
+- la tabla que correspondería a independencia, $p_X(x)p_Y(y)$;
+- la diferencia entre la distribución real y la independiente;
+- un indicador numérico de separación respecto de la independencia.
+
+Esto permite ver una idea crucial: **dos distribuciones pueden tener exactamente las mismas marginales y, sin embargo, estructuras conjuntas muy distintas**.
+
+# Actividad con GeoGebra
+
+## Parte A: soporte continuo
+
+Dibuja el cuadrado unitario y la región
+
+$$
+0<y<x<1.
+$$
+
+Utiliza un deslizador $c\in(0,1)$ y representa la recta vertical $x=c$. La sección vertical de la región tiene longitud $c$, por lo que
+
+$$
+f_X(c)=2c.
+$$
+
+Después usa una recta horizontal $y=d$. La sección horizontal tiene longitud $1-d$, de modo que
+
+$$
+f_Y(d)=2(1-d).
+$$
+
+Esta construcción ofrece una interpretación geométrica directa de la marginalización.
+
+## Parte B: condicionamiento
+
+Fija $X=c$. El segmento posible para $Y$ es
+
+$$
+0<Y<c.
+$$
+
+Observa que la densidad condicional sobre ese segmento es uniforme:
+
+$$
+f_{Y\mid X}(y\mid c)=\frac1c.
+$$
+
+# Estrategia de resolución
+
+Ante un problema con dos variables:
+
+1. identifica si la distribución conjunta es discreta o continua;
+2. determina con cuidado el soporte conjunto;
+3. verifica normalización;
+4. para marginalizar, suma o integra sobre la otra variable;
+5. para condicionar, divide la conjunta entre la marginal correspondiente;
+6. para independencia, compara la conjunta con el producto de marginales;
+7. en el caso continuo, dibuja primero la región de integración;
+8. interpreta el resultado: marginalizar elimina información sobre una variable; condicionar incorpora información sobre ella.
+
+# Errores frecuentes
+
+- Confundir una probabilidad conjunta con una probabilidad condicional.
+- Obtener marginales dividiendo en lugar de sumar o integrar.
+- Olvidar normalizar una distribución condicional.
+- Integrar sobre un rectángulo cuando el soporte real es triangular u otra región.
+- Concluir independencia sólo porque las marginales parecen sencillas.
+- Creer que conocer las dos marginales determina la distribución conjunta.
+- En variables continuas, interpretar $f_{X,Y}(x,y)$ como una probabilidad puntual.
+
+# Resumen
+
+Para variables discretas:
+
+$$
+p_X(x)=\sum_y p_{X,Y}(x,y),
+$$
+
+$$
+p_{X\mid Y}(x\mid y)=\frac{p_{X,Y}(x,y)}{p_Y(y)}.
+$$
+
+Para variables continuas:
+
+$$
+f_X(x)=\int f_{X,Y}(x,y)\,dy,
+$$
+
+$$
+f_{Y\mid X}(y\mid x)=\frac{f_{X,Y}(x,y)}{f_X(x)}.
+$$
+
+La independencia se expresa mediante
+
+$$
+p_{X,Y}(x,y)=p_X(x)p_Y(y)
+$$
+
+o, en el caso continuo,
+
+$$
+f_{X,Y}(x,y)=f_X(x)f_Y(y).
+$$
+
+# Ejercicios
+
+1. Para la tabla conjunta del capítulo, calcula $P(X=2,Y\ge1)$.
+2. Obtén todas las distribuciones condicionales $p_{X\mid Y}(x\mid y)$.
+3. Verifica si $X$ y $Y$ son independientes en esa tabla.
+4. Construye una tabla conjunta independiente utilizando $p_X=(0.2,0.5,0.3)$ y $p_Y=(0.4,0.35,0.25)$.
+5. Para $f(x,y)=2$ sobre $0<y<x<1$, calcula $P(Y<0.25)$.
+6. Para la misma densidad, calcula $P(X>0.6)$ mediante la marginal de $X$.
+7. Obtén $f_{Y\mid X}(y\mid0.8)$ y calcula $P(Y<0.3\mid X=0.8)$.
+8. Explica por qué el soporte triangular prueba que $X$ y $Y$ no pueden ser independientes en el ejemplo continuo.
+9. Simula 100 000 pares del ejemplo triangular y compara histogramas marginales con $f_X(x)=2x$ y $f_Y(y)=2(1-y)$.
+10. Construye en R una tabla conjunta con marginales prefijadas y modifica la dependencia sin alterar esas marginales.
+11. **Reto ★.** Demuestra que si $X$ y $Y$ son independientes, entonces $F_{X,Y}(x,y)=F_X(x)F_Y(y)$.
+12. **Reto ★.** Propón dos distribuciones conjuntas diferentes que tengan las mismas marginales.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/15-variables-conjuntas-colab.ipynb) | Explorar tablas conjuntas, marginales, condicionales, independencia y simulación. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/15-variables-conjuntas.Rmd) | Reproducir cálculos y visualizaciones bidimensionales en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap15-distribuciones-conjuntas.html) | Visualizar dependencia, marginales y distribuciones condicionales. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual de distribución conjunta, marginalización y condicionamiento. |
+
+## Referencias del capítulo
+
+El tratamiento de distribuciones conjuntas, marginales, condicionales e independencia sigue la presentación estándar de @walpole2012, @devore2016, @montgomery2018 y @johnson2018. Los ejemplos, ejercicios, simulaciones y código en R son originales; el enfoque computacional general toma como referencia @kerns2010.
