@@ -21,6 +21,9 @@ jobs:
       - name: Obtener repositorio
         uses: actions/checkout@v4
 
+      - name: Corregir capítulo 15
+        run: python scripts/corregir_jerarquia_cap15.py
+
       - name: Insertar materiales complementarios en los capítulos
         run: python scripts/insertar_materiales.py
 
@@ -69,7 +72,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "No hay cambios que guardar."
           else
-            git commit -m "Insertar materiales y actualizar sitio [skip ci]"
+            git commit -m "Corregir capítulo 15 y actualizar sitio [skip ci]"
             git pull --rebase origin main
             git push
           fi
