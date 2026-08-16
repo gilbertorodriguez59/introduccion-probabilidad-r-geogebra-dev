@@ -1,0 +1,497 @@
+# Transformaciones de variables aleatorias
+
+## Objetivos de aprendizaje
+
+Al finalizar este capítulo, el estudiante será capaz de:
+
+- obtener la distribución de $Y=g(X)$ en casos discretos y continuos;
+- aplicar el método de la función de distribución acumulada;
+- utilizar cambio de variable para transformaciones monótonas;
+- tratar transformaciones no monótonas separando ramas inversas;
+- obtener distribuciones de sumas mediante convolución;
+- aplicar transformaciones bidimensionales mediante el Jacobiano;
+- comprobar resultados mediante simulación en R;
+- interpretar geométricamente transformaciones con apoyo de GeoGebra.
+
+## ¿Por qué transformar una variable aleatoria?
+
+En aplicaciones rara vez interesa únicamente la variable medida originalmente. Si $X$ representa longitud, tiempo, voltaje o concentración, pueden interesar cantidades derivadas como
+
+$$
+Y=X^2,\qquad Y=aX+b,\qquad Y=\log X,
+$$
+
+o combinaciones de varias variables como
+
+$$
+S=X+Y.
+$$
+
+El problema consiste en determinar la distribución de la nueva variable.
+
+## Caso discreto
+
+Si $X$ es discreta y $Y=g(X)$, entonces
+
+$$
+P(Y=y)=\sum_{x:g(x)=y}P(X=x).
+$$
+
+La suma es importante cuando diferentes valores de $X$ producen el mismo valor de $Y$.
+
+### Ejemplo
+
+Sea $X$ con valores $-2,-1,0,1,2$ y probabilidades $0.1,0.2,0.4,0.2,0.1$. Si
+
+$$
+Y=X^2,
+$$
+
+entonces $Y$ toma valores $0,1,4$ y
+
+$$
+P(Y=0)=0.4,
+$$
+
+$$
+P(Y=1)=P(X=-1)+P(X=1)=0.4,
+$$
+
+$$
+P(Y=4)=P(X=-2)+P(X=2)=0.2.
+$$
+
+```{r}
+x <- -2:2
+px <- c(.1,.2,.4,.2,.1)
+y <- x^2
+aggregate(px, by = list(Y = y), FUN = sum)
+```
+
+## Método de la CDF
+
+Para una variable continua, un método general consiste en calcular
+
+$$
+F_Y(y)=P(Y\le y)=P(g(X)\le y)
+$$
+
+y después derivar:
+
+$$
+f_Y(y)=\frac{d}{dy}F_Y(y).
+$$
+
+Este procedimiento es especialmente útil cuando la transformación no es uno a uno.
+
+## Transformación monótona
+
+Si $Y=g(X)$ y $g$ es estrictamente monótona y diferenciable, con inversa
+
+$$
+x=g^{-1}(y),
+$$
+
+entonces
+
+$$
+\boxed{f_Y(y)=f_X(g^{-1}(y))\left|\frac{d}{dy}g^{-1}(y)\right|}.
+$$
+
+El valor absoluto garantiza una densidad no negativa.
+
+## Ejemplo: transformación lineal
+
+Sea
+
+$$
+Y=aX+b,\qquad a\ne0.
+$$
+
+Entonces
+
+$$
+x=\frac{y-b}{a},
+$$
+
+y
+
+$$
+\boxed{f_Y(y)=\frac1{|a|}f_X\left(\frac{y-b}{a}\right)}.
+$$
+
+Además,
+
+$$
+E[Y]=aE[X]+b,
+$$
+
+$$
+\operatorname{Var}(Y)=a^2\operatorname{Var}(X).
+$$
+
+## Ejemplo: de uniforme a otra escala
+
+Si
+
+$$
+X\sim U(0,1),\qquad Y=10+5X,
+$$
+
+entonces
+
+$$
+Y\sim U(10,15).
+$$
+
+```{r}
+set.seed(2026)
+x <- runif(50000)
+y <- 10 + 5*x
+hist(y, probability = TRUE, breaks = 40)
+curve(dunif(x, 10, 15), add = TRUE, lwd = 2)
+```
+
+## Transformación exponencial
+
+Sea
+
+$$
+X\sim U(0,1),\qquad Y=-\frac1\lambda\log X.
+$$
+
+Entonces $Y$ tiene distribución exponencial con tasa $\lambda$.
+
+Este resultado constituye la base del método de **transformada inversa** para simulación.
+
+```{r}
+set.seed(2026)
+lambda <- 2
+u <- runif(50000)
+y <- -log(u)/lambda
+hist(y, probability = TRUE, breaks = 60, xlim = c(0,4))
+curve(dexp(x, rate = lambda), add = TRUE, lwd = 2)
+```
+
+## Transformaciones no monótonas
+
+Si una transformación posee varias ramas inversas, deben sumarse las contribuciones correspondientes.
+
+Si las soluciones de
+
+$$
+y=g(x)
+$$
+
+son $x_1(y),\ldots,x_k(y)$, entonces, bajo condiciones regulares,
+
+$$
+\boxed{f_Y(y)=\sum_{j=1}^k f_X(x_j(y))\left|\frac{dx_j}{dy}\right|}.
+$$
+
+## Ejemplo fundamental: $Y=X^2$
+
+Sea
+
+$$
+X\sim U(-1,1),\qquad Y=X^2.
+$$
+
+Para $0<y<1$ existen dos ramas:
+
+$$
+x_1=\sqrt y,\qquad x_2=-\sqrt y.
+$$
+
+Como $f_X(x)=1/2$,
+
+$$
+f_Y(y)=\frac12\frac1{2\sqrt y}+\frac12\frac1{2\sqrt y}
+=\boxed{\frac1{2\sqrt y}},\qquad0<y<1.
+$$
+
+La misma conclusión se obtiene mediante la CDF:
+
+$$
+F_Y(y)=P(X^2\le y)=P(-\sqrt y\le X\le\sqrt y)=\sqrt y.
+$$
+
+## Transformación de una variable normal
+
+Si
+
+$$
+X\sim N(\mu,\sigma^2),
+$$
+
+y
+
+$$
+Z=\frac{X-\mu}{\sigma},
+$$
+
+entonces
+
+$$
+\boxed{Z\sim N(0,1)}.
+$$
+
+Esta estandarización es uno de los ejemplos más importantes de transformación lineal.
+
+## Suma de variables aleatorias: convolución discreta
+
+Si $X$ y $Y$ son discretas e independientes y
+
+$$
+S=X+Y,
+$$
+
+entonces
+
+$$
+\boxed{p_S(s)=\sum_x p_X(x)p_Y(s-x)}.
+$$
+
+### Ejemplo: suma de dos dados
+
+```{r}
+p <- rep(1/6, 6)
+ps <- convolve(p, rev(p), type = "open")
+s <- 2:12
+data.frame(Suma = s, Probabilidad = ps)
+```
+
+La distribución no es uniforme: el valor 7 posee mayor probabilidad porque puede producirse de más maneras.
+
+## Convolución continua
+
+Si $X$ y $Y$ son continuas e independientes,
+
+$$
+S=X+Y
+$$
+
+tiene densidad
+
+$$
+\boxed{f_S(s)=\int_{-\infty}^{\infty}f_X(x)f_Y(s-x)\,dx}.
+$$
+
+## Ejemplo: suma de dos uniformes
+
+Sean
+
+$$
+X,Y\stackrel{ind}{\sim}U(0,1).
+$$
+
+Entonces $S=X+Y$ tiene densidad triangular:
+
+$$
+f_S(s)=
+\begin{cases}
+s,&0<s<1,\\
+2-s,&1\le s<2,\\
+0,&\text{en otro caso}.
+\end{cases}
+$$
+
+```{r}
+set.seed(2026)
+s <- runif(50000) + runif(50000)
+hist(s, probability = TRUE, breaks = 50)
+curve(ifelse(x < 0 | x > 2, 0,
+             ifelse(x < 1, x, 2-x)),
+      from = 0, to = 2, add = TRUE, lwd = 2)
+```
+
+## Transformaciones de dos variables
+
+Sean
+
+$$
+U=g_1(X,Y),\qquad V=g_2(X,Y).
+$$
+
+Si la transformación es uno a uno y suficientemente regular, se obtiene la inversa
+
+$$
+X=x(u,v),\qquad Y=y(u,v).
+$$
+
+La densidad conjunta transformada es
+
+$$
+\boxed{
+f_{U,V}(u,v)=f_{X,Y}(x(u,v),y(u,v))
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.
+}
+$$
+
+El determinante es el **Jacobiano** de la transformación inversa.
+
+## Interpretación geométrica del Jacobiano
+
+Una transformación cambia áreas. Localmente,
+
+$$
+dx\,dy
+\approx
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|du\,dv.
+$$
+
+El Jacobiano corrige precisamente esa deformación para conservar probabilidad.
+
+## Ejemplo: suma y una componente
+
+Sean
+
+$$
+U=X+Y,\qquad V=X.
+$$
+
+La transformación inversa es
+
+$$
+X=V,\qquad Y=U-V.
+$$
+
+El Jacobiano inverso tiene valor absoluto 1, por lo que
+
+$$
+f_{U,V}(u,v)=f_{X,Y}(v,u-v).
+$$
+
+Integrando respecto de $v$ se recupera la fórmula de convolución para $U=X+Y$.
+
+## Simulación como herramienta de verificación
+
+La simulación no sustituye la demostración analítica, pero permite comprobar resultados y detectar errores de soporte o parametrización.
+
+Una estrategia recomendable es:
+
+1. generar $X$ según su distribución conocida;
+2. calcular $Y=g(X)$;
+3. representar histograma o densidad empírica;
+4. superponer la densidad teórica derivada;
+5. comparar probabilidades y momentos.
+
+## Interactivo del capítulo
+
+El recurso interactivo permite elegir entre varias transformaciones:
+
+- $Y=aX+b$;
+- $Y=X^2$;
+- $Y=-\log(X)/\lambda$;
+- $S=X_1+X_2$ para dos uniformes.
+
+Los deslizadores modifican parámetros y muestran simultáneamente la distribución original, la transformación geométrica y la distribución resultante.
+
+## Actividad con GeoGebra
+
+### Transformación lineal
+
+Construye puntos $(x,f_X(x))$ para una uniforme y utiliza deslizadores $a$ y $b$ en
+
+$$
+y=ax+b.
+$$
+
+Observa cómo cambia el soporte y cómo el factor $1/|a|$ conserva el área total bajo la densidad.
+
+### Transformación cuadrática
+
+Representa
+
+$$
+y=x^2
+$$
+
+para $-1<x<1$. Elige un valor $y_0$ y muestra sus dos preimágenes
+
+$$
+-\sqrt{y_0},\qquad\sqrt{y_0}.
+$$
+
+Esto permite visualizar por qué deben sumarse dos contribuciones a la densidad transformada.
+
+## Estrategia de resolución
+
+1. determina el soporte original;
+2. identifica el rango de la transformación;
+3. decide si $g$ es uno a uno;
+4. si es monótona, encuentra $g^{-1}$ y su derivada;
+5. si no es monótona, identifica todas las ramas inversas o usa la CDF;
+6. para sumas independientes, considera convolución;
+7. en dos dimensiones, calcula el Jacobiano y transforma también el soporte;
+8. verifica que la densidad resultante sea no negativa e integre 1;
+9. utiliza simulación como comprobación adicional.
+
+## Errores frecuentes
+
+- transformar sólo los valores y olvidar transformar la densidad;
+- omitir el valor absoluto de la derivada;
+- olvidar una rama inversa en transformaciones como $X^2$;
+- mantener el soporte original después de transformar;
+- aplicar convolución sin independencia cuando se usan sólo las marginales;
+- usar el Jacobiano directo cuando la fórmula requiere el de la transformación inversa;
+- confiar únicamente en una simulación sin justificar la distribución analíticamente.
+
+## Resumen
+
+Para una transformación monótona,
+
+$$
+f_Y(y)=f_X(g^{-1}(y))
+\left|\frac{d}{dy}g^{-1}(y)\right|.
+$$
+
+Para varias ramas inversas,
+
+$$
+f_Y(y)=\sum_jf_X(x_j(y))
+\left|\frac{dx_j}{dy}\right|.
+$$
+
+Para la suma de variables independientes,
+
+$$
+f_{X+Y}(s)=\int f_X(x)f_Y(s-x)\,dx.
+$$
+
+Para transformaciones bidimensionales,
+
+$$
+f_{U,V}(u,v)=f_{X,Y}(x(u,v),y(u,v))
+\left|\frac{\partial(x,y)}{\partial(u,v)}\right|.
+$$
+
+## Ejercicios
+
+1. Sea $X\sim U(0,2)$ y $Y=3X+1$. Obtén la densidad de $Y$.
+2. Sea $X\sim U(-2,2)$ y $Y=X^2$. Obtén la CDF y la densidad de $Y$.
+3. Si $X\sim\operatorname{Exp}(\lambda)$ y $Y=2X$, determina la distribución de $Y$.
+4. Demuestra mediante transformación que si $X\sim N(\mu,\sigma^2)$, entonces $(X-\mu)/\sigma\sim N(0,1)$.
+5. Obtén la PMF de la suma de dos dados mediante convolución.
+6. Deriva la densidad triangular de $X+Y$ para dos uniformes estándar independientes.
+7. Simula los ejercicios 2 y 6 en R y compara con las densidades teóricas.
+8. Sea $X\sim U(0,1)$ y $Y=-\log X/3$. Identifica la distribución de $Y$.
+9. Para $U=X+Y$ y $V=X$, calcula explícitamente el Jacobiano inverso.
+10. **Reto ★.** Deriva la distribución de $Y=|X|$ cuando $X\sim N(0,1)$.
+11. **Reto ★.** Explica por qué la convolución de dos densidades integra 1.
+12. **Reto ★.** Investiga mediante simulación cómo cambia la suma de 2, 5, 10 y 30 variables uniformes estandarizadas.
+
+## Materiales complementarios del capítulo
+
+| Material | Formato | Acceso | Propósito |
+|---|---|---|---|
+| Cuaderno de Google Colab | Notebook interactivo (R) | [Abrir en Colab](https://colab.research.google.com/github/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/notebooks/17-transformaciones-variables-colab.ipynb) | Ejecutar transformaciones, convoluciones y simulaciones. |
+| Cuaderno de R | R Markdown | [Abrir cuaderno R](https://github.com/gilbertorodriguez59/introduccion-probabilidad-r-geogebra-dev/blob/main/cuadernos-r/17-transformaciones-variables.Rmd) | Reproducir cálculos y gráficas en R/RStudio. |
+| Interactivo | HTML / GeoGebra | [Abrir recurso](interactivos/cap17-transformaciones.html) | Explorar visualmente transformaciones y distribuciones resultantes. |
+| Presentación | PDF / PPT | Próximamente | Se incorporará cuando se proporcionen los enlaces. |
+| Video | Video | Próximamente | Explicación audiovisual complementaria. |
+| Infografía | Imagen / PDF | Próximamente | Síntesis visual del cambio de variable y la convolución. |
+
+## Referencias del capítulo
+
+El tratamiento de transformaciones y distribuciones derivadas sigue la presentación de los textos principales citados en la bibliografía general, especialmente Walpole, Devore, Montgomery y Runger, Miller y Freund, y Kerns para el enfoque computacional en R. Los ejemplos, ejercicios y código son de elaboración original.
